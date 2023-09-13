@@ -1,0 +1,33 @@
+.inicio {
+    align-items: center;
+    border: 1px solid;
+    border-color: #a6b1e1;
+    border-radius: 18px;
+    display: flex;
+    gap: 8px;
+    padding: 8px 41px;
+    position: relative;
+    width: 208px;
+}
+
+.inicio .textWrapper {
+    color: #737373;
+    font-family: "Kanit-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 30px;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.inicio .iconoCasa {
+    height: 22px;
+    left: 10px;
+    position: absolute;
+    top: 12px;
+    width: 20px;
+}

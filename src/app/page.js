@@ -1,7 +1,5 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-import settings from './settings/page.js'
-import login from './pages/login/page.js'
 
 export default function Home() {
   return (
@@ -43,7 +41,7 @@ export default function Home() {
 
       <div className={styles.grid}>
         <a
-          href="./pages/login/"
+          href="./login/"
           className={styles.card}
           rel="noopener noreferrer"
         >
