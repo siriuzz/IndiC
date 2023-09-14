@@ -1,0 +1,101 @@
+.container {
+    border: 1px solid;
+    border-color: transparent;
+    background-color: #ffffff00;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    height: 717px;
+}
+
+.menuButton {
+    background-color: #ffffff00;
+    border-color: #ffffff00;
+    margin-top: 15px;
+    flex-direction: column;
+    align-self: center;
+    position: relative;
+    display: flex;
+    width: 48px;
+    height: 45px;
+}
+
+.inicioButton {
+    background-color: #ffffff00;
+        border-color: #ffffff00;
+        justify-content: center;
+        align-content: center;
+        position: relative;
+        display: flex;
+        width: 35px;
+        height: 35px;
+}
+
+.calificacionesIcon {
+    background-color: #ffffff00;
+    border-color: #ffffff00;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    display: flex;
+    margin-top: 30px;
+    width: 35px;
+    height: 35px;
+}
+
+.calculadoraIndiceIcon {
+    background-color: #ffffff00;
+    border-color: #ffffff00;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    display: flex;
+    margin-top: 30px;
+    width: 35px;
+    height: 35px;
+}
+
+.perfilIcon {
+    background-color: #ffffff00;
+    border-color: #ffffff00;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    display: flex;
+    margin-top: 30px;
+    width: 35px;
+    height: 35px;
+}
+
+.configuracionIcon {
+    background-color: #ffffff00;
+    border-color: #ffffff00;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    display: flex;
+    margin-top: 90px;
+    width: 35px;
+    height: 35px;
+}
+
+.logOutIcon {
+    background-color: #ffffff00;
+    border-color: #ffffff00;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    display: flex;
+    margin-top: 25px;
+    width: 35px;
+    height: 35px;
+}
+
+.logo {
+    display: flex;
+    position: relative;
+    margin-bottom: 75px;
+    margin-top: 30px;
+}
