@@ -1,10 +1,11 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import MenuButton from "../../components/menuButton/MenuButton";
+import SidebarOpenEstudiante from "@/components/SidebarsEstudiante/sidebarOpenEstudiante/sidebarOpenEstudiante";
 
 function login() {
     return (    
         <div className={styles.wallpaper}>
+            <SidebarOpenEstudiante/>
         </div>
         
     );

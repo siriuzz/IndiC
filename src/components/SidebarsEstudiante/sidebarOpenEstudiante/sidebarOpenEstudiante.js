@@ -1,8 +1,8 @@
+import React from 'react';
 import Image from 'next/image';
 import styles from "./style.module.css";
-import MenuButton from '../menuButton/MenuButton';
 
-function SidebarCloseEstudiante() {
+function SidebarOpenEstudiante() {
     return (
         <div className={styles.container}>
             <button className={styles.menuButton}>
@@ -21,8 +21,13 @@ function SidebarCloseEstudiante() {
                 alt="Logo app"
             />
 
+            <div className={styles.text}>
+                Indi <div className={styles.C}>C</div>
+            </div>
+
             <button className={styles.inicioButton}>
-                <Image src="https://github.com/JuanDanielU/DisBG/blob/main/icono-casa.png?raw=true" alt='Icono inicio' width={25} height={25} />
+                <Image className={styles.inicioIcon} src="https://github.com/JuanDanielU/DisBG/blob/main/icono-casa.png?raw=true" alt='Icono inicio' width={25} height={25}/>
+                <div className={styles.buttonText}>Inicio</div>
             </button>
 
             <button className={styles.calificacionesIcon}>
@@ -40,7 +45,7 @@ function SidebarCloseEstudiante() {
             <button className={styles.configuracionIcon}>
                 <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Icono-settings.png?raw=true" alt="Icono configuracion" width={24} height={24}/>
             </button>
-            
+
             <button className={styles.logOutIcon}>
                 <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Icono-cerrar_sesion.png?raw=true" alt="Icono cerrar sesion" width={24} height={24}/>
             </button>
@@ -48,4 +53,4 @@ function SidebarCloseEstudiante() {
     )
 }
 
-export default SidebarCloseEstudiante
+export default SidebarOpenEstudiante
