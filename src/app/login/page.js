@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import SidebarOpenEstudiante from "@/components/SidebarsEstudiante/sidebarOpenEstudiante/sidebarOpenEstudiante";
+import SidebarOpenEstudiante from "@/components/SidebarsEstudiante/sidebarOpen/sidebarOpen";
 
 function login() {
     return (    
