@@ -21,10 +21,6 @@ function SidebarOpenEstudiante() {
                 alt="Logo app"
             />
 
-            <div className={styles.text}>
-                Indi <div className={styles.C}>C</div>
-            </div>
-
             <button className={styles.inicioButton}>
                 <Image className={styles.inicioIcon} src="https://github.com/JuanDanielU/DisBG/blob/main/icono-casa.png?raw=true" alt='Icono inicio' width={25} height={25}/>
                 <div className={styles.buttonText}>Inicio</div>
