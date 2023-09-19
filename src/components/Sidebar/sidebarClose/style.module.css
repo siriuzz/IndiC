@@ -37,11 +37,10 @@
     background-color: #ffffff00;
         border-color: #ffffff00;
         justify-content: center;
-        align-content: center;
         position: relative;
         display: flex;
-        width: 35px;
-        height: 35px;
+        width: 25px;
+        height: 25px;
 }
 
 .calificacionesIcon {

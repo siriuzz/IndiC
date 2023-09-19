@@ -7,4 +7,47 @@
     min-height: 100vh;
     min-width: 100vw;
     display: flex;
+    flex-direction: column;
+}
+
+.container {
+    border: 1px solid;
+    border-color: blueviolet;
+    background-color: #ffffff;
+    border-radius: 25px;
+    margin-left: 26px;
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 608px;
+    height: 650px;
+}
+
+.logo {
+    display: flex;
+    position: relative;
+    margin-top: 54px;
+}
+
+.input {
+    background-color: #f6f6f6;
+    margin-top: 70px;
+    width: 420px;
+    height: 50px;
+    border-radius: 40px;
+    padding-left: 10px;
+}
+
+.password {
+    background-color: #f6f6f6;
+    margin-top: 40px;
+    width: 420px;
+    height: 50px;
+    border-radius: 40px;
+    padding-left: 10px;
+}
+
+.toggleButton {
+    border-radius: 10px;
 }

@@ -1,13 +1,15 @@
+"use client"
+import * as React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import SidebarClose from "@/components/sidebar/sidebarClose/SidebarClose";
+import SidebarOpen from "@/components/sidebar/sidebarOpen/sidebarOpen";
 
 function login() {
-    return (
+    return (    
         <div className={styles.wallpaper}>
-            <SidebarClose />
+            
         </div>
-
+        
     );
 }
 

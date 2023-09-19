@@ -1,0 +1,27 @@
+.button {
+    border: 1px solid;
+    border-color: #a6b1e1;
+    background-color: #ffffff;
+    border-radius: 18px;
+    display: flex;
+    gap: 8px;
+    height: 45px;
+    width: 208px;
+}
+
+.text {
+    color: #737373;
+    font-family: "Kanit";
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+    font-style: normal;
+    margin-top: 8px;
+    line-height:30px;
+}
+
+.icon {
+    align-self: center;
+    margin-top: -2px;
+    margin-left: 8px;
+}
