@@ -3,21 +3,21 @@ import * as React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Input from '@mui/material/Input';
-import ToggleButton from "@mui/material/ToggleButton";
-import Circle from '@mui/icons-material/CircleOutlined';
-import CheckedCircle from '@mui/icons-material/CheckCircle';
-import { InputAdornment } from "@mui/material";
+import { FormControlLabel, FormGroup, InputAdornment } from "@mui/material";
 import { Visibility } from "@mui/icons-material";
 import { VisibilityOff } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
+import { Checkbox } from "@mui/material";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { theme } from "../theme";
 
 function login() {
-    const [selected, setSelected] = React.useState(false);
-    const toggleIcon = selected ? <CheckedCircle /> : <Circle />;
     const [showPassword, setShowPassword] = React.useState(false);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const [checked, setChecked] = React.useState(false);
+
     return (
         <div className={styles.wallpaper}>
             <div className={styles.container}>
@@ -27,32 +27,42 @@ function login() {
                     height={160}
                     alt="Logo app"
                 />
-                <Input className={styles.input} placeholder="Correo Institucional">
-                </Input>
-                <Input
-                    className={styles.password}
-                    placeholder="Contraseña"
-                    type={showPassword ? 'text' : 'password'}
-                    endAdornment={
-                        <InputAdornment>
-                            <IconButton className={styles.iconButton}
-                                onClick={togglePasswordVisibility}
-                                onMouseDown={(e) => e.preventDefault()}
-                            >
-                                {showPassword ? <Visibility /> : <VisibilityOff />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                />
-                <ToggleButton className={styles.toggleButton}
-                    value="check"
-                    selected={selected}
-                    onChange={() => {
-                        setSelected(!selected);
-                    }}>
-                    {toggleIcon}
-                </ToggleButton>
-                <div className={styles.recuerdame}>Recuerdame</div>
+                <FormGroup>
+                    <Input className={styles.input} placeholder="Correo Institucional">
+                    </Input>
+                    <Input
+                        className={styles.password}
+                        placeholder="Contraseña"
+                        type={showPassword ? 'text' : 'password'}
+                        endAdornment={
+                            <InputAdornment>
+                                <IconButton className={styles.iconButton}
+                                    onClick={togglePasswordVisibility}
+                                    onMouseDown={(e) => e.preventDefault()}
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />  
+                    {/* <ThemeProvider theme={theme}> */}
+                        <FormControlLabel control={<Checkbox
+                            value="check"
+                            checked={checked}
+                            onChange={() => {
+                                setChecked(!checked);
+                            }}
+                            sx={{
+                                color: "#9879ce",
+                                '&.Mui-checked': {
+                                    color: "#9879ce"
+                                },
+                            }}
+                    />} label={
+                        <span style={{ color: "#939191" }}>Recuérdame</span>
+                    }/>
+                    {/* </ThemeProvider> */}
+                </FormGroup>
             </div>
         </div>
     );
