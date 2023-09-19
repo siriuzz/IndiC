@@ -54,3 +54,4 @@ function SidebarOpen() {
 }
 
 export default SidebarOpen
+export default SidebarOpen
