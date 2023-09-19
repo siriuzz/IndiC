@@ -1,7 +1,6 @@
 .container {
     border: 1px solid;
     border-color: transparent;
-    background-color: #ffffff00;
     border-radius: 18px;
     display: flex;
     flex-direction: column;
@@ -9,6 +8,18 @@
     width: 100px;
     height: 717px;
 }
+
+.button{
+    color: black;
+    padding: 1.5rem 1.5rem;
+}
+
+.icon{
+    width: 2rem;
+    height: 2rem;
+}
+
+
 
 .menuButton {
     background-color: #ffffff00;

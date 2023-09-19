@@ -1,14 +1,21 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import styles from "./style.module.css"
+import Button from '@mui/material/Button';
+import GradeIcon from '@mui/icons-material/Grade';
+import { ThemeProvider } from '@emotion/react';
+import theme from '@/app/theme';
 
 
 function MenuButtons() {
   return (
-    <button className={styles.inicio}>
-      <div className={styles.textWrapper}>Inicio</div>
-      <Image className={styles.iconoCasa} alt="Icono casa" src="https://github.com/JuanDanielU/DisBG/blob/main/icono-casa.png?raw=true" width={400} height={200} />
-    </button>
+    <ThemeProvider theme={theme}>
+      <Button variant='contained' startIcon={<GradeIcon />}>
+        MenuButton
+      </Button>
+    </ThemeProvider>
+
   )
 }
 

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import SidebarOpen from "@/components/sidebar/sidebarOpen/sidebarOpen";
+import SidebarClose from "@/components/sidebar/sidebarClose/SidebarClose";
 
 function login() {
-    return (    
+    return (
         <div className={styles.wallpaper}>
-            <SidebarOpen/>
+            <SidebarClose />
         </div>
-        
+
     );
 }
 
