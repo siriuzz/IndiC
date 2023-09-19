@@ -36,7 +36,7 @@
     width: 420px;
     height: 50px;
     border-radius: 40px;
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 .password {
@@ -45,9 +45,21 @@
     width: 420px;
     height: 50px;
     border-radius: 40px;
-    padding-left: 10px;
+    padding-left: 15px;
+}
+
+.iconButton {
+    margin-right: 5px;
 }
 
 .toggleButton {
-    border-radius: 10px;
+    border-radius: 40px;
+    border-color: transparent;
+    padding: 1px;
+    margin-top: 5px;
+    margin-right: 390px;
+}
+
+.recuerdame {
+    color: #b5b3b3;
 }
