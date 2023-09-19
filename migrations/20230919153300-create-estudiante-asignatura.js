@@ -6,7 +6,7 @@ module.exports = {
       id_estudiante: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       id_asignatura: {
         type: Sequelize.INTEGER,
@@ -23,11 +23,15 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+
       }
     });
     // await queryInterface.addConstraint('Estudiante_Asignaturas', {

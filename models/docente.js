@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }
       })
-      Docente.belongsTo(models.Rol, {
+      Docente.belongsTo(models.Roles, {
         foreignKey: {
           name: 'id_rol',
           allowNull: false

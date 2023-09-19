@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Config_Calif.init({
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, unique: true },
     nombre: { type: DataTypes.STRING, allowNull: false },
-    estado: { ype: DataTypes.BOOLEAN, allowNull: false },
+    estado: { type: DataTypes.BOOLEAN, allowNull: false },
   }, {
     sequelize,
     modelName: 'Config_Calif',

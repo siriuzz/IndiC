@@ -42,10 +42,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      id_asignatura: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       id_estado: {
         type: Sequelize.INTEGER,
         allowNull: false
@@ -64,11 +60,14 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+
       }
     });
     await queryInterface.addConstraint('Estudiantes', {

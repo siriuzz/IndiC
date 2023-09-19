@@ -11,7 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Roles.hasMany(models.Docente);
-      Roles.hasMany(models.Estudiante);
+      Roles.hasMany(models.Estudiante, {
+        foreignKey: {
+          name: 'id_rol',
+          allowNull: false
+        }
+      });
     }
   }
   Roles.init({
