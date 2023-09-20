@@ -1,18 +1,18 @@
 const express = require('express');
 const app = require('../express-config');
 
-router.get('/Docentes', async (req, res) => {
+router.get('/Estudiante_Asignatura', async (req, res) => {
     try {
-       
+
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
 
-}).post('/Docentes', (req, res) => {
+}).post('/Estudiante_Asignaturas', (req, res) => {
 
-}).put('/Docentes', (req, res) => {
+}).put('/Estudiante_Asignaturas', (req, res) => {
 
-}).patch('/Docentes', (req, res) => {
+}).patch('/Estudiante_Asignaturas', (req, res) => {
 
 });
 

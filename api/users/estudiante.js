@@ -1,5 +1,5 @@
 const express = require('express');
-const app = require('../express-config');
+// const app = require('../express-config');
 const EstudianteController = require('../../controllers/EstudianteController.js');
 
 router.get('/Estudiantes', async (req, res) => {
@@ -13,11 +13,10 @@ router.get('/Estudiantes', async (req, res) => {
 
 }).post('/Estudiantes', (req, res) => {
 
+}).put('/Estudiantes', (req, res) => {
+
+}).patch('/Estudiantes', (req, res) => {
+
 });
-
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
 
 module.exports = router;
