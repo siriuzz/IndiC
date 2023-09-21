@@ -1,18 +1,9 @@
 const express = require('express');
 // const app = require('../express-config');
 const EstudianteController = require('../../controllers/EstudianteController.js');
+const router = express.Router();
 
-/**
-* @openapi
-* /api/Estudiantes:
-*   get:
-*     summary: Returns a list of all Estudiantes
-*     tags: [Estudiantes]
-*     responses:
-*       200:
-*         description: The list of all Estudiantes
-*/
-router.get('/Estudiantes', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const result = await EstudianteController.getAllEstudiantes(req, res);
         console.log(result);
@@ -21,12 +12,13 @@ router.get('/Estudiantes', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).post('/Estudiantes', (req, res) => {
+})
+    .post('/', (req, res) => {
 
-}).put('/Estudiantes', (req, res) => {
+    }).put('/', (req, res) => {
 
-}).patch('/Estudiantes', (req, res) => {
+    }).patch('/', (req, res) => {
 
-});
+    });
 
 module.exports = router;

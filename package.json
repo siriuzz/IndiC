@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate": "npx sequelize db:migrate",
+    "seed": "npx sequelize db:seed:all",
+    "unseed": "npx sequelize db:seed:undo:all",
+    "swagger-autogen": "node ./swagger.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -26,5 +30,8 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "tedious": "^16.4.0"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.6"
   }
 }

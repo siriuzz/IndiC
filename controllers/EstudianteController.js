@@ -6,15 +6,15 @@ const getAllEstudiantes = async (req, res) => {
             // include: [
             //     {
             //         model: estado,
-            //         attributes: ['estado']
+            //         attributes: ['estado_id']
             //     },
             //     {
             //         model: roles,
-            //         attributes: ['rol']
+            //         attributes: ['rol_id']
             //     },
             //     {
             //         model: carrera,
-            //         attributes: ['carrera']
+            //         attributes: ['carrera_id']
             //     }
             // ]
         });
@@ -25,6 +25,17 @@ const getAllEstudiantes = async (req, res) => {
     }
 }
 
+const createEstudiante = async (req, res) => {
+    try {
+        const estudiante = await Estudiante.create(req.body);
+        return estudiante;
+    } catch (error) {
+        console.log("Error al crear el estudiante");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 module.exports = {
-    getAllEstudiantes
+    getAllEstudiantes,
+    createEstudiante
 }
