@@ -10,23 +10,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nombre_docente: {
+      nombre: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      correo_docente: {
+      correo: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      telefono_docente: {
+      telefono: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      cedula_docente: {
+      cedula: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      password_docente: {
+      password: {
         allowNull: false,
         type: Sequelize.STRING
       },

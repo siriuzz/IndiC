@@ -13,17 +13,17 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('Estudiantes', [{
-      nombre_estudiante: "John Doe",
-      correo_estudiante: "john@1234.com",
-      telefono_estudiante: "1234567890",
-      cedula_estudiante: "1234567890",
-      password_estudiante: "1234567890",
+      nombre: "John Doe",
+      correo: "john@1234.com",
+      telefono: "1234567890",
+      cedula: "1234567890",
+      password: "1234567890",
       fecha_registro: "2021-09-19",
       direccion: "Calle 123",
-      id_carrera: "1",
-      id_estado: "1",
-      id_rol: "1",
-      periodos_cursados: "1",
+      id_carrera: 1,
+      id_estado: 1,
+      id_rol: 1,
+      periodos_cursados: 1,
       configuracion: JSON.stringify({ "config": "config" }),
     }], {});
   },

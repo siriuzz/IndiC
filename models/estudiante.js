@@ -34,11 +34,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Estudiante.init({
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, unique: true },
-    nombre_estudiante: { type: DataTypes.STRING, allowNull: false },
-    correo_estudiante: { type: DataTypes.STRING, allowNull: false },
-    telefono_estudiante: { type: DataTypes.STRING, allowNull: false },
-    cedula_estudiante: { type: DataTypes.INTEGER, allowNull: false },
-    password_estudiante: {
+    nombre: { type: DataTypes.STRING, allowNull: false },
+    correo: { type: DataTypes.STRING, allowNull: false },
+    telefono: { type: DataTypes.STRING, allowNull: false },
+    cedula: { type: DataTypes.INTEGER, allowNull: false },
+    password: {
       type: DataTypes.STRING,
       // set(value) {
       //   this.setDataValue('password_estudiante', bcrypt.hashSync(value, 10));

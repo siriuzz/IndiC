@@ -1,5 +1,5 @@
-const express = require('express');
-const app = require('../express-config');
+const app = require('../../express-config');
+const router = app.router;
 
 router.get('/Asignaturas', async (req, res) => {
     try {

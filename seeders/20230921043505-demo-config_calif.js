@@ -12,8 +12,9 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Roles', [{
-      rol: "Estudiante"
+    await queryInterface.bulkInsert('Config_Califs', [{
+      nombre: 'Solo letras',
+      estado: true
     }], {});
   },
 
@@ -24,6 +25,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Roles', null, {});
+    await queryInterface.bulkDelete('Config_Califs', null, {});
   }
 };

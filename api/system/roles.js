@@ -1,7 +1,7 @@
-const express = require('express');
-const app = require('../express-config');
+const app = require('../../express-config');
+const router = app.router;
 
-router.get('/Roles', async (req, res) => {
+app.router.get('/Roles', async (req, res) => {
     try {
 
     } catch (error) {

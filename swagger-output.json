@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "My API",
-    "description": "Description",
+    "title": "IndiC API",
+    "description": "Esta es la documentación de la API de IndiC",
     "version": "1.0.0"
   },
   "servers": [
@@ -13,6 +13,9 @@
   "paths": {
     "/api-docs": {
       "get": {
+        "tags": [
+          "Documentacion"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -23,10 +26,25 @@
     },
     "/api/Estudiantes/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "Endpoint para obtener todos los estudiantes.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Estudiantes obtenidos correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiante"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiante"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -34,6 +52,109 @@
         }
       },
       "post": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "Endpoint para crear un estudiante.",
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "body.nombre",
+            "description": "Nombre del estudiante",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Estudiante"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Estudiante"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "Endpoint para actualizar un estudiante.",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Jhon Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "name",
+                "age"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Docentes/Docentes": {
+      "get": {
+        "tags": [
+          "Docentes"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Docentes"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -42,6 +163,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Docentes"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -50,6 +174,239 @@
         }
       },
       "patch": {
+        "tags": [
+          "Docentes"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Asignaturas": {
+      "get": {
+        "tags": [
+          "Asignaturas"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Asignaturas"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Asignaturas"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Asignaturas"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Carreras": {
+      "get": {
+        "tags": [
+          "Carreras"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Carreras"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Carreras"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Carreras"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Config_Calif": {
+      "get": {
+        "tags": [
+          "Configuracion calificaciones"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Configuracion calificaciones"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Configuracion calificaciones"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Configuracion calificaciones"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Estados": {
+      "get": {
+        "tags": [
+          "Estados"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Estados"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Estados"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Estados"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Roles": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Roles"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -58,5 +415,285 @@
         }
       }
     }
-  }
+  },
+  "components": {
+    "schemas": {
+      "Estudiante": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "correo": {
+            "type": "string",
+            "example": "john@1234.com"
+          },
+          "telefono": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "cedula": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "password": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "fecha_registro": {
+            "type": "string",
+            "example": "2021-09-19"
+          },
+          "direccion": {
+            "type": "string",
+            "example": "Calle 123"
+          },
+          "id_carrera": {
+            "type": "number",
+            "example": 1
+          },
+          "id_estado": {
+            "type": "number",
+            "example": 1
+          },
+          "id_rol": {
+            "type": "number",
+            "example": 1
+          },
+          "periodos_cursados": {
+            "type": "number",
+            "example": 1
+          },
+          "configuracion": {
+            "type": "string",
+            "example": "{\"config\":\"config\"}"
+          }
+        },
+        "required": [
+          "nombre",
+          "correo",
+          "telefono",
+          "cedula",
+          "password",
+          "fecha_registro",
+          "direccion",
+          "id_carrera",
+          "id_estado",
+          "id_rol",
+          "periodos_cursados",
+          "configuracion"
+        ],
+        "xml": {
+          "name": "Estudiante"
+        }
+      },
+      "Docente": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "example": "Juana Doe"
+          },
+          "correo": {
+            "type": "string",
+            "example": "juana@email.com"
+          },
+          "telefono": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "cedula": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "password": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "fecha_registro": {
+            "type": "string",
+            "example": "2021-09-19"
+          },
+          "direccion": {
+            "type": "string",
+            "example": "Calle 123"
+          },
+          "id_estado": {
+            "type": "number",
+            "example": 1
+          },
+          "id_rol": {
+            "type": "number",
+            "example": 1
+          },
+          "configuracion": {
+            "type": "string",
+            "example": "{\"config\":\"config\"}"
+          }
+        },
+        "required": [
+          "nombre",
+          "correo",
+          "telefono",
+          "cedula",
+          "password",
+          "fecha_registro",
+          "direccion",
+          "id_estado",
+          "id_rol",
+          "configuracion"
+        ],
+        "xml": {
+          "name": "Docente"
+        }
+      },
+      "Asignatura": {
+        "type": "object",
+        "properties": {
+          "asignatura": {
+            "type": "string",
+            "example": "Programacion I"
+          },
+          "id_docente": {
+            "type": "string",
+            "example": "1"
+          },
+          "creditos": {
+            "type": "string",
+            "example": "4"
+          },
+          "aula": {
+            "type": "string",
+            "example": "A-1"
+          },
+          "activa": {
+            "type": "boolean",
+            "example": true
+          },
+          "calificacion_base_mt": {
+            "type": "number",
+            "example": 40
+          }
+        },
+        "required": [
+          "asignatura",
+          "id_docente",
+          "creditos",
+          "aula",
+          "activa",
+          "calificacion_base_mt"
+        ],
+        "xml": {
+          "name": "Asignatura"
+        }
+      },
+      "Rol": {
+        "type": "object",
+        "properties": {
+          "rol": {
+            "type": "string",
+            "example": "Estudiante"
+          }
+        },
+        "required": [
+          "rol"
+        ],
+        "xml": {
+          "name": "Rol"
+        }
+      },
+      "Estado": {
+        "type": "object",
+        "properties": {
+          "estado": {
+            "type": "string",
+            "example": "Activo"
+          }
+        },
+        "required": [
+          "estado"
+        ],
+        "xml": {
+          "name": "Estado"
+        }
+      },
+      "Carrera": {
+        "type": "object",
+        "properties": {
+          "carrera": {
+            "type": "string",
+            "example": "Ingeniería de Sistemas"
+          },
+          "periodos_totales": {
+            "type": "number",
+            "example": 17
+          },
+          "asignaturas_totales": {
+            "type": "number",
+            "example": 50
+          }
+        },
+        "required": [
+          "carrera",
+          "periodos_totales",
+          "asignaturas_totales"
+        ],
+        "xml": {
+          "name": "Carrera"
+        }
+      },
+      "Estudiante_Asignatura": {
+        "type": "object",
+        "properties": {
+          "id_asignatura": {
+            "type": "number",
+            "example": 1
+          },
+          "id_estudiante": {
+            "type": "number",
+            "example": 1
+          },
+          "calificacion_mt": {
+            "type": "number",
+            "example": 40
+          },
+          "calificacion_final": {
+            "type": "number",
+            "example": 100
+          }
+        },
+        "required": [
+          "id_asignatura",
+          "id_estudiante",
+          "calificacion_mt",
+          "calificacion_final"
+        ],
+        "xml": {
+          "name": "Estudiante_Asignatura"
+        }
+      },
+      "Config_Calif": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "example": "Configuracion de calificaciones"
+          },
+          "estado": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "nombre",
+          "estado"
+        ],
+        "xml": {
+          "name": "Config_Calif"
+        }
+      }
+    }
+  },
+  "explorer": true
 }

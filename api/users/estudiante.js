@@ -1,9 +1,14 @@
-const express = require('express');
-// const app = require('../express-config');
+const app = require('../../express-config');
 const EstudianteController = require('../../controllers/EstudianteController.js');
-const router = express.Router();
+const router = app.router;
 
 router.get('/', async (req, res) => {
+
+    // #swagger.description = 'Endpoint para obtener todos los estudiantes.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiantes obtenidos correctamente.',
+            schema: { $ref: "#/components/schemas/Estudiante" }
+    } */
     try {
         const result = await EstudianteController.getAllEstudiantes(req, res);
         console.log(result);
@@ -14,8 +19,40 @@ router.get('/', async (req, res) => {
 
 })
     .post('/', (req, res) => {
+        // #swagger.description = 'Endpoint para crear un estudiante.'
+        /*	#swagger.requestBody = {
+               required: true,
+               schema: { $ref: "#/components/schemas/Estudiante" }
+       }
+         #swagger.parameters['nombre'] = {
+                in: 'body.nombre',                             
+                description: "Nombre del estudiante",
+                required: true,
+                type: 'string',
+                }
+         swagger.parameters['body'] = {
+         in: 'body',                            
+         description: "Nombre del estudiante",                   
+         required: true,                     
+         type: 'string',
+         }
+         #swaggger.responses[200] = {
+                description: 'Estudiante creado correctamente.',
+                schema: { $ref: "#/components/schemas/Estudiante" }
+         } 
+    } */
 
     }).put('/', (req, res) => {
+        // #swagger.description = 'Endpoint para actualizar un estudiante.'
+        /*  #swagger.parameters['obj'] = {
+                in: 'body',
+                description: 'Some description...',
+                schema: {
+                    $name: 'Jhon Doe',
+                    $age: 29,
+                    about: ''
+                }
+        } */
 
     }).patch('/', (req, res) => {
 

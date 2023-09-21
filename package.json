@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "npx sequelize db:migrate",
-    "seed": "npx sequelize db:seed:all",
-    "unseed": "npx sequelize db:seed:undo:all",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
+    "unseed": "npx sequelize-cli db:seed:undo:all",
     "swagger-autogen": "node ./swagger.js"
   },
   "dependencies": {

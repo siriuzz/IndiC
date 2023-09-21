@@ -28,11 +28,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Docente.init({
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, unique: true },
-    nombre_docente: { type: DataTypes.STRING, allowNull: false },
-    correo_docente: { type: DataTypes.STRING, allowNull: false },
-    telefono_docente: { type: DataTypes.INTEGER, allowNull: false },
-    cedula_docente: { type: DataTypes.INTEGER, allowNull: false },
-    password_docente: { type: DataTypes.STRING, allowNull: false },
+    nombre: { type: DataTypes.STRING, allowNull: false },
+    correo: { type: DataTypes.STRING, allowNull: false },
+    telefono: { type: DataTypes.INTEGER, allowNull: false },
+    cedula: { type: DataTypes.INTEGER, allowNull: false },
+    password: { type: DataTypes.STRING, allowNull: false },
     fecha_registro: { type: DataTypes.DATE, allowNull: false },
     direccion: { type: DataTypes.STRING, allowNull: false },
     id_estado: { type: DataTypes.INTEGER, allowNull: false },

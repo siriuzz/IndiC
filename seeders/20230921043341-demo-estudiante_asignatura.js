@@ -12,8 +12,11 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Roles', [{
-      rol: "Estudiante"
+    await queryInterface.bulkInsert('Estudiante_Asignaturas', [{
+      id_estudiante: 1,
+      id_asignatura: 1,
+      calificacion_mt: 40,
+      calificacion_final: 95,
     }], {});
   },
 
@@ -24,6 +27,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Roles', null, {});
+    await queryInterface.bulkDelete('Estudiante_Asignaturas', null, {});
   }
 };
