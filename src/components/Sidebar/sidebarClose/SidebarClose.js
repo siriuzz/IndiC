@@ -14,7 +14,7 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 
 
-function SidebarCloseEstudiante() {
+export default function SidebarCloseEstudiante() {
     return (
         <div class="container-fluid col d-flex flex-column">
             <div >
@@ -62,5 +62,3 @@ function SidebarCloseEstudiante() {
         </div>
     )
 }
-
-export default SidebarCloseEstudiante
