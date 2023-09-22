@@ -51,12 +51,12 @@ export default function Home() {
           <p>Acceder a la pagina de Login</p>
         </a>
         <a
-          href="./settings/"
+          href="./perfil"
           className={styles.card}
           rel="noopener noreferrer"
         >
           <h2>
-            Settings <span>-&gt;</span>
+            Perfil <span>-&gt;</span>
           </h2>
           <p>Find in-depth information about Next.js features and API.</p>
         </a>
