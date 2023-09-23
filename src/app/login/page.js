@@ -66,9 +66,9 @@ export default function Login() {
                             }}
                         />
                     } label={
-                            <span style={{ marginRight: "84px",color: "#939191" }}>Recuérdame</span>
+                            <span style={{ marginRight: "104px",color: "#939191" }}>Recuérdame</span>
                         } />
-                        <Link href="/perfil" style={{ display: "flex",color: "#939191" }}>
+                        <Link href="/recuperar" style={{ display: "flex",color: "#939191" }}>
                             <span style={{ alignSelf: "center",color: "#939191" }}>¿Olvidó su contraseña?</span>
                         </Link>
                     </div>
