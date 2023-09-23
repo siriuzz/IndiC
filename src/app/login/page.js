@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Input from '@mui/material/Input';
-import { FormControlLabel, FormGroup, InputAdornment } from "@mui/material";
+import { Button, FormControlLabel, FormGroup, InputAdornment } from "@mui/material";
 import { Title, Visibility } from "@mui/icons-material";
 import { VisibilityOff } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
@@ -12,6 +12,7 @@ import { Checkbox } from "@mui/material";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { theme } from "../theme";
 import { Paper } from "@mui/material";
+import Link from "next/link";
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -22,21 +23,20 @@ export default function Login() {
 
     return (
         <div className={styles.wallpaper}>
-            <Paper className={styles.container}>
+            <Paper className={styles.container} elevation={3}>
                 <Image className={styles.logo}
-                    src={"https://github.com/JuanDanielU/DisBG/blob/main/Logo.png?raw=true"}
+                    src={"/assets/Logo.png"}
                     width={70}
                     height={160}
                     alt="Logo app"
                 />
-
                 <FormGroup>
-                    <Title>Iniciar Sesión</Title>
-                    <Input className={styles.input} placeholder="Correo Institucional">
+                    <Input className={styles.input} color="secondary" placeholder="Correo Institucional">
                     </Input>
                     <Input
                         className={styles.password}
                         placeholder="Contraseña"
+                        color="secondary"
                         type={showPassword ? 'text' : 'password'}
                         endAdornment={
                             <InputAdornment>
@@ -49,22 +49,42 @@ export default function Login() {
                             </InputAdornment>
                         }
                     />
-                    {/* <ThemeProvider theme={theme}> */}
-                    <FormControlLabel control={<Checkbox
-                        value="check"
-                        checked={checked}
-                        onChange={() => {
-                            setChecked(!checked);
-                        }}
-                        sx={{
-                            color: "#9879ce",
-                            '&.Mui-checked': {
-                                color: "#9879ce"
-                            },
-                        }}
-                    />} label={
-                        <span style={{ color: "#939191" }}>Recuérdame</span>
-                    } />
+                    <div style={{ display: "inline-flex" }} >
+                        <FormControlLabel control={
+                        <Checkbox
+                            style={{ color: "#9879ce" }}
+                            value="check"
+                            checked={checked}
+                            onChange={() => {
+                                setChecked(!checked);
+                            }}
+                            sx={{
+                                color: "#9879ce",
+                                '&.Mui-checked': {
+                                    color: "#9879ce"
+                                },
+                            }}
+                        />
+                    } label={
+                            <span style={{ marginRight: "84px",color: "#939191" }}>Recuérdame</span>
+                        } />
+                        <Link href="/perfil" style={{ display: "flex",color: "#939191" }}>
+                            <span style={{ alignSelf: "center",color: "#939191" }}>¿Olvidó su contraseña?</span>
+                        </Link>
+                    </div>
+                    <Button variant="outlined" 
+                    style={{
+                        color: "#9879ce",
+                        marginTop: "50px",
+                        borderRadius: "10px",
+                        borderColor: "#9879ce",
+                        width: "146px",
+                        alignSelf: "center",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        textTransform: "capitalize",
+                    }}
+                    >Iniciar Sesión</Button>
                 </FormGroup>
             </Paper>
         </div>

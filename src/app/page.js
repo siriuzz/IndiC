@@ -58,7 +58,7 @@ export default function Home() {
           <h2>
             Perfil <span>-&gt;</span>
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
+          <p>Accede a la pagina de perfil</p>
         </a>
 
         <a

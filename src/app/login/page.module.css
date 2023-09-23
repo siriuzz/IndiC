@@ -1,5 +1,5 @@
 .wallpaper {
-    background-image: url('../../assets/loginwallpaper.png');
+    background-image: url('/assets/LoginWallpaper.svg');
     background-color: white;
     background-size: contain;
     background-position: right;
@@ -12,11 +12,11 @@
 
 .container {
     border: 1px solid;
-    border-color: blueviolet;
+    border-color: transparent;
     background-color: #ffffff;
     border-radius: 25px;
-    margin-left: 26px;
-    margin-top: 26px;
+    margin-left: 40px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
