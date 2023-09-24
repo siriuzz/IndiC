@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { Button } from "@mui/material";
 import React from "react";
-import styles from "./page.module.css";
 import Image from "next/image";
 import 'bootstrap/dist/css/bootstrap.css';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
