@@ -2,7 +2,6 @@
 import * as React from "react";
 import { useState } from "react";
 import Image from "next/image";
-import styles from "./page.module.css";
 import Input from '@mui/material/Input';
 import { Button, 
         FormControlLabel,
@@ -21,16 +20,27 @@ import { useStyles } from "../layout";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
+const wallpaperStyle = {
+    backgroundImage: "url('/assets/LoginWallpaper.svg')",
+    backgroundColor: "white",
+    backgroundSize: "contain",
+    backgroundPosition: "right center",
+    backgroundRepeat: "no-repeat",
+    minHeight: "100vh",
+    minWidth: "100vw",
+    display: "flex",
+    flexDirection: "column",
+};
+
 export default function Login() {
+
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const togglePasswordVisibility = () => {setShowPassword(!showPassword);};
     const [checked, setChecked] = useState(false);
     
     return (
-        <div className={styles.wallpaper}>
+        <div style={wallpaperStyle}>
             <Paper className={classes.paperSmall} elevation={3}>
                 <Image style={{marginTop: "54px"}}
                     src={"/assets/Logo.png"}
@@ -84,12 +94,12 @@ export default function Login() {
                                 />
                             } label={
                                 <span className={kanit.className} style={{ marginRight: "104px", color: theme.palette.secondary.label }}>Recuérdame</span>
-                            } />
+                            }/>
                             <Link href="/recuperar" style={{ display: "flex" }}>
                                 <span style={{ alignSelf: "center", color: theme.palette.secondary.label }}>¿Olvidó su contraseña?</span>
                             </Link>
                         </div>
-                        <Button variant="outlined" className={kanit.className}
+                        <Button variant="outlined" href="./inicio" className={kanit.className}
                             style={{
                                 marginTop: "50px",
                                 borderRadius: "10px",

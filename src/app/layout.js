@@ -21,6 +21,15 @@ export const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column"
   },
+  paperBig: {
+    backgroundColor: "white",
+    borderRadius: "40px",
+    marginTop: "20px",
+    marginBottom: "20px",
+    marginRight: "20px",
+    height: "94.3vh",
+    width: "100%",
+  }
 })
 
 export default function RootLayout({ children }) {

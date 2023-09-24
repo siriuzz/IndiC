@@ -11,7 +11,7 @@ import Image from "next/image";
 import { styled } from '@mui/material/styles';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 
-function Perfil() {
+export default function Perfil() {
     
     const EditButton = styled(Button)(({ theme }) => ({
         color: theme.palette.getContrastText("#e4d1d1"),
@@ -54,16 +54,9 @@ function Perfil() {
                         <div style={{ fontSize: "26px", marginLeft:"20px", marginTop: "10px" }}>
                             Nombres y Apellidos<div>Id<div>Carrera</div></div>
                         </div>
-                        <Button variant="contained" style={{ backgroundColor: "#6750a4", color: "white", borderRadius: "10px", height: "40px", alignSelf: "center" }}>
-                            <LockOpenIcon style={{ height: "25", width: "25" }}/>
-                            <div style={{fontSize: "12px", fontFamily: "Kanit", marginLeft: "5px"}}>Cambiar contraseña</div>
-                        </Button>
-
                     </div>
                 </Paper>
             </Paper>
         </div>
     );
 }
-
-export default Perfil;
