@@ -1,11 +1,15 @@
+"use client"
 import Link from "next/link";
 import { Button } from "@mui/material";
 import React from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { styled } from '@mui/material/styles';
 import 'bootstrap/dist/css/bootstrap.css';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useStyles } from "./layout";
+import { Kanit } from '@next/font/google';
+
+const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
 const containerStyle = {
   display: "flex",
@@ -22,7 +26,7 @@ const buttonStyle = {
   transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
   backgroundColor: "#FFFFFF",
   color: "black",
-  marginTop: "205px",
+  marginTop: "250px",
   borderRadius: "50px",
   padding: "10px 20px",
   zIndex: 1, // Coloca el botón por encima de la imagen
@@ -35,17 +39,17 @@ export default function NotFound() {
   return (
     <div style={containerStyle}>
       <Image
-        className={styles.Image}
-        src={"/assets/404.png"}
-        width={800}
-        height={700}
+        src={"/assets/404.svg"}
+        style={{height: "100vh", width: "100vw"}}
+        height={100}
+        width={100}
         alt="Error image"
       />
 
       <Link href="/">
         <Button variant="contained" style={buttonStyle}>
           <KeyboardBackspaceIcon style={{ height: "25px", width: "25px" }} />
-          <div style={{ fontSize: "12px", fontFamily: "Kanit", marginLeft: "5px" }}>
+          <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", marginLeft: "5px" }}>
             Volver a la página anterior
           </div>
         </Button>
