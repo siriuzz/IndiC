@@ -6,7 +6,6 @@ import styles from "./page.module.css";
 import Image from "next/image";
 import 'bootstrap/dist/css/bootstrap.css';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { useStyles } from "./layout";
 import { Kanit } from '@next/font/google';
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
