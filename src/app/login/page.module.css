@@ -2,65 +2,10 @@
     background-image: url('/assets/LoginWallpaper.svg');
     background-color: white;
     background-size: contain;
-    background-position: right;
+    background-position: right center;
     background-repeat: no-repeat;
     min-height: 100vh;
-    min-width: 100vw;
+    max-width: 100vw;
     display: flex;
     flex-direction: column;
-}
-
-.container {
-    border: 1px solid;
-    border-color: transparent;
-    background-color: #ffffff;
-    border-radius: 25px;
-    margin-left: 40px;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 608px;
-    height: 650px;
-}
-
-.logo {
-    display: flex;
-    position: relative;
-    margin-top: 54px;
-    align-self: center;
-}
-
-.input {
-    background-color: #f6f6f6;
-    margin-top: 70px;
-    width: 420px;
-    height: 50px;
-    border-radius: 40px;
-    padding-left: 15px;
-}
-
-.password {
-    background-color: #f6f6f6;
-    margin-top: 40px;
-    width: 420px;
-    height: 50px;
-    border-radius: 40px;
-    padding-left: 15px;
-}
-
-.iconButton {
-    margin-right: 5px;
-}
-
-.toggleButton {
-    border-radius: 40px;
-    border-color: transparent;
-    padding: 1px;
-    margin-top: 5px;
-    margin-right: 390px;
-}
-
-.recuerdame {
-    color: #b5b3b3;
 }

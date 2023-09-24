@@ -4,14 +4,15 @@ const theme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#dcd6f7',
-            dark: '#a6b1e1',
+            main: '#a681e1',
         },
         secondary: {
             main: '#424874',
+            label: '#939191'
         },
         background: {
             default: '#f4eeff',
+            input: '#f6f6f6',
         },
     },
     spacing: 8,
