@@ -28,6 +28,11 @@ const notificationsButtonStyle = {
     marginRight: "24px",
 };
 
+const notificationsIconStyle = {
+    height: "35px",
+    width: "35px"
+};
+
 const labelStyle = {
     fontWeight: "bold",
     fontSize: "48px",
@@ -35,6 +40,23 @@ const labelStyle = {
     marginLeft: "40px",
     marginTop: "10px",
     justifyContent: "space-between",
+};
+
+const paperStyle = {
+    width: "472px",
+    marginTop: "30px",
+    marginLeft: "60px",
+};
+
+const divUserStyle = {
+    display: "flex",
+    flexDirection: "row"
+};
+
+const userInfoStyle = {
+    fontSize: "26px",
+    marginLeft: "40px",
+    marginTop: "10px"
 };
 
 export default function Perfil() {
@@ -48,14 +70,14 @@ export default function Perfil() {
                 <div className={kanit.className} style={labelStyle}>
                     Bienvenido!
                     <IconButton style={notificationsButtonStyle}>
-                        <NotificationsIcon style={{ height: "35px", width: "35px" }} />
+                        <NotificationsIcon style={notificationsIconStyle} />
                     </IconButton>
                 </div>
-                <Paper elevation={0} style={{}}>
-                    <div style={{ display: "flex", marginTop: "10px", flexDirection: "row" }}>
-                        <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={130} width={130} style={{ marginLeft: "60px" }}
+                <Paper elevation={0} style={paperStyle}>
+                    <div style={divUserStyle}>
+                        <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
                         />
-                        <div style={{ fontSize: "26px", marginLeft: "40px", marginTop: "5px" }}>
+                        <div style={userInfoStyle}>
                             Nombres y Apellidos<div>Id<div>Carrera</div></div>
                         </div>
                     </div>
