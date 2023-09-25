@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import Image from "next/image";
 import { useStyles } from "../layout";
 import { Kanit } from "next/font/google";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -39,7 +40,7 @@ const labelStyle = {
     display: "flex",
     marginLeft: "40px",
     marginTop: "10px",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
 };
 
 const paperStyle = {
@@ -82,6 +83,9 @@ export default function Perfil() {
                         </div>
                     </div>
                 </Paper>
+                <div className={LinearProgressStyle}>
+                    3.88/4
+                </div>
             </Paper>
         </div>
     );
