@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 //icons
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import GradeOutlined from '@mui/icons-material/GradeOutlined';
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
@@ -15,7 +14,7 @@ import Link from 'next/link';
 
 
 
-export default function SidebarCloseEstudiante() {
+export default function SidebarCloseDocente() {
     return (
         <div class="container-fluid col d-flex flex-column">
             <div >
@@ -32,7 +31,7 @@ export default function SidebarCloseEstudiante() {
             </div>
 
             <div>
-                <Link href="/inicio_estudiante">
+                <Link href="/inicio_docente">
                 <IconButton className={styles.button}>
                     <HomeOutlinedIcon className={styles.icon} />
                 </IconButton>
@@ -40,10 +39,6 @@ export default function SidebarCloseEstudiante() {
 
                 <IconButton className={styles.button}>
                     <GradeOutlined className={styles.icon} />
-                </IconButton>
-
-                <IconButton className={styles.button}>
-                    <SignalCellularAltIcon className={styles.icon} />
                 </IconButton>
 
                 <IconButton className={styles.button}>
