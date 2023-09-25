@@ -83,9 +83,10 @@ export default function Perfil() {
                         </div>
                     </div>
                 </Paper>
-                <div className={classes.root}>
+                <div className={classes.divlinearProgress}>
                     3.88/4
-                    <LinearProgress variant="determinate" value={75} />
+                    <LinearProgress className={classes.linearProgress} variant="determinate" value={75} />
+                    Mayo-Julio 2023
                 </div>
             </Paper>
         </div>

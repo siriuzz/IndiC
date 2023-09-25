@@ -30,9 +30,14 @@ export const useStyles = makeStyles({
     height: "94.3vh",
     width: "100%",
   },
-  root: {
+  divlinearProgress: {
     width: "280px",
     marginLeft: "40px",
+    marginTop: "20px",
+  },
+  linearProgress: {
+    marginTop: "5px",
+    marginBottom: "5px",
   }
 })
 
