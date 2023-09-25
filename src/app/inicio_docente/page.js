@@ -59,9 +59,6 @@ const userInfoStyle = {
     marginTop: "10px"
 };
 
-
-
-
 export default function Inicio_docente() {
     
     const classes = useStyles();
@@ -89,5 +86,3 @@ export default function Inicio_docente() {
     </div>
 );
 }
-
-  

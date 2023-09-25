@@ -139,7 +139,7 @@ export default function Login() {
                             </Link>
                         </div>
                         <Button // botón para iniciar sesión
-                        variant="outlined" href="./inicio" 
+                        variant="outlined" href="./inicio_estudiante" 
                         className={kanit.className}
                         style={buttonStyle}
                         >Iniciar Sesión</Button>
