@@ -1,8 +1,8 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import SidebarClose from "@/components/sidebar/sidebarClose/SidebarClose";
+import SidebarClose from "@/components/Sidebar/sidebarClose/SidebarClose";
 
-function login() {
+export default function login() {
     return (
         <div className={styles.wallpaper}>
             <SidebarClose />
@@ -10,5 +10,3 @@ function login() {
 
     );
 }
-
-export default login;

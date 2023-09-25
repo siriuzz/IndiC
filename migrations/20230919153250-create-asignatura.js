@@ -10,27 +10,15 @@ module.exports = {
         type: Sequelize.INTEGER,
         unique: true
       },
-      asignatura: {
+      codigo: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      id_docente: {
+      nombre: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
       creditos: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      aula: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      activa: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false
-      },
-      calificacion_base_mt: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
@@ -44,19 +32,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: new Date()
-
       }
-    });
-    await queryInterface.addConstraint('Asignaturas', {
-      fields: ['id_docente'],
-      type: 'foreign key',
-      name: 'fk_asignatura_docente',
-      references: {
-        table: 'Docentes',
-        field: 'id'
-      },
-      onDelete: 'cascade',
-      onUpdate: 'cascade'
     });
   },
   async down(queryInterface, Sequelize) {

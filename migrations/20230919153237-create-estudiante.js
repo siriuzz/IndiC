@@ -32,7 +32,8 @@ module.exports = {
       },
       fecha_registro: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: new Date()
       },
       direccion: {
         type: Sequelize.STRING,
@@ -44,24 +45,28 @@ module.exports = {
       },
       id_estado: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
       },
       id_rol: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        defaultValue: 1
       },
       periodos_cursados: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       configuracion: {
         allowNull: false,
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        defaultValue: {}
       },
-      createdAt: {
+      indice_general: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: new Date()
+        type: Sequelize.FLOAT,
+        defaultValue: 0
       },
       updatedAt: {
         allowNull: false,
