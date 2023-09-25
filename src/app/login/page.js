@@ -84,7 +84,7 @@ export default function Login() {
     return (
         <div // Fondo de pantalla
         style={wallpaperStyle}>
-            <Paper // paper que almacena el logo y el formulario */
+            <Paper // paper que almacena el logo y el formulario
             className={classes.paperSmall} 
             elevation={3}>
                 <Image style={{marginTop: "54px"}} // logo de la aplicación
