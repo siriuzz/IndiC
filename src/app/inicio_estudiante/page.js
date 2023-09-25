@@ -9,6 +9,9 @@ import Image from "next/image";
 import { useStyles } from "../layout";
 import { Kanit } from "next/font/google";
 import LinearProgress from "@mui/material/LinearProgress";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import theme from "../theme";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -47,17 +50,32 @@ const paperStyle = {
     width: "472px",
     marginTop: "30px",
     marginLeft: "60px",
+    display: "flex",
 };
 
 const divUserStyle = {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
 };
 
-const userInfoStyle = {
+const divUserInfoStyle = {
     fontSize: "26px",
     marginLeft: "40px",
-    marginTop: "10px"
+    marginTop: "10px",
+    width: "250px",
+};
+
+const divIndiceGraphStyle = {
+    display: "flex",
+    flexDirection: "column",
+    marginRight: "50px",
+    borderRadius: "50px",
+    borderColor: "black",
+    height: "319px",
+    width: "316px",
+    backgroundColor: "aliceblue",
+    justifyContent: "center",
+    marginTop: "-30px"
 };
 
 export default function Perfil() {
@@ -74,20 +92,40 @@ export default function Perfil() {
                         <NotificationsIcon style={notificationsIconStyle} />
                     </IconButton>
                 </div>
-                <Paper elevation={0} style={paperStyle}>
-                    <div style={divUserStyle}>
-                        <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
-                        />
-                        <div style={userInfoStyle}>
-                            Nombres y Apellidos<div>Id<div>Carrera</div></div>
+                <ThemeProvider theme={theme}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <Paper elevation={0} style={paperStyle}>
+                            <div style={divUserStyle}>
+                                <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
+                                />
+                                <div style={divUserInfoStyle}>
+                                    Nombres y Apellidos<div>Id<div>Carrera</div></div>
+                                </div>
+                            </div>
+                        </Paper>
+                        <div style={divIndiceGraphStyle}>
+                            <div style={{alignSelf: "center", width: "180px", height: "180px"}}>
+                                <CircularProgress size={180} variant="determinate" value={78} />
+                            </div>
+                            <div style={{ fontSize: "24px", width: "155px", alignSelf: "center", marginTop: "20px"}}>Indice General</div>
                         </div>
                     </div>
-                </Paper>
-                <div className={classes.divlinearProgress}>
-                    3.88/4
-                    <LinearProgress className={classes.linearProgress} variant="determinate" value={75} />
-                    Mayo-Julio 2023
-                </div>
+                    <div className={classes.divlinearProgressHead}>
+                        3.88/4
+                        <LinearProgress className={classes.linearProgress} variant="determinate" value={95} />
+                        Mayo-Julio 2023
+                    </div>
+                    <div className={classes.divlinearProgress}>
+                        3.88/4
+                        <LinearProgress className={classes.linearProgress} variant="determinate" value={95} />
+                        Mayo-Julio 2023
+                    </div>
+                    <div className={classes.divlinearProgress}>
+                        3.88/4
+                        <LinearProgress className={classes.linearProgress} variant="determinate" value={95} />
+                        Mayo-Julio 2023
+                    </div>
+                </ThemeProvider>
             </Paper>
         </div>
     );

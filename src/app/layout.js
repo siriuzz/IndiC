@@ -30,14 +30,24 @@ export const useStyles = makeStyles({
     height: "94.3vh",
     width: "100%",
   },
+  divlinearProgressHead: {
+    width: "280px",
+    marginLeft: "50px",
+    marginTop: "-60px",
+    fontSize: "20px",
+  },
   divlinearProgress: {
     width: "280px",
-    marginLeft: "40px",
-    marginTop: "20px",
+    marginLeft: "50px",
+    marginTop: "50px",
+    fontSize: "20px",
   },
   linearProgress: {
     marginTop: "5px",
     marginBottom: "5px",
+  },
+  circularProgress: {
+    borderRadius: "50px",
   }
 })
 
