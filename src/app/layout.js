@@ -33,7 +33,7 @@ export const useStyles = makeStyles({
   divlinearProgressHead: {
     width: "280px",
     marginLeft: "50px",
-    marginTop: "-60px",
+    marginTop: "-70px",
     fontSize: "20px",
   },
   divlinearProgress: {
