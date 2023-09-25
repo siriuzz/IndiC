@@ -29,6 +29,10 @@ export const useStyles = makeStyles({
     marginRight: "20px",
     height: "94.3vh",
     width: "100%",
+  },
+  root: {
+    width: "280px",
+    marginLeft: "40px",
   }
 })
 

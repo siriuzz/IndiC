@@ -83,8 +83,9 @@ export default function Perfil() {
                         </div>
                     </div>
                 </Paper>
-                <div className={LinearProgressStyle}>
+                <div className={classes.root}>
                     3.88/4
+                    <LinearProgress variant="determinate" value={75} />
                 </div>
             </Paper>
         </div>
