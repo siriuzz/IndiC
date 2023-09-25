@@ -32,7 +32,7 @@ export default function SidebarCloseEstudiante() {
             </div>
 
             <div>
-                <Link href="/inicio">
+                <Link href="/inicio_estudiante">
                 <IconButton className={styles.button}>
                     <HomeOutlinedIcon className={styles.icon} />
                 </IconButton>

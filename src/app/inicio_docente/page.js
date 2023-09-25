@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
@@ -64,6 +65,7 @@ export default function Inicio_docente() {
 
     return (
         <div style={wallpaperStyle}>
+        <SidebarCloseDocente />
         <Paper elevation={3} className={classes.paperBig}>
             <div className={kanit.className} style={labelStyle}>
                 Bienvenido!
