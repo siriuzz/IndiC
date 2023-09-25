@@ -2,6 +2,7 @@ const { Estudiante } = require('../models'); // Importa los modelos necesarios
 
 const getAllEstudiantes = async (req, res) => {
     try {
+        console.log("Obteniendo todos los estudiantes");
         const allEstudiantes = await Estudiante.findAll({
             // include: [
             //     {
@@ -19,9 +20,10 @@ const getAllEstudiantes = async (req, res) => {
             // ]
         });
         return allEstudiantes;
-    } catch (error) {
+    }
+    catch (error) {
         console.log("Error al obtener los estudiantes");
-        return res.status(500).json({ error: error.message });
+        // return res.status(500).json({ error: error.message });
     }
 }
 

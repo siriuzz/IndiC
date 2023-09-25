@@ -468,6 +468,10 @@
           "configuracion": {
             "type": "string",
             "example": "{\"config\":\"config\"}"
+          },
+          "indice_general": {
+            "type": "number",
+            "example": 3.5
           }
         },
         "required": [
@@ -482,7 +486,8 @@
           "id_estado",
           "id_rol",
           "periodos_cursados",
-          "configuracion"
+          "configuracion",
+          "indice_general"
         ],
         "xml": {
           "name": "Estudiante"
@@ -551,38 +556,23 @@
       "Asignatura": {
         "type": "object",
         "properties": {
-          "asignatura": {
+          "nombre": {
             "type": "string",
             "example": "Programacion I"
           },
-          "id_docente": {
+          "codigo": {
             "type": "string",
-            "example": "1"
+            "example": "1234"
           },
           "creditos": {
             "type": "string",
             "example": "4"
-          },
-          "aula": {
-            "type": "string",
-            "example": "A-1"
-          },
-          "activa": {
-            "type": "boolean",
-            "example": true
-          },
-          "calificacion_base_mt": {
-            "type": "number",
-            "example": 40
           }
         },
         "required": [
-          "asignatura",
-          "id_docente",
-          "creditos",
-          "aula",
-          "activa",
-          "calificacion_base_mt"
+          "nombre",
+          "codigo",
+          "creditos"
         ],
         "xml": {
           "name": "Asignatura"
@@ -643,7 +633,7 @@
           "name": "Carrera"
         }
       },
-      "Estudiante_Asignatura": {
+      "Estudiante_Seccion": {
         "type": "object",
         "properties": {
           "id_asignatura": {
@@ -661,16 +651,101 @@
           "calificacion_final": {
             "type": "number",
             "example": 100
+          },
+          "periodo": {
+            "type": "number",
+            "example": 1
           }
         },
         "required": [
           "id_asignatura",
           "id_estudiante",
           "calificacion_mt",
-          "calificacion_final"
+          "calificacion_final",
+          "periodo"
         ],
         "xml": {
-          "name": "Estudiante_Asignatura"
+          "name": "Estudiante_Seccion"
+        }
+      },
+      "Seccion": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "number",
+            "example": 1
+          },
+          "id_profesor": {
+            "type": "number",
+            "example": 1
+          },
+          "id_asignatura": {
+            "type": "number",
+            "example": 1
+          },
+          "periodo": {
+            "type": "number",
+            "example": 1
+          },
+          "year": {
+            "type": "string",
+            "example": "2021-09-19"
+          },
+          "aula": {
+            "type": "string",
+            "example": "Aula 1"
+          },
+          "is_active": {
+            "type": "boolean",
+            "example": true
+          },
+          "calificacion_base_mt": {
+            "type": "number",
+            "example": 40
+          }
+        },
+        "required": [
+          "numero",
+          "id_profesor",
+          "id_asignatura",
+          "periodo",
+          "year",
+          "aula",
+          "is_active",
+          "calificacion_base_mt"
+        ],
+        "xml": {
+          "name": "Seccion"
+        }
+      },
+      "Horario": {
+        "type": "object",
+        "properties": {
+          "id_seccion": {
+            "type": "number",
+            "example": 1
+          },
+          "dia": {
+            "type": "number",
+            "example": 1
+          },
+          "hora_inicio": {
+            "type": "number",
+            "example": 8
+          },
+          "hora_fin": {
+            "type": "number",
+            "example": 10
+          }
+        },
+        "required": [
+          "id_seccion",
+          "dia",
+          "hora_inicio",
+          "hora_fin"
+        ],
+        "xml": {
+          "name": "Horario"
         }
       },
       "Config_Calif": {

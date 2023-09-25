@@ -25,6 +25,7 @@ module.exports = {
       id_rol: 1,
       periodos_cursados: 1,
       configuracion: JSON.stringify({ "config": "config" }),
+      indice_general: 3.0
     }], {});
   },
 

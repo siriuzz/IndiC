@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }
       })
-      Estudiante_Seccion.belongsTo(models.Asignatura, {
+      Estudiante_Seccion.belongsTo(models.Seccion, {
         foreignKey: {
           name: 'id_seccion',
           allowNull: false
@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     id_asignatura: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false },
     calificacion_mt: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 40 },
     calificacion_final: { type: DataTypes.INTEGER, allowNull: false },
+    periodo: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     sequelize,
     modelName: 'Estudiante_Seccion',

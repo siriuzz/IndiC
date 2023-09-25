@@ -1,4 +1,7 @@
 'use strict';
+
+const { sequelize } = require('../models');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -68,11 +71,15 @@ module.exports = {
         type: Sequelize.FLOAT,
         defaultValue: 0
       },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: new Date()
-
       }
     });
     await queryInterface.addConstraint('Estudiantes', {
@@ -104,8 +111,10 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade'
     });
+    sequelize.sync();
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Estudiantes');
   }
+
 };

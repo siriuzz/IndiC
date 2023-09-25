@@ -22,7 +22,8 @@ const doc = {
                 $id_estado: 1,
                 $id_rol: 1,
                 $periodos_cursados: 1,
-                $configuracion: JSON.stringify({ "config": "config" })
+                $configuracion: JSON.stringify({ "config": "config" }),
+                $indice_general: 3.5
             },
             Docente: {
                 $nombre: 'Juana Doe',
@@ -37,12 +38,9 @@ const doc = {
                 $configuracion: JSON.stringify({ "config": "config" }),
             },
             Asignatura: {
-                $asignatura: "Programacion I",
-                $id_docente: "1",
-                $creditos: "4",
-                $aula: "A-1",
-                $activa: true,
-                $calificacion_base_mt: 40
+                $nombre: "Programacion I",
+                $codigo: "1234",
+                $creditos: "4"
             },
             Rol: {
                 $rol: "Estudiante"
@@ -55,11 +53,28 @@ const doc = {
                 $periodos_totales: 17,
                 $asignaturas_totales: 50,
             },
-            Estudiante_Asignatura: {
+            Estudiante_Seccion: {
                 $id_asignatura: 1,
                 $id_estudiante: 1,
                 $calificacion_mt: 40,
                 $calificacion_final: 100,
+                $periodo: 1
+            },
+            Seccion: {
+                $numero: 1,
+                $id_profesor: 1,
+                $id_asignatura: 1,
+                $periodo: 1,
+                $year: "2021-09-19",
+                $aula: "Aula 1",
+                $is_active: true,
+                $calificacion_base_mt: 40
+            },
+            Horario: {
+                $id_seccion: 1,
+                $dia: 1,
+                $hora_inicio: 8,
+                $hora_fin: 10
             },
             Config_Calif: {
                 $nombre: "Configuracion de calificaciones",

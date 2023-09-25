@@ -10,7 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+
+      Horario.belongsTo(models.Seccion, {
+        foreignKey: {
+          name: 'id_seccion',
+          allowNull: false
+        }
+      })
     }
   }
   Horario.init({

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Estudiante extends Model {
     /**
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Estudiante.hasMany(models.Estudiante_Asignatura);
+      Estudiante.hasMany(models.Estudiante_Seccion);
       Estudiante.belongsTo(models.Estado, {
         foreignKey: {
           name: 'id_estado',
@@ -51,10 +52,12 @@ module.exports = (sequelize, DataTypes) => {
     id_estado: { type: DataTypes.INTEGER, allowNull: false },
     id_rol: { type: DataTypes.INTEGER, allowNull: false },
     periodos_cursados: { type: DataTypes.INTEGER, allowNull: false },
-    configuracion: { type: DataTypes.JSON, allowNull: false }
+    configuracion: { type: DataTypes.JSON, allowNull: false },
+    indice_general: { type: DataTypes.FLOAT, allowNull: false },
   }, {
     sequelize,
     modelName: 'Estudiante',
   });
+  sequelize.sync();
   return Estudiante;
 };
