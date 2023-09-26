@@ -11,10 +11,11 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import Link from 'next/link';
 
 
 
-function SidebarCloseEstudiante() {
+export default function SidebarCloseEstudiante() {
     return (
         <div class="container-fluid col d-flex flex-column">
             <div >
@@ -31,9 +32,11 @@ function SidebarCloseEstudiante() {
             </div>
 
             <div>
+                <Link href="/inicio">
                 <IconButton className={styles.button}>
                     <HomeOutlinedIcon className={styles.icon} />
                 </IconButton>
+                </Link>
 
                 <IconButton className={styles.button}>
                     <GradeOutlined className={styles.icon} />
@@ -54,13 +57,13 @@ function SidebarCloseEstudiante() {
                     <SettingsOutlinedIcon className={styles.icon} />
                 </IconButton>
 
+                <Link href="/login">
                 <IconButton className={styles.button}>
                     <ExitToAppOutlinedIcon className={styles.icon} />
                 </IconButton>
+                </Link>
             </div>
 
         </div>
     )
 }
-
-export default SidebarCloseEstudiante

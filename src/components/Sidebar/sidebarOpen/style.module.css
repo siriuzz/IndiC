@@ -4,130 +4,17 @@
     background-color: #ffffff;
     border-radius: 25px;
     border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 300px;
-    height: 717px;
-}
-
-.text {
-    color: #000000;
-}
-
-.C {
-    display: inline;
-    color: #a6b1e1;
-}
-
-.menuButton {
-    background-color: #ffffff00;
-    border-color: #ffffff00;
-    margin-top: 15px;
-    margin-left: 15px;
-    align-self:normal;
-    position: relative;
-    display: flex;
-    width: 48px;
-    height: 45px;
-}
-
-.incioIcon {
-        height: 22px;
-        position: absolute;
-        top: 12px;
-        width: 20px;
-}
-
-.inicioButton {
-        border: 1px solid;
-        border-color: #a6b1e1;
-        background-color: #ffffff;
-        border-radius: 18px;
-        display: flex;
-        gap: 8px;
-        padding: 8px 41px;
-        position: relative;
-        width: 208px;
-}
-
-.buttonText {
-    color: #737373;
-        font-family: "Kanit", Hel, Arial, sans-serif;
-        font-size: 16px;
-        font-weight: 400;
-        font-style: normal;
-        line-height: 30px;
-        margin-top: -1px;
-        position: relative;
-        white-space: nowrap;
-        width: fit-content;
-}
-
-.calificacionesIcon {
-    background-color: #ffffff00;
-    border-color: #ffffff00;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-    display: flex;
-    margin-top: 30px;
-    width: 35px;
-    height: 35px;
-}
-
-.calculadoraIndiceIcon {
-    background-color: #ffffff00;
-    border-color: #ffffff00;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-    display: flex;
-    margin-top: 30px;
-    width: 35px;
-    height: 35px;
-}
-
-.perfilIcon {
-    background-color: #ffffff00;
-    border-color: #ffffff00;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-    display: flex;
-    margin-top: 30px;
-    width: 35px;
-    height: 35px;
-}
-
-.configuracionIcon {
-    background-color: #ffffff00;
-    border-color: #ffffff00;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-    display: flex;
-    margin-top: 90px;
-    width: 35px;
-    height: 35px;
-}
-
-.logOutIcon {
-    background-color: #ffffff00;
-    border-color: #ffffff00;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-    display: flex;
-    margin-top: 25px;
-    width: 35px;
-    height: 35px;
+    height: 705px;
 }
 
 .logo {
     display: flex;
     position: relative;
-    margin-bottom: 75px;
-    margin-top: 30px;
+    margin-bottom: 45px;
+    margin-top: 25px;
 }

@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuButtons from '@/components/menuButtons/MenuButtons';
 import { ThemeProvider } from '@emotion/react';
 
-function SidebarOpenEstudiante() {
+export default function SidebarOpen() {
     return (
         <div className={styles.container}>
             <Button className={styles.menuButton} variant="contained" startIcon={<MenuIcon />} >
@@ -53,4 +53,3 @@ function SidebarOpenEstudiante() {
     )
 }
 
-export default SidebarOpenEstudiante
