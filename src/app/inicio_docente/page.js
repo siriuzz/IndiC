@@ -11,6 +11,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
+import { LineChart } from '@mui/x-charts/LineChart';
 import { useStyles } from "../layout";
 import { Kanit } from "next/font/google";
 
@@ -55,34 +56,36 @@ const paperStyle = {
 
 const divUserStyle = {
     display: "flex",
-    flexDirection: "row"
-
+    flexDirection: "row",
+    width: "600px"
 };
 
 const userInfoStyle = {
     fontSize: "26px",
     marginLeft: "40px",
-    marginTop: "10px"
+    marginTop: "10px",
+    width: "280px"
+
 };
 
+
 const CalendarStyle = {
-    fontSize: "26px",
-    marginLeft: "600px",
-    marginTop: "-20 px",
+    width: "320px",
+    height: "auto",
+    fontSize: "24px",
+    marginLeft: "300px",
+    marginTop: "10px",
     font: "Kanit",
 };
 
 
 
 export default function Inicio_docente() {
-    const [value, setValue] = React.useState(dayjs()); // Inicializa con la fecha actual
+    const [value, setValue] = React.useState(dayjs());
 
-    // Utiliza useEffect para establecer el valor inicial
     useEffect(() => {
         setValue(dayjs());
     }, []);
-
-    // Define el estilo de fuente para el calendario
 
     return (
         <div style={wallpaperStyle}>
