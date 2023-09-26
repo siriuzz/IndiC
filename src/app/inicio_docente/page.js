@@ -75,7 +75,6 @@ const CalendarStyle = {
 
 
 export default function Inicio_docente() {
-    const classes = useStyles();
     const [value, setValue] = React.useState(dayjs()); // Inicializa con la fecha actual
 
     // Utiliza useEffect para establecer el valor inicial
@@ -88,7 +87,7 @@ export default function Inicio_docente() {
     return (
         <div style={wallpaperStyle}>
             <SidebarCloseDocente />
-            <Paper elevation={3} className={classes.paperBig}>
+            <Paper elevation={3} style={useStyles.paperBig}>
                 <div className={kanit.className} style={labelStyle}>
                     Bienvenido!
                     <IconButton style={notificationsButtonStyle}>

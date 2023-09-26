@@ -1,7 +1,6 @@
 "use client"
 import './globals.css'
 import { Kanit } from 'next/font/google'
-import { makeStyles } from "@mui/styles";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ['400', '700'] })
 
@@ -10,7 +9,7 @@ export const metadata = {
   description: 'Created by Group #5',
 }
 
-export const useStyles = makeStyles({
+export const useStyles = {
   paperSmall: {
     marginTop: "30px",
     marginLeft: "40px",
@@ -49,7 +48,7 @@ export const useStyles = makeStyles({
   circularProgress: {
     borderRadius: "50px",
   }
-})
+}
 
 export default function RootLayout({ children }) {
   return (

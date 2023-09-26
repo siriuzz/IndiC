@@ -12,8 +12,6 @@ import LinearProgress from "@mui/material/LinearProgress";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -88,12 +86,10 @@ const divIndiceStyle = {
 
 export default function Perfil() {
 
-    const classes = useStyles();
-
     return (
         <div style={wallpaperStyle}>
             <SidebarClose />
-            <Paper elevation={3} className={classes.paperBig}>
+            <Paper elevation={3} style={useStyles.paperBig}>
                 <div className={kanit.className} style={labelStyle}>
                     Bienvenido!
                     <IconButton style={notificationsButtonStyle}>
@@ -118,19 +114,19 @@ export default function Perfil() {
                             <div style={{ fontSize: "24px", width: "155px", alignSelf: "center", marginTop: "20px" }}>Indice General</div>
                         </div>
                     </div>
-                    <div className={classes.divlinearProgressHead}>
+                    <div style={useStyles.divlinearProgressHead}>
                         3.88/4
-                        <LinearProgress className={classes.linearProgress} variant="determinate" value={95} />
+                        <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Mayo-Julio 2023
                     </div>
-                    <div className={classes.divlinearProgress}>
+                    <div style={useStyles.divlinearProgress}>
                         3.88/4
-                        <LinearProgress className={classes.linearProgress} variant="determinate" value={95} />
+                        <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Mayo-Julio 2023
                     </div>
-                    <div className={classes.divlinearProgress}>
+                    <div style={useStyles.divlinearProgress}>
                         3.88/4
-                        <LinearProgress className={classes.linearProgress} variant="determinate" value={95} />
+                        <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Mayo-Julio 2023
                     </div>
                 </ThemeProvider>
