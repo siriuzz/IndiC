@@ -3,10 +3,12 @@ import * as React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import Input from '@mui/material/Input';
-import { Button, 
-        FormControlLabel,
-        FormGroup, 
-        InputAdornment} from "@mui/material";
+import {
+    Button,
+    FormControlLabel,
+    FormGroup,
+    InputAdornment
+} from "@mui/material";
 import { Visibility } from "@mui/icons-material";
 import { VisibilityOff } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
@@ -20,7 +22,7 @@ import { useStyles } from "../layout";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] }) // Se usa para usar la fuente Kanit en los elementos que no se le aplica por defecto
 
-const wallpaperStyle = { 
+const wallpaperStyle = {
     backgroundImage: "url('/assets/LoginWallpaper.svg')",
     backgroundColor: "white",
     backgroundSize: "contain",
@@ -78,27 +80,27 @@ export default function Login() {
 
     const classes = useStyles(); // constante para almacenar los estilos de los papers
     const [showPassword, setShowPassword] = useState(false); // hooks para el input de contraseña
-    const togglePasswordVisibility = () => {setShowPassword(!showPassword);};//función para mostrar la contraseña
+    const togglePasswordVisibility = () => { setShowPassword(!showPassword); };//función para mostrar la contraseña
     const [checked, setChecked] = useState(false); // hooks para el checkbox
-    
+
     return (
         <div // Fondo de pantalla
-        style={wallpaperStyle}>
+            style={wallpaperStyle}>
             <Paper // paper que almacena el logo y el formulario
-            className={classes.paperSmall} 
-            elevation={3}>
-                <Image style={{marginTop: "54px"}} // logo de la aplicación
+                className={classes.paperSmall}
+                elevation={3}>
+                <Image style={{ marginTop: "54px" }} // logo de la aplicación
                     src={"/assets/Logo.png"}
                     width={70}
                     height={160}
                     alt="Logo app"
                 />
                 <ThemeProvider // tema de la aplicación 
-                theme={theme}>
+                    theme={theme}>
                     <FormGroup // formulario de inicio de sesión
-                    className={kanit.className}>
+                        className={kanit.className}>
                         <Input // input de correo institucional 
-                        className={kanit.className} style={correoInputStyle} placeholder="Correo Institucional">
+                            className={kanit.className} style={correoInputStyle} placeholder="Correo Institucional">
                         </Input>
                         <Input // input de contraseña
                             className={kanit.className}
@@ -107,7 +109,7 @@ export default function Login() {
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={ // icono para mostrar la contraseña
                                 <InputAdornment>
-                                    <IconButton style={{marginRight: "5px"}}
+                                    <IconButton style={{ marginRight: "5px" }}
                                         onClick={togglePasswordVisibility}
                                         onMouseDown={(e) => e.preventDefault()}
                                     >
@@ -117,31 +119,31 @@ export default function Login() {
                             }
                         />
                         <div // div que contiene el checkbox y el link de recuperar contraseña
-                        style={{ display: "inline-flex" }} >
-                            <FormControlLabel 
-                            control={
-                                <Checkbox // checkbox para recordar usuario
-                                    style={checkboxStyle}
-                                    value="check"
-                                    checked={checked}
-                                    onChange={() => {
-                                        setChecked(!checked);
-                                    }}
-                                />
-                            } label={ 
-                                <span className={kanit.className} style={checkboxLabelStyle}>Recuérdame</span>
-                            }/>
+                            style={{ display: "inline-flex" }} >
+                            <FormControlLabel
+                                control={
+                                    <Checkbox // checkbox para recordar usuario
+                                        style={checkboxStyle}
+                                        value="check"
+                                        checked={checked}
+                                        onChange={() => {
+                                            setChecked(!checked);
+                                        }}
+                                    />
+                                } label={
+                                    <span className={kanit.className} style={checkboxLabelStyle}>Recuérdame</span>
+                                } />
                             <Link // link para recuperar contraseña
-                            href="/recuperar" style={{ display: "flex" }}>
+                                href="/recuperar" style={{ display: "flex" }}>
                                 <span style={linkLabelStyle}>
                                     ¿Olvidó su contraseña?
                                 </span>
                             </Link>
                         </div>
                         <Button // botón para iniciar sesión
-                        variant="outlined" href="./inicio_estudiante" 
-                        className={kanit.className}
-                        style={buttonStyle}
+                            variant="outlined" href="./inicio_estudiante"
+                            className={kanit.className}
+                            style={buttonStyle}
                         >Iniciar Sesión</Button>
                     </FormGroup>
                 </ThemeProvider>
