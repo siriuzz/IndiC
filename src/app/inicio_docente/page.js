@@ -78,8 +78,6 @@ const CalendarStyle = {
     font: "Kanit",
 };
 
-
-
 export default function Inicio_docente() {
     const [value, setValue] = React.useState(dayjs());
 
