@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     telefono: { type: DataTypes.INTEGER, allowNull: false },
     cedula: { type: DataTypes.INTEGER, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
+    salt: { type: DataTypes.STRING, allowNull: false },
     fecha_registro: { type: DataTypes.DATE, allowNull: false },
     direccion: { type: DataTypes.STRING, allowNull: false },
     id_estado: { type: DataTypes.INTEGER, allowNull: false },
@@ -40,6 +41,8 @@ module.exports = (sequelize, DataTypes) => {
     configuracion: { type: DataTypes.JSON, allowNull: false }
   }, {
     sequelize,
+    timestamps: true,
+    createdAt: false,
     modelName: 'Docente',
   });
   return Docente;

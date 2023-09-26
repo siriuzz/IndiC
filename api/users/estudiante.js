@@ -17,45 +17,44 @@ router.get('/', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-})
-    .post('/', (req, res) => {
-        // #swagger.description = 'Endpoint para crear un estudiante.'
-        /*	#swagger.requestBody = {
-               required: true,
-               schema: { $ref: "#/components/schemas/Estudiante" }
-       }
-         #swagger.parameters['nombre'] = {
-                in: 'body.nombre',                             
-                description: "Nombre del estudiante",
-                required: true,
-                type: 'string',
-                }
-         swagger.parameters['body'] = {
-         in: 'body',                            
-         description: "Nombre del estudiante",                   
-         required: true,                     
-         type: 'string',
-         }
-         #swaggger.responses[200] = {
-                description: 'Estudiante creado correctamente.',
-                schema: { $ref: "#/components/schemas/Estudiante" }
-         } 
+}).post("/", async (req, res) => {
+    // #swagger.description = 'Endpoint para crear un estudiante.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiante creado correctamente.',
+            schema: { $ref: "#/components/schemas/Estudiante" }
     } */
+    /* #swagger.parameters[body] = [
+        {
+            in: 'body',
+            description: 'Información del estudiante.',
+            required: true,
+            schema: { $ref: "#/components/schemas/Estudiante" }
+        }
+    ] */
+    try {
+        const result = await EstudianteController.createEstudiante(req, res);
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+router.get('/:id', async (req, res) => {
 
-    }).put('/', (req, res) => {
-        // #swagger.description = 'Endpoint para actualizar un estudiante.'
-        /*  #swagger.parameters['obj'] = {
-                in: 'body',
-                description: 'Some description...',
-                schema: {
-                    $name: 'Jhon Doe',
-                    $age: 29,
-                    about: ''
-                }
-        } */
+    // #swagger.description = 'Endpoint para obtener un estudiante.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiante obtenido correctamente.',
+            schema: { $ref: "#/components/schemas/Estudiante" }
+    } */
+    try {
+        const result = await EstudianteController.getEstudianteById(req, res);
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
 
-    }).patch('/', (req, res) => {
+});
 
-    });
 
 module.exports = router;

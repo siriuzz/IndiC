@@ -2,9 +2,9 @@ const express = require('express')
 const app = express();
 const estudiantesRoutes = require('./api/users/estudiante.js');
 const docentesRoutes = require('./api/users/docente');
+const authRoutes = require('./api/auth/login');
 const swaggerUi = require('swagger-ui-express');
 const router = express.Router();
-
 
 const port = process.env.PORT || 3000;
 
@@ -17,11 +17,19 @@ app.get('/api-docs', swaggerUi.setup(require('./swagger-output.json')));
 
 app.use('/api', router);
 
+
+
 router.use('/Estudiantes', swaggerUi.serve, estudiantesRoutes
     /* 
     #swagger.tags = ['Estudiantes']
     */
 
+);
+
+router.use('/auth', authRoutes
+    /*
+    #swagger.tags = ['Auth']
+    */
 );
 
 router.use('/Docentes', swaggerUi.serve, docentesRoutes

@@ -16,6 +16,7 @@ const doc = {
                 $telefono: "1234567890",
                 $cedula: "1234567890",
                 $password: "1234567890",
+                $salt: "1234567890",
                 $fecha_registro: "2021-09-19",
                 $direccion: "Calle 123",
                 $id_carrera: 1,
@@ -31,6 +32,7 @@ const doc = {
                 $telefono: '1234567890',
                 $cedula: '1234567890',
                 $password: '1234567890',
+                $salt: '1234567890',
                 $fecha_registro: '2021-09-19',
                 $direccion: 'Calle 123',
                 $id_estado: 1,
@@ -79,6 +81,19 @@ const doc = {
             Config_Calif: {
                 $nombre: "Configuracion de calificaciones",
                 $estado: true
+            },
+            Admin: {
+                $nombre: "Julio Doe",
+                $correo: "123@gmail.com",
+                $telefono: "1234567890",
+                $cedula: "1234567890",
+                $password: "1234567890",
+                $salt: "1234567890",
+                $fecha_registro: "2021-09-19",
+                $direccion: "Calle 123",
+                $id_estado: 1,
+                $id_rol: 1,
+                $configuracion: JSON.stringify({ "config": "config" })
             }
         }
     }
@@ -91,6 +106,4 @@ const endpointsFiles = ['./app.js'];
    'endpointsFiles' only the root file where the route starts,
    such as index.js, app.js, routes.js, ... */
 
-swaggerAutogen(outputFile, endpointsFiles, doc).then(async () => {
-    await import('./app.js'); // Your project's root file
-});;
+swaggerAutogen(outputFile, endpointsFiles, doc);
