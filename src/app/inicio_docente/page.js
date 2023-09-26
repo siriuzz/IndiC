@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from "react";
-import SidebarCloseDocente from "@/components/sidebar/sidebarCloseDocente/sidebarCloseDocente";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -56,7 +56,7 @@ const paperStyle = {
 const divUserStyle = {
     display: "flex",
     flexDirection: "row"
-    
+
 };
 
 const userInfoStyle = {
@@ -69,7 +69,7 @@ const CalendarStyle = {
     fontSize: "26px",
     marginLeft: "600px",
     marginTop: "-20 px",
-    font:  "Kanit",
+    font: "Kanit",
 };
 
 
