@@ -169,7 +169,8 @@ export default function Perfil() {
                                 <div style={divIndiceStyle}>
                                     3.58
                                 </div>
-                                <CircularProgress style={{marginLeft: "5px"}}size={180} variant="determinate" value={78} />
+                                <CircularProgress style={{ color: "#ebdfe6",marginLeft: "5px"}}size={180} variant="determinate" value={100} />
+                                <CircularProgress style={{ marginTop: "-186px",marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={78} />
                             </div>
                             <div style={divIndiceTextStyle}>Indice General</div>
                         </div>
