@@ -14,13 +14,12 @@ import Image from "next/image";
 import { useStyles } from "../layout";
 import { Kanit } from "next/font/google";
 import { Line } from 'react-chartjs-2';
-import {Chart as ChartJS, Title, Tooltip, LineElement, Legend, CategoryScale, LinearScale, PointElement, Filler} from 'chart.js';
-import { lightBlue } from "@mui/material/colors";
+import { Chart as ChartJS, Title, Tooltip, LineElement, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
 
 ChartJS.register(
-    Title, Tooltip, LineElement, Legend,
+    Title, Tooltip, LineElement,
     CategoryScale, LinearScale, PointElement, Filler
-  )
+)
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -78,16 +77,16 @@ const CalendarStyle = {
     width: "320px",
     height: "auto",
     fontSize: "24px",
-    marginLeft: "450px", 
-    marginTop: "-10px",
-    fontFamily: kanit, 
+    marginLeft: "450px",
+    marginTop: "-30px",
+    fontFamily: kanit,
 };
 
 const LinearStyle = {
     width: "470px",
     height: "auto",
-    marginLeft: "75px", 
-    marginTop: "-50px",
+    marginLeft: "75px",
+    marginTop: "-40px",
 }
 
 export default function Inicio_docente() {
@@ -98,33 +97,25 @@ export default function Inicio_docente() {
     }, []);
 
     const [data, setData] = useState({
-        labels: ["IDS323", "IDS311", "IDS326", "IDS325","IDS323L"],
+        labels: ["IDS323", "IDS311", "IDS326", "IDS325", "IDS323L"],
         datasets: [
             {
                 height: "40px",
                 label: "Promedio de calificaciones",
                 data: [80, 70, 85, 63, 75],
                 backgroundColor: [
-                    'rgba(166, 177, 225, 0.8)', 
-                  ],
-                borderColor:'#0052B4',
-                tension:0.4,
-                fill:true,
-                pointStyle:'circ',
-                pointBorderColor:'blue',
-                pointBackgroundColor:'#E4D1D1',
-                showLine:true
+                    'rgba(166, 177, 225, 0.8)',
+                ],
+                borderColor: '#0052B4',
+                tension: 0.4,
+                fill: true,
+                pointStyle: 'circ',
+                pointBorderColor: 'blue',
+                pointBackgroundColor: '#E4D1D1',
+                showLine: true
             }
         ]
     });
-
-    const options = {
-        plugins: {
-            legend: {
-                display: false, 
-            },
-        },
-    };
 
     return (
         <div style={wallpaperStyle}>
@@ -158,7 +149,7 @@ export default function Inicio_docente() {
                         </div>
                     </div>
                 </Paper>
-                <div style={LinearStyle}><Line data={data} /> 
+                <div style={LinearStyle}><Line data={data} />
                 </div>
             </Paper>
         </div>
