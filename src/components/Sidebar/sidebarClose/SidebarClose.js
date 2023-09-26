@@ -33,9 +33,9 @@ export default function SidebarCloseEstudiante() {
 
             <div>
                 <Link href="/inicio_estudiante">
-                <IconButton className={styles.button}>
-                    <HomeOutlinedIcon className={styles.icon} />
-                </IconButton>
+                    <IconButton className={styles.button}>
+                        <HomeOutlinedIcon className={styles.icon} />
+                    </IconButton>
                 </Link>
 
                 <IconButton className={styles.button}>
@@ -52,15 +52,15 @@ export default function SidebarCloseEstudiante() {
 
 
             </div>
-            <div class="mt-auto align-bottom">
+            <div class="mt-auto align-bottom" style={{ marginBottom: "15px" }}>
                 <IconButton className={styles.button}>
                     <SettingsOutlinedIcon className={styles.icon} />
                 </IconButton>
 
                 <Link href="/login">
-                <IconButton className={styles.button}>
-                    <ExitToAppOutlinedIcon className={styles.icon} />
-                </IconButton>
+                    <IconButton className={styles.button}>
+                        <ExitToAppOutlinedIcon className={styles.icon} />
+                    </IconButton>
                 </Link>
             </div>
 
