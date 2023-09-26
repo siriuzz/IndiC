@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import SidebarClose from "@/components/sidebar/sidebarClose/SidebarClose";
+import SidebarClose from "@/components/Sidebar/sidebarClose/SidebarClose";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
@@ -104,10 +104,10 @@ export default function Perfil() {
                             </div>
                         </Paper>
                         <div style={divIndiceGraphStyle}>
-                            <div style={{alignSelf: "center", width: "180px", height: "180px"}}>
+                            <div style={{ alignSelf: "center", width: "180px", height: "180px" }}>
                                 <CircularProgress size={180} variant="determinate" value={78} />
                             </div>
-                            <div style={{ fontSize: "24px", width: "155px", alignSelf: "center", marginTop: "20px"}}>Indice General</div>
+                            <div style={{ fontSize: "24px", width: "155px", alignSelf: "center", marginTop: "20px" }}>Indice General</div>
                         </div>
                     </div>
                     <div className={classes.divlinearProgressHead}>
