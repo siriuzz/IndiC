@@ -13,11 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use('/api-docs', swaggerUi.serve);
-app.get('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./swagger-output.json'))
-    /*
-    #swagger.tags = ['Documentacion']
-    */
-);
+app.get('/api-docs', swaggerUi.setup(require('./swagger-output.json')));
 
 app.use('/api', router);
 

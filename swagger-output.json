@@ -13,9 +13,6 @@
   "paths": {
     "/api-docs": {
       "get": {
-        "tags": [
-          "Documentacion"
-        ],
         "description": "",
         "responses": {
           "default": {
