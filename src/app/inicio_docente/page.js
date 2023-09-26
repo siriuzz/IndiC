@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
@@ -11,9 +11,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
-import { LineChart } from '@mui/x-charts/LineChart';
 import { useStyles } from "../layout";
 import { Kanit } from "next/font/google";
+import { Line } from 'react-chartjs-2';
+import {Chart as ChartJS, Title, Tooltip, LineElement, Legend, CategoryScale, LinearScale, PointElement, Filler} from 'chart.js';
+import { lightBlue } from "@mui/material/colors";
+
+ChartJS.register(
+    Title, Tooltip, LineElement, Legend,
+    CategoryScale, LinearScale, PointElement, Filler
+  )
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -65,18 +72,23 @@ const userInfoStyle = {
     marginLeft: "40px",
     marginTop: "10px",
     width: "280px"
-
 };
-
 
 const CalendarStyle = {
     width: "320px",
     height: "auto",
     fontSize: "24px",
-    marginLeft: "300px",
-    marginTop: "10px",
-    font: "Kanit",
+    marginLeft: "450px", 
+    marginTop: "-10px",
+    fontFamily: kanit, 
 };
+
+const LinearStyle = {
+    width: "470px",
+    height: "auto",
+    marginLeft: "75px", 
+    marginTop: "-50px",
+}
 
 export default function Inicio_docente() {
     const [value, setValue] = React.useState(dayjs());
@@ -84,6 +96,35 @@ export default function Inicio_docente() {
     useEffect(() => {
         setValue(dayjs());
     }, []);
+
+    const [data, setData] = useState({
+        labels: ["IDS323", "IDS311", "IDS326", "IDS325","IDS323L"],
+        datasets: [
+            {
+                height: "40px",
+                label: "Promedio de calificaciones",
+                data: [80, 70, 85, 63, 75],
+                backgroundColor: [
+                    'rgba(166, 177, 225, 0.8)', 
+                  ],
+                borderColor:'#0052B4',
+                tension:0.4,
+                fill:true,
+                pointStyle:'circ',
+                pointBorderColor:'blue',
+                pointBackgroundColor:'#E4D1D1',
+                showLine:true
+            }
+        ]
+    });
+
+    const options = {
+        plugins: {
+            legend: {
+                display: false, 
+            },
+        },
+    };
 
     return (
         <div style={wallpaperStyle}>
@@ -117,6 +158,8 @@ export default function Inicio_docente() {
                         </div>
                     </div>
                 </Paper>
+                <div style={LinearStyle}><Line data={data} /> 
+                </div>
             </Paper>
         </div>
     );
