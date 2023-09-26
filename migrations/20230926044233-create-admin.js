@@ -1,4 +1,5 @@
 'use strict';
+const { sequelize } = require('../models');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -26,6 +27,10 @@ module.exports = {
         allowNull: false
       },
       password: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      hash: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -77,6 +82,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade'
     });
+    sequelize.sync({ force: true });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Admins');

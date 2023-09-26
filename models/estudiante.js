@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       // },
       allowNull: false
     },
+    hash: { type: DataTypes.STRING, allowNull: false },
     fecha_registro: { type: DataTypes.DATE, allowNull: false },
     direccion: { type: DataTypes.STRING, allowNull: false },
     id_carrera: { type: DataTypes.INTEGER, allowNull: false },

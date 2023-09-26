@@ -10,12 +10,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         unique: true
       },
-      codigo: {
+      nombre: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      nombre: {
-        type: Sequelize.INTEGER,
+      codigo: {
+        type: Sequelize.STRING,
         allowNull: false
       },
       creditos: {

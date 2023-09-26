@@ -13,12 +13,9 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('Asignaturas', [{
-      asignatura: "Programacion I",
-      id_docente: "1",
-      creditos: "4",
-      aula: "A-1",
-      activa: true,
-      calificacion_base_mt: 40,
+      codigo: "ING",
+      nombre: "Programacion I",
+      creditos: 4,
     }], {});
   },
 
