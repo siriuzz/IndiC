@@ -12,6 +12,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -70,12 +72,18 @@ const divIndiceGraphStyle = {
     flexDirection: "column",
     marginRight: "50px",
     borderRadius: "50px",
-    borderColor: "black",
+    border: "solid 1px #a681e1",
     height: "319px",
     width: "316px",
-    backgroundColor: "aliceblue",
     justifyContent: "center",
     marginTop: "-30px"
+};
+
+const divIndiceStyle = {
+    position: "absolute",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
 };
 
 export default function Perfil() {
@@ -104,10 +112,10 @@ export default function Perfil() {
                             </div>
                         </Paper>
                         <div style={divIndiceGraphStyle}>
-                            <div style={{alignSelf: "center", width: "180px", height: "180px"}}>
+                            <div style={{ alignSelf: "center", width: "180px", height: "180px" }}>
                                 <CircularProgress size={180} variant="determinate" value={78} />
                             </div>
-                            <div style={{ fontSize: "24px", width: "155px", alignSelf: "center", marginTop: "20px"}}>Indice General</div>
+                            <div style={{ fontSize: "24px", width: "155px", alignSelf: "center", marginTop: "20px" }}>Indice General</div>
                         </div>
                     </div>
                     <div className={classes.divlinearProgressHead}>
