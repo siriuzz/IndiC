@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      hash: {
+      salt: {
         type: Sequelize.STRING,
         allowNull: false,
       },

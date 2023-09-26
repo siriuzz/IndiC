@@ -18,7 +18,7 @@ module.exports = {
       telefono: '1234567890',
       cedula: '1234567890',
       password: '1234567890',
-      hash: '1234567890',
+      salt: '1234567890',
       fecha_registro: '2021-09-19',
       direccion: 'Calle 123',
       id_estado: 1,
