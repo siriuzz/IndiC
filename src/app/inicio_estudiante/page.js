@@ -65,7 +65,7 @@ const divUserInfoStyle = {
     width: "250px",
 };
 
-const divIndiceGraphStyle = {
+const divIndiceGraphContainerStyle = {
     display: "flex",
     flexDirection: "column",
     marginRight: "50px",
@@ -74,14 +74,71 @@ const divIndiceGraphStyle = {
     height: "319px",
     width: "316px",
     justifyContent: "center",
-    marginTop: "-30px"
+    marginTop: "-35px",
+};
+
+const divIndiceGraphStyle = {
+    alignSelf: "center",
+    width: "180px",
+    height: "180px"
 };
 
 const divIndiceStyle = {
-    position: "absolute",
     display: "flex",
+    position: "absolute",
+    marginTop: "65px",
+    marginLeft: "68px",
+    fontSize: "36px"
+};
+
+const divIndiceTextStyle = {
+    fontSize: "24px",
+    width: "155px",
+    marginLeft: "15px",
+    alignSelf: "center",
+    marginTop: "20px"
+};
+
+const paperPeriodosStyle = {
+    float: "right",
+    borderRadius: "60px",
+    border: "2px solid",
+    borderColor: theme.palette.primary.main,
+    fontSize: "26px",
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#ebdfe6",
+    marginTop: "-210px",
+    marginRight: "85px",
+    display: "flex",
+    flexDirection: "column",
+    height: "100px",
+    width: "250px",
+    fontWeight: "600"
+};
+
+const paperAsignaturasStyle = {
+    float: "right",
+    borderRadius: "60px",
+    border: "2px solid",
+    borderColor: theme.palette.primary.main,
+    fontSize: "26px",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ebdfe6",
+    marginRight: "85px",
+    marginTop: "-80px",
+    display: "flex",
+    flexDirection: "column",
+    height: "100px",
+    width: "250px",
+    fontWeight: "600"
+};
+
+const paperFontStyle = {
+    fontSize: "20px",
+    fontWeight: "100",
+    fontStyle: "italic"
 };
 
 export default function Perfil() {
@@ -107,11 +164,14 @@ export default function Perfil() {
                                 </div>
                             </div>
                         </Paper>
-                        <div style={divIndiceGraphStyle}>
-                            <div style={{ alignSelf: "center", width: "180px", height: "180px" }}>
-                                <CircularProgress size={180} variant="determinate" value={78} />
+                        <div style={divIndiceGraphContainerStyle}>
+                            <div style={divIndiceGraphStyle}>
+                                <div style={divIndiceStyle}>
+                                    3.58
+                                </div>
+                                <CircularProgress style={{marginLeft: "5px"}}size={180} variant="determinate" value={78} />
                             </div>
-                            <div style={{ fontSize: "24px", width: "155px", alignSelf: "center", marginTop: "20px" }}>Indice General</div>
+                            <div style={divIndiceTextStyle}>Indice General</div>
                         </div>
                     </div>
                     <div style={useStyles.divlinearProgressHead}>
@@ -122,13 +182,21 @@ export default function Perfil() {
                     <div style={useStyles.divlinearProgress}>
                         3.88/4
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
-                        Mayo-Julio 2023
+                        Febrero-Abril 2023
                     </div>
                     <div style={useStyles.divlinearProgress}>
                         3.88/4
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
-                        Mayo-Julio 2023
+                        Noviembre-Febrero 2023
                     </div>
+                    <Paper elevation={3} style={paperPeriodosStyle}>
+                        8/14
+                        <div style={paperFontStyle}>Periodos cursados</div>
+                    </Paper>
+                    <Paper elevation={3} style={paperAsignaturasStyle}>
+                        60/120
+                        <div style={paperFontStyle}>Asignaturas aprobadas</div>
+                    </Paper>
                 </ThemeProvider>
             </Paper>
         </div>
