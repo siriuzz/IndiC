@@ -77,8 +77,6 @@ const buttonStyle = {
 }; // constante que contiene el estilo del botón de iniciar sesión
 
 export default function Login() {
-
-    const classes = useStyles(); // constante para almacenar los estilos de los papers
     const [showPassword, setShowPassword] = useState(false); // hooks para el input de contraseña
     const togglePasswordVisibility = () => { setShowPassword(!showPassword); };//función para mostrar la contraseña
     const [checked, setChecked] = useState(false); // hooks para el checkbox
@@ -87,7 +85,7 @@ export default function Login() {
         <div // Fondo de pantalla
             style={wallpaperStyle}>
             <Paper // paper que almacena el logo y el formulario
-                className={classes.paperSmall}
+                style={useStyles.paperSmall}
                 elevation={3}>
                 <Image style={{ marginTop: "54px" }} // logo de la aplicación
                     src={"/assets/Logo.png"}
