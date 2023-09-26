@@ -1,5 +1,5 @@
 const app = require('../../express-config');
-const EstudianteController = require('../../controllers/EstudianteController.js');
+const EstudianteController = require('../controllers/EstudianteController.js');
 const router = app.router;
 
 router.get('/', async (req, res) => {

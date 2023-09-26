@@ -1,4 +1,4 @@
-const { Estudiante } = require('../models'); // Importa los modelos necesarios
+const { Estudiante } = require('../../models'); // Importa los modelos necesarios
 const bcrypt = require('bcrypt');
 
 const getAllEstudiantes = async (req, res) => {

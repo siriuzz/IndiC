@@ -1,5 +1,5 @@
 const app = require('../../express-config');
-const EstudianteController = require('../../controllers/EstudianteController.js');
+const EstudianteController = require('../controllers/EstudianteController.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = app.router;
