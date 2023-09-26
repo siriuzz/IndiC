@@ -40,6 +40,8 @@ module.exports = (sequelize, DataTypes) => {
     configuracion: { type: DataTypes.JSON, allowNull: false }
   }, {
     sequelize,
+    timestamps: true,
+    createdAt: false,
     modelName: 'Docente',
   });
   return Docente;

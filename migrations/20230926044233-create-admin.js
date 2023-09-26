@@ -2,71 +2,63 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Docentes', {
+    await queryInterface.createTable('Admins', {
       id: {
-        unique: true,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
       nombre: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       correo: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       telefono: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        allowNull: false
       },
       cedula: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        allowNull: false
       },
       password: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      hash: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       fecha_registro: {
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: new Date()
       },
       direccion: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       id_estado: {
-        allowNull: false,
         type: Sequelize.INTEGER,
-        defaultValue: 1
+        allowNull: false
       },
       id_rol: {
-        allowNull: false,
         type: Sequelize.INTEGER,
-        defaultValue: 1
+        allowNull: false
       },
       configuracion: {
-        allowNull: false,
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull: false
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: new Date()
-
+        type: Sequelize.DATE
       }
     });
-    await queryInterface.addConstraint('Docentes', {
+    await queryInterface.addConstraint('Admins', {
       fields: ['id_estado'],
       type: 'foreign key',
-      name: 'fk_docente_estado',
+      name: 'fk_admin_estado',
       references: {
         table: 'Estados',
         field: 'id'
@@ -74,10 +66,10 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade'
     });
-    await queryInterface.addConstraint('Docentes', {
+    await queryInterface.addConstraint('Admins', {
       fields: ['id_rol'],
       type: 'foreign key',
-      name: 'fk_docente_rol',
+      name: 'fk_admin_rol',
       references: {
         table: 'Roles',
         field: 'id'
@@ -87,6 +79,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Docentes');
+    await queryInterface.dropTable('Admins');
   }
 };
