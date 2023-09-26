@@ -1,10 +1,17 @@
 "use client"
-import React from "react";
+import React, { useEffect } from "react";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
+import { LineChart } from '@mui/x-charts/LineChart';
 import { useStyles } from "../layout";
 import { Kanit } from "next/font/google";
 
@@ -49,38 +56,68 @@ const paperStyle = {
 
 const divUserStyle = {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    width: "600px"
 };
 
 const userInfoStyle = {
     fontSize: "26px",
     marginLeft: "40px",
-    marginTop: "10px"
+    marginTop: "10px",
+    width: "280px"
+
+};
+
+
+const CalendarStyle = {
+    width: "320px",
+    height: "auto",
+    fontSize: "24px",
+    marginLeft: "300px",
+    marginTop: "10px",
+    font: "Kanit",
 };
 
 export default function Inicio_docente() {
-    
-    const classes = useStyles();
+    const [value, setValue] = React.useState(dayjs());
+
+    useEffect(() => {
+        setValue(dayjs());
+    }, []);
 
     return (
         <div style={wallpaperStyle}>
-        <Paper elevation={3} className={classes.paperBig}>
-            <div className={kanit.className} style={labelStyle}>
-                Bienvenido!
-                <IconButton style={notificationsButtonStyle}>
-                    <NotificationsIcon style={notificationsIconStyle} />
-                </IconButton>
-            </div>
-            <Paper elevation={0} style={paperStyle}>
-                <div style={divUserStyle}>
-                    <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
-                    />
-                    <div style={userInfoStyle}>
-                        Nombres y Apellidos<div>Area Academica</div>
-                    </div>
+            <SidebarCloseDocente />
+            <Paper elevation={3} style={useStyles.paperBig}>
+                <div className={kanit.className} style={labelStyle}>
+                    Bienvenido!
+                    <IconButton style={notificationsButtonStyle}>
+                        <NotificationsIcon style={notificationsIconStyle} />
+                    </IconButton>
                 </div>
+                <Paper elevation={0} style={paperStyle}>
+                    <div style={{ display: "flex" }}>
+                        <div style={divUserStyle}>
+                            <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150} />
+                            <div style={userInfoStyle}>
+                                Nombres y Apellidos<div>Area Academica</div>
+                            </div>
+                        </div>
+                        <div style={CalendarStyle}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DateCalendar', 'DateCalendar']}>
+                                    <DemoItem>
+                                        <DateCalendar
+                                            value={value}
+                                            onChange={(newValue) => setValue(newValue)}
+                                        />
+                                    </DemoItem>
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                    </div>
+                </Paper>
             </Paper>
-        </Paper>
-    </div>
-);
+        </div>
+    );
 }
