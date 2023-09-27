@@ -21,6 +21,16 @@
         }
       }
     },
+    "/api/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Estudiantes/": {
       "get": {
         "tags": [

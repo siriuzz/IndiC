@@ -1,4 +1,4 @@
-const { Estudiante } = require('../models'); // Importa los modelos necesarios
+const { Estudiante } = require('../../db/models'); // Importa los modelos necesarios
 const bcrypt = require('bcrypt');
 
 const getAllEstudiantes = async (req, res) => {
@@ -47,6 +47,7 @@ const getEstudianteById = async (req, res) => {
 }
 const getEstudianteByCorreo = async (req, res) => {
     try {
+        console.log(req.body);
         const { correo } = req.body;
         if (correo == null) return res.status(400).json({ error: 'Correo no especificado.' });
         console.log("Obteniendo estudiante por correo");
