@@ -51,7 +51,7 @@ router.post('/login', async (req, res) => {
                     id_carrera: estudiante.id_carrera,
                     id_estado: estudiante.id_estado,
                     iat: Math.floor(Date.now() / 1000),
-                    exp: Math.floor(Date.now() / 1000) + 60
+                    exp: Math.floor(Date.now() / 1000) + 10
                 }
                 const key = process.env.JWT_KEY;
                 const token = jwt.sign(payload, key);

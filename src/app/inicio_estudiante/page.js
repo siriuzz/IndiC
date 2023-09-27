@@ -12,6 +12,9 @@ import LinearProgress from "@mui/material/LinearProgress";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
+import { useEffect } from "react";
+
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -142,7 +145,41 @@ const paperFontStyle = {
 };
 
 export default function Perfil() {
+    useEffect(() => {
+        console.log('Checking token validity...');
+        const checkTokenValidity = async () => {
+            try {
+                const token = localStorage.getItem('jwtToken');
+                // console.log(token);
+                if (token) {
+                    // Send a request to your server to validate the token
+                    let response;
+                    await axios.post('http://localhost:3001/api/token/validate', { "token": token })
+                        .then(function (response) {
+                            console.log()
+                        }).catch(function (error) {
+                            console.log(error);
+                            localStorage.removeItem('token');
+                            window.location.href = '/login';
+                        }).finally(function () {
+                            console.log("Finalizado");
+                        });
 
+
+                } else {
+                    // Token is not present, handle the situation (e.g., redirect to the login page)
+                    window.location.href = '/login';
+                }
+            } catch (error) {
+                console.error('Error checking token validity:', error);
+                // Handle the error here
+            }
+        };
+
+        // Call the function to check token validity when the component mounts
+        checkTokenValidity();
+        fillPage();
+    }, []);
     return (
         <div style={wallpaperStyle}>
             <SidebarClose />
@@ -160,7 +197,13 @@ export default function Perfil() {
                                 <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
                                 />
                                 <div style={divUserInfoStyle}>
-                                    Nombres y Apellidos<div>Id<div>Carrera</div></div>
+                                    {/* Nombres y Apellidos
+                                    <div>
+                                        Id
+                                        <div>
+                                            Carrera
+                                        </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </Paper>
@@ -169,8 +212,8 @@ export default function Perfil() {
                                 <div style={divIndiceStyle}>
                                     3.58
                                 </div>
-                                <CircularProgress style={{ color: "#ebdfe6",marginLeft: "5px"}}size={180} variant="determinate" value={100} />
-                                <CircularProgress style={{ marginTop: "-186px",marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={78} />
+                                <CircularProgress style={{ color: "#ebdfe6", marginLeft: "5px" }} size={180} variant="determinate" value={100} />
+                                <CircularProgress style={{ marginTop: "-186px", marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={78} />
                             </div>
                             <div style={divIndiceTextStyle}>Indice General</div>
                         </div>

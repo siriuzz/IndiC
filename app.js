@@ -3,6 +3,7 @@ const app = express();
 const estudiantesRoutes = require('./api/users/estudiante.js');
 const docentesRoutes = require('./api/users/docente');
 const authRoutes = require('./api/auth/login');
+const tokenRoutes = require('./api/auth/token');
 const swaggerUi = require('swagger-ui-express');
 const router = express.Router();
 const cors = require('cors');
@@ -33,6 +34,12 @@ router.use('/Estudiantes', swaggerUi.serve, estudiantesRoutes
 );
 
 router.use('/auth', authRoutes
+    /*
+    #swagger.tags = ['Auth']
+    */
+);
+
+router.use('/token', tokenRoutes
     /*
     #swagger.tags = ['Auth']
     */

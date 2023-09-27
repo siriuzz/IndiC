@@ -100,7 +100,10 @@ export default function Login() {
         // const formData = new FormData();
         // formData.append('correo', correo);
         // formData.append('password', password);
-        var apiResponse;
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            localStorage.removeItem('jwtToken');
+        }
         await axios.post('http://localhost:3001/api/auth/login', {
             correo: correo,
             password: password
