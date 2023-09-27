@@ -111,6 +111,7 @@ export default function Login() {
             // apiResponse = response.data;
             // const token = signToken(apiResponse);
             localStorage.setItem('jwtToken', response.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.data));
             window.location.href = "/inicio_estudiante";
 
         }).catch(function (error) {

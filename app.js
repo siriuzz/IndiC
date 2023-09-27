@@ -4,6 +4,7 @@ const estudiantesRoutes = require('./api/users/estudiante.js');
 const docentesRoutes = require('./api/users/docente');
 const authRoutes = require('./api/auth/login');
 const tokenRoutes = require('./api/auth/token');
+const carrerasRoutes = require('./api/academic/carrera');
 const swaggerUi = require('swagger-ui-express');
 const router = express.Router();
 const cors = require('cors');
@@ -26,7 +27,7 @@ app.get('/api-docs', swaggerUi.setup(require('./swagger-output.json')));
 
 app.use('/api', router);
 
-router.use('/Estudiantes', swaggerUi.serve, estudiantesRoutes
+router.use('/', swaggerUi.serve, estudiantesRoutes
     /* 
     #swagger.tags = ['Estudiantes']
     */
@@ -58,7 +59,7 @@ router.use('/Asignaturas', swaggerUi.serve, require('./api/academic/asignatura')
             */
 );
 
-router.use('/Carreras', swaggerUi.serve, require('./api/academic/carrera')
+router.use('/', swaggerUi.serve, carrerasRoutes
     /* 
     #swagger.tags = ['Carreras']
     */

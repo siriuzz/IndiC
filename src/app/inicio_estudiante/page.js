@@ -13,7 +13,7 @@ import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -145,8 +145,29 @@ const paperFontStyle = {
 };
 
 export default function Perfil() {
+    const [nombre, setNombre] = useState("");
+    const [id, setId] = useState("");
+    const [carrera, setCarrera] = useState("");
+
     useEffect(() => {
+
         console.log('Checking token validity...');
+        const { nombre, id, id_carrera } = JSON.parse(localStorage.getItem('user'));
+        // console.log(data);
+        if (nombre) {
+            setNombre(nombre);
+        };
+
+        if (id) {
+            setId(id);
+        };
+        if (id_carrera) {
+            console.log(id_carrera);
+            axios.get(`http://localhost:3001/api/Carreras/${id_carrera}`).then((response) => {
+                setCarrera(response.data.carrera);
+            });
+        };
+
         const checkTokenValidity = async () => {
             try {
                 const token = localStorage.getItem('jwtToken');
@@ -178,7 +199,6 @@ export default function Perfil() {
 
         // Call the function to check token validity when the component mounts
         checkTokenValidity();
-        fillPage();
     }, []);
     return (
         <div style={wallpaperStyle}>
@@ -203,7 +223,13 @@ export default function Perfil() {
                                         <div>
                                             Carrera
                                         </div>
-                                    </div> */}
+                                    </div> */
+                                    }
+                                    <div>{nombre}</div>
+                                    <div>{id}</div>
+                                    <div>{carrera}</div>
+                                    {/* <div>{data.id}</div>
+                                    <div>{data.id_carrera}</div> */}
                                 </div>
                             </div>
                         </Paper>

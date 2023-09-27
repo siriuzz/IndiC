@@ -2,7 +2,7 @@ const app = require('../../express-config');
 const EstudianteController = require('../controllers/EstudianteController.js');
 const router = app.router;
 
-router.get('/', async (req, res) => {
+router.get('/Estudiantes', async (req, res) => {
 
     // #swagger.description = 'Endpoint para obtener todos los estudiantes.'
     /*	#swagger.responses[200] = {
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).post("/", async (req, res) => {
+}).post("/Estudiantes", async (req, res) => {
     // #swagger.description = 'Endpoint para crear un estudiante.'
     /*	#swagger.responses[200] = {
             description: 'Estudiante creado correctamente.',
@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 });
-router.get('/:id', async (req, res) => {
+router.get('/Estudiantes/:id', async (req, res) => {
 
     // #swagger.description = 'Endpoint para obtener un estudiante.'
     /*	#swagger.responses[200] = {
