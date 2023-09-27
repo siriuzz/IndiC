@@ -12,9 +12,15 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
 import { useStyles } from "../layout";
-import { Kanit } from "next/font/google";
+import { Jost, Kanit } from "next/font/google";
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, LineElement, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 
 ChartJS.register(
     Title, Tooltip, LineElement,
@@ -78,9 +84,9 @@ const CalendarStyle = {
     height: "auto",
     fontSize: "24px",
     marginLeft: "450px",
-    marginTop: "-30px",
-    fontFamily: kanit,
+    marginTop: "-40px"
 };
+
 
 const LinearStyle = {
     width: "470px",
@@ -89,6 +95,19 @@ const LinearStyle = {
     marginTop: "-40px",
 }
 
+
+const AsignaturaStyle = {
+    width: "800px",
+    height: "40px",
+    fontSize: "24px",
+    marginLeft: "-340px",
+    marginTop: "300px",
+    fontFamily: kanit, 
+    fontStyle: "bold"
+};
+
+
+    
 export default function Inicio_docente() {
     const [value, setValue] = React.useState(dayjs());
 
@@ -147,11 +166,38 @@ export default function Inicio_docente() {
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
+                        <div style={AsignaturaStyle}>
+                        <List sx={{ width: "400px", bgcolor: 'background.paper'}}>
+                    <ListItem>
+                        <ListItemAvatar>
+                            <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                <BookmarkBorderOutlinedIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="IDS325 - Aseguramiento de la Calidad" secondary="Sección 01 GC302" />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemAvatar>
+                        <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                <BookmarkBorderOutlinedIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="IDS311 - Proceso de Software" secondary="Sección 05 AH101" />                    </ListItem>
+                    <ListItem>
+                        <ListItemAvatar>
+                        <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                <BookmarkBorderOutlinedIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="IDS326 - Construcción de Software" secondary="Sección 02 FD411" />                    </ListItem>
+                </List>
+                        </div>
                     </div>
                 </Paper>
                 <div style={LinearStyle}><Line data={data} />
                 </div>
             </Paper>
+              
         </div>
     );
 }
