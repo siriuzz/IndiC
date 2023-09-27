@@ -47,6 +47,7 @@ const getEstudianteById = async (req, res) => {
 }
 const getEstudianteByCorreo = async (req, res) => {
     try {
+        console.log(req.body);
         const { correo } = req.body;
         if (correo == null) return res.status(400).json({ error: 'Correo no especificado.' });
         console.log("Obteniendo estudiante por correo");

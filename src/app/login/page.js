@@ -19,6 +19,9 @@ import Link from "next/link";
 import { Kanit } from "next/font/google";
 import theme from "../theme";
 import { useStyles } from "../layout";
+import axios from 'axios';
+var jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] }) // Se usa para usar la fuente Kanit en los elementos que no se le aplica por defecto
 
@@ -80,7 +83,50 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false); // hooks para el input de contraseña
     const togglePasswordVisibility = () => { setShowPassword(!showPassword); };//función para mostrar la contraseña
     const [checked, setChecked] = useState(false); // hooks para el checkbox
+    const [isLoading, setIsLoading] = useState(false);
+    const [correo, setCorreo] = useState(""); // hooks para el input de correo institucional
+    const [password, setPassword] = useState(""); // hooks para el input de contraseña
 
+    const handleChangeCorreo = (event) => {
+        setCorreo(event.target.value);
+    }
+    const handleChangePassword = (event) => {
+        setPassword(event.target.value);
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        // const formData = new FormData();
+        // formData.append('correo', correo);
+        // formData.append('password', password);
+        var apiResponse;
+        await axios.post('http://localhost:3001/api/auth/login', {
+            correo: correo,
+            password: password
+        }).then(function (response) {
+            apiResponse = response.data;
+        }).catch(function (error) {
+            console.log(error);
+        }).finally(function () {
+            console.log("axios executed")
+        });
+
+        const token = jwt.sign({
+            nombre: apiResponse.name,
+            // correo: apiResponse.correo,
+            // rol: 'estudiante',
+            // id_carrera: apiResponse.id_carrera,
+            // id_estado: apiResponse.id_estado,
+            // // iat: Math.floor(Date.now() / 1000),
+            // // exp: Math.floor(Date.now() / 1000) + 60
+        }, "key");
+
+        localStorage.setItem('jwtToken', token);
+
+        setIsLoading(false);
+
+    }; // función para el submit del formulario
     return (
         <div // Fondo de pantalla
             style={wallpaperStyle}>
@@ -95,55 +141,63 @@ export default function Login() {
                 />
                 <ThemeProvider // tema de la aplicación 
                     theme={theme}>
-                    <FormGroup // formulario de inicio de sesión
-                        className={kanit.className}>
-                        <Input // input de correo institucional 
-                            className={kanit.className} style={correoInputStyle} placeholder="Correo Institucional">
-                        </Input>
-                        <Input // input de contraseña
-                            className={kanit.className}
-                            style={passwordInputStyle}
-                            placeholder="Contraseña"
-                            type={showPassword ? 'text' : 'password'}
-                            endAdornment={ // icono para mostrar la contraseña
-                                <InputAdornment>
-                                    <IconButton style={{ marginRight: "5px" }}
-                                        onClick={togglePasswordVisibility}
-                                        onMouseDown={(e) => e.preventDefault()}
-                                    >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                        <div // div que contiene el checkbox y el link de recuperar contraseña
-                            style={{ display: "inline-flex" }} >
-                            <FormControlLabel
-                                control={
-                                    <Checkbox // checkbox para recordar usuario
-                                        style={checkboxStyle}
-                                        value="check"
-                                        checked={checked}
-                                        onChange={() => {
-                                            setChecked(!checked);
-                                        }}
-                                    />
-                                } label={
-                                    <span className={kanit.className} style={checkboxLabelStyle}>Recuérdame</span>
-                                } />
-                            <Link // link para recuperar contraseña
-                                href="/recuperar" style={{ display: "flex" }}>
-                                <span style={linkLabelStyle}>
-                                    ¿Olvidó su contraseña?
-                                </span>
-                            </Link>
-                        </div>
-                        <Button // botón para iniciar sesión
-                            variant="outlined" href="./inicio_estudiante"
-                            className={kanit.className}
-                            style={buttonStyle}
-                        >Iniciar Sesión</Button>
-                    </FormGroup>
+                    <form onSubmit={handleSubmit}>
+                        <FormGroup // formulario de inicio de sesión
+                            className={kanit.className}>
+                            <Input // input de correo institucional 
+                                id="correo" onChange={handleChangeCorreo} className={kanit.className} style={correoInputStyle} placeholder="Correo Institucional">
+                            </Input>
+                            <Input // input de contraseña
+                                id="password"
+                                className={kanit.className}
+                                style={passwordInputStyle}
+                                placeholder="Contraseña"
+                                type={showPassword ? 'text' : 'password'}
+                                onChange={handleChangePassword}
+                                endAdornment={ // icono para mostrar la contraseña
+                                    <InputAdornment position="start">
+                                        <IconButton style={{ marginRight: "5px" }}
+                                            onClick={togglePasswordVisibility}
+                                            onMouseDown={(e) => e.preventDefault()}
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                            <div // div que contiene el checkbox y el link de recuperar contraseña
+                                style={{ display: "inline-flex" }} >
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox // checkbox para recordar usuario
+                                            style={checkboxStyle}
+                                            value="check"
+                                            checked={checked}
+                                            onChange={() => {
+                                                setChecked(!checked);
+                                            }}
+                                        />
+                                    } label={
+                                        <span className={kanit.className} style={checkboxLabelStyle}>Recuérdame</span>
+                                    } />
+                                <Link // link para recuperar contraseña
+                                    href="/recuperar" style={{ display: "flex" }}>
+                                    <span style={linkLabelStyle}>
+                                        ¿Olvidó su contraseña?
+                                    </span>
+                                </Link>
+                            </div>
+                            <Button // botón para iniciar sesión
+                                onClick={handleSubmit}
+                                variant="outlined"
+                                className={kanit.className}
+                                style={buttonStyle}
+                                disabled={isLoading}
+                            >
+                                {isLoading ? 'Cargando...' : 'Iniciar Sesión'}</Button>
+                        </FormGroup>
+                    </form>
+
                 </ThemeProvider>
             </Paper>
         </div>

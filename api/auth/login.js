@@ -35,12 +35,12 @@ router.post('/login', async (req, res) => {
     try {
         const { correo, password } = req.body;
 
-        const result = await EstudianteController.getEstudianteByCorreo(req, res);
+        const estudiante = await EstudianteController.getEstudianteByCorreo(req, res);
 
-        if (result.length == 0) return res.status(404).json({ error: 'Estudiante no encontrado.' });
-        if (result.correo != correo) return res.status(400);
+        if (estudiante.length == 0) return res.status(404).json({ error: 'Estudiante no encontrado.' });
+        if (estudiante.correo != correo) return res.status(400);
 
-        bcrypt.compare(password, result.password, function (err, result) {
+        bcrypt.compare(password, estudiante.password, function (err, result) {
             if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
             else {
                 // const payload = {
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
                 // const token = jwt.sign(payload, key);
                 // localStorage.setItem('jwtToken', token);
 
-                return res.status(200).json({ message: 'Login exitoso.' });
+                return res.status(200).json(estudiante);
             }
         });
     } catch (error) {
