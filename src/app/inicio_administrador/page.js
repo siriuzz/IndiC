@@ -66,12 +66,20 @@ const divUserInfoStyle = {
     width: "250px",
 };
 
-const BotonEstudiantesStyle = {
+const divBotonEstudiantesStyle = {
     height: "100px",
     width: "100px",
     marginRight: "5px",
     marginLeft: "-530px",
     marginTop: "-90px",
+}
+
+const BotonEstudiantesStyle = {
+    height: "50px",
+    width: "50px",
+    marginRight: "50px",
+    marginLeft: "-225px",
+    marginTop: "10px",
 }
 
 const divIndiceGraphContainerStyle = {
@@ -96,7 +104,7 @@ const divIndiceGraphStyle = {
 const divIndiceStyle = {
     display: "flex",
     position: "absolute",
-    marginTop: "150px",
+    marginTop: "135px",
     marginLeft: "230px",
     fontSize: "22px"
 };
@@ -106,7 +114,7 @@ const divIndiceTextStyle = {
     width: "155px",
     marginLeft: "-85px",
     alignSelf: "center",
-    marginTop: "-50px"
+    marginTop: "-60px"
 };
 
 
@@ -147,12 +155,22 @@ const div2IndiceTextStyle = {
     marginTop: "-240px"
 };
 
-const BotonDocenteStyle = {
+
+const divBotonDocenteStyle = {
     height: "100px",
     width: "100px",
     marginRight: "5px",
-    marginLeft: "215px",
+    marginLeft: "-50px",
     marginTop: "-90px",
+}
+
+
+const BotonDocenteStyle = {
+    height: "50px",
+    width: "50px",
+    marginRight: "5px",
+    marginLeft: "-220px",
+    marginTop: "5px",
 }
 
 
@@ -182,12 +200,12 @@ export default function InicioAdministrador() {
                         <div style={divIndiceGraphContainerStyle}>
                         <div style={divIndiceStyle}>
                         <div style={divIndiceGraphStyle}>
-                                    70k
-                                    <div style={BotonEstudiantesStyle}>
-                                        <SchoolOutlinedIcon/>                              
-                                        <CircularProgress style={{ color: "#ebdfe6", marginLeft: "515px", marginTop: "5px"}} size={70} variant="determinate" value={100} />
+                                    70k <SchoolOutlinedIcon style={BotonEstudiantesStyle}/>                              
+
+                                    <div style={divBotonEstudiantesStyle}>
+                                        <CircularProgress style={{ color: "#ebdfe6", marginLeft: "515px", marginTop: "25px"}} size={70} variant="determinate" value={100} />
                                     </div>
-                                    <CircularProgress style={{ marginTop: "-63px", marginLeft: "-16px", display: "flex" }} size={70} variant="determinate" value={78} />
+                                    <CircularProgress style={{ marginTop: "-75px", marginLeft: "-16px", display: "flex" }} size={70} variant="determinate" value={78} />
                                 </div>
                             </div>
                             <div style={divIndiceTextStyle}>
@@ -197,12 +215,11 @@ export default function InicioAdministrador() {
                         <div style={div2IndiceGraphContainerStyle}>
                             <div style={div2IndiceGraphStyle}>
                                 <div style={div2IndiceStyle}>   
-                                    30k
-                                    <div style={BotonDocenteStyle}>
-                                        <WorkOutlineOutlinedIcon/>
+                                    30k  <WorkOutlineOutlinedIcon style={BotonDocenteStyle}/>
+
+                                    <div style={divBotonDocenteStyle}>
                                     </div>
-                                    
-                                <CircularProgress style={{ color: "#ebdfe6", marginLeft: "-372px", marginTop: "-20px"  }} size={70} variant="determinate" value={100} />
+                                <CircularProgress style={{ color: "#ebdfe6", marginLeft: "59px", marginTop: "-20px"  }} size={70} variant="determinate" value={100} />
 
                                 </div>
                                 <CircularProgress style={{ marginTop: "-50px", marginLeft: "5px", display: "flex" }} size={70} variant="determinate" value={78} />
