@@ -43,19 +43,20 @@ router.post('/login', async (req, res) => {
         bcrypt.compare(password, estudiante.password, function (err, result) {
             if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
             else {
-                // const payload = {
-                //     id: result.id,
-                //     nombre: result.nombre,
-                //     correo: result.correo,
-                //     rol: 'estudiante',
-                //     id_carrera: result.id_carrera,
-                //     id_estado: result.id_estado
-                // }
-                // const key = process.env.JWT_KEY;
-                // const token = jwt.sign(payload, key);
-                // localStorage.setItem('jwtToken', token);
+                const payload = {
+                    id: estudiante.id,
+                    nombre: estudiante.nombre,
+                    correo: estudiante.correo,
+                    rol: 'estudiante',
+                    id_carrera: estudiante.id_carrera,
+                    id_estado: estudiante.id_estado,
+                    iat: Math.floor(Date.now() / 1000),
+                    exp: Math.floor(Date.now() / 1000) + 60
+                }
+                const key = process.env.JWT_KEY;
+                const token = jwt.sign(payload, key);
 
-                return res.status(200).json(estudiante);
+                return res.status(200).json({ "token": token });
             }
         });
     } catch (error) {

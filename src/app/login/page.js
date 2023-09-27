@@ -105,24 +105,17 @@ export default function Login() {
             correo: correo,
             password: password
         }).then(function (response) {
-            apiResponse = response.data;
+            // apiResponse = response.data;
+            // const token = signToken(apiResponse);
+            localStorage.setItem('jwtToken', response.data.token);
+            window.location.href = "/inicio_estudiante";
+
         }).catch(function (error) {
             console.log(error);
         }).finally(function () {
             console.log("axios executed")
         });
 
-        const token = jwt.sign({
-            nombre: apiResponse.name,
-            // correo: apiResponse.correo,
-            // rol: 'estudiante',
-            // id_carrera: apiResponse.id_carrera,
-            // id_estado: apiResponse.id_estado,
-            // // iat: Math.floor(Date.now() / 1000),
-            // // exp: Math.floor(Date.now() / 1000) + 60
-        }, "key");
-
-        localStorage.setItem('jwtToken', token);
 
         setIsLoading(false);
 
