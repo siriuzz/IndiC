@@ -5,7 +5,7 @@ const doc = {
         title: 'IndiC API',
         description: 'Esta es la documentación de la API de IndiC',
     },
-    host: 'localhost:3000',
+    host: 'localhost:3001',
     schemes: ['http'],
     explorer: true,
     components: {
@@ -17,12 +17,14 @@ const doc = {
                 $cedula: "1234567890",
                 $password: "1234567890",
                 $salt: "1234567890",
+
                 $fecha_registro: "2021-09-19",
                 $direccion: "Calle 123",
                 $id_carrera: 1,
                 $id_estado: 1,
                 $id_rol: 1,
                 $periodos_cursados: 1,
+                $asignaturas_aprobadas: 1,
                 $configuracion: JSON.stringify({ "config": "config" }),
                 $indice_general: 3.5
             },

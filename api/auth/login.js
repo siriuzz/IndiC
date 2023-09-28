@@ -6,7 +6,7 @@ const router = app.router;
 require('dotenv').config()
 
 
-router.post('/login', async (req, res) => {
+router.post('/auth/login', async (req, res) => {
     // #swagger.description = 'Endpoint para hacer login.'
     /*	#swagger.responses[200] = {
             description: 'Login exitoso.'
@@ -56,7 +56,19 @@ router.post('/login', async (req, res) => {
                 const key = process.env.JWT_KEY;
                 const token = jwt.sign(payload, key);
 
-                return res.status(200).json({ "token": token, "data": payload });
+                return res.status(200).json({
+                    "token": token, "data": {
+                        id: estudiante.id,
+                        nombre: estudiante.nombre,
+                        correo: estudiante.correo,
+                        rol: 'estudiante',
+                        id_carrera: estudiante.id_carrera,
+                        id_estado: estudiante.id_estado,
+                        periodos_cursados: estudiante.periodos_cursados,
+                        asignaturas_aprobadas: estudiante.asignaturas_aprobadas,
+                        indice_general: estudiante.indice_general
+                    }
+                });
             }
         });
     } catch (error) {

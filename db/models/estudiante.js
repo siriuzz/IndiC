@@ -52,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     id_estado: { type: DataTypes.INTEGER, allowNull: false },
     id_rol: { type: DataTypes.INTEGER, allowNull: false },
     periodos_cursados: { type: DataTypes.INTEGER, allowNull: false },
+    asignaturas_aprobadas: { type: DataTypes.INTEGER, allowNull: false },
     configuracion: { type: DataTypes.JSON, allowNull: false },
     indice_general: { type: DataTypes.FLOAT, allowNull: false },
   }, {

@@ -65,6 +65,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
+      asignaturas_aprobadas: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       configuracion: {
         allowNull: false,
         type: Sequelize.JSON,

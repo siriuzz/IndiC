@@ -34,26 +34,26 @@ router.use('/', swaggerUi.serve, estudiantesRoutes
 
 );
 
-router.use('/auth', authRoutes
+router.use('/', authRoutes
     /*
     #swagger.tags = ['Auth']
     */
 );
 
-router.use('/token', tokenRoutes
+router.use('/', tokenRoutes
     /*
     #swagger.tags = ['Auth']
     */
 );
 
-router.use('/Docentes', swaggerUi.serve, docentesRoutes
+router.use('/', swaggerUi.serve, docentesRoutes
     /* 
     #swagger.tags = ['Docentes']
         
     */
 );
 
-router.use('/Asignaturas', swaggerUi.serve, require('./api/academic/asignatura')
+router.use('/', swaggerUi.serve, require('./api/academic/asignatura')
     /* 
     #swagger.tags = ['Asignaturas']
             */
@@ -65,19 +65,19 @@ router.use('/', swaggerUi.serve, carrerasRoutes
     */
 );
 
-router.use('/Config_calif', swaggerUi.serve, require('./api/system/config_calif')
+router.use('/', swaggerUi.serve, require('./api/system/config_calif')
     /* 
     #swagger.tags = ['Configuracion calificaciones']
     */
 );
 
-router.use('/Estados', swaggerUi.serve, require('./api/system/estado')
+router.use('/', swaggerUi.serve, require('./api/system/estado')
     /* 
      #swagger.tags = ['Estados']
     */
 );
 
-router.use('/Roles', swaggerUi.serve, require('./api/system/roles')
+router.use('/', swaggerUi.serve, require('./api/system/roles')
     /*
     #swagger.tags = ['Roles']
     */

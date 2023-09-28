@@ -1,6 +1,9 @@
 const app = require('../../express-config');
 const EstudianteController = require('../controllers/EstudianteController.js');
 const router = app.router;
+const multer = require('multer');
+const upload = multer({ dest: 'temp/' });
+const Papa = require('papaparse');
 
 router.get('/Estudiantes', async (req, res) => {
 
@@ -54,6 +57,39 @@ router.get('/Estudiantes/:id', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
+});
+
+router.post('/Estudiantes/upload', upload.single('csv'), async (req, res) => {
+    const file = fs.createReadStream(req.file.path);
+    Papa.parse(file, {
+        delimiter: ',',
+        newline: '', // Newline character
+        header: true,
+        dynamicTyping: true,
+        skipEmptyLines: true, // Skip empty lines in the CSV
+        transformHeader: header => header.trim(), // Trim header names
+        transform: value => value.trim(), // Trim cell values
+        complete: async function (results) {
+            // console.log(results);
+            for (let i = 0; i < results.data.length; i++) {
+                const element = results.data[i];
+                await EstudianteController.createEstudianteFromCsv(element);
+            }
+            fs.unlink(req.file.path, (err) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ error: 'Error al eliminar el archivo' });
+                }
+                //file removed
+            })
+
+            res.status(201).json(results.data);
+
+        },
+        error: function (error) {
+            res.status(400).json({ error: 'Invalid CSV format' }); // Handle errors
+        },
+    });
 });
 
 

@@ -64,9 +64,30 @@ const getEstudianteByCorreo = async (req, res) => {
     }
 }
 
+const createEstudianteFromCsv = async (row) => {
+    try {
+        console.log(row);
+        const password = row.password;
+        let estudiante;
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(password, salt, async function (err, hash) {
+                row.password = hash;
+                row.salt = salt;
+                console.log("Creando estudiante");
+                estudiante = await Estudiante.create(row);
+                return estudiante;
+            });
+        });
+    } catch (error) {
+        console.log("Error al crear el estudiante");
+        return res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     getAllEstudiantes,
     createEstudiante,
     getEstudianteById,
-    getEstudianteByCorreo
+    getEstudianteByCorreo,
+    createEstudianteFromCsv
 }

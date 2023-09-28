@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/"
+      "url": "http://localhost:3001/"
     }
   ],
   "paths": {
@@ -21,17 +21,7 @@
         }
       }
     },
-    "/api/login": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Estudiantes/": {
+    "/api/Estudiantes": {
       "get": {
         "tags": [
           "Estudiantes"
@@ -151,6 +141,25 @@
         }
       }
     },
+    "/api/Estudiantes/upload": {
+      "post": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/auth/login": {
       "post": {
         "tags": [
@@ -190,7 +199,37 @@
         }
       }
     },
-    "/api/Docentes/Docentes": {
+    "/api/validate": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Docentes": {
       "get": {
         "tags": [
           "Docentes"
@@ -293,37 +332,30 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "post": {
+      }
+    },
+    "/api/Carreras/{id}": {
+      "get": {
         "tags": [
           "Carreras"
         ],
         "description": "",
-        "responses": {
-          "default": {
-            "description": ""
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }
-      },
-      "put": {
-        "tags": [
-          "Carreras"
         ],
-        "description": "",
         "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Carreras"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -390,10 +422,24 @@
         "tags": [
           "Estados"
         ],
-        "description": "",
+        "description": "Endpoint para crear estado.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Información del estado.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Estado"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Estado creado exitosamente."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -436,10 +482,24 @@
         "tags": [
           "Roles"
         ],
-        "description": "",
+        "description": "Endpoint para crear rol.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Información del rol.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Rol"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Rol creado exitosamente."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -520,6 +580,10 @@
             "type": "number",
             "example": 1
           },
+          "asignaturas_aprobadas": {
+            "type": "number",
+            "example": 1
+          },
           "configuracion": {
             "type": "string",
             "example": "{\"config\":\"config\"}"
@@ -542,6 +606,7 @@
           "id_estado",
           "id_rol",
           "periodos_cursados",
+          "asignaturas_aprobadas",
           "configuracion",
           "indice_general"
         ],
