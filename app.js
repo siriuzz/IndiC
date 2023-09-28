@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const estudiantesRoutes = require('./api/users/estudiante.js');
 const docentesRoutes = require('./api/users/docente');
+const adminsRoutes = require('./api/users/admin.js');
 const authRoutes = require('./api/auth/login');
 const tokenRoutes = require('./api/auth/token');
 const carrerasRoutes = require('./api/academic/carrera');
@@ -30,6 +31,13 @@ app.use('/api', router);
 router.use('/', swaggerUi.serve, estudiantesRoutes
     /* 
     #swagger.tags = ['Estudiantes']
+    */
+
+);
+
+router.use('/', swaggerUi.serve, adminsRoutes
+    /* 
+    #swagger.tags = ['Admins']
     */
 
 );
