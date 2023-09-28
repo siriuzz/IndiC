@@ -1,6 +1,11 @@
 const app = require('../../express-config');
 const router = app.router;
 const DocenteController = require('../controllers/DocenteController');
+const multer = require('multer');
+const upload = multer({ dest: 'temp/' });
+const Papa = require('papaparse');
+const fs = require('fs');
+const config = require('../papaConfig.js');
 
 router.get('/Docentes', async (req, res) => {
     // #swagger.description = 'Endpoint para obtener todos los docentes.'
@@ -40,6 +45,33 @@ router.get('/Docentes', async (req, res) => {
 }).patch('/Docentes', (req, res) => {
 
 
+});
+
+router.post('/Docentes/upload', upload.single('csv'), async (req, res) => {
+    try {
+        const file = fs.createReadStream(req.file.path);
+        config.complete = async function (results) {
+            // console.log(results);
+            for (let i = 0; i < results.data.length; i++) {
+                const element = results.data[i];
+                await DocenteController.createDocenteFromCsv(res, element);
+            }
+            fs.unlink(req.file.path, (err) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ error: 'Error al eliminar el archivo' });
+                }
+                //file removed
+            })
+            res.status(201).json(results.data);
+        }
+        config.error = function (error) {
+            res.status(400).json({ error: 'Invalid CSV format' }); // Handle errors
+        }
+        Papa.parse(file, config);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
 });
 
 module.exports = router;

@@ -35,7 +35,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       }
-    });
+    }, { freezeTableName: true });
     await queryInterface.addConstraint('Estudiante_Seccion', {
       fields: ['id_seccion'],
       type: 'foreign key',

@@ -17,23 +17,24 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }
       })
-      Estudiante_Seccion.belongsTo(models.Seccion, {
+      Estudiante_Seccion.belongsTo(models.Secciones, {
         foreignKey: {
           name: 'id_seccion',
           allowNull: false
-        }
+        },
       })
     }
   }
   Estudiante_Seccion.init({
     id_estudiante: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false },
-    id_asignatura: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false },
+    id_seccion: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false },
     calificacion_mt: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 40 },
     calificacion_final: { type: DataTypes.INTEGER, allowNull: false },
     periodo: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     sequelize,
     modelName: 'Estudiante_Seccion',
+    freezeTableName: true,
   });
   return Estudiante_Seccion;
 };

@@ -26,14 +26,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      periodo: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      year: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
       aula: {
         type: Sequelize.STRING,
         allowNull: false
@@ -56,7 +48,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       }
-    });
+    }, { freezeTableName: true });
     await queryInterface.addConstraint('Secciones', {
       fields: ['id_asignatura'],
       type: 'foreign key',

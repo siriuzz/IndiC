@@ -173,7 +173,7 @@
         }
       }
     },
-    "/api/validate": {
+    "/api/token/validate": {
       "post": {
         "tags": [
           "Auth"
@@ -670,6 +670,128 @@
               }
             }
           },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Estudiante_Seccion": {
+      "get": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Estudiante_Seccion/upload": {
+      "post": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "Endpoint para subir un archivo csv con estudiantes_secciones.",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con estudiantes_secciones.",
+            "required": true,
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Secciones": {
+      "get": {
+        "tags": [
+          "Secciones"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Secciones/upload": {
+      "post": {
+        "tags": [
+          "Secciones"
+        ],
+        "description": "Endpoint para crear secciones desde un archivo csv.",
+        "parameters": [
+          {
+            "name": "csv",
+            "in": "formData",
+            "description": "Archivo csv con las secciones a crear.",
+            "required": true,
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
           "201": {
             "description": "Created"
           },

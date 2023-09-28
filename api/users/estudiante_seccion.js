@@ -1,28 +1,37 @@
+
 const app = require('../../express-config');
-const HorarioController = require('../controllers/HorarioController.js');
 const router = app.router;
-const multer = require('multer');
-const upload = multer({ dest: 'temp/' });
+const config = require('../papaConfig');
 const Papa = require('papaparse');
 const fs = require('fs');
-const config = require('../papaConfig.js');
+const multer = require('multer');
+const EstudianteSeccionController = require('../controllers/EstudianteSeccionController');
+const upload = multer({ dest: 'temp/' });
 
-router.get('/Horarios', async (req, res) => {
+
+router.get('/Estudiante_Seccion', async (req, res) => {
     try {
-        const result = await HorarioController.getAllHorarios(req, res);
-        console.log(result);
-        res.json(result);
+
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
-})
 
-router.post('/Horarios/upload', upload.single('csv'), async (req, res) => {
-    /* #swagger.tags = ['Horario']
-    #swagger.description = 'Endpoint para crear horarios desde un archivo CSV.'
-    /*	#swagger.responses[200] = {
-            description: 'Horarios creados correctamente.',
-            schema: { $ref: "#/components/schemas/Horario" }
+}).post('/Estudiante_Seccion', (req, res) => {
+
+}).put('/Estudiante_Seccion', (req, res) => {
+
+}).patch('/Estudiante_Seccion', (req, res) => {
+
+});
+
+router.post('/Estudiante_Seccion/upload', upload.single('csv'), (req, res) => {
+    /* #swagger.tags = ['Estudiante_Seccion']
+         #swagger.description = 'Endpoint para subir un archivo csv con estudiantes_secciones.' */
+    /* #swagger.parameters['file'] = {
+            in: 'formData',
+            description: 'Archivo csv con estudiantes_secciones.',
+            required: true,
+            type: 'file'
     } */
     try {
         const file = fs.createReadStream(req.file.path);
@@ -30,8 +39,7 @@ router.post('/Horarios/upload', upload.single('csv'), async (req, res) => {
             // console.log(results);
             for (let i = 0; i < results.data.length; i++) {
                 const element = results.data[i];
-                const horario = await HorarioController.createHorarioFromCsv(element);
-                console.log(horario);
+                await EstudianteSeccionController.createEstudianteSeccionFromCsv(element);
             }
             fs.unlink(req.file.path, (err) => {
                 if (err) {

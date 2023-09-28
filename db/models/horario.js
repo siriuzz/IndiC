@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
-      // Horario.belongsTo(models.Seccion, {
+      // Horario.belongsTo(models.Secciones, {
       //   foreignKey: {
       //     name: 'id_seccion',
       //     allowNull: false
@@ -28,5 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Horario',
   });
+  // sequelize.sync({ force: true });
   return Horario;
 };

@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }
       })
-      Docente.hasMany(models.Seccion, {
+      Docente.hasMany(models.Secciones, {
         foreignKey: {
           name: 'id_docente',
           allowNull: false
@@ -35,8 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, unique: true },
     nombre: { type: DataTypes.STRING, allowNull: false },
     correo: { type: DataTypes.STRING, allowNull: false },
-    telefono: { type: DataTypes.INTEGER, allowNull: false },
-    cedula: { type: DataTypes.INTEGER, allowNull: false },
+    telefono: { type: DataTypes.STRING, allowNull: false },
+    cedula: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     salt: { type: DataTypes.STRING, allowNull: false },
     fecha_registro: { type: DataTypes.DATE, allowNull: false },
