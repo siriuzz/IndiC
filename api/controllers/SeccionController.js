@@ -22,7 +22,7 @@ const createSeccionesFromCsv = async (row) => {
         });
         return seccion;
     } catch (error) {
-        return res.status(500).send(error.message);
+        return { error: error.message };
     }
 }
 

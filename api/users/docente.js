@@ -54,7 +54,7 @@ router.post('/Docentes/upload', upload.single('csv'), async (req, res) => {
             // console.log(results);
             for (let i = 0; i < results.data.length; i++) {
                 const element = results.data[i];
-                await DocenteController.createDocenteFromCsv(res, element);
+                await DocenteController.createDocenteFromCsv(element);
             }
             fs.unlink(req.file.path, (err) => {
                 if (err) {

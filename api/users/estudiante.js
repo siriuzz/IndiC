@@ -67,7 +67,7 @@ router.post('/Estudiantes/upload', upload.single('csv'), async (req, res) => {
         // console.log(results);
         for (let i = 0; i < results.data.length; i++) {
             const element = results.data[i];
-            await EstudianteController.createEstudianteFromCsv(res, element);
+            await EstudianteController.createEstudianteFromCsv(element);
         }
         fs.unlink(req.file.path, (err) => {
             if (err) {

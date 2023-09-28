@@ -16,7 +16,7 @@ const getCarreraById = async (req, res) => {
     }
 }
 
-const createCarreraFromCsv = async (res, row) => {
+const createCarreraFromCsv = async (row) => {
     try {
         console.log("Creando carrera");
         const carreraCreated = await Carrera.create(row);

@@ -11,7 +11,7 @@ const getAllAsignaturas = async (req, res) => {
     }
 }
 
-const createAsignaturaFromCsv = async (res, element) => {
+const createAsignaturaFromCsv = async (element) => {
     try {
         console.log(element);
         const asignatura = await Asignatura.create({
@@ -26,7 +26,7 @@ const createAsignaturaFromCsv = async (res, element) => {
         return asignatura;
     } catch (error) {
         console.log("Error al crear la asignatura");
-        return res.status(500).json({ error: error.message });
+        return { error: error.message };
     }
 }
 

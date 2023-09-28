@@ -34,7 +34,7 @@ router.post('/Asignaturas/upload', upload.single('csv'), (req, res) => {
         // console.log(results);
         for (let i = 0; i < results.data.length; i++) {
             const element = results.data[i];
-            await AsignaturaController.createAsignaturaFromCsv(res, element);
+            await AsignaturaController.createAsignaturaFromCsv(element);
         }
         fs.unlink(req.file.path, (err) => {
             if (err) {

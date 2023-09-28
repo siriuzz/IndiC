@@ -64,7 +64,7 @@ const getEstudianteByCorreo = async (req, res) => {
     }
 }
 
-const createEstudianteFromCsv = async (res, row) => {
+const createEstudianteFromCsv = async (row) => {
     try {
         console.log(row);
         const password = row.password;
@@ -96,7 +96,7 @@ const createEstudianteFromCsv = async (res, row) => {
         });
     } catch (error) {
         console.log("Error al crear el estudiante");
-        return res.status(500).json({ error: error.message });
+        return { error: error.message };
     }
 };
 

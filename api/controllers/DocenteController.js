@@ -28,7 +28,7 @@ const getDocenteById = async (req, res) => {
     }
 }
 
-const createDocenteFromCsv = async (res, element) => {
+const createDocenteFromCsv = async (element) => {
     try {
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(element.password, salt, async function (err, hash) {
@@ -52,7 +52,7 @@ const createDocenteFromCsv = async (res, element) => {
             });
         });
     } catch (error) {
-        return res.status(500).send(error.message);
+        return { error: error.message };
     }
 }
 
