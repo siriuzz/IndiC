@@ -66,8 +66,9 @@ const doc = {
             },
             Seccion: {
                 $numero: 1,
-                $id_profesor: 1,
+                $id_docente: 1,
                 $id_asignatura: 1,
+                $id_horario: 1,
                 $periodo: 1,
                 $year: "2021-09-19",
                 $aula: "Aula 1",
@@ -75,7 +76,6 @@ const doc = {
                 $calificacion_base_mt: 40
             },
             Horario: {
-                $id_seccion: 1,
                 $dia: 1,
                 $hora_inicio: 8,
                 $hora_fin: 10

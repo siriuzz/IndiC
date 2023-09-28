@@ -12,17 +12,14 @@ module.exports = {
       },
       carrera: {
         allowNull: false,
-
         type: Sequelize.STRING
       },
       periodos_totales: {
         allowNull: false,
-
         type: Sequelize.INTEGER
       },
       asignaturas_totales: {
         allowNull: false,
-
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const router = app.router;
 require('dotenv').config()
 
-router.post('/validate', async (req, res) => {
+router.post('/token/validate', async (req, res) => {
     const { token } = req.body;
     // console.log(token);
     const key = process.env.JWT_KEY;

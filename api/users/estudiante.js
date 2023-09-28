@@ -4,6 +4,8 @@ const router = app.router;
 const multer = require('multer');
 const upload = multer({ dest: 'temp/' });
 const Papa = require('papaparse');
+const fs = require('fs');
+const config = require('../papaConfig.js');
 
 router.get('/Estudiantes', async (req, res) => {
 
@@ -61,35 +63,25 @@ router.get('/Estudiantes/:id', async (req, res) => {
 
 router.post('/Estudiantes/upload', upload.single('csv'), async (req, res) => {
     const file = fs.createReadStream(req.file.path);
-    Papa.parse(file, {
-        delimiter: ',',
-        newline: '', // Newline character
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: true, // Skip empty lines in the CSV
-        transformHeader: header => header.trim(), // Trim header names
-        transform: value => value.trim(), // Trim cell values
-        complete: async function (results) {
-            // console.log(results);
-            for (let i = 0; i < results.data.length; i++) {
-                const element = results.data[i];
-                await EstudianteController.createEstudianteFromCsv(element);
+    config.complete = async function (results) {
+        // console.log(results);
+        for (let i = 0; i < results.data.length; i++) {
+            const element = results.data[i];
+            await EstudianteController.createEstudianteFromCsv(res, element);
+        }
+        fs.unlink(req.file.path, (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Error al eliminar el archivo' });
             }
-            fs.unlink(req.file.path, (err) => {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).json({ error: 'Error al eliminar el archivo' });
-                }
-                //file removed
-            })
-
-            res.status(201).json(results.data);
-
-        },
-        error: function (error) {
-            res.status(400).json({ error: 'Invalid CSV format' }); // Handle errors
-        },
-    });
+            //file removed
+        })
+        res.status(201).json(results.data);
+    }
+    config.error = function (error) {
+        res.status(400).json({ error: 'Invalid CSV format' }); // Handle errors
+    }
+    Papa.parse(file, config);
 });
 
 

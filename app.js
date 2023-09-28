@@ -82,6 +82,12 @@ router.use('/', swaggerUi.serve, require('./api/system/roles')
     #swagger.tags = ['Roles']
     */
 );
+
+router.use('/', swaggerUi.serve, require('./api/academic/horario.js')
+    /*
+    #swagger.tags = ['Horarios']
+    */
+);
 // router.get('/Estudiantes', swaggerUi.serve, estudiantesRoutes);
 
 app.listen(port, () => {

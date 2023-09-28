@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Seccion.hasOne(models.Horario, {
-        foreignKey: {
-          name: 'id_seccion',
-          allowNull: false
-        }
-      })
+      // Seccion.hasOne(models.Horario, {
+      //   foreignKey: {
+      //     name: 'id_seccion',
+      //     allowNull: false
+      //   }
+      // })
       Seccion.hasMany(models.Estudiante_Seccion);
       Seccion.belongsTo(models.Docente, {
         foreignKey: {
@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   Seccion.init({
     id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unique: true },
     id_asignatura: { type: DataTypes.INTEGER, allowNull: false },
+    id_horario: { type: DataTypes.INTEGER, allowNull: false },
     numero: { type: DataTypes.INTEGER, allowNull: false },
     id_profesor: { type: DataTypes.INTEGER, allowNull: false },
     periodo: { type: DataTypes.INTEGER, allowNull: false },

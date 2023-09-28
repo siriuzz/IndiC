@@ -64,7 +64,7 @@ const getEstudianteByCorreo = async (req, res) => {
     }
 }
 
-const createEstudianteFromCsv = async (row) => {
+const createEstudianteFromCsv = async (res, row) => {
     try {
         console.log(row);
         const password = row.password;
@@ -74,7 +74,23 @@ const createEstudianteFromCsv = async (row) => {
                 row.password = hash;
                 row.salt = salt;
                 console.log("Creando estudiante");
-                estudiante = await Estudiante.create(row);
+                estudiante = await Estudiante.create({
+                    nombre: row.nombre,
+                    correo: row.correo,
+                    telefono: row.telefono,
+                    cedula: row.cedula,
+                    password: row.password,
+                    salt: row.salt,
+                    fecha_registro: new Date(),
+                    direccion: row.direccion,
+                    id_carrera: row.id_carrera,
+                    id_estado: row.id_estado,
+                    id_rol: 1,
+                    periodos_cursados: row.periodos_cursados,
+                    asignaturas_aprobadas: row.asignaturas_aprobadas,
+                    configuracion: { "config": "config" },
+                    indice_general: row.indice_general
+                });
                 return estudiante;
             });
         });
