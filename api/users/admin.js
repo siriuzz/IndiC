@@ -3,7 +3,7 @@ const router = app.router;
 const AdminController = require('../controllers/AdminController');
 
 
-router.get('/Administrador', async (req, res) => {
+router.get('/Admins', async (req, res) => {
 
 // #swagger.description = 'Endpoint para obtener todos los administradores.'
     /*	#swagger.responses[200] = {
@@ -18,7 +18,7 @@ router.get('/Administrador', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).get('/Administrador/:id', async (req, res) => {
+}).get('/Admins/:id', async (req, res) => {
 
     // #swagger.description = 'Endpoint para obtener un Administrador por su ID.'
     /*	#swagger.responses[200] = {
@@ -33,13 +33,13 @@ router.get('/Administrador', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).post('/Administrador', (req, res) => {
+}).post('/Admins', (req, res) => {
 
 
-}).put('/Administrador', (req, res) => {
+}).put('/Admins', (req, res) => {
 
 
-}).patch('/Administrador', (req, res) => {
+}).patch('/Admins', (req, res) => {
 
 
 });
