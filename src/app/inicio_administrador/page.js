@@ -14,6 +14,13 @@ import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -137,7 +144,7 @@ const div2IndiceGraphStyle = {
     width: "180px",
     height: "180px",
     marginLeft: "300px"
-    
+
 };
 
 const div2IndiceStyle = {
@@ -175,6 +182,47 @@ const BotonDocenteStyle = {
 }
 
 
+const AsignaturaStyle = {
+    fontSize: "24px",
+    fontFamily: kanit,
+    fontStyle: "bold",
+    float: "right",
+    marginRight: "220px",
+    borderRadius: "10px",
+    marginTop: "20px",
+};
+
+const EachAsignaturaStyle = {
+    backgroundColor: "#ffffff", 
+    borderTop: "3px solid #F5F5F5",
+    borderRadius: "0px", 
+    width: "550px", 
+    justifySelf: "center", 
+    marginLeft: "17px", 
+    marginTop: "8px", 
+    marginBottom: "8px"
+};
+
+const ProfileIconStyle = {
+    width: "30px",
+    height: "30px",
+    color: "black"
+};
+
+
+const EstadoStyle = {
+    fontSize: "18px",
+    fontFamily: kanit,
+    fontStyle: "bold",
+};
+
+
+const RightIconStyle = {
+    width: "30px",
+    height: "30px",
+    marginLeft: "-8px",
+    marginTop: "-2px"
+};
 
 
 export default function InicioAdministrador() {
@@ -190,7 +238,7 @@ export default function InicioAdministrador() {
                     </IconButton>
                 </div>
                 <ThemeProvider theme={theme}>
-                    
+
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <Paper elevation={0} style={paperStyle}>
                             <div style={divUserStyle}>
@@ -202,12 +250,12 @@ export default function InicioAdministrador() {
                             </div>
                         </Paper>
                         <div style={divIndiceGraphContainerStyle}>
-                        <div style={divIndiceStyle}>
-                        <div style={divIndiceGraphStyle}>
-                                    70k <SchoolOutlinedIcon style={BotonEstudiantesStyle}/>                              
+                            <div style={divIndiceStyle}>
+                                <div style={divIndiceGraphStyle}>
+                                    70k <SchoolOutlinedIcon style={BotonEstudiantesStyle} />
 
                                     <div style={divBotonEstudiantesStyle}>
-                                        <CircularProgress style={{ color: "#ebdfe6", marginLeft: "515px", marginTop: "25px"}} size={70} variant="determinate" value={100} />
+                                        <CircularProgress style={{ color: "#ebdfe6", marginLeft: "515px", marginTop: "25px" }} size={70} variant="determinate" value={100} />
                                     </div>
                                     <CircularProgress style={{ marginTop: "-75px", marginLeft: "-16px", display: "flex" }} size={70} variant="determinate" value={78} />
                                 </div>
@@ -218,20 +266,57 @@ export default function InicioAdministrador() {
                         </div>
                         <div style={div2IndiceGraphContainerStyle}>
                             <div style={div2IndiceGraphStyle}>
-                                <div style={div2IndiceStyle}>   
-                                    30k  <WorkOutlineOutlinedIcon style={BotonDocenteStyle}/>
+                                <div style={div2IndiceStyle}>
+                                    30k  <WorkOutlineOutlinedIcon style={BotonDocenteStyle} />
 
                                     <div style={divBotonDocenteStyle}>
                                     </div>
-                                <CircularProgress style={{ color: "#ebdfe6", marginLeft: "59px", marginTop: "-20px"  }} size={70} variant="determinate" value={100} />
+                                    <CircularProgress style={{ color: "#ebdfe6", marginLeft: "59px", marginTop: "-20px" }} size={70} variant="determinate" value={100} />
 
                                 </div>
                                 <CircularProgress style={{ marginTop: "-50px", marginLeft: "5px", display: "flex" }} size={70} variant="determinate" value={78} />
                             </div>
-                            <div style={div2IndiceTextStyle}>Docentes</div>
+                            <div style={div2IndiceTextStyle}>Docentes </div>
                         </div>
                     </div>
-                    <SearchBar placeholder="Buscar Usuarios"/>
+                    <SearchBar placeholder="Buscar Usuarios" />
+                    <Paper elevation={4} style={AsignaturaStyle}>
+                        <List sx={{ width: "450px", paddingY: "0px",  marginRight:"135px", }}>
+                            <div style={EachAsignaturaStyle}>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
+                                        <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Juan Ubiera" secondary="juanduuuu@gmail.com" />
+                                    <div style={EstadoStyle}>Egresado <ChevronRightIcon style={RightIconStyle}/></div>
+                                </ListItem>
+                            </div>
+                            <div style={EachAsignaturaStyle}>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
+                                        <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Kelvin Garcia" secondary="kelvin.garcia@gmail.com" />
+                                    <div style={EstadoStyle}>Activo <ChevronRightIcon style={RightIconStyle}/></div>
+                                </ListItem>
+                            </div>
+                            <div style={EachAsignaturaStyle}>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
+                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Francia Mejia" secondary="franciamejia@example.com" />
+                                    <div style={EstadoStyle}>Docente <ChevronRightIcon style={RightIconStyle}/></div>
+                                </ListItem>
+                            </div>
+                        </List>
+                    </Paper>
                 </ThemeProvider>
             </Paper>
         </div>
