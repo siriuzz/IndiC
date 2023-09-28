@@ -7,31 +7,33 @@ require('dotenv').config()
 
 
 router.post('/auth/login', async (req, res) => {
-    // #swagger.description = 'Endpoint para hacer login.'
-    /*	#swagger.responses[200] = {
+    /**  #swagger.tags = ['Auth']
+     #swagger.description = 'Endpoint para hacer login.'
+          #swagger.responses[200] = {
             description: 'Login exitoso.'
-    } */
-    /* #swagger.parameters[body] = [
+    } 
+    #swagger.parameters[body] = [
         {
             in: 'body',
             description: 'Información del estudiante.',
             required: true,
             schema: {
-                correo: 
-                {
-                    type: string,
-                    description: 'Correo del estudiante.',
-                    required: true
-                },
-                password: 
-                {
-                    type: string,
-                    description: 'Contraseña del estudiante.',
-                    required: true
-                }
+                // correo: 
+                // {
+                //     type: string,
+                //     description: 'Correo del estudiante.',
+                //     required: true
+                // },
+                // password: 
+                // {
+                //     type: string,
+                //     description: 'Contraseña del estudiante.',
+                //     required: true
+                // }
             }
         }
     ] */
+
     try {
         const { correo, password } = req.body;
 

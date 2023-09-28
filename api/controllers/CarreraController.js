@@ -16,6 +16,18 @@ const getCarreraById = async (req, res) => {
     }
 }
 
+const createCarreraFromCsv = async (res, row) => {
+    try {
+        console.log("Creando carrera");
+        const carreraCreated = await Carrera.create(row);
+        return carreraCreated;
+    } catch (error) {
+        console.log("Error al crear la carrera");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 module.exports = {
-    getCarreraById
+    getCarreraById,
+    createCarreraFromCsv
 }

@@ -11,17 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
-      Horario.belongsTo(models.Seccion, {
-        foreignKey: {
-          name: 'id_seccion',
-          allowNull: false
-        }
-      })
+      // Horario.belongsTo(models.Seccion, {
+      //   foreignKey: {
+      //     name: 'id_seccion',
+      //     allowNull: false
+      //   }
+      // })
     }
   }
   Horario.init({
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, unique: true },
-    id_seccion: { type: DataTypes.INTEGER, allowNull: false },
     dia: { type: DataTypes.INTEGER, allowNull: false },
     hora_inicio: { type: DataTypes.INTEGER, allowNull: false },
     hora_fin: { type: DataTypes.INTEGER, allowNull: false }

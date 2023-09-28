@@ -184,7 +184,7 @@ export default function Perfil() {
                     // Send a request to your server to validate the token
                     await axios.post('http://localhost:3001/api/token/validate', { "token": token })
                         .then(function (response) {
-                            console.log()
+                            console.log('Token is valid');
                         }).catch(function (error) {
                             console.log(error);
                             localStorage.removeItem('token');

@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false,
       },
       cedula: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       password: {
@@ -48,7 +48,11 @@ module.exports = {
       },
       id_carrera: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Carreras',
+          key: 'id',
+        },
       },
       id_estado: {
         type: Sequelize.INTEGER,
