@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import SidebarCloseAdministrador from "@/components/Sidebar/sidebarCloseAdministrador/sidebarCloseAdministrador";
+import SearchBar from "@/components/SearchBar/SearchBar";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
@@ -174,6 +175,8 @@ const BotonDocenteStyle = {
 }
 
 
+
+
 export default function InicioAdministrador() {
 
     return (
@@ -187,6 +190,7 @@ export default function InicioAdministrador() {
                     </IconButton>
                 </div>
                 <ThemeProvider theme={theme}>
+                    
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <Paper elevation={0} style={paperStyle}>
                             <div style={divUserStyle}>
@@ -227,7 +231,7 @@ export default function InicioAdministrador() {
                             <div style={div2IndiceTextStyle}>Docentes</div>
                         </div>
                     </div>
-
+                    <SearchBar placeholder="Buscar Usuarios"/>
                 </ThemeProvider>
             </Paper>
         </div>
