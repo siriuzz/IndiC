@@ -108,6 +108,8 @@ router.use('/', swaggerUi.serve, require('./api/academic/seccion.js')
          #swagger.tags = ['Secciones']
      */
 );
+
+router.use('/', swaggerUi.serve, require('./api/users/admin.js'));
 // router.get('/Estudiantes', swaggerUi.serve, estudiantesRoutes);
 
 app.listen(port, () => {

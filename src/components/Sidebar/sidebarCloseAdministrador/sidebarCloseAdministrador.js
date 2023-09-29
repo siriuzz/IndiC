@@ -17,7 +17,7 @@ import Link from 'next/link';
 
 export default function SidebarCloseAdministrador() {
     return (
-        <div class="container-fluid col d-flex flex-column">
+        <div className="container-fluid col d-flex flex-column">
             <div >
                 <IconButton className={styles.button}>
                     <MenuOutlinedIcon className={styles.icon} />
@@ -47,9 +47,9 @@ export default function SidebarCloseAdministrador() {
                 </IconButton>
 
                 <Link href="/cuenta_administrador">
-                <IconButton className={styles.button}>
-                    <PeopleAltOutlinedIcon className={styles.icon} />
-                </IconButton>
+                    <IconButton className={styles.button}>
+                        <PeopleAltOutlinedIcon className={styles.icon} />
+                    </IconButton>
                 </Link>
 
 

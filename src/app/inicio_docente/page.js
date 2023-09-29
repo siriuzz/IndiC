@@ -117,6 +117,9 @@ const EachAsignaturaStyle = {
     marginBottom: "10px",
 };
 
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+
+
 export default function Inicio_docente() {
     const [value, setValue] = useState(dayjs());
     const [profesor, setProfesor] = useState({}); //almacena variables del profesor que realizo el login
@@ -126,14 +129,14 @@ export default function Inicio_docente() {
     useEffect(() => {
         setValue(dayjs());
         setProfesor(JSON.parse(localStorage.getItem("user")));
-        axios.post('http://localhost:3001/api/token/validate', { token: localStorage.getItem('jwtToken') }).then((response) => {
-            console.log("this is the data");
+        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`) }).then((response) => {
+            // console.log("this is the data");
         }).catch((error) => {
             console.log(error);
-            localStorage.removeItem('jwtToken');
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
             window.location.href = '/login';
         });
-        console.log(profesor);
+        // console.log(profesor);
     }, []);
 
     const [data, setData] = useState({

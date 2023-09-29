@@ -145,43 +145,56 @@ const paperFontStyle = {
     fontStyle: "italic"
 };
 
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+
 export default function Perfil() {
-    const [nombre, setNombre] = useState("");
-    const [id, setId] = useState("");
-    const [carrera, setCarrera] = useState("");
-    const [indice, setIndice] = useState(0);
-    const [periodosCursados, setPeriodosCursados] = useState(0);
+    // const [nombre, setNombre] = useState("");
+    // const [id, setId] = useState("");
+    // const [carrera, setCarrera] = useState("");
+    // const [indice, setIndice] = useState(0);
+    // const [periodosCursados, setPeriodosCursados] = useState(0);
+    const [estudiante, setEstudiante] = useState({});
+    const [carrera, setCarrera] = useState({});//[{}]
     const [asignaturasAprobadas, setAsignaturasAprobadas] = useState(0);
-    const [periodosTotales, setPeriodosTotales] = useState(0);
+    // const [periodosTotales, setPeriodosTotales] = useState(0);
     const [asignaturasTotales, setAsignaturasTotales] = useState(0);
 
     useEffect(() => {
-        axios.post('http://localhost:3001/api/token/validate', { token: localStorage.getItem('jwtToken') }).then((response) => {
-            console.log(response.data);
+        // const storedEstudiante = JSON.parse(localStorage.getItem('user'));
+        // if (storedEstudiante) {
+        //     setEstudiante(storedEstudiante);
+        // }
+        // console.log(estudiante);
+        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`) }).then((response) => {
+            // console.log(response.data); 
+            const user = JSON.parse(localStorage.getItem('user'));
+            // console.log(data);
+            if (user) {
+                // console.log(estudiante);
+                setEstudiante(user);
+                setCarrera(user.carrera);
+                console.log(user);
+                // setId(estudiante.id);
+                // setNombre(estudiante.nombre);
+                // setIndice(estudiante.indice_general);
+                // axios.get(`http://${apiURL}/api/Carreras/${estudiante.id_carrera}`).then((response) => {
+                //     // console.log(response.data);
+                //     setCarrera(response.data.carrera);
+                //     setPeriodosTotales(response.data.periodos_totales);
+                //     setAsignaturasTotales(response.data.asignaturas_totales);
+
+                // });
+                // setPeriodosCursados(estudiante.periodos_cursados);
+                // setAsignaturasAprobadas(estudiante.asignaturas_aprobadas);
+
+            };
+
         }).catch((error) => {
             console.log(error);
-            localStorage.removeItem('jwtToken');
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
             window.location.href = '/login';
         });
 
-        const estudiante = JSON.parse(localStorage.getItem('user'));
-        // console.log(data);
-        if (estudiante) {
-            console.log(estudiante);
-            setId(estudiante.id);
-            setNombre(estudiante.nombre);
-            setIndice(estudiante.indice_general);
-            axios.get(`http://localhost:3001/api/Carreras/${estudiante.id_carrera}`).then((response) => {
-                console.log(response.data);
-                setCarrera(response.data.carrera);
-                setPeriodosTotales(response.data.periodos_totales);
-                setAsignaturasTotales(response.data.asignaturas_totales);
-
-            });
-            setPeriodosCursados(estudiante.periodos_cursados);
-            setAsignaturasAprobadas(estudiante.asignaturas_aprobadas);
-
-        };
         // console.log(token);
         // Send a request to your server to validate the token
         // async function validateToken() {
@@ -219,9 +232,9 @@ export default function Perfil() {
                                         </div>
                                     </div> */
                                     }
-                                    <div>{nombre}</div>
-                                    <div>{id}</div>
-                                    <div>{carrera}</div>
+                                    <div>{estudiante.nombre}</div>
+                                    <div>{estudiante.id}</div>
+                                    <div>{estudiante.carrera ? estudiante.carrera.carrera : " "}</div>
                                     {/* <div>{data.id}</div>
                                     <div>{data.id_carrera}</div> */}
                                 </div>
@@ -230,10 +243,10 @@ export default function Perfil() {
                         <div style={divIndiceGraphContainerStyle}>
                             <div style={divIndiceGraphStyle}>
                                 <div style={divIndiceStyle}>
-                                    {indice.toFixed(2)}
+                                    {estudiante.indice_general ? estudiante.indice_general.toFixed(2) : " "}
                                 </div>
                                 <CircularProgress style={{ color: "#ebdfe6", marginLeft: "5px" }} size={180} variant="determinate" value={100} />
-                                <CircularProgress style={{ marginTop: "-186px", marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={(indice * 100) / 4} />
+                                <CircularProgress style={{ marginTop: "-186px", marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={(estudiante.indice_general * 100) / 4} />
                             </div>
                             <div style={divIndiceTextStyle}>Indice General</div>
                         </div>
@@ -254,11 +267,11 @@ export default function Perfil() {
                         Noviembre-Febrero 2023
                     </div>
                     <Paper elevation={3} style={paperPeriodosStyle}>
-                        {periodosCursados}/{periodosTotales}
+                        {estudiante.periodos_cursados}/{carrera.periodos_totales}
                         <div style={paperFontStyle}>Periodos cursados</div>
                     </Paper>
                     <Paper elevation={3} style={paperAsignaturasStyle}>
-                        {asignaturasAprobadas}/{asignaturasTotales}
+                        {estudiante.asignaturas_aprobadas}/{carrera.asignaturas_totales}
                         <div style={paperFontStyle}>Asignaturas aprobadas</div>
                     </Paper>
                 </ThemeProvider>

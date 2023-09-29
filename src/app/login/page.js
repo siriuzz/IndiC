@@ -79,6 +79,8 @@ const buttonStyle = {
     textTransform: "capitalize",
 }; // constante que contiene el estilo del botón de iniciar sesión
 
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false); // hooks para el input de contraseña
     const togglePasswordVisibility = () => { setShowPassword(!showPassword); };//función para mostrar la contraseña
@@ -100,17 +102,17 @@ export default function Login() {
         // const formData = new FormData();
         // formData.append('correo', correo);
         // formData.append('password', password);
-        const token = localStorage.getItem('jwtToken');
+        const token = localStorage.getItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
         if (token) {
-            localStorage.removeItem('jwtToken');
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
         }
-        await axios.post('http://localhost:3001/api/auth/login', {
+        await axios.post(`http://${apiURL}/api/auth/login`, {
             correo: correo,
             password: password
         }).then(function (response) {
             // apiResponse = response.data;
             // const token = signToken(apiResponse);
-            localStorage.setItem('jwtToken', response.data.token);
+            localStorage.setItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`, response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             if (response.data.user.rol === 'Estudiante') {
 
@@ -120,6 +122,9 @@ export default function Login() {
             else if (response.data.user.rol === 'Docente') {
                 console.log("redireccionando docente");
                 window.location.href = "/inicio_docente";
+            } else if (response.data.user.rol === 'Administrador') {
+                console.log("redireccionando administrador");
+                window.location.href = "/inicio_administrador";
             }
             // else if (response.data.data.rol === 'Administrador')
             //     window.location.href = "/inicio_administrador";
