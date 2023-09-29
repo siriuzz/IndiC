@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import styles from "./page.module.css";
-import SidebarClose from "@/components/Sidebar/sidebarClose/SidebarClose";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
 import { Button, IconButton, colors } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import EditIcon from "@mui/icons-material/EditOutlined";
@@ -50,7 +50,7 @@ export default function Perfil() {
 
     return (
         <div className={styles.wallpaper}>
-            <SidebarClose />
+            <SidebarCloseDocente />
             <Paper elevation={3}
                 style={{
                     backgroundColor: "white",
@@ -76,7 +76,7 @@ export default function Perfil() {
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
                         <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
-                            Nombres y Apellidos<div>ID<div>Carrera</div></div>
+                            Nombres y Apellidos<div>ID<div>Area Academica</div></div>
                             <div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
                                 <Link href="/" style={{ color: '#979797' }}>
@@ -90,9 +90,6 @@ export default function Perfil() {
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Teléfono</div>
                                 <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>849-587-6767  <Link href="/"><EditIcon style={{ height: "20", width: "20", color: "#6750a4", marginLeft: "10px", marginTop: "-5px" }} />
                                 </Link></div>
-                                <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Condición Academica</div>
-                                <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>Normal</div>
-
                             </div>
                             <Button variant="contained" style={buttonStyle}>
                                 <LockOpenIcon style={{ height: "20px", width: "18px", marginLeft: "-7px" }} />
@@ -101,8 +98,8 @@ export default function Perfil() {
                                 </div>
                             </Button>
                             <Image
-                                src={"/assets/cuenta_estudiante.svg"}
-                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-400px" }}
+                                src={"/assets/cuenta_docente.svg"}
+                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-290px" }}
                                 height={100}
                                 width={100}
                                 alt="Error image"
