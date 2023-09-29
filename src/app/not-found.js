@@ -29,11 +29,16 @@ const buttonStyle = {
   padding: "10px 20px",
   zIndex: 1, // Coloca el botón por encima de la imagen
   marginRight: "200px",
-  marginLeft: "-125px",
+  marginLeft: "190px",
   height: "30x"
 };
 
 export default function NotFound() {
+
+  const goBack = () => {
+    window.history.back(); // Volver a la página anterior en la historia de navegación
+  };
+
   return (
     <div style={containerStyle}>
       <Image
@@ -44,14 +49,12 @@ export default function NotFound() {
         alt="Error image"
       />
 
-      <Link href="/">
-        <Button variant="contained" style={buttonStyle}>
+        <Button onClick={goBack} variant="contained" style={buttonStyle}>
           <KeyboardBackspaceIcon style={{ height: "25px", width: "25px" }} />
           <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", marginLeft: "5px" }}>
             Volver a la página anterior
           </div>
         </Button>
-      </Link>
     </div>
   );
 }
