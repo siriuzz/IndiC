@@ -1,6 +1,7 @@
 const app = require('../../express-config');
 const EstudianteController = require('../controllers/EstudianteController.js');
 const DocenteController = require('../controllers/DocenteController.js');
+const AdminController = require('../controllers/AdminController');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = app.router;
@@ -39,6 +40,7 @@ router.post('/auth/login', async (req, res) => {
         const { correo, password } = req.body;
 
         const estudiante = await EstudianteController.getEstudianteByCorreo(req, res);
+        console.log(estudiante);
         if (estudiante) {
             bcrypt.compare(password, estudiante.password, function (err, result) {
                 if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
@@ -51,7 +53,7 @@ router.post('/auth/login', async (req, res) => {
                         id_carrera: estudiante.id_carrera,
                         id_estado: estudiante.id_estado,
                         iat: Math.floor(Date.now() / 1000),
-                        exp: Math.floor(Date.now() / 1000) + 10
+                        exp: Math.floor(Date.now() / 1000) + parseInt(process.env.JWT_TIMEOUT)
                     }
                     const key = process.env.JWT_KEY;
                     const token = jwt.sign(payload, key);
@@ -66,7 +68,8 @@ router.post('/auth/login', async (req, res) => {
                             id_estado: estudiante.id_estado,
                             periodos_cursados: estudiante.periodos_cursados,
                             asignaturas_aprobadas: estudiante.asignaturas_aprobadas,
-                            indice_general: estudiante.indice_general
+                            indice_general: estudiante.indice_general,
+                            carrera: estudiante.Carrera
                         }
                     });
                 }
@@ -78,7 +81,6 @@ router.post('/auth/login', async (req, res) => {
             bcrypt.compare(password, docente.password, async function (err, result) {
                 if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
                 else {
-                    console.log(docente.id);
                     const payload = {
                         id: docente.id,
                         nombre: docente.nombre,
@@ -86,7 +88,7 @@ router.post('/auth/login', async (req, res) => {
                         rol: 'Docente',
                         id_estado: docente.id_estado,
                         iat: Math.floor(Date.now() / 1000),
-                        exp: Math.floor(Date.now() / 1000) + 20
+                        exp: Math.floor(Date.now() / 1000) + parseInt(process.env.JWT_TIMEOUT)
                     }
                     const key = process.env.JWT_KEY;
                     const token = jwt.sign(payload, key);
@@ -101,6 +103,36 @@ router.post('/auth/login', async (req, res) => {
                             rol: 'Docente',
                             id_estado: docente.id_estado,
                             secciones: seccionesDocente
+                        }
+                    });
+                }
+            });
+        }
+
+        const admin = await AdminController.getAdminByCorreo(req, res);
+        if (admin) {
+            bcrypt.compare(password, admin.password, function (err, result) {
+                if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
+                else {
+                    const payload = {
+                        id: admin.id,
+                        nombre: admin.nombre,
+                        correo: admin.correo,
+                        rol: 'Administrador',
+                        id_estado: admin.id_estado,
+                        iat: Math.floor(Date.now() / 1000),
+                        exp: Math.floor(Date.now() / 1000) + parseInt(process.env.JWT_TIMEOUT)
+                    }
+                    const key = process.env.JWT_KEY;
+                    const token = jwt.sign(payload, key);
+
+                    return res.status(200).json({
+                        "token": token, "user": {
+                            id: admin.id,
+                            nombre: admin.nombre,
+                            correo: admin.correo,
+                            rol: 'Administrador',
+                            id_estado: admin.id_estado
                         }
                     });
                 }

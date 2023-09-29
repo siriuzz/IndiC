@@ -1,4 +1,4 @@
-const { Estudiante } = require('../../db/models'); // Importa los modelos necesarios
+const { Estudiante, Carrera } = require('../../db/models'); // Importa los modelos necesarios
 const bcrypt = require('bcrypt');
 
 const getAllEstudiantes = async (req, res) => {
@@ -54,13 +54,19 @@ const getEstudianteByCorreo = async (req, res) => {
         const estudiante = await Estudiante.findOne({
             where: {
                 correo: correo
-            }
+            },
+            include: [
+                {
+                    model: Carrera,
+                    attributes: ['carrera', 'periodos_totales', 'asignaturas_totales']
+                }
+            ]
         });
         return estudiante;
     }
     catch (error) {
         console.log("Error al obtener el estudiante por correo");
-        return res.status(500).json({ error: error.message });
+        return { error: error.message };
     }
 }
 
