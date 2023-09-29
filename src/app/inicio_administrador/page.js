@@ -6,7 +6,6 @@ import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
 import Paper from "@mui/material/Paper";
-import Image from "next/image";
 import { useStyles } from "../layout";
 import { Kanit } from "next/font/google";
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
@@ -32,174 +31,59 @@ const wallpaperStyle = {
     justifyContent: "left",
 };
 
-const notificationsButtonStyle = {
-    color: "black",
-    marginTop: "5px",
-    width: "35px",
-    height: "35px",
-    display: "flex",
-    marginRight: "24px",
-};
-
-const notificationsIconStyle = {
-    height: "35px",
-    width: "35px"
-};
-
-const labelStyle = {
-    fontWeight: "bold",
-    fontSize: "48px",
-    display: "flex",
-    marginLeft: "40px",
-    marginTop: "10px",
-    justifyContent: "space-between"
-};
-
-const paperStyle = {
-    width: "472px",
-    marginTop: "30px",
-    marginLeft: "60px",
-    display: "flex",
-};
-
-const divUserStyle = {
-    display: "flex",
-    flexDirection: "row",
-};
-
-const divUserInfoStyle = {
-    fontSize: "26px",
-    marginLeft: "40px",
-    marginTop: "10px",
-    width: "250px",
-};
-
-const divBotonEstudiantesStyle = {
-    height: "100px",
-    width: "100px",
-    marginRight: "5px",
-    marginLeft: "-530px",
-    marginTop: "-90px",
-}
-
-const BotonEstudiantesStyle = {
-    height: "50px",
-    width: "50px",
-    marginRight: "50px",
-    marginLeft: "-225px",
-    marginTop: "10px",
-}
-
-const divIndiceGraphContainerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    marginRight: "520px",
-    marginLeft: "85px",
-    borderRadius: "50px",
-    border: "solid 3px #a681e1",
-    height: "130px",
-    width: "300px",
-    justifyContent: "center",
-    marginTop: "20px",
-};
-
-const divIndiceGraphStyle = {
-    alignSelf: "center",
-    width: "180px",
-    height: "180px"
-};
-
-const divIndiceStyle = {
-    display: "flex",
-    position: "absolute",
-    marginTop: "135px",
-    marginLeft: "230px",
-    fontSize: "22px"
-};
-
-const divIndiceTextStyle = {
-    fontSize: "20px",
-    width: "155px",
-    marginLeft: "-85px",
-    alignSelf: "center",
-    marginTop: "-60px"
-};
-
-
-const div2IndiceGraphContainerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    marginRight: "200px",
-    marginLeft: "-500px",
-    borderRadius: "50px",
-    border: "solid 3px #a681e1",
-    height: "130px",
-    width: "300px",
-    justifyContent: "center",
-    marginTop: "20px",
-};
-
-const div2IndiceGraphStyle = {
-    alignSelf: "center",
-    width: "180px",
-    height: "180px",
-    marginLeft: "300px"
-
-};
-
-const div2IndiceStyle = {
-    display: "flex",
-    position: "absolute",
-    marginTop: "-30px",
-    marginLeft: "20px",
-    fontSize: "22px"
-};
-
-const div2IndiceTextStyle = {
-    fontSize: "20px",
-    width: "155px",
-    marginLeft: "-85px",
-    alignSelf: "center",
-    marginTop: "-240px"
-};
-
-
-const divBotonDocenteStyle = {
-    height: "100px",
-    width: "100px",
-    marginRight: "5px",
-    marginLeft: "-50px",
-    marginTop: "-90px",
-}
-
-
-const BotonDocenteStyle = {
-    height: "50px",
-    width: "50px",
-    marginRight: "5px",
-    marginLeft: "-220px",
-    marginTop: "5px",
-}
-
-
-const AsignaturaStyle = {
+const UsuariosStyle = {
     fontSize: "24px",
     fontFamily: kanit,
     fontStyle: "bold",
+    width: "590px",
     float: "right",
-    marginRight: "220px",
+    justifySelf: "center",
+    marginTop: "5rem",
     borderRadius: "10px",
-    marginTop: "20px",
+};
+
+const estudianteContainerStyle = {
+    height: "160px",
+    width: "380px",
+    borderColor: theme.palette.primary.main,
+    borderStyle: "solid",
+    borderRadius: "40px",
+};
+
+const estudianteInfoStyle = {
+    width: "25%",
+    JustifyItems: "center",
+    marginLeft: "5%",
+    marginTop: "5%",
+};
+
+const estudianteTextStyle = {
+    width: "100%",
+    justifyContent: "center",
+};
+
+const estudianteIconStyle = {
+    height: "60px",
+    width: "60px",
+    marginLeft: "5%",
+};
+
+const docenteStyle = {
+    height: "160px",
+    width: "380px",
+    borderColor: theme.palette.primary.main,
+    borderStyle: "solid",
+    borderRadius: "40px",
 };
 
 const EachAsignaturaStyle = {
-    backgroundColor: "#ffffff", 
+    backgroundColor: "#ffffff",
     borderTop: "3px solid #F5F5F5",
-    borderRadius: "0px", 
-    width: "550px", 
-    justifySelf: "center", 
-    marginLeft: "17px", 
-    marginTop: "8px", 
+    borderRadius: "0px",
+    width: "550px",
+    justifySelf: "center",
+    marginLeft: "17px",
+    marginTop: "8px",
     marginBottom: "8px"
 };
 
@@ -231,77 +115,42 @@ export default function InicioAdministrador() {
         <div style={wallpaperStyle}>
             <SidebarCloseAdministrador />
             <Paper elevation={3} style={useStyles.paperBig}>
-                <div className={kanit.className} style={labelStyle}>
-                    Bienvenido!
-                    <IconButton style={notificationsButtonStyle}>
-                        <NotificationsIcon style={notificationsIconStyle} />
-                    </IconButton>
-                </div>
                 <ThemeProvider theme={theme}>
-
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <Paper elevation={0} style={paperStyle}>
-                            <div style={divUserStyle}>
-                                <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
-                                />
-                                <div style={divUserInfoStyle}>
-                                    Nombres y Apellidos<div>Administrador</div>
-                                </div>
-                            </div>
-                        </Paper>
-                        <div style={divIndiceGraphContainerStyle}>
-                            <div style={divIndiceStyle}>
-                                <div style={divIndiceGraphStyle}>
-                                    70k <SchoolOutlinedIcon style={BotonEstudiantesStyle} />
-
-                                    <div style={divBotonEstudiantesStyle}>
-                                        <CircularProgress style={{ color: "#ebdfe6", marginLeft: "515px", marginTop: "25px" }} size={70} variant="determinate" value={100} />
-                                    </div>
-                                    <CircularProgress style={{ marginTop: "-75px", marginLeft: "-16px", display: "flex" }} size={70} variant="determinate" value={78} />
-                                </div>
-                            </div>
-                            <div style={divIndiceTextStyle}>
-                                Estudiantes
+                    <Paper style={{display: "inline-flex", justifyContent: "space-between", width: "100%"}}>
+                        <div style={estudianteContainerStyle}>
+                            <div style={estudianteInfoStyle}>
+                                <div style={estudianteTextStyle}>Estudiantes</div>
+                                <SchoolOutlinedIcon style={estudianteIconStyle} />
+                                <div style={estudianteTextStyle}>Inscritos</div>
                             </div>
                         </div>
-                        <div style={div2IndiceGraphContainerStyle}>
-                            <div style={div2IndiceGraphStyle}>
-                                <div style={div2IndiceStyle}>
-                                    30k  <WorkOutlineOutlinedIcon style={BotonDocenteStyle} />
-
-                                    <div style={divBotonDocenteStyle}>
-                                    </div>
-                                    <CircularProgress style={{ color: "#ebdfe6", marginLeft: "59px", marginTop: "-20px" }} size={70} variant="determinate" value={100} />
-
-                                </div>
-                                <CircularProgress style={{ marginTop: "-50px", marginLeft: "5px", display: "flex" }} size={70} variant="determinate" value={78} />
-                            </div>
-                            <div style={div2IndiceTextStyle}>Docentes </div>
-                        </div>
-                    </div>
-                    <SearchBar placeholder="Buscar Usuarios" />
-                    <Paper elevation={4} style={AsignaturaStyle}>
-                        <List sx={{ width: "450px", paddingY: "0px",  marginRight:"135px", }}>
+                        <div style={docenteStyle} >
+                            <WorkOutlineOutlinedIcon/>
+                        </div>  
+                    </Paper>
+                    <Paper elevation={4} style={UsuariosStyle}>
+                        <List sx={{ width: "190px" }}>
+                            <SearchBar placeholder="Buscar Usuarios" />
                             <div style={EachAsignaturaStyle}>
                                 <ListItem>
                                     <ListItemAvatar>
                                         <Avatar style={{ backgroundColor: '#FFFFFF' }}>
-                                        <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Juan Ubiera" secondary="juanduuuu@gmail.com" />
-                                    <div style={EstadoStyle}>Egresado <ChevronRightIcon style={RightIconStyle}/></div>
+                                    <div style={EstadoStyle}>Egresado <ChevronRightIcon style={RightIconStyle} /></div>
                                 </ListItem>
                             </div>
                             <div style={EachAsignaturaStyle}>
                                 <ListItem>
                                     <ListItemAvatar>
                                         <Avatar style={{ backgroundColor: '#FFFFFF' }}>
-                                        <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Kelvin Garcia" secondary="kelvin.garcia@gmail.com" />
-                                    <div style={EstadoStyle}>Activo <ChevronRightIcon style={RightIconStyle}/></div>
+                                    <div style={EstadoStyle}>Activo <ChevronRightIcon style={RightIconStyle} /></div>
                                 </ListItem>
                             </div>
                             <div style={EachAsignaturaStyle}>
@@ -312,7 +161,7 @@ export default function InicioAdministrador() {
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Francia Mejia" secondary="franciamejia@example.com" />
-                                    <div style={EstadoStyle}>Docente <ChevronRightIcon style={RightIconStyle}/></div>
+                                    <div style={EstadoStyle}>Docente <ChevronRightIcon style={RightIconStyle} /></div>
                                 </ListItem>
                             </div>
                         </List>

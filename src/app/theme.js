@@ -8,11 +8,12 @@ const theme = createTheme({
         },
         secondary: {
             main: '#424874',
-            label: '#939191'
+            label: '#939191',
         },
         background: {
             default: '#f4eeff',
             input: '#f6f6f6',
+            light: '#e8e4ef',
         },
     },
     spacing: 8,
