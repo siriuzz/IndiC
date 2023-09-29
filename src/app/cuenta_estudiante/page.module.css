@@ -1,0 +1,30 @@
+.wallpaper {
+    background-color: #dcd6f7;
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    justify-content: left;
+}
+
+.notificationsButton {
+    color: black;
+    margin-top: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    margin-right: 24px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 48px;
+    display: flex;
+    margin-left: 40px;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+

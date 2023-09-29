@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 //icons
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
@@ -43,12 +43,14 @@ export default function SidebarCloseAdministrador() {
                 </IconButton>
 
                 <IconButton className={styles.button}>
-                    <SignalCellularAltIcon className={styles.icon} />
+                    <GradeOutlinedIcon className={styles.icon} />
                 </IconButton>
 
+                <Link href="/cuenta_administrador">
                 <IconButton className={styles.button}>
                     <PeopleAltOutlinedIcon className={styles.icon} />
                 </IconButton>
+                </Link>
 
 
             </div>
