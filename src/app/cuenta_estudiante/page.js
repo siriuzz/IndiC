@@ -38,7 +38,7 @@ export default function Perfil() {
         backgroundColor: "#f2f2f2",
         border: "solid",
         color: "#424874",
-        marginTop: "-170px",
+        marginTop: "-200px",
         borderRadius: "50px",
         padding: "10px 20px",
         zIndex: 1, // Coloca el botón por encima de la imagen
@@ -70,14 +70,14 @@ export default function Perfil() {
                 </div>
                 <Paper elevation={0} style={{}}>
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                        <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={130} width={130} style={{ marginLeft: "60px", marginTop: "60px" }}
+                        <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={130} width={130} style={{ marginLeft: "60px", marginTop: "20px" }}
                         />
-                        <EditButton variant="contained">
+                        <EditButton variant="contained" style={{marginTop: "130px"}}>
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
-                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
+                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "30px" }}>
                             Nombres y Apellidos<div>ID<div>Carrera</div></div>
-                            <div>
+                            <div style={{marginTop: "90px"}}>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
                                 <Link href="/" style={{ color: '#979797' }}>
                                     <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>juandu@example.com </div>
@@ -92,7 +92,6 @@ export default function Perfil() {
                                 </Link></div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Condición Academica</div>
                                 <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>Normal</div>
-
                             </div>
                             <Button variant="contained" style={buttonStyle}>
                                 <LockOpenIcon style={{ height: "20px", width: "18px", marginLeft: "-7px" }} />
@@ -102,7 +101,7 @@ export default function Perfil() {
                             </Button>
                             <Image
                                 src={"/assets/cuenta_estudiante.svg"}
-                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-400px" }}
+                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-360px" }}
                                 height={100}
                                 width={100}
                                 alt="Error image"
