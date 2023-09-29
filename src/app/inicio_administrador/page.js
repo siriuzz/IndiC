@@ -60,6 +60,7 @@ const estudianteInfoStyle = {
 const estudianteTextStyle = {
     width: "100%",
     justifyContent: "center",
+    fontSize: "20px",
 };
 
 const estudianteIconStyle = {
