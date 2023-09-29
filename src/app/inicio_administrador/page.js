@@ -38,20 +38,25 @@ const UsuariosStyle = {
     width: "590px",
     float: "right",
     justifySelf: "center",
-    marginTop: "5rem",
+    marginTop: "2.5%",
     borderRadius: "10px",
+    marginRight: "26rem",
+    marginLeft: "26rem",
+    height: "25rem",
 };
 
 const estudianteContainerStyle = {
     height: "160px",
-    width: "380px",
     borderColor: theme.palette.primary.main,
+    marginLeft: "10%",
     borderStyle: "solid",
     borderRadius: "40px",
+    marginTop: "3%",
+    display: "inline-flex",
 };
 
 const estudianteInfoStyle = {
-    width: "25%",
+    width: "30%",
     JustifyItems: "center",
     marginLeft: "5%",
     marginTop: "5%",
@@ -63,18 +68,33 @@ const estudianteTextStyle = {
     fontSize: "20px",
 };
 
+const estudianteIndiceTextStyle = {
+    marginTop: "17%",
+    marginLeft: "-23%",
+    fontSize: "24px",
+};
+
 const estudianteIconStyle = {
     height: "60px",
     width: "60px",
     marginLeft: "5%",
 };
 
-const docenteStyle = {
+const docenteContainerStyle = {
     height: "160px",
-    width: "380px",
     borderColor: theme.palette.primary.main,
     borderStyle: "solid",
     borderRadius: "40px",
+    marginTop: "3%",
+    marginLeft: "25%",
+    display: "inline-flex",
+};
+
+const docenteInfoStyle = {
+    width: "30%",
+    JustifyItems: "center",
+    marginLeft: "5%",
+    marginTop: "4%",
 };
 
 const EachAsignaturaStyle = {
@@ -109,6 +129,19 @@ const RightIconStyle = {
     marginTop: "-2px"
 };
 
+const notificationsButtonStyle = {
+    color: "black",
+    marginTop: "1%",
+    width: "35px",
+    height: "35px",
+    display: "flex",
+    marginRight: "24px",
+};
+
+const notificationsIconStyle = {
+    height: "35px",
+    width: "35px"
+};
 
 export default function InicioAdministrador() {
 
@@ -117,17 +150,30 @@ export default function InicioAdministrador() {
             <SidebarCloseAdministrador />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <ThemeProvider theme={theme}>
-                    <Paper style={{display: "inline-flex", justifyContent: "space-between", width: "100%"}}>
+                    <Paper elevation={0} style={{display: "inline-flex", justifyContent: "space-between", width: "100%"}}>
                         <div style={estudianteContainerStyle}>
                             <div style={estudianteInfoStyle}>
                                 <div style={estudianteTextStyle}>Estudiantes</div>
                                 <SchoolOutlinedIcon style={estudianteIconStyle} />
                                 <div style={estudianteTextStyle}>Inscritos</div>
                             </div>
+                            <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
+                            <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
+                            <div style={estudianteIndiceTextStyle}>70K</div>
                         </div>
-                        <div style={docenteStyle} >
-                            <WorkOutlineOutlinedIcon/>
-                        </div>  
+                        <div style={docenteContainerStyle}>
+                            <div style={docenteInfoStyle}>
+                                <div style={estudianteTextStyle}>Docentes</div>
+                                <WorkOutlineOutlinedIcon style={estudianteIconStyle} />
+                                <div style={estudianteTextStyle}>Trabajando</div>
+                            </div>
+                            <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
+                            <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
+                            <div style={estudianteIndiceTextStyle}>03K</div>
+                        </div>
+                        <IconButton style={notificationsButtonStyle}>
+                            <NotificationsIcon style={notificationsIconStyle} />
+                        </IconButton>
                     </Paper>
                     <Paper elevation={4} style={UsuariosStyle}>
                         <List sx={{ width: "190px" }}>
@@ -163,6 +209,17 @@ export default function InicioAdministrador() {
                                     </ListItemAvatar>
                                     <ListItemText primary="Francia Mejia" secondary="franciamejia@example.com" />
                                     <div style={EstadoStyle}>Docente <ChevronRightIcon style={RightIconStyle} /></div>
+                                </ListItem>
+                            </div>
+                            <div style={EachAsignaturaStyle}>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
+                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Elian Matos" secondary="ElianMatos@example.com" />
+                                    <div style={EstadoStyle}>Administrador <ChevronRightIcon style={RightIconStyle} /></div>
                                 </ListItem>
                             </div>
                         </List>

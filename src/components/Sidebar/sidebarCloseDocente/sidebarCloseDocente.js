@@ -41,10 +41,11 @@ export default function SidebarCloseDocente() {
                     <GradeOutlined className={styles.icon} />
                 </IconButton>
 
+                <Link href="/cuenta_docente">
                 <IconButton className={styles.button}>
                     <PeopleAltOutlinedIcon className={styles.icon} />
                 </IconButton>
-
+                </Link>
 
             </div>
             <div class="mt-auto align-bottom">
