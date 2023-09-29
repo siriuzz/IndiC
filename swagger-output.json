@@ -21,6 +21,16 @@
         }
       }
     },
+    "/api/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Estudiantes/": {
       "get": {
         "tags": [
@@ -55,9 +65,64 @@
         "description": "Endpoint para crear un estudiante.",
         "parameters": [
           {
-            "name": "nombre",
-            "in": "body.nombre",
-            "description": "Nombre del estudiante",
+            "name": "body",
+            "in": "body",
+            "description": "Información del estudiante.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Estudiante"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estudiante creado correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiante"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiante"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "example": "any"
+                  },
+                  "salt": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Estudiantes/{id}": {
+      "get": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "Endpoint para obtener un estudiante.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -65,73 +130,62 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Estudiante obtenido correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiante"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiante"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint para hacer login.",
+        "responses": {
+          "200": {
+            "description": "Login exitoso."
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Estudiante"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/Estudiante"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Estudiantes"
-        ],
-        "description": "Endpoint para actualizar un estudiante.",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Some description...",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Jhon Doe"
-                },
-                "age": {
-                  "type": "number",
-                  "example": 29
-                },
-                "about": {
-                  "type": "string",
-                  "example": ""
+                "type": "object",
+                "properties": {
+                  "correo": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  }
                 }
-              },
-              "required": [
-                "name",
-                "age"
-              ]
+              }
             }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Estudiantes"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
@@ -438,6 +492,10 @@
             "type": "string",
             "example": "1234567890"
           },
+          "salt": {
+            "type": "string",
+            "example": "1234567890"
+          },
           "fecha_registro": {
             "type": "string",
             "example": "2021-09-19"
@@ -477,6 +535,7 @@
           "telefono",
           "cedula",
           "password",
+          "salt",
           "fecha_registro",
           "direccion",
           "id_carrera",
@@ -513,6 +572,10 @@
             "type": "string",
             "example": "1234567890"
           },
+          "salt": {
+            "type": "string",
+            "example": "1234567890"
+          },
           "fecha_registro": {
             "type": "string",
             "example": "2021-09-19"
@@ -540,6 +603,7 @@
           "telefono",
           "cedula",
           "password",
+          "salt",
           "fecha_registro",
           "direccion",
           "id_estado",
@@ -763,6 +827,71 @@
         ],
         "xml": {
           "name": "Config_Calif"
+        }
+      },
+      "Admin": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "example": "Julio Doe"
+          },
+          "correo": {
+            "type": "string",
+            "example": "123@gmail.com"
+          },
+          "telefono": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "cedula": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "password": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "salt": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "fecha_registro": {
+            "type": "string",
+            "example": "2021-09-19"
+          },
+          "direccion": {
+            "type": "string",
+            "example": "Calle 123"
+          },
+          "id_estado": {
+            "type": "number",
+            "example": 1
+          },
+          "id_rol": {
+            "type": "number",
+            "example": 1
+          },
+          "configuracion": {
+            "type": "string",
+            "example": "{\"config\":\"config\"}"
+          }
+        },
+        "required": [
+          "nombre",
+          "correo",
+          "telefono",
+          "cedula",
+          "password",
+          "salt",
+          "fecha_registro",
+          "direccion",
+          "id_estado",
+          "id_rol",
+          "configuracion"
+        ],
+        "xml": {
+          "name": "Admin"
         }
       }
     }

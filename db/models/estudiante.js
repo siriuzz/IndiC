@@ -1,5 +1,4 @@
 'use strict';
-const bcrypt = require('bcrypt');
 const {
   Model
 } = require('sequelize');
@@ -46,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       // },
       allowNull: false
     },
+    salt: { type: DataTypes.STRING, allowNull: false },
     fecha_registro: { type: DataTypes.DATE, allowNull: false },
     direccion: { type: DataTypes.STRING, allowNull: false },
     id_carrera: { type: DataTypes.INTEGER, allowNull: false },
@@ -56,8 +56,9 @@ module.exports = (sequelize, DataTypes) => {
     indice_general: { type: DataTypes.FLOAT, allowNull: false },
   }, {
     sequelize,
+    timestamps: true,
+    createdAt: false,
     modelName: 'Estudiante',
   });
-  sequelize.sync();
   return Estudiante;
 };

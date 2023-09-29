@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      salt: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       fecha_registro: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -71,11 +75,6 @@ module.exports = {
         type: Sequelize.FLOAT,
         defaultValue: 0
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: new Date()
-      },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -85,7 +84,7 @@ module.exports = {
     await queryInterface.addConstraint('Estudiantes', {
       fields: ['id_carrera'],
       type: 'foreign key',
-      name: 'fk_id_carrera',
+      name: 'fk_estudiante_carrera',
       references: {
         table: 'Carreras',
         field: 'id'
@@ -94,7 +93,7 @@ module.exports = {
     await queryInterface.addConstraint('Estudiantes', {
       fields: ['id_estado'],
       type: 'foreign key',
-      name: 'fk_id_estado',
+      name: 'fk_estudiante_estado',
       references: {
         table: 'Estados',
         field: 'id'
@@ -103,7 +102,7 @@ module.exports = {
     await queryInterface.addConstraint('Estudiantes', {
       fields: ['id_rol'],
       type: 'foreign key',
-      name: 'fk_id_rol',
+      name: 'fk_estudiante_rol',
       references: {
         table: 'Roles',
         field: 'id'

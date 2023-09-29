@@ -12,13 +12,18 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Asignaturas', [{
-      asignatura: "Programacion I",
-      id_docente: "1",
-      creditos: "4",
-      aula: "A-1",
-      activa: true,
-      calificacion_base_mt: 40,
+    await queryInterface.bulkInsert('Docentes', [{
+      nombre: 'Juana Doe',
+      correo: 'juana@email.com',
+      telefono: '1234567890',
+      cedula: '1234567890',
+      password: '1234567890',
+      salt: '1234567890',
+      fecha_registro: '2021-09-19',
+      direccion: 'Calle 123',
+      id_estado: 1,
+      id_rol: 1,
+      configuracion: JSON.stringify({ "config": "config" }),
     }], {});
   },
 
@@ -29,6 +34,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Asignaturas', null, {});
+    await queryInterface.bulkDelete('Docentes', null, {});
   }
 };

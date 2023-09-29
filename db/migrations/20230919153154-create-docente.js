@@ -30,6 +30,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      salt: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       fecha_registro: {
         type: Sequelize.DATE,
         defaultValue: new Date()
@@ -51,12 +55,6 @@ module.exports = {
       configuracion: {
         allowNull: false,
         type: Sequelize.JSON
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: new Date()
-
       },
       updatedAt: {
         allowNull: false,

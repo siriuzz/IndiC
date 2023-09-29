@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+
     }
   }
   Asignatura.init({
@@ -17,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, unique: true
     },
     nombre: { type: DataTypes.STRING, allowNull: false },
-    codigo: { type: DataTypes.INTEGER, allowNull: false },
+    codigo: { type: DataTypes.STRING, allowNull: false },
     creditos: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     sequelize,
