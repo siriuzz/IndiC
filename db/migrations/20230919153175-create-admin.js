@@ -53,11 +53,12 @@ module.exports = {
       },
       configuracion: {
         type: Sequelize.JSON,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
     });
     await queryInterface.addConstraint('Admins', {

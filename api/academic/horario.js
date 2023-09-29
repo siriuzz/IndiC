@@ -1,5 +1,5 @@
 const app = require('../../express-config');
-const CarreraController = require('../controllers/CarreraController.js');
+const HorarioController = require('../controllers/HorarioController.js');
 const router = app.router;
 const multer = require('multer');
 const upload = multer({ dest: 'temp/' });
@@ -7,38 +7,22 @@ const Papa = require('papaparse');
 const fs = require('fs');
 const config = require('../papaConfig.js');
 
-router.get('/Carreras', async (req, res) => {
+router.get('/Horarios', async (req, res) => {
     try {
-
+        const result = await HorarioController.getAllHorarios(req, res);
+        console.log(result);
+        res.json(result);
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
 })
-    .post('/Carreras', (req, res) => {
 
-    })
-// .put('/Carreras', (req, res) => {
-
-// }).patch('/Carreras', (req, res) => {
-
-// });
-router.get('/Carreras/:id', async (req, res) => {
-    try {
-        console.log("Obteniendo carrera por id");
-        const carrera = await CarreraController.getCarreraById(req, res);
-        return res.status(200).json(carrera);
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-
-})
-
-router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
-    /* #swagger.tags = ['Carrera']
-    #swagger.description = 'Endpoint para crear carreras desde un archivo CSV.'
+router.post('/Horarios/upload', upload.single('csv'), async (req, res) => {
+    /* #swagger.tags = ['Horario']
+    #swagger.description = 'Endpoint para crear horarios desde un archivo CSV.'
     /*	#swagger.responses[200] = {
-            description: 'Carreras creadas correctamente.',
-            schema: { $ref: "#/components/schemas/Carrera" }
+            description: 'Horarios creados correctamente.',
+            schema: { $ref: "#/components/schemas/Horario" }
     } */
     try {
         const file = fs.createReadStream(req.file.path);
@@ -46,7 +30,8 @@ router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
             // console.log(results);
             for (let i = 0; i < results.data.length; i++) {
                 const element = results.data[i];
-                await CarreraController.createCarreraFromCsv(element);
+                const horario = await HorarioController.createHorarioFromCsv(element);
+                console.log(horario);
             }
             fs.unlink(req.file.path, (err) => {
                 if (err) {
@@ -64,6 +49,6 @@ router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
-});
+})
 
 module.exports = router;

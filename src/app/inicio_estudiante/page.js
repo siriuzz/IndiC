@@ -12,6 +12,9 @@ import LinearProgress from "@mui/material/LinearProgress";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -142,7 +145,68 @@ const paperFontStyle = {
 };
 
 export default function Perfil() {
+    const [nombre, setNombre] = useState("");
+    const [id, setId] = useState("");
+    const [carrera, setCarrera] = useState("");
+    const [indice, setIndice] = useState(0);
+    const [periodosCursados, setPeriodosCursados] = useState(0);
+    const [asignaturasAprobadas, setAsignaturasAprobadas] = useState(0);
+    const [periodosTotales, setPeriodosTotales] = useState(0);
+    const [asignaturasTotales, setAsignaturasTotales] = useState(0);
 
+    useEffect(() => {
+
+        console.log('Checking token validity...');
+        const estudiante = JSON.parse(localStorage.getItem('user'));
+        // console.log(data);
+        if (estudiante) {
+            console.log(estudiante);
+            setId(estudiante.id);
+            setNombre(estudiante.nombre);
+            setIndice(estudiante.indice_general);
+            axios.get(`http://localhost:3001/api/Carreras/${estudiante.id_carrera}`).then((response) => {
+                console.log(response.data);
+                setCarrera(response.data.carrera);
+                setPeriodosTotales(response.data.periodos_totales);
+                setAsignaturasTotales(response.data.asignaturas_totales);
+
+            });
+            setPeriodosCursados(estudiante.periodos_cursados);
+            setAsignaturasAprobadas(estudiante.asignaturas_aprobadas);
+
+        };
+
+        const checkTokenValidity = async () => {
+            try {
+                const token = localStorage.getItem('jwtToken');
+                // console.log(token);
+                if (token) {
+                    // Send a request to your server to validate the token
+                    await axios.post('http://localhost:3001/api/token/validate', { "token": token })
+                        .then(function (response) {
+                            console.log('Token is valid');
+                        }).catch(function (error) {
+                            console.log(error);
+                            localStorage.removeItem('token');
+                            window.location.href = '/login';
+                        }).finally(function () {
+                            console.log("Finalizado");
+                        });
+
+
+                } else {
+                    // Token is not present, handle the situation (e.g., redirect to the login page)
+                    window.location.href = '/login';
+                }
+            } catch (error) {
+                console.error('Error checking token validity:', error);
+                // Handle the error here
+            }
+        };
+
+        // Call the function to check token validity when the component mounts
+        checkTokenValidity();
+    }, []);
     return (
         <div style={wallpaperStyle}>
             <SidebarClose />
@@ -160,17 +224,29 @@ export default function Perfil() {
                                 <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
                                 />
                                 <div style={divUserInfoStyle}>
-                                    Nombres y Apellidos<div>Id<div>Carrera</div></div>
+                                    {/* Nombres y Apellidos
+                                    <div>
+                                        Id
+                                        <div>
+                                            Carrera
+                                        </div>
+                                    </div> */
+                                    }
+                                    <div>{nombre}</div>
+                                    <div>{id}</div>
+                                    <div>{carrera}</div>
+                                    {/* <div>{data.id}</div>
+                                    <div>{data.id_carrera}</div> */}
                                 </div>
                             </div>
                         </Paper>
                         <div style={divIndiceGraphContainerStyle}>
                             <div style={divIndiceGraphStyle}>
                                 <div style={divIndiceStyle}>
-                                    3.58
+                                    {indice.toFixed(2)}
                                 </div>
-                                <CircularProgress style={{ color: "#ebdfe6",marginLeft: "5px"}}size={180} variant="determinate" value={100} />
-                                <CircularProgress style={{ marginTop: "-186px",marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={78} />
+                                <CircularProgress style={{ color: "#ebdfe6", marginLeft: "5px" }} size={180} variant="determinate" value={100} />
+                                <CircularProgress style={{ marginTop: "-186px", marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={(indice * 100) / 4} />
                             </div>
                             <div style={divIndiceTextStyle}>Indice General</div>
                         </div>
@@ -191,11 +267,11 @@ export default function Perfil() {
                         Noviembre-Febrero 2023
                     </div>
                     <Paper elevation={3} style={paperPeriodosStyle}>
-                        8/14
+                        {periodosCursados}/{periodosTotales}
                         <div style={paperFontStyle}>Periodos cursados</div>
                     </Paper>
                     <Paper elevation={3} style={paperAsignaturasStyle}>
-                        60/120
+                        {asignaturasAprobadas}/{asignaturasTotales}
                         <div style={paperFontStyle}>Asignaturas aprobadas</div>
                     </Paper>
                 </ThemeProvider>

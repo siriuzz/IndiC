@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/"
+      "url": "http://localhost:3001/"
     }
   ],
   "paths": {
@@ -21,17 +21,7 @@
         }
       }
     },
-    "/api/login": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Estudiantes/": {
+    "/api/Estudiantes": {
       "get": {
         "tags": [
           "Estudiantes"
@@ -151,6 +141,124 @@
         }
       }
     },
+    "/api/Estudiantes/upload": {
+      "post": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Admins": {
+      "get": {
+        "tags": [
+          "Admins"
+        ],
+        "description": "Endpoint para obtener todos los administradores.",
+        "responses": {
+          "200": {
+            "description": "Administradores obtenidos correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Admin"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Admin"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Admins"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admins"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Admins"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Admins/{id}": {
+      "get": {
+        "tags": [
+          "Admins"
+        ],
+        "description": "Endpoint para obtener un Administrador por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Administrador obtenido correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Admin"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Admin"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/auth/login": {
       "post": {
         "tags": [
@@ -160,15 +268,22 @@
         "responses": {
           "200": {
             "description": "Login exitoso."
+          }
+        }
+      }
+    },
+    "/api/token/validate": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "requestBody": {
@@ -177,10 +292,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "correo": {
-                    "example": "any"
-                  },
-                  "password": {
+                  "token": {
                     "example": "any"
                   }
                 }
@@ -190,13 +302,28 @@
         }
       }
     },
-    "/api/Docentes/Docentes": {
+    "/api/Docentes": {
       "get": {
         "tags": [
           "Docentes"
         ],
-        "description": "",
+        "description": "Endpoint para obtener todos los docentes.",
         "responses": {
+          "200": {
+            "description": "Docentes obtenidos correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Docente"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Docente"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -232,6 +359,44 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/api/Docentes/{id}": {
+      "get": {
+        "tags": [
+          "Docentes"
+        ],
+        "description": "Endpoint para obtener un Docente por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Docente obtenido correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Docente"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Docente"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -282,6 +447,40 @@
         }
       }
     },
+    "/api/Asignaturas/upload": {
+      "post": {
+        "tags": [
+          "Asignatura"
+        ],
+        "description": "Endpoint para crear asignaturas desde un archivo CSV.",
+        "responses": {
+          "200": {
+            "description": "Asignaturas creadas correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asignatura"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asignatura"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/Carreras": {
       "get": {
         "tags": [
@@ -304,26 +503,64 @@
             "description": ""
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/api/Carreras/{id}": {
+      "get": {
         "tags": [
           "Carreras"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
-      },
-      "patch": {
+      }
+    },
+    "/api/Carreras/upload": {
+      "post": {
         "tags": [
-          "Carreras"
+          "Carrera"
         ],
-        "description": "",
+        "description": "Endpoint para crear carreras desde un archivo CSV.",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Carreras creadas correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrera"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrera"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -390,10 +627,24 @@
         "tags": [
           "Estados"
         ],
-        "description": "",
+        "description": "Endpoint para crear estado.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Información del estado.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Estado"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Estado creado exitosamente."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -436,10 +687,24 @@
         "tags": [
           "Roles"
         ],
-        "description": "",
+        "description": "Endpoint para crear rol.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Información del rol.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Rol"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Rol creado exitosamente."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -462,6 +727,178 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/api/Horarios": {
+      "get": {
+        "tags": [
+          "Horarios"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Horarios/upload": {
+      "post": {
+        "tags": [
+          "Horario"
+        ],
+        "description": "Endpoint para crear horarios desde un archivo CSV.",
+        "responses": {
+          "200": {
+            "description": "Horarios creados correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Horario"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Horario"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Estudiante_Seccion": {
+      "get": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Estudiante_Seccion/upload": {
+      "post": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "Endpoint para subir un archivo csv con estudiantes_secciones.",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con estudiantes_secciones.",
+            "required": true,
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Secciones": {
+      "get": {
+        "tags": [
+          "Secciones"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Secciones/upload": {
+      "post": {
+        "tags": [
+          "Secciones"
+        ],
+        "description": "Endpoint para crear secciones desde un archivo csv.",
+        "parameters": [
+          {
+            "name": "csv",
+            "in": "formData",
+            "description": "Archivo csv con las secciones a crear.",
+            "required": true,
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -520,6 +957,10 @@
             "type": "number",
             "example": 1
           },
+          "asignaturas_aprobadas": {
+            "type": "number",
+            "example": 1
+          },
           "configuracion": {
             "type": "string",
             "example": "{\"config\":\"config\"}"
@@ -542,6 +983,7 @@
           "id_estado",
           "id_rol",
           "periodos_cursados",
+          "asignaturas_aprobadas",
           "configuracion",
           "indice_general"
         ],
@@ -736,11 +1178,15 @@
             "type": "number",
             "example": 1
           },
-          "id_profesor": {
+          "id_docente": {
             "type": "number",
             "example": 1
           },
           "id_asignatura": {
+            "type": "number",
+            "example": 1
+          },
+          "id_horario": {
             "type": "number",
             "example": 1
           },
@@ -767,8 +1213,9 @@
         },
         "required": [
           "numero",
-          "id_profesor",
+          "id_docente",
           "id_asignatura",
+          "id_horario",
           "periodo",
           "year",
           "aula",
@@ -782,10 +1229,6 @@
       "Horario": {
         "type": "object",
         "properties": {
-          "id_seccion": {
-            "type": "number",
-            "example": 1
-          },
           "dia": {
             "type": "number",
             "example": 1
@@ -800,7 +1243,6 @@
           }
         },
         "required": [
-          "id_seccion",
           "dia",
           "hora_inicio",
           "hora_fin"
