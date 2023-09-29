@@ -14,6 +14,7 @@ import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useEffect, useState } from "react";
+// const checkTokenValidity = require("@/utils/jwtValidation").checkTokenValidity;
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -155,8 +156,14 @@ export default function Perfil() {
     const [asignaturasTotales, setAsignaturasTotales] = useState(0);
 
     useEffect(() => {
+        axios.post('http://localhost:3001/api/token/validate', { token: localStorage.getItem('jwtToken') }).then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+            localStorage.removeItem('jwtToken');
+            window.location.href = '/login';
+        });
 
-        console.log('Checking token validity...');
         const estudiante = JSON.parse(localStorage.getItem('user'));
         // console.log(data);
         if (estudiante) {
@@ -175,40 +182,20 @@ export default function Perfil() {
             setAsignaturasAprobadas(estudiante.asignaturas_aprobadas);
 
         };
-
-        const checkTokenValidity = async () => {
-            try {
-                const token = localStorage.getItem('jwtToken');
-                // console.log(token);
-                if (token) {
-                    // Send a request to your server to validate the token
-                    await axios.post('http://localhost:3001/api/token/validate', { "token": token })
-                        .then(function (response) {
-                            console.log('Token is valid');
-                        }).catch(function (error) {
-                            console.log(error);
-                            localStorage.removeItem('token');
-                            window.location.href = '/login';
-                        }).finally(function () {
-                            console.log("Finalizado");
-                        });
-
-
-                } else {
-                    // Token is not present, handle the situation (e.g., redirect to the login page)
-                    window.location.href = '/login';
-                }
-            } catch (error) {
-                console.error('Error checking token validity:', error);
-                // Handle the error here
-            }
-        };
-
-        // Call the function to check token validity when the component mounts
-        checkTokenValidity();
+        // console.log(token);
+        // Send a request to your server to validate the token
+        // async function validateToken() {
+        //     const valid = await checkTokenValidity(token);
+        //     console.log("Este es el resultado de la validacion " + valid);
+        //     if (!valid) {
+        //         localStorage.removeItem('jwtToken');
+        //         window.location.href = '/login';
+        //     }
+        // }
+        // validateToken();
     }, []);
     return (
-        <div style={wallpaperStyle}>
+        < div style={wallpaperStyle} >
             <SidebarClose />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <div className={kanit.className} style={labelStyle}>
@@ -276,6 +263,6 @@ export default function Perfil() {
                     </Paper>
                 </ThemeProvider>
             </Paper>
-        </div>
+        </div >
     );
 }

@@ -111,8 +111,18 @@ export default function Login() {
             // apiResponse = response.data;
             // const token = signToken(apiResponse);
             localStorage.setItem('jwtToken', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.data));
-            window.location.href = "/inicio_estudiante";
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            if (response.data.user.rol === 'Estudiante') {
+
+                console.log("redireccionando estudiante");
+                window.location.href = "/inicio_estudiante";
+            }
+            else if (response.data.user.rol === 'Docente') {
+                console.log("redireccionando docente");
+                window.location.href = "/inicio_docente";
+            }
+            // else if (response.data.data.rol === 'Administrador')
+            //     window.location.href = "/inicio_administrador";
 
         }).catch(function (error) {
             console.log(error);

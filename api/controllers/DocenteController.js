@@ -1,4 +1,4 @@
-const { Docente } = require('../../db/models'); // Importa los modelos necesarios
+const { Docente, Secciones, Asignatura } = require('../../db/models'); // Importa los modelos necesarios
 const bcrypt = require('bcrypt');
 
 const getAllDocentes = async (req, res) => {
@@ -25,6 +25,47 @@ const getDocenteById = async (req, res) => {
     catch (error) {
         console.log("Error al obtener el docente por id");
         return res.status(500).json({ error: error.message });
+    }
+}
+
+const getDocenteByCorreo = async (req, res) => {
+    try {
+        console.log(req.body);
+        const { correo } = req.body;
+        if (correo == null) return res.status(400).json({ error: 'Correo no especificado.' });
+        console.log("Obteniendo docente por correo");
+        const docente = await Docente.findOne({
+            where: {
+                correo: correo
+            }
+        });
+        return docente;
+    }
+    catch (error) {
+        console.log("Error al obtener el docente por correo");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+const getSeccionesDocenteById = async (id) => {
+    try {
+        console.log("Obteniendo secciones por id de docente");
+        const secciones = await Secciones.findAll({
+            where: {
+                id_docente: id
+            },
+            include: [
+                {
+                    model: Asignatura,
+                    attributes: ['nombre']
+                },
+            ]
+        });
+        return secciones;
+    }
+    catch (error) {
+        console.log("Error al obtener las secciones por id de docente");
+        return { error: error.message };
     }
 }
 
@@ -59,5 +100,7 @@ const createDocenteFromCsv = async (element) => {
 module.exports = {
     getAllDocentes,
     getDocenteById,
-    createDocenteFromCsv
+    createDocenteFromCsv,
+    getDocenteByCorreo,
+    getSeccionesDocenteById
 }
