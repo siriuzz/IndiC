@@ -1,5 +1,5 @@
 const app = require('../../express-config');
-const CarreraController = require('../controllers/CarreraController.js');
+const SeccionController = require('../controllers/SeccionController');
 const router = app.router;
 const multer = require('multer');
 const upload = multer({ dest: 'temp/' });
@@ -7,46 +7,33 @@ const Papa = require('papaparse');
 const fs = require('fs');
 const config = require('../papaConfig.js');
 
-router.get('/Carreras', async (req, res) => {
+router.get('/Secciones', async (req, res) => {
     try {
-
+        const result = await SeccionController.getAllSecciones(req, res);
+        console.log(result);
+        res.json(result);
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
 })
-    .post('/Carreras', (req, res) => {
 
-    })
-// .put('/Carreras', (req, res) => {
-
-// }).patch('/Carreras', (req, res) => {
-
-// });
-router.get('/Carreras/:id', async (req, res) => {
-    try {
-        console.log("Obteniendo carrera por id");
-        const carrera = await CarreraController.getCarreraById(req, res);
-        return res.status(200).json(carrera);
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-
-})
-
-router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
-    /* #swagger.tags = ['Carrera']
-    #swagger.description = 'Endpoint para crear carreras desde un archivo CSV.'
-    /*	#swagger.responses[200] = {
-            description: 'Carreras creadas correctamente.',
-            schema: { $ref: "#/components/schemas/Carrera" }
-    } */
+router.post('/Secciones/upload', upload.single('csv'), async (req, res) => {
+    /* #swagger.tags = ['Secciones']
+        #swagger.description = 'Endpoint para crear secciones desde un archivo csv.'
+        #swagger.contentType = 'multipart/form-data'
+        #swagger.parameters['csv'] = {
+            in: 'formData',
+            type: 'file',
+            description: 'Archivo csv con las secciones a crear.',
+            required: true
+        } */
     try {
         const file = fs.createReadStream(req.file.path);
         config.complete = async function (results) {
             // console.log(results);
             for (let i = 0; i < results.data.length; i++) {
                 const element = results.data[i];
-                await CarreraController.createCarreraFromCsv(element);
+                await SeccionController.createSeccionesFromCsv(element);
             }
             fs.unlink(req.file.path, (err) => {
                 if (err) {
@@ -60,7 +47,7 @@ router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
         config.error = function (error) {
             res.status(400).json({ error: 'Invalid CSV format' }); // Handle errors
         }
-        Papa.parse(file, config);
+        const result = await Papa.parse(file, config);
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

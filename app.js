@@ -2,7 +2,10 @@ const express = require('express')
 const app = express();
 const estudiantesRoutes = require('./api/users/estudiante.js');
 const docentesRoutes = require('./api/users/docente');
+const adminsRoutes = require('./api/users/admin.js');
 const authRoutes = require('./api/auth/login');
+const tokenRoutes = require('./api/auth/token');
+const carrerasRoutes = require('./api/academic/carrera');
 const swaggerUi = require('swagger-ui-express');
 const router = express.Router();
 const cors = require('cors');
@@ -25,54 +28,85 @@ app.get('/api-docs', swaggerUi.setup(require('./swagger-output.json')));
 
 app.use('/api', router);
 
-router.use('/Estudiantes', swaggerUi.serve, estudiantesRoutes
+router.use('/', swaggerUi.serve, estudiantesRoutes
     /* 
     #swagger.tags = ['Estudiantes']
     */
 
 );
 
-router.use('/auth', authRoutes
+router.use('/', swaggerUi.serve, adminsRoutes
+    /* 
+    #swagger.tags = ['Admins']
+    */
+
+);
+
+router.use('/', authRoutes
     /*
     #swagger.tags = ['Auth']
     */
 );
 
-router.use('/Docentes', swaggerUi.serve, docentesRoutes
+router.use('/', tokenRoutes
+    /*
+    #swagger.tags = ['Auth']
+    */
+);
+
+router.use('/', swaggerUi.serve, docentesRoutes
     /* 
     #swagger.tags = ['Docentes']
         
     */
 );
 
-router.use('/Asignaturas', swaggerUi.serve, require('./api/academic/asignatura')
+router.use('/', swaggerUi.serve, require('./api/academic/asignatura')
     /* 
     #swagger.tags = ['Asignaturas']
             */
 );
 
-router.use('/Carreras', swaggerUi.serve, require('./api/academic/carrera')
+router.use('/', swaggerUi.serve, carrerasRoutes
     /* 
     #swagger.tags = ['Carreras']
     */
 );
 
-router.use('/Config_calif', swaggerUi.serve, require('./api/system/config_calif')
+router.use('/', swaggerUi.serve, require('./api/system/config_calif')
     /* 
     #swagger.tags = ['Configuracion calificaciones']
     */
 );
 
-router.use('/Estados', swaggerUi.serve, require('./api/system/estado')
+router.use('/', swaggerUi.serve, require('./api/system/estado')
     /* 
      #swagger.tags = ['Estados']
     */
 );
 
-router.use('/Roles', swaggerUi.serve, require('./api/system/roles')
+router.use('/', swaggerUi.serve, require('./api/system/roles')
     /*
     #swagger.tags = ['Roles']
     */
+);
+
+router.use('/', swaggerUi.serve, require('./api/academic/horario.js')
+    /*
+    #swagger.tags = ['Horarios']
+    */
+);
+
+router.use('/', swaggerUi.serve, require('./api/users/estudiante_seccion.js')
+    /*
+       #swagger.tags = ['Estudiante_Seccion']
+    */
+);
+
+router.use('/', swaggerUi.serve, require('./api/academic/seccion.js')
+    /*
+         #swagger.tags = ['Secciones']
+     */
 );
 // router.get('/Estudiantes', swaggerUi.serve, estudiantesRoutes);
 

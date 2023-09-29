@@ -1,44 +1,37 @@
+
 const app = require('../../express-config');
-const CarreraController = require('../controllers/CarreraController.js');
 const router = app.router;
-const multer = require('multer');
-const upload = multer({ dest: 'temp/' });
+const config = require('../papaConfig');
 const Papa = require('papaparse');
 const fs = require('fs');
-const config = require('../papaConfig.js');
+const multer = require('multer');
+const EstudianteSeccionController = require('../controllers/EstudianteSeccionController');
+const upload = multer({ dest: 'temp/' });
 
-router.get('/Carreras', async (req, res) => {
+
+router.get('/Estudiante_Seccion', async (req, res) => {
     try {
 
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
-})
-    .post('/Carreras', (req, res) => {
 
-    })
-// .put('/Carreras', (req, res) => {
+}).post('/Estudiante_Seccion', (req, res) => {
 
-// }).patch('/Carreras', (req, res) => {
+}).put('/Estudiante_Seccion', (req, res) => {
 
-// });
-router.get('/Carreras/:id', async (req, res) => {
-    try {
-        console.log("Obteniendo carrera por id");
-        const carrera = await CarreraController.getCarreraById(req, res);
-        return res.status(200).json(carrera);
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+}).patch('/Estudiante_Seccion', (req, res) => {
 
-})
+});
 
-router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
-    /* #swagger.tags = ['Carrera']
-    #swagger.description = 'Endpoint para crear carreras desde un archivo CSV.'
-    /*	#swagger.responses[200] = {
-            description: 'Carreras creadas correctamente.',
-            schema: { $ref: "#/components/schemas/Carrera" }
+router.post('/Estudiante_Seccion/upload', upload.single('csv'), (req, res) => {
+    /* #swagger.tags = ['Estudiante_Seccion']
+         #swagger.description = 'Endpoint para subir un archivo csv con estudiantes_secciones.' */
+    /* #swagger.parameters['file'] = {
+            in: 'formData',
+            description: 'Archivo csv con estudiantes_secciones.',
+            required: true,
+            type: 'file'
     } */
     try {
         const file = fs.createReadStream(req.file.path);
@@ -46,7 +39,7 @@ router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
             // console.log(results);
             for (let i = 0; i < results.data.length; i++) {
                 const element = results.data[i];
-                await CarreraController.createCarreraFromCsv(element);
+                await EstudianteSeccionController.createEstudianteSeccionFromCsv(element);
             }
             fs.unlink(req.file.path, (err) => {
                 if (err) {
@@ -64,6 +57,6 @@ router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
-});
+})
 
 module.exports = router;

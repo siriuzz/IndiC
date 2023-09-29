@@ -10,6 +10,10 @@ module.exports = {
         autoIncrement: true,
         unique: true
       },
+      id_horario: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       id_asignatura: {
         type: Sequelize.INTEGER,
         allowNull: false
@@ -18,16 +22,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      id_profesor: {
+      id_docente: {
         type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      periodo: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      year: {
-        type: Sequelize.DATE,
         allowNull: false
       },
       aula: {
@@ -44,13 +40,15 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
-    });
+    }, { freezeTableName: true });
     await queryInterface.addConstraint('Secciones', {
       fields: ['id_asignatura'],
       type: 'foreign key',
@@ -64,7 +62,19 @@ module.exports = {
     });
 
     await queryInterface.addConstraint('Secciones', {
-      fields: ['id_profesor'],
+      fields: ['id_horario'],
+      type: 'foreign key',
+      name: 'fk_seccion_horario',
+      references: {
+        table: 'Horarios',
+        field: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    });
+
+    await queryInterface.addConstraint('Secciones', {
+      fields: ['id_docente'],
       type: 'foreign key',
       name: 'fk_seccion_profesor',
       references: {
@@ -76,6 +86,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Seccions');
+    await queryInterface.dropTable('Secciones');
   }
 };

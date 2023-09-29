@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }
       });
-      Estado.hasMany(models.Docente);
+      // Estado.hasMany(models.Docente);
+      Estado.hasMany(models.Admin);
     }
   }
   Estado.init({

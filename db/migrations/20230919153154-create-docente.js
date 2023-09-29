@@ -20,11 +20,11 @@ module.exports = {
       },
       telefono: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       cedula: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       password: {
         allowNull: false,
