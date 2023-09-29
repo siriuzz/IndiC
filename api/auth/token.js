@@ -5,6 +5,7 @@ require('dotenv').config()
 
 router.post('/token/validate', async (req, res) => {
     const { token } = req.body;
+    console.log(req.body)
     // console.log(token);
     const key = process.env.JWT_KEY;
     jwt.verify(token, key, function (err, decoded) {
