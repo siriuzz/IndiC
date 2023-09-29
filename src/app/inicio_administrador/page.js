@@ -37,7 +37,7 @@ const UsuariosStyle = {
     fontSize: "24px",
     fontFamily: kanit,
     fontStyle: "bold",
-    width: "590px",
+    width: "600px",
     float: "right",
     justifySelf: "center",
     marginTop: "2.5%",

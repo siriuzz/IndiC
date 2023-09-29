@@ -248,7 +248,7 @@ export default function Perfil() {
                                 <CircularProgress style={{ color: "#ebdfe6", marginLeft: "5px" }} size={180} variant="determinate" value={100} />
                                 <CircularProgress style={{ marginTop: "-186px", marginLeft: "5px", display: "flex" }} size={180} variant="determinate" value={(estudiante.indice_general * 100) / 4} />
                             </div>
-                            <div style={divIndiceTextStyle}>Indice General</div>
+                            <div style={divIndiceTextStyle}>Índice General</div>
                         </div>
                     </div>
                     <div style={useStyles.divlinearProgressHead}>
