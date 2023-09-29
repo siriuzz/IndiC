@@ -23,6 +23,7 @@ import Avatar from '@mui/material/Avatar';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import theme from "../theme";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import axios from "axios";
 
 ChartJS.register(
     Title, Tooltip, LineElement,
@@ -96,23 +97,43 @@ const LinearStyle = {
 
 const AsignaturaStyle = {
     fontSize: "24px",
+    height: "300px",
     fontFamily: kanit,
     fontStyle: "bold",
     float: "right",
     marginRight: "60px",
     borderRadius: "10px",
     marginTop: "20px",
+    overflowY: "auto"
 };
 
 const EachAsignaturaStyle = {
-    backgroundColor: "#f4eeff", borderRadius: "5px", width: "370px", justifySelf: "center", marginLeft: "10px", marginTop: "5px", marginBottom: "10px"
+    backgroundColor: "#f4eeff",
+    borderRadius: "5px",
+    width: "370px",
+    justifySelf: "center",
+    marginLeft: "10px",
+    marginTop: "5px",
+    marginBottom: "10px",
 };
 
 export default function Inicio_docente() {
-    const [value, setValue] = React.useState(dayjs());
+    const [value, setValue] = useState(dayjs());
+    const [profesor, setProfesor] = useState({}); //almacena variables del profesor que realizo el login
+
+
 
     useEffect(() => {
         setValue(dayjs());
+        setProfesor(JSON.parse(localStorage.getItem("user")));
+        axios.post('http://localhost:3001/api/token/validate', { token: localStorage.getItem('jwtToken') }).then((response) => {
+            console.log("this is the data");
+        }).catch((error) => {
+            console.log(error);
+            localStorage.removeItem('jwtToken');
+            window.location.href = '/login';
+        });
+        console.log(profesor);
     }, []);
 
     const [data, setData] = useState({
@@ -151,8 +172,8 @@ export default function Inicio_docente() {
                         <div style={divUserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150} />
                             <div style={userInfoStyle}>
-                                Nombres y Apellidos
-                                Id<div>Estado</div>
+                                {profesor.nombre}<br></br>
+                                {profesor.id}<div>{profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div>
                             </div>
                         </div>
                         <Paper elevation={2} style={CalendarStyle}>
@@ -170,37 +191,56 @@ export default function Inicio_docente() {
                     </div>
                     <Paper elevation={6} style={AsignaturaStyle}>
                         <List sx={{ width: "390px", paddingY: "0px" }}>
+
                             <div style={{ marginLeft: "15px", marginTop: "5px", fontSize: "18px" }}>Asignaturas a impartir<Button style={{ float: "right", marginRight: "10px", marginTop: "-1.5px", fontSize: "12px", textTransform: "none", textDecoration: "underline" }}>Ver todo</Button></div>
-                            <div style={EachAsignaturaStyle}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: '#A6B1E1' }}>
-                                            <BookmarkBorderOutlinedIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="IDS325 - Aseguramiento de la Calidad" secondary="Sección 01 GC302" />
-                                </ListItem>
-                            </div>
-                            <div style={EachAsignaturaStyle}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: '#A6B1E1' }}>
-                                            <BookmarkBorderOutlinedIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="IDS311 - Proceso de Software" secondary="Sección 05 AH101" />
-                                </ListItem>
-                            </div>
-                            <div style={EachAsignaturaStyle}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: '#A6B1E1' }}>
-                                            <BookmarkBorderOutlinedIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="IDS326 - Construcción de Software" secondary="Sección 02 FD411" />
-                                </ListItem>
-                            </div>
+                            {
+                                profesor.secciones && profesor.secciones.map((seccion) => {
+                                    return (
+                                        <div style={EachAsignaturaStyle} key={seccion.id}>
+                                            <ListItem>
+                                                <ListItemAvatar>
+                                                    <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                                        <BookmarkBorderOutlinedIcon />
+                                                    </Avatar>
+                                                </ListItemAvatar>
+                                                <ListItemText primary={seccion.Asignatura.nombre} secondary={"Sección " + seccion.numero + " " + seccion.aula} />
+                                            </ListItem>
+                                        </div>
+                                    )
+                                })
+                            }
+                            {
+                                // <div style={EachAsignaturaStyle}>
+                                //     <ListItem>
+                                //         <ListItemAvatar>
+                                //             <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                //                 <BookmarkBorderOutlinedIcon />
+                                //             </Avatar>
+                                //         </ListItemAvatar>
+                                //         <ListItemText primary="IDS325 - Aseguramiento de la Calidad" secondary="Sección 01 GC302" />
+                                //     </ListItem>
+                                // </div>
+                                // <div style={EachAsignaturaStyle}>
+                                //     <ListItem>
+                                //         <ListItemAvatar>
+                                //             <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                //                 <BookmarkBorderOutlinedIcon />
+                                //             </Avatar>
+                                //         </ListItemAvatar>
+                                //         <ListItemText primary="IDS311 - Proceso de Software" secondary="Sección 05 AH101" />
+                                //     </ListItem>
+                                // </div>
+                                // <div style={EachAsignaturaStyle}>
+                                //     <ListItem>
+                                //         <ListItemAvatar>
+                                //             <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                //                 <BookmarkBorderOutlinedIcon />
+                                //             </Avatar>
+                                //         </ListItemAvatar>
+                                //         <ListItemText primary="IDS326 - Construcción de Software" secondary="Sección 02 FD411" />
+                                //     </ListItem>
+                                // </div>
+                            }
                         </List>
                     </Paper>
                     <div style={LinearStyle}><Line data={data} />

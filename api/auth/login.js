@@ -1,5 +1,6 @@
 const app = require('../../express-config');
 const EstudianteController = require('../controllers/EstudianteController.js');
+const DocenteController = require('../controllers/DocenteController.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = app.router;
@@ -12,7 +13,7 @@ router.post('/auth/login', async (req, res) => {
           #swagger.responses[200] = {
             description: 'Login exitoso.'
     } 
-    #swagger.parameters[body] = [
+        #swagger.parameters[body] = [
         {
             in: 'body',
             description: 'Información del estudiante.',
@@ -32,47 +33,81 @@ router.post('/auth/login', async (req, res) => {
                 // }
             }
         }
-    ] */
+        ] */
 
     try {
         const { correo, password } = req.body;
 
         const estudiante = await EstudianteController.getEstudianteByCorreo(req, res);
-
-        if (estudiante.length == 0) return res.status(404).json({ error: 'Estudiante no encontrado.' });
-        if (estudiante.correo != correo) return res.status(400);
-
-        bcrypt.compare(password, estudiante.password, function (err, result) {
-            if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
-            else {
-                const payload = {
-                    id: estudiante.id,
-                    nombre: estudiante.nombre,
-                    correo: estudiante.correo,
-                    rol: 'estudiante',
-                    id_carrera: estudiante.id_carrera,
-                    id_estado: estudiante.id_estado,
-                    iat: Math.floor(Date.now() / 1000),
-                    exp: Math.floor(Date.now() / 1000) + (60 * 60)
-                }
-                const key = process.env.JWT_KEY;
-                const token = jwt.sign(payload, key);
-
-                return res.status(200).json({
-                    "token": token, "data": {
+        if (estudiante) {
+            bcrypt.compare(password, estudiante.password, function (err, result) {
+                if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
+                else {
+                    const payload = {
                         id: estudiante.id,
                         nombre: estudiante.nombre,
                         correo: estudiante.correo,
                         rol: 'estudiante',
                         id_carrera: estudiante.id_carrera,
                         id_estado: estudiante.id_estado,
-                        periodos_cursados: estudiante.periodos_cursados,
-                        asignaturas_aprobadas: estudiante.asignaturas_aprobadas,
-                        indice_general: estudiante.indice_general
+                        iat: Math.floor(Date.now() / 1000),
+                        exp: Math.floor(Date.now() / 1000) + 10
                     }
-                });
-            }
-        });
+                    const key = process.env.JWT_KEY;
+                    const token = jwt.sign(payload, key);
+
+                    return res.status(200).json({
+                        "token": token, "user": {
+                            id: estudiante.id,
+                            nombre: estudiante.nombre,
+                            correo: estudiante.correo,
+                            rol: 'Estudiante',
+                            id_carrera: estudiante.id_carrera,
+                            id_estado: estudiante.id_estado,
+                            periodos_cursados: estudiante.periodos_cursados,
+                            asignaturas_aprobadas: estudiante.asignaturas_aprobadas,
+                            indice_general: estudiante.indice_general
+                        }
+                    });
+                }
+            });
+        }
+
+        const docente = await DocenteController.getDocenteByCorreo(req, res);
+        if (docente) {
+            bcrypt.compare(password, docente.password, async function (err, result) {
+                if (result == false) return res.status(400).json({ error: 'Correo o contraseña incorrecta.' });
+                else {
+                    console.log(docente.id);
+                    const payload = {
+                        id: docente.id,
+                        nombre: docente.nombre,
+                        correo: docente.correo,
+                        rol: 'Docente',
+                        id_estado: docente.id_estado,
+                        iat: Math.floor(Date.now() / 1000),
+                        exp: Math.floor(Date.now() / 1000) + 20
+                    }
+                    const key = process.env.JWT_KEY;
+                    const token = jwt.sign(payload, key);
+
+                    const seccionesDocente = await DocenteController.getSeccionesDocenteById(docente.id);
+
+                    return res.status(200).json({
+                        "token": token, "user": {
+                            id: docente.id,
+                            nombre: docente.nombre,
+                            correo: docente.correo,
+                            rol: 'Docente',
+                            id_estado: docente.id_estado,
+                            secciones: seccionesDocente
+                        }
+                    });
+                }
+            });
+        }
+
+        // const administrador = await AdministradorController.getAdministradorByCorreo(req, res);
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
