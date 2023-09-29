@@ -31,10 +31,12 @@ module.exports = (sequelize, DataTypes) => {
     calificacion_mt: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 40 },
     calificacion_final: { type: DataTypes.INTEGER, allowNull: false },
     periodo: { type: DataTypes.INTEGER, allowNull: false },
+    year: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     sequelize,
     modelName: 'Estudiante_Seccion',
     freezeTableName: true,
   });
+  // Estudiante_Seccion.sync();
   return Estudiante_Seccion;
 };

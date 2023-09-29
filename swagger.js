@@ -1,11 +1,12 @@
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' })
+require('dotenv').config()
 
 const doc = {
     info: {
         title: 'IndiC API',
         description: 'Esta es la documentación de la API de IndiC',
     },
-    host: 'localhost:3001',
+    host: `${process.env.NEXT_PUBLIC_API_HOST}:${process.env.NEXT_PUBLIC_API_PORT}`,
     schemes: ['http'],
     explorer: true,
     components: {

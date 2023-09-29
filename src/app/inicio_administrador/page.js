@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useEffect } from "react";
 import SidebarCloseAdministrador from "@/components/Sidebar/sidebarCloseAdministrador/sidebarCloseAdministrador";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import { IconButton } from "@mui/material";
@@ -20,6 +20,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import axios from "axios";
+// require('dotenv').config()
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -35,7 +37,7 @@ const UsuariosStyle = {
     fontSize: "24px",
     fontFamily: kanit,
     fontStyle: "bold",
-    width: "590px",
+    width: "600px",
     float: "right",
     justifySelf: "center",
     marginTop: "2.5%",
@@ -43,6 +45,7 @@ const UsuariosStyle = {
     marginRight: "26rem",
     marginLeft: "26rem",
     height: "25rem",
+    overflowY: "auto",
 };
 
 const estudianteContainerStyle = {
@@ -143,14 +146,29 @@ const notificationsIconStyle = {
     width: "35px"
 };
 
-export default function InicioAdministrador() {
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
+export default function InicioAdministrador() {
+    const [estudiantes, setEstudiantes] = React.useState([]);
+    useEffect(() => {
+        // console.log(process.env.NEXT_PUBLIC_API_HOST);
+        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
+            window.location.href = '/login';
+        });;
+        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+            setEstudiantes(response.data);
+        });
+    }, []);
     return (
         <div style={wallpaperStyle}>
             <SidebarCloseAdministrador />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <ThemeProvider theme={theme}>
-                    <Paper elevation={0} style={{display: "inline-flex", justifyContent: "space-between", width: "100%"}}>
+                    <Paper elevation={0} style={{ display: "inline-flex", justifyContent: "space-between", width: "100%" }}>
                         <div style={estudianteContainerStyle}>
                             <div style={estudianteInfoStyle}>
                                 <div style={estudianteTextStyle}>Estudiantes</div>
@@ -178,7 +196,24 @@ export default function InicioAdministrador() {
                     <Paper elevation={4} style={UsuariosStyle}>
                         <List sx={{ width: "190px" }}>
                             <SearchBar placeholder="Buscar Usuarios" />
-                            <div style={EachAsignaturaStyle}>
+                            {
+                                estudiantes.map((estudiante) => {
+                                    return (
+                                        <div style={EachAsignaturaStyle} key={estudiante.id}>
+                                            <ListItem>
+                                                <ListItemAvatar>
+                                                    <Avatar style={{ backgroundColor: '#FFFFFF' }}>
+                                                        <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                                    </Avatar>
+                                                </ListItemAvatar>
+                                                <ListItemText primary={estudiante.nombre} secondary={estudiante.correo} />
+                                                <div style={EstadoStyle}>{estudiante.id_estado == 1 ? "Activo" : "Inactivo"} <ChevronRightIcon style={RightIconStyle} /></div>
+                                            </ListItem>
+                                        </div>
+                                    );
+                                })
+                            }
+                            {/* <div style={EachAsignaturaStyle}>
                                 <ListItem>
                                     <ListItemAvatar>
                                         <Avatar style={{ backgroundColor: '#FFFFFF' }}>
@@ -221,7 +256,7 @@ export default function InicioAdministrador() {
                                     <ListItemText primary="Elian Matos" secondary="ElianMatos@example.com" />
                                     <div style={EstadoStyle}>Administrador <ChevronRightIcon style={RightIconStyle} /></div>
                                 </ListItem>
-                            </div>
+                            </div> */}
                         </List>
                     </Paper>
                 </ThemeProvider>
