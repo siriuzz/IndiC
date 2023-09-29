@@ -46,9 +46,11 @@ export default function SidebarCloseEstudiante() {
                     <SignalCellularAltIcon className={styles.icon} />
                 </IconButton>
 
+                <Link href="/cuenta_estudiante">
                 <IconButton className={styles.button}>
                     <PeopleAltOutlinedIcon className={styles.icon} />
                 </IconButton>
+                </Link>
 
 
             </div>
