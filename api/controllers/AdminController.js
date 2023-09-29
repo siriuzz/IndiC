@@ -27,7 +27,23 @@ const getAdminById = async (req, res) => {
     }
 }
 
+const createAdminFromCsv = async (req, res) => {
+    try {
+        const { nombre, correo, password } = req.body;
+        const admin = await Admin.create({
+            nombre: nombre,
+            correo: correo,
+            password: password
+        });
+        return admin;
+    }
+    catch (error) {
+        console.log("Error al crear el administrador desde csv");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 module.exports = {
-getAllAdmins,
-getAdminById
+    getAllAdmins,
+    getAdminById
 }
