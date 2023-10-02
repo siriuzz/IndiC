@@ -233,9 +233,9 @@ export default function Perfil() {
                                         </div>
                                     </div> */
                                     }
-                                    <div>{estudiante.nombre}</div>
-                                    <div>{estudiante.id}</div>
-                                    <div>{estudiante.carrera ? estudiante.carrera.carrera : " "}</div>
+                                    <div>Nombre: {" " + estudiante.nombre}</div>
+                                    <div>Id: {" " + estudiante.id}</div>
+                                    <div>Carrera: {" " + estudiante.carrera ? estudiante.carrera.carrera : " "}</div>
                                     {/* <div>{data.id}</div>
                                     <div>{data.id_carrera}</div> */}
                                 </div>
@@ -253,17 +253,17 @@ export default function Perfil() {
                         </div>
                     </div>
                     <div style={useStyles.divlinearProgressHead}>
-                        3.88/4
+                        3.88/4.0
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Mayo-Julio 2023
                     </div>
                     <div style={useStyles.divlinearProgress}>
-                        3.88/4
+                        3.88/4.0
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Febrero-Abril 2023
                     </div>
                     <div style={useStyles.divlinearProgress}>
-                        3.88/4
+                        3.88/4.0
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Noviembre-Febrero 2023
                     </div>

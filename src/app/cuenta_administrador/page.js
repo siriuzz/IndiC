@@ -76,7 +76,7 @@ export default function Perfil() {
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
                         <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
-                            Nombres y Apellidos<div>ID<div>Area Academica</div></div>
+                            Nombre: Nombres y Apellidos<div>Id: ID<div>Estado: Estado</div></div>
                             <div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo</div>
                                 <Link href="/" style={{ color: '#979797' }}>

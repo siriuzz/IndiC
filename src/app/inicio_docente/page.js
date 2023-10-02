@@ -175,8 +175,8 @@ export default function Inicio_docente() {
                         <div style={divUserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150} />
                             <div style={userInfoStyle}>
-                                {profesor.nombre}<br></br>
-                                {profesor.id}<div>{profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div>
+                                Nombre: {" " + profesor.nombre}<br></br>
+                                Id: {" " + profesor.id}<div>Estado: {" " + profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div>
                             </div>
                         </div>
                         <Paper elevation={2} style={CalendarStyle}>

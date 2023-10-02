@@ -98,8 +98,8 @@ export default function Perfil() {
                         <EditButton variant="contained" style={{ marginTop: "130px" }}>
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
-                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "30px" }}>
-                            {user.nombre}<div>{user.id}<div>{carrera.carrera}</div></div>
+                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "30px" }}>Nombre:
+                            {" " + user.nombre}<div>Id:{" " + user.id}<div>Carrera:{" " + carrera.carrera}</div></div>
                             <div style={{ marginTop: "90px" }}>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
                                 <Link href="/" style={{ color: '#979797' }}>
