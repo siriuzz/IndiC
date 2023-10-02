@@ -39,7 +39,7 @@ const wallpaperStyle = {
 
 const correoInputStyle = {
     backgroundColor: theme.palette.background.input,
-    marginTop: "70px",
+    marginTop: "20px",
     borderRadius: "40px",
     width: "420px",
     height: "50px",
@@ -48,7 +48,7 @@ const correoInputStyle = {
 
 const passwordInputStyle = {
     backgroundColor: theme.palette.background.input,
-    marginTop: "40px",
+    marginTop: "30px",
     borderRadius: "40px",
     width: "420px",
     height: "50px",
@@ -66,11 +66,14 @@ const checkboxLabelStyle = {
 
 const linkLabelStyle = {
     alignSelf: "center",
-    color: theme.palette.secondary.label
+    color: theme.palette.secondary.label,
+    marginTop: "-2px",
+    marginLeft: "25px",
+    textDecoration: "underline",
 }; // constante que contiene el estilo del label del link
 
 const buttonStyle = {
-    marginTop: "50px",
+    marginTop: "40px",
     borderRadius: "10px",
     borderColor: theme.palette.primary.main,
     width: "147px",
@@ -79,6 +82,7 @@ const buttonStyle = {
     textTransform: "capitalize",
 }; // constante que contiene el estilo del botón de iniciar sesión
 
+// const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
 export default function Login() {
@@ -88,8 +92,22 @@ export default function Login() {
     const [isLoading, setIsLoading] = useState(false);
     const [correo, setCorreo] = useState(""); // hooks para el input de correo institucional
     const [password, setPassword] = useState(""); // hooks para el input de contraseña
+    const [displayEML, setDisplayEML] = useState("none");
+    const [displayPWD, setDisplayPWD] = useState("none");
+    const regex = /^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/;
 
     const handleChangeCorreo = (event) => {
+        const isValid = regex.test(event.target.value);
+        if (!isValid) {
+            setDisplayEML("flex");
+        }
+        else {
+            setDisplayEML("none");
+        }
+        if (event.target.value === "") {
+            setDisplayEML("none");
+            setDisplayPWD("none");
+        }
         setCorreo(event.target.value);
     }
     const handleChangePassword = (event) => {
@@ -130,12 +148,11 @@ export default function Login() {
             //     window.location.href = "/inicio_administrador";
 
         }).catch(function (error) {
-            console.log(error);
+            setDisplayPWD("flex");
+            console.log(error.message);
         }).finally(function () {
             console.log("axios executed")
         });
-
-
         setIsLoading(false);
 
     }; // función para el submit del formulario
@@ -151,14 +168,23 @@ export default function Login() {
                     height={160}
                     alt="Logo app"
                 />
+                <div style={{ display: "inline-flex", fontSize: "46px", marginTop: "10px" }}> Iniciar<div style={{ color: theme.palette.primary.dark, marginLeft: "10px" }}>Sesión</div></div>
                 <ThemeProvider // tema de la aplicación 
                     theme={theme}>
                     <form onSubmit={handleSubmit}>
                         <FormGroup // formulario de inicio de sesión
                             className={kanit.className}>
                             <Input // input de correo institucional 
-                                id="correo" onChange={handleChangeCorreo} className={kanit.className} style={correoInputStyle} placeholder="Correo Institucional">
-                            </Input>
+                                id="correo" onChange={handleChangeCorreo}
+                                className={kanit.className}
+                                style={correoInputStyle}
+                                placeholder="Correo Institucional"
+                            />
+                            <div style={{
+                                color: "red",
+                                display: displayEML,
+                                marginBottom: "-24px"
+                            }} role="alert">Correo invalido!</div>
                             <Input // input de contraseña
                                 id="password"
                                 className={kanit.className}
@@ -168,7 +194,7 @@ export default function Login() {
                                 onChange={handleChangePassword}
                                 endAdornment={ // icono para mostrar la contraseña
                                     <InputAdornment position="start">
-                                        <IconButton style={{ marginRight: "5px" }}
+                                        <IconButton
                                             onClick={togglePasswordVisibility}
                                             onMouseDown={(e) => e.preventDefault()}
                                         >
@@ -177,6 +203,10 @@ export default function Login() {
                                     </InputAdornment>
                                 }
                             />
+                            <div style={{
+                                color: "red",
+                                display: displayPWD,
+                            }}>Credenciales invalidas, intente nuevamente.</div>
                             <div // div que contiene el checkbox y el link de recuperar contraseña
                                 style={{ display: "inline-flex" }} >
                                 <FormControlLabel
@@ -195,7 +225,7 @@ export default function Login() {
                                 <Link // link para recuperar contraseña
                                     href="/recuperar" style={{ display: "flex" }}>
                                     <span style={linkLabelStyle}>
-                                        ¿Olvidó su contraseña?
+                                        Recordar contraseña
                                     </span>
                                 </Link>
                             </div>
