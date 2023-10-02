@@ -59,6 +59,27 @@ router.get('/Estudiantes/:id', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
+}).patch('/Estudiantes/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para actualizar un estudiante.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiante actualizado correctamente.',
+    } */
+    /* #swagger.parameters[body] = [
+        {
+            in: 'body',
+            description: 'Actualización de la información del estudiante.',
+            required: true,
+            schema: { oldPassword: "oldPassword", newPassword: "newPassword" }
+        }
+    ] */
+    try {
+        const result = await EstudianteController.updatePassword(req, res);
+        console.log("Este es el resultadooooo", result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
 });
 
 router.post('/Estudiantes/upload', upload.single('csv'), async (req, res) => {

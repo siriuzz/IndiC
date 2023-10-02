@@ -11,7 +11,7 @@ import Image from "next/image";
 import { styled } from '@mui/material/styles';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
-import bootstrap from 'bootstrap';
+// import bootstrap from 'bootstrap';
 import Link from "next/link";
 import axios from "axios";
 
@@ -114,7 +114,7 @@ export default function Perfil() {
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Teléfono</div>
                                 <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{telefono}</div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Condición Academica</div>
-                                <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>Normal</div>
+                                <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{condicionAcademica}</div>
                             </div>
                             <Button variant="contained" style={buttonStyle}>
                                 <LockOpenIcon style={{ height: "20px", width: "18px", marginLeft: "-7px" }} />
