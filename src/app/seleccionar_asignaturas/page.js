@@ -19,11 +19,6 @@ export default function SeleccionarAsignaturasPage() {
         justifyContent: "left"
     };
 
-    const SearchBarStyle = {
-        marginTop: "30px",
-        marginLeft: "40px",
-    };
-
     return (
         <div style={wallpaperStyle}>
             <SidebarCloseEstudiante />
