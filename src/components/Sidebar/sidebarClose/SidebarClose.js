@@ -39,9 +39,11 @@ export default function SidebarCloseEstudiante() {
                     </IconButton>
                 </Link>
 
-                <IconButton className={styles.button}>
-                    <EditOutlined className={styles.icon} />
-                </IconButton>
+                <Link href="/seleccionar_asignaturas">
+                    <IconButton className={styles.button}>
+                        <EditOutlined className={styles.icon} />
+                    </IconButton>
+                </Link>
 
                 <IconButton className={styles.button}>
                     <GradeOutlined className={styles.icon} />
@@ -52,9 +54,9 @@ export default function SidebarCloseEstudiante() {
                 </IconButton>
 
                 <Link href="/cuenta_estudiante">
-                <IconButton className={styles.button}>
-                    <PeopleAltOutlinedIcon className={styles.icon} />
-                </IconButton>
+                    <IconButton className={styles.button}>
+                        <PeopleAltOutlinedIcon className={styles.icon} />
+                    </IconButton>
                 </Link>
 
 
