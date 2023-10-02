@@ -187,7 +187,7 @@ export default function InicioAdministrador() {
                             </div>
                             <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
                             <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
-                            <div style={estudianteIndiceTextStyle}>03K</div>
+                            <div style={estudianteIndiceTextStyle}>3K</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
                             <NotificationsIcon style={notificationsIconStyle} />
