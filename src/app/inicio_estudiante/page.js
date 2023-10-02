@@ -158,6 +158,7 @@ export default function Perfil() {
     const [asignaturasAprobadas, setAsignaturasAprobadas] = useState(0);
     // const [periodosTotales, setPeriodosTotales] = useState(0);
     const [asignaturasTotales, setAsignaturasTotales] = useState(0);
+    const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
     useEffect(() => {
         // const storedEstudiante = JSON.parse(localStorage.getItem('user'));

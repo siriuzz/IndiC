@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./page.module.css";
 import SidebarClose from "@/components/Sidebar/sidebarClose/SidebarClose";
 import { Button, IconButton, colors } from "@mui/material";
@@ -11,40 +11,68 @@ import Image from "next/image";
 import { styled } from '@mui/material/styles';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
+import bootstrap from 'bootstrap';
 import Link from "next/link";
+import axios from "axios";
 
+const EditButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText("#e4d1d1"),
+    backgroundColor: "#e4d1d1",
+    '&:hover': {
+        backgroundColor: "#a99b9b",
+    },
+    borderRadius: "20px",
+    marginLeft: "-55px",
+    marginTop: "165px",
+    height: "35px",
+    width: " -20px",
+}));
+
+
+const buttonStyle = {
+    position: "absolute",
+    top: "50%", // Centra verticalmente el botón en relación con el contenedor
+    transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
+    backgroundColor: "#f2f2f2",
+    border: "solid",
+    color: "#424874",
+    marginTop: "-200px",
+    borderRadius: "50px",
+    padding: "10px 20px",
+    zIndex: 1, // Coloca el botón por encima de la imagen
+    marginLeft: "700px",
+    height: "30x"
+};
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+
 export default function Perfil() {
+    const [user, setUser] = React.useState({});
+    const [carrera, setCarrera] = React.useState({});
+    const [telefono, setTelefono] = React.useState("###-###-####");
+    const [condicionAcademica, setCondicionAcademica] = React.useState("Normal");
 
-    const EditButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText("#e4d1d1"),
-        backgroundColor: "#e4d1d1",
-        '&:hover': {
-            backgroundColor: "#a99b9b",
-        },
-        borderRadius: "20px",
-        marginLeft: "-55px",
-        marginTop: "165px",
-        height: "35px",
-        width: " -20px",
-    }));
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        setCarrera(user.carrera);
+        setUser(user);
+        console.log(user.id)
+        axios.get(`http://${apiURL}/api/Estudiantes/${user.id}`).then((res) => {
+            const telefono = res.data.telefono;
+            setTelefono(telefono);
+        });
+        if (user.indice_general > 3.0) {
+            setCondicionAcademica("Normal");
+        } else if (user.indice_general < 3.0 && user.indice_general > 2.0) {
+            setCondicionAcademica("En Riesgo");
+        } else {
+            setCondicionAcademica("En Peligro");
+        }
+    }, []);
 
 
-    const buttonStyle = {
-        position: "absolute",
-        top: "50%", // Centra verticalmente el botón en relación con el contenedor
-        transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
-        backgroundColor: "#f2f2f2",
-        border: "solid",
-        color: "#424874",
-        marginTop: "-200px",
-        borderRadius: "50px",
-        padding: "10px 20px",
-        zIndex: 1, // Coloca el botón por encima de la imagen
-        marginLeft: "700px",
-        height: "30x"
-    };
+
 
 
 
@@ -72,24 +100,19 @@ export default function Perfil() {
                     <div style={{ display: "flex", flexDirection: "row" }}>
                         <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={130} width={130} style={{ marginLeft: "60px", marginTop: "20px" }}
                         />
-                        <EditButton variant="contained" style={{marginTop: "130px"}}>
+                        <EditButton variant="contained" style={{ marginTop: "130px" }}>
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
                         <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "30px" }}>
-                            Nombres y Apellidos<div>ID<div>Carrera</div></div>
-                            <div style={{marginTop: "90px"}}>
+                            {user.nombre}<div>{user.id}<div>{carrera.carrera}</div></div>
+                            <div style={{ marginTop: "90px" }}>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
                                 <Link href="/" style={{ color: '#979797' }}>
-                                    <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>juandu@example.com </div>
+                                    <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{user.correo}</div>
                                 </Link>
-                                <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Email</div>
-                                <Link href="/" style={{ color: '#979797' }}>
-                                    <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>kelvinga@example.com<Link href="/"> <EditIcon style={{ height: "20", width: "20", color: "#6750a4", marginLeft: "20px", marginTop: "-5px" }} />
-                                    </Link></div>
-                                </Link>
+
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Teléfono</div>
-                                <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>849-587-6767  <Link href="/"><EditIcon style={{ height: "20", width: "20", color: "#6750a4", marginLeft: "10px", marginTop: "-5px" }} />
-                                </Link></div>
+                                <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{telefono}</div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Condición Academica</div>
                                 <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>Normal</div>
                             </div>
