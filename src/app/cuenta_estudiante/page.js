@@ -71,11 +71,6 @@ export default function Perfil() {
         }
     }, []);
 
-
-
-
-
-
     return (
         <div className={styles.wallpaper}>
             <SidebarClose />
