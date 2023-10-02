@@ -15,7 +15,7 @@ import Link from "next/link";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
-export default function Perfil() {
+export default function Cuenta() {
 
     const EditButton = styled(Button)(({ theme }) => ({
         color: theme.palette.getContrastText("#e4d1d1"),

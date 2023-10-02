@@ -11,6 +11,7 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import EditOutlined from '@mui/icons-material/EditOutlined';
 import Link from 'next/link';
 
 
@@ -37,6 +38,10 @@ export default function SidebarCloseEstudiante() {
                         <HomeOutlinedIcon className={styles.icon} />
                     </IconButton>
                 </Link>
+
+                <IconButton className={styles.button}>
+                    <EditOutlined className={styles.icon} />
+                </IconButton>
 
                 <IconButton className={styles.button}>
                     <GradeOutlined className={styles.icon} />
