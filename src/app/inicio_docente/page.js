@@ -246,6 +246,7 @@ export default function Inicio_docente() {
                             }
                         </List>
                     </Paper>
+                    <div className={kanit.className}>Promedio de asistencias por asignatura</div>
                     <div style={LinearStyle}><Line data={data} />
                     </div>
                 </ThemeProvider>
