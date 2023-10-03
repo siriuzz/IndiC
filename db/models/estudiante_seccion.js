@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       })
       Estudiante_Seccion.belongsTo(models.Secciones, {
+        as: 'Secciones',
         foreignKey: {
           name: 'id_seccion',
           allowNull: false

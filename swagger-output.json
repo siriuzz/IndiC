@@ -139,6 +139,66 @@
             "description": "Internal Server Error"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "description": "Endpoint para actualizar un estudiante.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Actualización de la información del estudiante.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "oldPassword": {
+                  "type": "string",
+                  "example": "oldPassword"
+                },
+                "newPassword": {
+                  "type": "string",
+                  "example": "newPassword"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estudiante actualizado correctamente."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "oldPassword": {
+                    "example": "any"
+                  },
+                  "newPassword": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Estudiantes/upload": {
@@ -162,9 +222,6 @@
     },
     "/api/Admins": {
       "get": {
-        "tags": [
-          "Admins"
-        ],
         "description": "Endpoint para obtener todos los administradores.",
         "responses": {
           "200": {
@@ -188,9 +245,6 @@
         }
       },
       "post": {
-        "tags": [
-          "Admins"
-        ],
         "description": "",
         "responses": {
           "default": {
@@ -199,9 +253,6 @@
         }
       },
       "put": {
-        "tags": [
-          "Admins"
-        ],
         "description": "",
         "responses": {
           "default": {
@@ -210,9 +261,6 @@
         }
       },
       "patch": {
-        "tags": [
-          "Admins"
-        ],
         "description": "",
         "responses": {
           "default": {
@@ -223,9 +271,6 @@
     },
     "/api/Admins/{id}": {
       "get": {
-        "tags": [
-          "Admins"
-        ],
         "description": "Endpoint para obtener un Administrador por su ID.",
         "parameters": [
           {
@@ -255,6 +300,74 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Admins/upload": {
+      "post": {
+        "tags": [
+          "Admins"
+        ],
+        "description": "Endpoint para subir un archivo csv con los datos de los administradores.",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con los datos de los administradores.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Administradores creados correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Admin"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Admin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error al subir el archivo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al eliminar el archivo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
           }
         }
       }
@@ -394,6 +507,25 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Docentes/upload": {
+      "post": {
+        "tags": [
+          "Docentes"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -823,6 +955,29 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/api/Estudiante_Seccion/{id}": {
+      "get": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "Endpoint para obtener las secciones de un estudiante.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
