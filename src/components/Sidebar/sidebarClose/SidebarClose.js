@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from "./style.module.css";
 import { IconButton } from '@mui/material';
+import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.css'
 
 //icons
@@ -12,9 +13,6 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import EditOutlined from '@mui/icons-material/EditOutlined';
-import Link from 'next/link';
-
-
 
 export default function SidebarCloseEstudiante() {
     return (
@@ -59,7 +57,6 @@ export default function SidebarCloseEstudiante() {
                     </IconButton>
                 </Link>
 
-
             </div>
             <div class="mt-auto align-bottom" style={{ marginBottom: "15px" }}>
                 <IconButton className={styles.button}>
@@ -72,7 +69,6 @@ export default function SidebarCloseEstudiante() {
                     </IconButton>
                 </Link>
             </div>
-
         </div>
     )
 }
