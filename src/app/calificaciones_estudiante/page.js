@@ -14,6 +14,10 @@ import { TabPanel } from '@mui/base/TabPanel';
 import { buttonClasses } from '@mui/base/Button';
 import { Tab, tabClasses } from '@mui/base/Tab';
 import SearchBar from "@/components/SearchBar/SearchBarPequena";
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+
 import { Kanit } from "next/font/google";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -83,9 +87,9 @@ const blue = {
     700: '#0059B2',
     800: '#004C99',
     900: '#003A75',
-  };
-  
-  const grey = {
+};
+
+const grey = {
     50: '#f6f8fa',
     100: '#eaeef2',
     200: '#d0d7de',
@@ -96,22 +100,25 @@ const blue = {
     700: '#424a53',
     800: '#32383f',
     900: '#24292f',
-  };
-  
-  const StyledTab = styled(Tab)`
-    font-family: 'IBM Plex Sans', sans-serif;
+};
+
+const StyledTab = styled(Tab)`
     color: #fff;
     cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 400;
     background-color: transparent;
-    width: 100%;
+    width: 400px;
+    height: 45px;
     padding: 10px 12px;
     margin: 6px;
     border: 2px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
+    text-align: center;
+    font-size: 30px;
+    align-items: center;
+    fontfamily: Kanit, sans-serif;
 
   
     &:hover {
@@ -133,38 +140,75 @@ const blue = {
       cursor: not-allowed;
     }
   `;
-  
-  const StyledTabPanel = styled(TabPanel)(
+
+const StyledTabPanel = styled(TabPanel)(
     ({ theme }) => `
     width: 950px;
     font-family: Kanit, sans-serif;
     font-size: 0.875rem;
     padding: 20px 12px;
     background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-    border: 3px solid ${theme.palette.mode === 'dark' ? purple[50] : purple[50]};
+    border: 3.5px solid ${theme.palette.mode === 'dark' ? purple[50] : purple[50]};
     border-radius: 20px;
     opacity: 0.6;
     margin-left: 100px;
-    margin-top: 70px;
+    margin-top: 50px;
     `,
-  );
-  
-  const StyledTabsList = styled(TabsList)(
+);
+
+const StyledTabsList = styled(TabsList)(
     ({ theme }) => `
     min-width: 1000px;
+    height: 70px;
     background-color: ${purple[50]};
     border-radius: 40px;
-    margin-bottom: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     align-content: space-between;
-    box-shadow: 0px 4px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
+    box-shadow: 0px 8px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
     margin-left: 80px;
+    margin-top: 40px;
     `,
-  );
+);
 
-export default function Inicio_docente() {
+
+const listStyle = {
+    width: '1000px',
+    bgcolor: 'background.paper',
+    marginLeft: "-30px",
+    marginTop: "-20px",
+}
+
+
+const AsignaturasStyle = {
+    width: '800px',
+    height: '40px',
+    bgcolor: 'background.paper',
+    marginLeft: "0px",
+    marginTop: "3px",
+    fontWeight: "bold",
+}
+
+
+const CreditosSytle = {
+    width: '400px',
+    bgcolor: 'background.paper',
+    marginLeft: "0px",
+    marginTop: "10px",
+    textAlign: "center",
+    }
+
+
+const textCreditosStyle = {
+    fontFamily: "kanit", 
+    fontSize:"16px",
+    fontWeight: "bold",
+}
+
+
+
+export default function Calificaciones_Estudiante() {
 
     return (
         <div style={wallpaperStyle}>
@@ -180,19 +224,51 @@ export default function Inicio_docente() {
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
                                 <Tabs defaultValue={0}>
-                                <StyledTabsList>
-                                    <StyledTab value={0}>Finales</StyledTab>
-                                    <StyledTab value={1}>Medio Termino</StyledTab>
-                                </StyledTabsList>
-                                <StyledTabPanel value={0}>Finales</StyledTabPanel>
-                                <StyledTabPanel value={1}>Medio Termino</StyledTabPanel>
-                            </Tabs>
+                                    <StyledTabsList>
+                                        <StyledTab value={0}>Finales</StyledTab>
+                                        <StyledTab value={1}>Medio Termino</StyledTab>
+                                    </StyledTabsList>
+                                    <StyledTabPanel value={0}>
+                                        <ListItem style={listStyle}>
+                                            <ListItemAvatar>
+                                            </ListItemAvatar>
+                                            <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                            secondary={
+                                                <div>
+                                                    <span>Profesor/a:</span>
+                                                    <br style={{marginTop:"20px"}} />
+                                                    <span>Correo:</span>
+                                                </div>
+                                            }    />
+                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Creditos</span> secondary="2" />
+                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación Base</span> secondary="50" />
+                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación</span> secondary="49" />
+                                          </ListItem>
+                                          </StyledTabPanel>
+                                    <StyledTabPanel value={1}>
+                                    <ListItem style={listStyle}>
+                                            <ListItemAvatar>
+                                            </ListItemAvatar>
+                                            <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                            secondary={
+                                                <div>
+                                                    <span>Profesor/a:</span>
+                                                    <br style={{marginTop:"20px"}} />
+                                                    <span>Correo:</span>
+                                                </div>
+                                            }    />
+                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Creditos</span> secondary="2" />
+                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación Base</span> secondary="50" />
+                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación</span> secondary="49" />
+                                          </ListItem>
+                                    </StyledTabPanel>
+                                </Tabs>
                             </div>
                         </div>
                     </div>
                 </Paper>
                 <div style={divBuscarStyle}>
-                <SearchBar placeholder={"Buscar asignaturas"} />
+                    <SearchBar placeholder={"Buscar asignaturas"} />
                 </div>
             </Paper>
         </div>
