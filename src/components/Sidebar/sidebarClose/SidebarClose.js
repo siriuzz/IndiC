@@ -43,13 +43,17 @@ export default function SidebarCloseEstudiante() {
                     </IconButton>
                 </Link>
 
+                <Link href="/calificaciones_estudiante">
                 <IconButton className={styles.button}>
                     <GradeOutlined className={styles.icon} />
                 </IconButton>
+                </Link>
+
 
                 <IconButton className={styles.button}>
                     <SignalCellularAltIcon className={styles.icon} />
                 </IconButton>
+
 
                 <Link href="/cuenta_estudiante">
                     <IconButton className={styles.button}>
