@@ -185,7 +185,7 @@ const AsignaturasStyle = {
     width: '800px',
     height: '40px',
     bgcolor: 'background.paper',
-    marginLeft: "0px",
+    marginLeft: "30px",
     marginTop: "3px",
     fontWeight: "bold",
 }
@@ -230,8 +230,6 @@ export default function Calificaciones_Estudiante() {
                                     </StyledTabsList>
                                     <StyledTabPanel value={0}>
                                         <ListItem style={listStyle}>
-                                            <ListItemAvatar>
-                                            </ListItemAvatar>
                                             <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
                                             secondary={
                                                 <div>
@@ -247,8 +245,6 @@ export default function Calificaciones_Estudiante() {
                                           </StyledTabPanel>
                                     <StyledTabPanel value={1}>
                                     <ListItem style={listStyle}>
-                                            <ListItemAvatar>
-                                            </ListItemAvatar>
                                             <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
                                             secondary={
                                                 <div>
