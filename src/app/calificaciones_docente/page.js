@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
 import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
@@ -13,11 +13,15 @@ import { TabsList } from '@mui/base/TabsList';
 import { TabPanel } from '@mui/base/TabPanel';
 import { buttonClasses } from '@mui/base/Button';
 import { Tab, tabClasses } from '@mui/base/Tab';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 import { Kanit } from "next/font/google";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import EditIcon from "@mui/icons-material/EditOutlined";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -197,16 +201,42 @@ const EditButton = styled(Button)(({ theme }) => ({
         backgroundColor: "#a99b9b",
     },
     borderRadius: "20px",
-    marginLeft: "50px",
+    marginLeft: "0px",
     marginTop: "70px",
-    height: "50px",
-    width: " 50%px",
+    height: "40px",
+    width: " 40px",
 }));
 
+
+const EachStudentStyle = {
+    backgroundColor: "#f4eeff",
+    borderRadius: "20px",
+    width: "700px",
+    height: "70px",
+    justifySelf: "center",
+    marginLeft: "230px",
+    marginTop: "0px",
+    marginBottom: "10px",
+};
 
 
 
 export default function Calificaciones_Estudiante() {
+
+    const [displayEST, setDisplayEST] = useState("none");
+
+    const handleEstudiante = (event) => {
+        const isValid = regex.test(event.target.value);
+        if (!isValid) {
+            setDisplayEST("flex");
+        }
+        else {
+            setDisplayEST("none");
+        }
+        if (event.target.value === "") {
+            setDisplayEST("none");
+        }
+    };
 
     return (
         <div style={wallpaperStyle}>
@@ -242,9 +272,9 @@ export default function Calificaciones_Estudiante() {
 
                                         </ListItem>
                                         <IconButton style={{ marginLeft: "850px", marginTop: "-60px" }}>
-                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }}/>
+                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }} />
                                         </IconButton>
-                                        <EditButton variant="contained" style={{ marginTop: "-60px", marginLeft:"-140px" }}>
+                                        <EditButton variant="contained" style={{ marginTop: "-60px", marginLeft: "-125px" }}>
                                             <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
                                         </EditButton>
                                     </StyledTabPanel>
@@ -260,13 +290,31 @@ export default function Calificaciones_Estudiante() {
                                                 } />
                                         </ListItem>
                                         <IconButton style={{ marginLeft: "850px", marginTop: "-60px" }}>
-                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }}/>
+                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }} />
                                         </IconButton>
-                                        <EditButton variant="contained" style={{ marginTop: "-60px", marginLeft:"-140px" }}>
+                                        <EditButton style={{ marginTop: "-60px", marginLeft: "-125px" }}>
                                             <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
                                         </EditButton>
                                     </StyledTabPanel>
                                 </Tabs>
+                                <div style={EachStudentStyle}>
+                                    <ListItem>
+                                        <ListItemAvatar>
+                                            <Avatar style={{color:"black", background:"transparent"}}>
+                                                <AccountCircleOutlinedIcon style={{width:"38px", height:"38px"}} />
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText  primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
+                                                secondary={
+                                                    <div>
+                                                        <span>juandanielu@est.example.edu</span>
+                                                    </div>
+                                                } />
+                                    </ListItem>
+                                    <Button  style={{ marginTop: "-120px", marginLeft: "625px" }}>
+                                            <EditIcon style={{ height: "24", width: "24", color: "#6750a4" }} />
+                                    </Button>   
+                                </div>
                             </div>
                         </div>
                     </div>
