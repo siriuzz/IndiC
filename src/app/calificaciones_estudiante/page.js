@@ -107,8 +107,8 @@ const StyledTab = styled(Tab)`
     cursor: pointer;
     font-weight: 400;
     background-color: transparent;
-    width: 400px;
-    height: 45px;
+    width: 300px;
+    height: 40px;
     padding: 10px 12px;
     margin: 6px;
     border: 2px;
