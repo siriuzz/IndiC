@@ -20,8 +20,6 @@ import { Kanit } from "next/font/google";
 import theme from "../theme";
 import { useStyles } from "../layout";
 import axios from 'axios';
-import SidebarOpen from "@/components/Sidebar/sidebarOpen/sidebarOpen";
-import SidebarClose from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
 var jwt = require('jsonwebtoken');
 require('dotenv').config()
 
