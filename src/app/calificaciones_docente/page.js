@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
 import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -207,35 +207,28 @@ const EditButton = styled(Button)(({ theme }) => ({
     width: " 40px",
 }));
 
-
-const EachStudentStyle = {
-    backgroundColor: "#f4eeff",
-    borderRadius: "20px",
-    width: "700px",
-    height: "70px",
-    justifySelf: "center",
-    marginLeft: "230px",
-    marginTop: "0px",
-    marginBottom: "10px",
-};
-
-
-
 export default function Calificaciones_Estudiante() {
 
-    const [displayEST, setDisplayEST] = useState("none");
+    const [displayEST, setDisplayEST] = useState("flex");
 
     const handleEstudiante = (event) => {
-        const isValid = regex.test(event.target.value);
-        if (!isValid) {
+        if (displayEST == "none") {
             setDisplayEST("flex");
-        }
-        else {
+        } else {
             setDisplayEST("none");
         }
-        if (event.target.value === "") {
-            setDisplayEST("none");
-        }
+    };
+
+    const EachStudentStyle = {
+        display: displayEST,
+        backgroundColor: "#f4eeff",
+        borderRadius: "20px",
+        width: "700px",
+        height: "70px",
+        justifySelf: "center",
+        marginLeft: "230px",
+        marginTop: "0px",
+        marginBottom: "10px",
     };
 
     return (
@@ -247,7 +240,7 @@ export default function Calificaciones_Estudiante() {
                         <div style={divUserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
                             <div style={userInfoStyle}>
-                                Nombre y Apellido<div>ID</div>
+                                Nombre: Nombre y Apellido<div>Id: ID</div>
                                 <IconButton style={notificationsButtonStyle}>
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
@@ -271,7 +264,7 @@ export default function Calificaciones_Estudiante() {
                                             />
 
                                         </ListItem>
-                                        <IconButton style={{ marginLeft: "850px", marginTop: "-60px" }}>
+                                        <IconButton onClick={handleEstudiante} style={{ marginLeft: "850px", marginTop: "-60px" }}>
                                             <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }} />
                                         </IconButton>
                                         <EditButton variant="contained" style={{ marginTop: "-60px", marginLeft: "-125px" }}>
@@ -289,7 +282,7 @@ export default function Calificaciones_Estudiante() {
                                                     </div>
                                                 } />
                                         </ListItem>
-                                        <IconButton style={{ marginLeft: "850px", marginTop: "-60px" }}>
+                                        <IconButton onClick={handleEstudiante} style={{ marginLeft: "850px", marginTop: "-60px" }}>
                                             <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }} />
                                         </IconButton>
                                         <EditButton style={{ marginTop: "-60px", marginLeft: "-125px" }}>
@@ -300,20 +293,20 @@ export default function Calificaciones_Estudiante() {
                                 <div style={EachStudentStyle}>
                                     <ListItem>
                                         <ListItemAvatar>
-                                            <Avatar style={{color:"black", background:"transparent"}}>
-                                                <AccountCircleOutlinedIcon style={{width:"38px", height:"38px"}} />
+                                            <Avatar style={{ color: "black", background: "transparent" }}>
+                                                <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
                                             </Avatar>
                                         </ListItemAvatar>
-                                        <ListItemText  primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
-                                                secondary={
-                                                    <div>
-                                                        <span>juandanielu@est.example.edu</span>
-                                                    </div>
-                                                } />
+                                        <ListItemText primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
+                                            secondary={
+                                                <div>
+                                                    <span>juandanielu@est.example.edu</span>
+                                                </div>
+                                            } />
                                     </ListItem>
-                                    <Button  style={{ marginTop: "-120px", marginLeft: "625px" }}>
-                                            <EditIcon style={{ height: "24", width: "24", color: "#6750a4" }} />
-                                    </Button>   
+                                    <Button style={{ marginTop: "-120px", marginLeft: "625px" }}>
+                                        <EditIcon style={{ height: "24", width: "24", color: "#6750a4" }} />
+                                    </Button>
                                 </div>
                             </div>
                         </div>

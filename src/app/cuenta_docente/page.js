@@ -10,40 +10,39 @@ import Image from "next/image";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
 import Link from "next/link";
-import SidebarCloseEstudiante from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
+import SidebarDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
 import { useStyles } from "../layout";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
+const  editButtonStyle = {
+    borderRadius: "20px",
+    marginLeft: "-55px",
+    marginTop: "165px",
+    height: "35px",
+    width: " -20px",
+    backgroundColor: "#e4d1d1",
+};
+
+const buttonStyle = {
+    position: "absolute",
+    top: "50%", // Centra verticalmente el botón en relación con el contenedor
+    transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
+    backgroundColor: "#f2f2f2",
+    border: "solid",
+    color: "#424874",
+    marginTop: "-170px",
+    borderRadius: "50px",
+    padding: "10px 20px",
+    marginLeft: "700px",
+    height: "30x"
+};
+
 export default function Perfil() {
-
-    const  editButtonStyle = {
-        borderRadius: "20px",
-        marginLeft: "-55px",
-        marginTop: "165px",
-        height: "35px",
-        width: " -20px",
-        backgroundColor: "#e4d1d1",
-    };
-
-    const buttonStyle = {
-        position: "absolute",
-        top: "50%", // Centra verticalmente el botón en relación con el contenedor
-        transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
-        backgroundColor: "#f2f2f2",
-        border: "solid",
-        color: "#424874",
-        marginTop: "-170px",
-        borderRadius: "50px",
-        padding: "10px 20px",
-        zIndex: 1, // Coloca el botón por encima de la imagen
-        marginLeft: "700px",
-        height: "30x"
-    };
 
     return (
         <div className={styles.wallpaper}>
-            <SidebarCloseEstudiante />
+            <SidebarDocente />
             <Paper elevation={3}
                 style={useStyles.paperBig}>
 
@@ -60,7 +59,7 @@ export default function Perfil() {
                         <IconButton style={editButtonStyle} variant="contained">
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </IconButton>
-                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
+                        <div style={{ fontSize: "26px", marginLeft: "40px", marginTop: "70px" }}>
                             Nombre: Nombres y Apellidos<div>Id: ID<div>Estado: Estado</div></div>
                             <div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
