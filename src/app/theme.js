@@ -9,6 +9,7 @@ const theme = createTheme({
         secondary: {
             main: '#424874',
             label: '#939191',
+            input: '#f3f3f3',
         },
         background: {
             default: '#f4eeff',

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import SidebarCloseEstudiante from "@/components/Sidebar/sidebarClose/SidebarClose";
+import SidebarEstudiante from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante"
 import Paper from "@mui/material/Paper";
 import { useStyles } from "../layout";
 import SearchBar from "@/components/SearchBar/SearchBar";
@@ -45,7 +45,7 @@ export default function SeleccionarAsignaturasPage() {
 
     return (
         <div style={wallpaperStyle}>
-            <SidebarCloseEstudiante />
+            <SidebarEstudiante />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <AgreeCancelButtons />
                 <div style={SearchBarContainer}>

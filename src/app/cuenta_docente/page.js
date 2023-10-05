@@ -1,35 +1,30 @@
 "use client"
 import React from "react";
 import styles from "./page.module.css";
-import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
-import { Button, IconButton, colors } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import EditIcon from "@mui/icons-material/EditOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
-import { styled } from '@mui/material/styles';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
 import Link from "next/link";
+import SidebarCloseEstudiante from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
+import { useStyles } from "../layout";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
 export default function Perfil() {
 
-    const EditButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText("#e4d1d1"),
-        backgroundColor: "#e4d1d1",
-        '&:hover': {
-            backgroundColor: "#a99b9b",
-        },
+    const  editButtonStyle = {
         borderRadius: "20px",
         marginLeft: "-55px",
         marginTop: "165px",
         height: "35px",
         width: " -20px",
-    }));
-
+        backgroundColor: "#e4d1d1",
+    };
 
     const buttonStyle = {
         position: "absolute",
@@ -46,21 +41,11 @@ export default function Perfil() {
         height: "30x"
     };
 
-
-
     return (
         <div className={styles.wallpaper}>
-            <SidebarCloseDocente />
+            <SidebarCloseEstudiante />
             <Paper elevation={3}
-                style={{
-                    backgroundColor: "white",
-                    borderRadius: "40px",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    marginRight: "20px",
-                    height: "92.3vh",
-                    width: "100%",
-                }}>
+                style={useStyles.paperBig}>
 
                 <div className={styles.label}>
                     Bienvenido!
@@ -68,13 +53,13 @@ export default function Perfil() {
                         <NotificationsIcon style={{ height: "35px", width: "35px" }} />
                     </IconButton>
                 </div>
-                <Paper elevation={0} style={{}}>
+                <Paper elevation={0}>
                     <div style={{ display: "flex", flexDirection: "row" }}>
                         <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={130} width={130} style={{ marginLeft: "60px", marginTop: "60px" }}
                         />
-                        <EditButton variant="contained">
+                        <IconButton style={editButtonStyle} variant="contained">
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
-                        </EditButton>
+                        </IconButton>
                         <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
                             Nombre: Nombres y Apellidos<div>Id: ID<div>Estado: Estado</div></div>
                             <div>

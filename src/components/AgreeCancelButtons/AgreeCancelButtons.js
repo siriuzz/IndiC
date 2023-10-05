@@ -32,7 +32,7 @@ const CancelarStyle = {
 export default function AgreeCancelButtons() {
     return (
         <div style={divContainerStyle}>
-            <Button className={kanit.className} style={GuardarStyle}variant="contained">
+            <Button className={kanit.className} style={GuardarStyle} variant="contained">
                 Guardar
             </Button>
             <Button className={kanit.className} style={CancelarStyle} variant="contained">
