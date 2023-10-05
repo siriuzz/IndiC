@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect } from "react";
-import SidebarCloseEstudiante from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
-import { IconButton } from "@mui/material";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
+import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
 import Paper from "@mui/material/Paper";
@@ -13,12 +13,12 @@ import { TabsList } from '@mui/base/TabsList';
 import { TabPanel } from '@mui/base/TabPanel';
 import { buttonClasses } from '@mui/base/Button';
 import { Tab, tabClasses } from '@mui/base/Tab';
-import SearchBar from "@/components/SearchBar/SearchBarPequena";
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-
 import { Kanit } from "next/font/google";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import EditIcon from "@mui/icons-material/EditOutlined";
+
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -190,21 +190,19 @@ const AsignaturasStyle = {
     fontWeight: "bold",
 }
 
+const EditButton = styled(Button)(({ theme }) => ({
+    color: "#e4d1d1",
+    backgroundColor: "#e4d1d1",
+    '&:hover': {
+        backgroundColor: "#a99b9b",
+    },
+    borderRadius: "20px",
+    marginLeft: "50px",
+    marginTop: "70px",
+    height: "50px",
+    width: " 50%px",
+}));
 
-const CreditosSytle = {
-    width: '400px',
-    bgcolor: 'background.paper',
-    marginLeft: "0px",
-    marginTop: "10px",
-    textAlign: "center",
-    }
-
-
-const textCreditosStyle = {
-    fontFamily: "kanit", 
-    fontSize:"16px",
-    fontWeight: "bold",
-}
 
 
 
@@ -212,7 +210,7 @@ export default function Calificaciones_Estudiante() {
 
     return (
         <div style={wallpaperStyle}>
-            <SidebarCloseEstudiante />
+            <SidebarCloseDocente />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <Paper elevation={0} style={paperStyle}>
                     <div style={{ display: "flex" }}>
@@ -230,42 +228,49 @@ export default function Calificaciones_Estudiante() {
                                     </StyledTabsList>
                                     <StyledTabPanel value={0}>
                                         <ListItem style={listStyle}>
-                                            <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                            secondary={
-                                                <div>
-                                                    <span>Profesor/a:</span>
-                                                    <br style={{marginTop:"20px"}} />
-                                                    <span>Correo:</span>
-                                                </div>
-                                            }    />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Creditos</span> secondary="2" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación Base</span> secondary="50" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación</span> secondary="49" />
-                                          </ListItem>
-                                          </StyledTabPanel>
+
+                                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                                secondary={
+                                                    <div>
+                                                        <span>Profesor/a:</span>
+                                                        <br style={{ marginTop: "20px" }} />
+                                                        <span>Correo:</span>
+                                                    </div>
+
+                                                }
+                                            />
+
+                                        </ListItem>
+                                        <IconButton style={{ marginLeft: "850px", marginTop: "-60px" }}>
+                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }}/>
+                                        </IconButton>
+                                        <EditButton variant="contained" style={{ marginTop: "-60px", marginLeft:"-140px" }}>
+                                            <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                        </EditButton>
+                                    </StyledTabPanel>
                                     <StyledTabPanel value={1}>
-                                    <ListItem style={listStyle}>
-                                            <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                            secondary={
-                                                <div>
-                                                    <span>Profesor/a:</span>
-                                                    <br style={{marginTop:"20px"}} />
-                                                    <span>Correo:</span>
-                                                </div>
-                                            }    />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Creditos</span> secondary="2" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación Base</span> secondary="50" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación</span> secondary="49" />
-                                          </ListItem>
+                                        <ListItem style={listStyle}>
+                                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                                secondary={
+                                                    <div>
+                                                        <span>Profesor/a:</span>
+                                                        <br style={{ marginTop: "20px" }} />
+                                                        <span>Correo:</span>
+                                                    </div>
+                                                } />
+                                        </ListItem>
+                                        <IconButton style={{ marginLeft: "850px", marginTop: "-60px" }}>
+                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }}/>
+                                        </IconButton>
+                                        <EditButton variant="contained" style={{ marginTop: "-60px", marginLeft:"-140px" }}>
+                                            <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                        </EditButton>
                                     </StyledTabPanel>
                                 </Tabs>
                             </div>
                         </div>
                     </div>
                 </Paper>
-                <div style={divBuscarStyle}>
-                    <SearchBar placeholder={"Buscar asignaturas"} />
-                </div>
             </Paper>
         </div>
     );

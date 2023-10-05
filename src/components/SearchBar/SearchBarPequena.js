@@ -14,9 +14,9 @@ const style = {
     fontSize: "16px",
     height: "50px",
     paddingLeft: "15px",
-    width: "330px",
+    width: "300px",
     marginLeft: "200px",
-    marginTop: "50px",
+    marginTop: "-50px",
 };
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] }) // Se usa para usar la fuente Kanit en los elementos que no se le aplica por defecto
