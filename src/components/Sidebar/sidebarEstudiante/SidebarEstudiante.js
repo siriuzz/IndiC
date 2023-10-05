@@ -6,7 +6,7 @@ import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.css'
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import theme from '@/app/theme';
-import { Kanit } from "next/font/google";
+import {Kanit} from "next/font/google";
 import Paper from '@mui/material/Paper';
 
 //icons
@@ -88,7 +88,7 @@ export default function SidebarCloseEstudiante() {
         }
     };
 
-    const spanStyle = {
+    const divStyle = {
         display: display,
         color: "black",
         fontSize: "18px",
@@ -154,7 +154,7 @@ export default function SidebarCloseEstudiante() {
                             alt="Logo app"
                         />
                     </div>
-                    <span style={labelStyle}>Indi<span style={cStyle}>C</span></span>
+                    <div style={labelStyle}>Indi<div style={cStyle}>C</div></div>
                 </div>
 
                 <hr
@@ -172,35 +172,35 @@ export default function SidebarCloseEstudiante() {
                     <Link href="/inicio_estudiante">
                         <Button style={buttonStyle} variant={contained}>
                             <HomeOutlined style={iconStyle} />
-                            <span className={kanit.className} style={spanStyle}>Inicio</span>
+                            <div style={divStyle}>Inicio</div>
                         </Button>
                     </Link>
 
                     <Link href="/calificaciones_estudiantes">
                         <Button style={buttonStyle2} variant={contained}>
                             <GradeOutlined style={iconStyle} />
-                            <span className={kanit.className} style={spanStyle}>Calificaciones</span>
+                            <div style={divStyle}>Calificaciones</div>
                         </Button>
                     </Link>
 
                     <Link href="/calculadora">
                         <Button style={buttonStyle2} variant={contained}>
                             <SignalCellularAltIcon style={iconStyle} />
-                            <span className={kanit.className} style={spanStyle}>Calculadora de indice</span>
+                            <div style={divStyle}>Calculadora de indice</div>
                         </Button>
                     </Link>
 
                     <Link href="/seleccionar_asignaturas">
                         <Button style={buttonStyle2} variant={contained}>
                             <EditOutlined style={iconStyle} />
-                            <span className={kanit.className} style={spanStyle}>Selección</span>
+                            <div style={divStyle}>Selección</div>
                         </Button>
                     </Link>
 
                     <Link href="/cuenta_estudiante">
                         <Button style={buttonStyle2} variant={contained}>
                             <PeopleAltOutlinedIcon style={iconStyle} />
-                            <span className={kanit.className} style={spanStyle}>Cuenta</span>
+                            <div style={divStyle}>Cuenta</div>
                         </Button>
                     </Link>
                 </div>
@@ -209,13 +209,13 @@ export default function SidebarCloseEstudiante() {
                     <Link href="/configuracion_estudiante">
                         <Button style={buttonStyle2} variant={contained}>
                             <SettingsOutlinedIcon style={iconStyle} />
-                            <span className={kanit.className} style={spanStyle}>Configuración</span>
+                            <div style={divStyle}>Configuración</div>
                         </Button>
                     </Link>
                     <Link href="/login">
                         <Button style={buttonStyle2} variant={contained}>
                             <ExitToAppOutlinedIcon style={iconStyle} />
-                            <span className={kanit.className} style={spanStyle}>Salir</span>
+                            <div style={divStyle}>Salir</div>
                         </Button>
                     </Link>
                 </div>
