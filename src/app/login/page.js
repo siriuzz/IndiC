@@ -20,6 +20,8 @@ import { Kanit } from "next/font/google";
 import theme from "../theme";
 import { useStyles } from "../layout";
 import axios from 'axios';
+import SidebarOpen from "@/components/Sidebar/sidebarOpen/sidebarOpen";
+import SidebarClose from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
 var jwt = require('jsonwebtoken');
 require('dotenv').config()
 
@@ -34,7 +36,7 @@ const wallpaperStyle = {
     minHeight: "100vh",
     minWidth: "100vw",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "",
 }; //constante que contiene el estilo del fondo de pantalla
 
 const correoInputStyle = {
@@ -94,7 +96,7 @@ export default function Login() {
     const [password, setPassword] = useState(""); // hooks para el input de contraseña
     const [displayEML, setDisplayEML] = useState("none"); // hooks para desplegar el error de correo invalido
     const [displayPWD, setDisplayPWD] = useState("none"); // hooks para desplegar el error de contraseña invalida
-    const regex = /^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/;
+    const regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9][a-zA-Z0-9]+$/;
 
     const handleChangeCorreo = (event) => {
         const isValid = regex.test(event.target.value);
@@ -133,7 +135,6 @@ export default function Login() {
             localStorage.setItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`, response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             if (response.data.user.rol === 'Estudiante') {
-
                 console.log("redireccionando estudiante");
                 window.location.href = "/inicio_estudiante";
             }
@@ -239,7 +240,6 @@ export default function Login() {
                                 {isLoading ? 'Cargando...' : 'Iniciar Sesión'}</Button>
                         </FormGroup>
                     </form>
-
                 </ThemeProvider>
             </Paper>
         </div>
