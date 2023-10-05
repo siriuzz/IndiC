@@ -57,6 +57,34 @@ const calcularIndice = async (req, res) => {
     }
 }
 
+const calcularIndicePorPeriodo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { periodo, year } = req.query;
+        if (!(id && periodo && year)) {
+            return { error: "Faltan parámetros" };
+        }
+
+        const calificaciones = await Estudiante_Seccion.findAll({
+            where: {
+                id_estudiante: id,
+                periodo: periodo,
+                year: year
+            },
+            include: [{
+                model: Secciones,
+                as: 'Secciones',
+                include: {
+                    model: Asignatura
+                }
+            }]
+        })
+        return calificaciones;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 
 const createEstudianteSeccionFromCsv = async (row) => {
     try {
@@ -70,5 +98,6 @@ const createEstudianteSeccionFromCsv = async (row) => {
 module.exports = {
     getEstudianteSeccion,
     createEstudianteSeccionFromCsv,
-    calcularIndice
+    calcularIndice,
+    calcularIndicePorPeriodo
 }

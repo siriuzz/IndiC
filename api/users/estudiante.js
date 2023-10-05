@@ -44,6 +44,7 @@ router.get('/Estudiantes', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 });
+
 router.get('/Estudiantes/:id', async (req, res) => {
 
     // #swagger.description = 'Endpoint para obtener un estudiante.'

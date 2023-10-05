@@ -17,13 +17,20 @@ module.exports = (sequelize, DataTypes) => {
       //     allowNull: false
       //   }
       // })
+      Horario.belongsTo(models.Secciones, {
+        foreignKey: {
+          name: 'id_seccion',
+          allowNull: false
+        }
+      })
     }
   }
   Horario.init({
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false, unique: true },
     dia: { type: DataTypes.INTEGER, allowNull: false },
     hora_inicio: { type: DataTypes.INTEGER, allowNull: false },
-    hora_fin: { type: DataTypes.INTEGER, allowNull: false }
+    hora_fin: { type: DataTypes.INTEGER, allowNull: false },
+    id_seccion: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     sequelize,
     modelName: 'Horario',
