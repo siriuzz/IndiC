@@ -6,7 +6,7 @@ import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.css'
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import theme from '@/app/theme';
-import {Kanit} from "next/font/google";
+import { Kanit } from "next/font/google";
 import Paper from '@mui/material/Paper';
 
 //icons
@@ -18,9 +18,9 @@ import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import EditOutlined from '@mui/icons-material/EditOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
-    const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
+const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
-    const menuButtonStyle = {
+const menuButtonStyle = {
     marginTop: "0.5rem",
     color: "black",
     padding: "0.5rem 0.5rem",
@@ -35,10 +35,10 @@ const iconStyles = {
 const logoContainerStyle = {
     display: "flex",
     marginRight: "10px",
-    marginTop: "30px",
+    marginLeft: "5px",
+    marginTop: "10px",
     justifyContent: "center",
 };
-
 
 const iconStyle = {
     display: "flex",
@@ -63,6 +63,7 @@ export default function SidebarCloseEstudiante() {
     const [contained, setContained] = React.useState("");
     const [border, setBorder] = React.useState("");
     const [elevation, setElevation] = React.useState(0);
+    const [mbhr,setMbhr] = React.useState("45px");
 
     const toggleSidebar = () => {
         if (collapsed === "280px") {
@@ -73,6 +74,7 @@ export default function SidebarCloseEstudiante() {
             setBorder("");
             setContained("");
             setElevation(0);
+            setMbhr("45px");
         }
         else {
             setCollapsed("280px");
@@ -82,6 +84,7 @@ export default function SidebarCloseEstudiante() {
             setContained("contained");
             setBorder("2px solid #a681e1");
             setElevation(3);
+            setMbhr("15px");
         }
     };
 
@@ -114,6 +117,17 @@ export default function SidebarCloseEstudiante() {
         marginTop: "10px"
     };
 
+    const labelStyle = {
+        display: display,
+        fontSize: "30px",
+        marginLeft: "6rem"
+    };
+
+    const cStyle = {
+        display: display,
+        color: theme.palette.primary.main
+    };
+
     return (
         <Paper elevation={elevation} style={{
             display: "flex",
@@ -140,6 +154,7 @@ export default function SidebarCloseEstudiante() {
                             alt="Logo app"
                         />
                     </div>
+                    <span style={labelStyle}>Indi<span style={cStyle}>C</span></span>
                 </div>
 
                 <hr
@@ -148,8 +163,8 @@ export default function SidebarCloseEstudiante() {
                         height: 1.5,
                         width: "93%",
                         justifySelf: "center",
-                        marginTop: "20px",
-                        marginBottom: "20px"
+                        marginTop: "5px",
+                        marginBottom: mbhr
                     }}
                 ></hr>
 
