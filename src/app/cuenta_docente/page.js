@@ -10,7 +10,7 @@ import Image from "next/image";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
 import Link from "next/link";
-import SidebarDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
+import SidebarDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
 import { useStyles } from "../layout";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })

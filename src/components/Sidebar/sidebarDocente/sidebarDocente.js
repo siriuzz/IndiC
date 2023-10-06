@@ -54,7 +54,7 @@ const bottomdivStyle = {
     marginBottom: "1rem"
 };
 
-export default function SidebarCloseEstudiante() {
+export default function SidebarDocente() {
 
     const [collapsed, setCollapsed] = React.useState("75px");
     const [display, setDisplay] = React.useState("none");
