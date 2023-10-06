@@ -126,18 +126,18 @@ export default function Inicio_docente() {
 
 
 
-    // useEffect(() => {
-    //     setValue(dayjs());
-    //     setProfesor(JSON.parse(localStorage.getItem("user")));
-    //     axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`) }).then((response) => {
-    //         // console.log("this is the data");
-    //     }).catch((error) => {
-    //         console.log(error);
-    //         localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
-    //         window.location.href = '/login';
-    //     });
-    //     // console.log(profesor);
-    // }, []);
+    useEffect(() => {
+        setValue(dayjs());
+        setProfesor(JSON.parse(localStorage.getItem("user")));
+        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`) }).then((response) => {
+            // console.log("this is the data");
+        }).catch((error) => {
+            console.log(error);
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
+            window.location.href = '/login';
+        });
+        // console.log(profesor);
+    }, []);
 
     const [data, setData] = useState({
         labels: ["IDS323", "IDS311", "IDS326", "IDS325", "IDS323L"],
