@@ -6,7 +6,7 @@ import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.css'
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import theme from '@/app/theme';
-import {Kanit} from "next/font/google";
+import { Kanit } from "next/font/google";
 import Paper from '@mui/material/Paper';
 
 //icons
@@ -63,7 +63,7 @@ export default function SidebarCloseEstudiante() {
     const [contained, setContained] = React.useState("");
     const [border, setBorder] = React.useState("");
     const [elevation, setElevation] = React.useState(0);
-    const [mbhr,setMbhr] = React.useState("45px");
+    const [mbhr, setMbhr] = React.useState("45px");
 
     const toggleSidebar = () => {
         if (collapsed === "280px") {
@@ -176,7 +176,7 @@ export default function SidebarCloseEstudiante() {
                         </Button>
                     </Link>
 
-                    <Link href="/calificaciones_estudiantes">
+                    <Link href="/calificaciones_estudiante">
                         <Button style={buttonStyle2} variant={contained}>
                             <GradeOutlined style={iconStyle} />
                             <div style={divStyle}>Calificaciones</div>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.css'
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import theme from '@/app/theme';
-import {Kanit} from "next/font/google";
+import { Kanit } from "next/font/google";
 import Paper from '@mui/material/Paper';
 
 //icons
@@ -63,7 +63,7 @@ export default function SidebarDocente() {
     const [contained, setContained] = React.useState("");
     const [border, setBorder] = React.useState("");
     const [elevation, setElevation] = React.useState(0);
-    const [mbhr,setMbhr] = React.useState("75px");
+    const [mbhr, setMbhr] = React.useState("75px");
 
     const toggleSidebar = () => {
         if (collapsed === "280px") {
@@ -169,21 +169,21 @@ export default function SidebarDocente() {
                 ></hr>
 
                 <div>
-                    <Link href="/inicio_estudiante">
+                    <Link href="/inicio_docente">
                         <Button style={buttonStyle} variant={contained}>
                             <HomeOutlined style={iconStyle} />
                             <div style={divStyle}>Inicio</div>
                         </Button>
                     </Link>
 
-                    <Link href="/calificaciones_estudiantes">
+                    <Link href="/calificaciones_docente">
                         <Button style={buttonStyle2} variant={contained}>
                             <GradeOutlined style={iconStyle} />
                             <div style={divStyle}>Calificaciones</div>
                         </Button>
                     </Link>
 
-                    <Link href="/cuenta_estudiante">
+                    <Link href="/cuenta_docente">
                         <Button style={buttonStyle2} variant={contained}>
                             <PeopleAltOutlinedIcon style={iconStyle} />
                             <div style={divStyle}>Cuenta</div>
@@ -192,7 +192,7 @@ export default function SidebarDocente() {
                 </div>
 
                 <div style={bottomdivStyle} >
-                    <Link href="/configuracion_estudiante">
+                    <Link href="/configuracion_docente">
                         <Button style={buttonStyle2} variant={contained}>
                             <SettingsOutlinedIcon style={iconStyle} />
                             <div style={divStyle}>Configuración</div>

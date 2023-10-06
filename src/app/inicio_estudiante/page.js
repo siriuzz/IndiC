@@ -207,8 +207,6 @@ export default function Perfil() {
                         indice: avg.toFixed(2)
                     });
 
-
-
                     if (i === ultimoPeriodo - 2) break;
                 }
                 setPeriodos(periodos);
@@ -288,7 +286,7 @@ export default function Perfil() {
                             <div style={useStyles.divlinearProgressHead}>
                                 {periodo.indice * 4 / 100}/4.00
                                 <LinearProgress style={useStyles.linearProgress} variant="determinate" value={periodo.indice} />
-                                {periodo.periodo + " - " + periodo.year}
+                                Período: {periodo.periodo} | Año:  {periodo.year}
 
                             </div>
                         ))}

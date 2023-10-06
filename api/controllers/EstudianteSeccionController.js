@@ -1,4 +1,4 @@
-const { Estudiante_Seccion, Secciones, Asignatura } = require('../../db/models'); // Importa los modelos necesarios
+const { Estudiante_Seccion, Secciones, Asignatura, Docente } = require('../../db/models'); // Importa los modelos necesarios
 
 
 const getEstudianteSeccion = async (req, res) => {
@@ -7,6 +7,40 @@ const getEstudianteSeccion = async (req, res) => {
         return res.status(200).json({ estudianteSeccion });
     } catch (error) {
         return res.status(500).send(error.message);
+    }
+}
+
+const getEstudianteSeccionByIdAndPeriod = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { periodo } = req.query;
+        if (!(id && periodo)) {
+            return { error: "Faltan parámetros" };
+        }
+
+        const estudiante_seccion = await Estudiante_Seccion.findAll({
+            where: {
+                id_estudiante: id,
+                periodo_estudiante: periodo
+            },
+            include: [{
+                model: Secciones,
+                as: 'Secciones',
+                include: [{
+                    model: Asignatura,
+                    as: 'Asignatura',
+                    attributes: ['nombre', 'codigo', 'creditos']
+                },
+                {
+                    model: Docente,
+                    as: 'Docente',
+                    attributes: ['nombre', 'correo']
+                }]
+            }]
+        })
+        return estudiante_seccion;
+    } catch (error) {
+        return error.message;
     }
 }
 
@@ -96,5 +130,6 @@ module.exports = {
     getEstudianteSeccion,
     createEstudianteSeccionFromCsv,
     calcularIndice,
-    calcularIndicePorPeriodo
+    calcularIndicePorPeriodo,
+    getEstudianteSeccionByIdAndPeriod
 }
