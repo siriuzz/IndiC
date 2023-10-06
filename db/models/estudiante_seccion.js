@@ -31,13 +31,14 @@ module.exports = (sequelize, DataTypes) => {
     id_seccion: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false },
     calificacion_mt: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 40 },
     calificacion_final: { type: DataTypes.INTEGER, allowNull: false },
-    periodo: { type: DataTypes.INTEGER, allowNull: false },
+    periodo_year: { type: DataTypes.INTEGER, allowNull: false },
     year: { type: DataTypes.INTEGER, allowNull: false },
+    periodo_estudiante: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     sequelize,
     modelName: 'Estudiante_Seccion',
     freezeTableName: true,
   });
-  // Estudiante_Seccion.sync();
+  // sequelize.sync();
   return Estudiante_Seccion;
 };

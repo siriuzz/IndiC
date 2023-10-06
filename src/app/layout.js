@@ -32,7 +32,8 @@ export const useStyles = {
   divlinearProgressHead: {
     width: "280px",
     marginLeft: "50px",
-    marginTop: "-70px",
+    // paddingBottom: "100px",
+
     fontSize: "20px",
   },
   divlinearProgress: {

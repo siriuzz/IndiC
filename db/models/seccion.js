@@ -58,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     aula: { type: DataTypes.STRING, allowNull: false },
     is_active: { type: DataTypes.BOOLEAN, allowNull: false },
     calificacion_base_mt: { type: DataTypes.INTEGER, allowNull: false },
+    cupo: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 40 }
   }, {
     sequelize,
     modelName: 'Secciones',

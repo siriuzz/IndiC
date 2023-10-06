@@ -60,16 +60,13 @@ const calcularIndice = async (req, res) => {
 const calcularIndicePorPeriodo = async (req, res) => {
     try {
         const { id } = req.params;
-        const { periodo, year } = req.query;
-        if (!(id && periodo && year)) {
+        if (!(id)) {
             return { error: "Faltan parámetros" };
         }
 
         const calificaciones = await Estudiante_Seccion.findAll({
             where: {
                 id_estudiante: id,
-                periodo: periodo,
-                year: year
             },
             include: [{
                 model: Secciones,

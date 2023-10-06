@@ -14,6 +14,7 @@ import theme from "../theme";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Container from "@mui/material/Container";
 // const checkTokenValidity = require("@/utils/jwtValidation").checkTokenValidity;
 
 
@@ -155,9 +156,9 @@ export default function Perfil() {
     // const [periodosCursados, setPeriodosCursados] = useState(0);
     const [estudiante, setEstudiante] = useState({});
     const [carrera, setCarrera] = useState({});//[{}]
-    const [asignaturasAprobadas, setAsignaturasAprobadas] = useState(0);
     // const [periodosTotales, setPeriodosTotales] = useState(0);
-    const [asignaturasTotales, setAsignaturasTotales] = useState(0);
+    const [periodos, setPeriodos] = useState([]);//[{}]
+
 
     useEffect(() => {
         // const storedEstudiante = JSON.parse(localStorage.getItem('user'));
@@ -173,7 +174,6 @@ export default function Perfil() {
                 // console.log(estudiante);
                 setEstudiante(user);
                 setCarrera(user.carrera);
-                console.log(user);
                 // setId(estudiante.id);
                 // setNombre(estudiante.nombre);
                 // setIndice(estudiante.indice_general);
@@ -188,12 +188,42 @@ export default function Perfil() {
                 // setAsignaturasAprobadas(estudiante.asignaturas_aprobadas);
 
             };
+            axios.get(`http://${apiURL}/api/Estudiante_Seccion/CalcularIndicePorPeriodo/${user.id}`).then((response) => {
+                // console.log(response);
+                const ultimoPeriodo = user.periodos_cursados - 1;
+                const periodos = [];
+                for (let i = ultimoPeriodo; i >= 0; i--) {
+                    let seccionesPeriodo = [];
+                    for (let j = 0; j < response.data.length; j++) {
+                        // console.log(response.data[j].periodo_estudiante);
+                        if (response.data[j].periodo_estudiante !== i) continue;
+                        seccionesPeriodo.push(response.data[j]);
+                    }
+                    const sum = seccionesPeriodo.reduce((accumulator, obj) => accumulator + obj.calificacion_final, 0);
+                    const avg = sum / seccionesPeriodo.length;
+                    periodos.push({
+                        periodo: i,
+                        year: seccionesPeriodo[0].year,
+                        indice: avg.toFixed(2)
+                    });
+
+
+
+                    if (i === ultimoPeriodo - 2) break;
+                }
+                setPeriodos(periodos);
+            });
+            console.log(periodos);
 
         }).catch((error) => {
             console.log(error);
             localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
             window.location.href = '/login';
         });
+
+
+
+
 
         // console.log(token);
         // Send a request to your server to validate the token
@@ -251,7 +281,18 @@ export default function Perfil() {
                             <div style={divIndiceTextStyle}>Índice General</div>
                         </div>
                     </div>
-                    <div style={useStyles.divlinearProgressHead}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignContent: "space-between", flexDirection: "column", height: "45%", marginTop: "-55px" }}>
+
+                        {periodos.map((periodo) => (
+                            <div style={useStyles.divlinearProgressHead}>
+                                {periodo.indice * 4 / 100}/4.00
+                                <LinearProgress style={useStyles.linearProgress} variant="determinate" value={periodo.indice} />
+                                {periodo.periodo + " - " + periodo.year}
+
+                            </div>
+                        ))}
+                    </div>
+                    {/* <div style={useStyles.divlinearProgressHead}>
                         3.88/4
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Mayo-Julio 2023
@@ -265,15 +306,18 @@ export default function Perfil() {
                         3.88/4
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Noviembre-Febrero 2023
+                    </div> */}
+                    <div>
+
+                        <Paper elevation={3} style={paperPeriodosStyle}>
+                            {estudiante.periodos_cursados}/{carrera.periodos_totales}
+                            <div style={paperFontStyle}>Periodos cursados</div>
+                        </Paper>
+                        <Paper elevation={3} style={paperAsignaturasStyle}>
+                            {estudiante.asignaturas_aprobadas}/{carrera.asignaturas_totales}
+                            <div style={paperFontStyle}>Asignaturas aprobadas</div>
+                        </Paper>
                     </div>
-                    <Paper elevation={3} style={paperPeriodosStyle}>
-                        {estudiante.periodos_cursados}/{carrera.periodos_totales}
-                        <div style={paperFontStyle}>Periodos cursados</div>
-                    </Paper>
-                    <Paper elevation={3} style={paperAsignaturasStyle}>
-                        {estudiante.asignaturas_aprobadas}/{carrera.asignaturas_totales}
-                        <div style={paperFontStyle}>Asignaturas aprobadas</div>
-                    </Paper>
                 </ThemeProvider>
             </Paper>
         </div >
