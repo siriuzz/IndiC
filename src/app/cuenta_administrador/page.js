@@ -90,7 +90,9 @@ export default function Perfil() {
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
                         <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
+
                             Nombre: {user.nombre}<div>Id: {user.id}<div>Estado: {user.id_estado == 1 ? "Activo" : "Inactivo"}</div></div>
+
                             <div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo</div>
                                 <Link href="/" style={{ color: '#979797' }}>

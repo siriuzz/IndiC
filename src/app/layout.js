@@ -26,6 +26,7 @@ export const useStyles = {
     marginTop: "20px",
     marginBottom: "20px",
     marginRight: "20px",
+    marginLeft: "5rem",
     height: "94.3vh",
     width: "100%",
   },

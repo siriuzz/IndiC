@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import SidebarClose from "@/components/Sidebar/sidebarClose/SidebarClose";
+import SidebarClose from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
@@ -262,9 +262,9 @@ export default function Perfil() {
                                         </div>
                                     </div> */
                                     }
-                                    <div>{estudiante.nombre}</div>
-                                    <div>{estudiante.id}</div>
-                                    <div>{estudiante.carrera ? estudiante.carrera.carrera : " "}</div>
+                                    <div>Nombre: {" " + estudiante.nombre}</div>
+                                    <div>Id: {" " + estudiante.id}</div>
+                                    <div>Carrera: {" " + estudiante.carrera ? estudiante.carrera.carrera : " "}</div>
                                     {/* <div>{data.id}</div>
                                     <div>{data.id_carrera}</div> */}
                                 </div>
@@ -281,6 +281,7 @@ export default function Perfil() {
                             <div style={divIndiceTextStyle}>Índice General</div>
                         </div>
                     </div>
+
                     <div style={{ display: "flex", justifyContent: "space-between", alignContent: "space-between", flexDirection: "column", height: "45%", marginTop: "-55px" }}>
 
                         {periodos.map((periodo) => (
@@ -294,16 +295,20 @@ export default function Perfil() {
                     </div>
                     {/* <div style={useStyles.divlinearProgressHead}>
                         3.88/4
+
+                    <div style={useStyles.divlinearProgressHead}>
+                        3.88/4.0
+
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Mayo-Julio 2023
                     </div>
                     <div style={useStyles.divlinearProgress}>
-                        3.88/4
+                        3.88/4.0
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Febrero-Abril 2023
                     </div>
                     <div style={useStyles.divlinearProgress}>
-                        3.88/4
+                        3.88/4.0
                         <LinearProgress style={useStyles.linearProgress} variant="determinate" value={95} />
                         Noviembre-Febrero 2023
                     </div> */}

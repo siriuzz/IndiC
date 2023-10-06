@@ -1,13 +1,46 @@
 import React from "react";
-import Image from "next/image";
-import styles from "./style.module.css";
 import Button from "@mui/material/Button";
+import theme from "@/app/theme";
+import HomeOutlined from "@mui/icons-material/HomeOutlined";
+import { ThemeProvider } from "@mui/material";
+import { Kanit } from "next/font/google";
+
+const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
+
+const buttonStyle = {
+    justifyContent: "left",
+    backgroundColor: "white",
+    color: "black",
+    borderRadius: "20px",
+    textTransform: "none",
+    width: "180px",
+    border: "1px solid",
+    borderColor: theme.palette.primary.main,
+};
+
+const iconStyle = {
+    display: "flex",
+    color: "black",
+    height: "35px",
+    width: "35px",
+    marginLeft: "-5px",
+};
+
+const spanStyle = {
+    display: "flex",
+    color: "black",
+    fontSize: "18px",
+    marginLeft: "5px",
+    marginTop: "3px"
+};
 
 export default function InicioButton() {
     return (
-        <Button className={styles.button}>
-            <Image className={styles.icon} src="https://github.com/JuanDanielU/DisBG/blob/main/icono-casa.png?raw=true" alt='Icono inicio' width={25} height={25} />
-            <div className={styles.text}>Inicio</div>
-        </Button>
+        <ThemeProvider theme={theme}>
+            <Button style={buttonStyle} variant="contained">
+                <HomeOutlined style={iconStyle} />
+                <span className={kanit.className} style={spanStyle}>Inicio</span>
+            </Button>
+        </ThemeProvider>
     )
 }

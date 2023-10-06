@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
 import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -175,8 +175,8 @@ export default function Inicio_docente() {
                         <div style={divUserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150} />
                             <div style={userInfoStyle}>
-                                {profesor.nombre}<br></br>
-                                {profesor.id}<div>{profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div>
+                                Nombre: {" " + profesor.nombre}<br></br>
+                                Id: {" " + profesor.id}<div>Estado: {" " + profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div>
                             </div>
                         </div>
                         <Paper elevation={2} style={CalendarStyle}>
@@ -246,6 +246,7 @@ export default function Inicio_docente() {
                             }
                         </List>
                     </Paper>
+                    <div className={kanit.className}>Promedio de asistencias por asignatura</div>
                     <div style={LinearStyle}><Line data={data} />
                     </div>
                 </ThemeProvider>
