@@ -29,10 +29,6 @@ router.get('/Estados', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).put('/Estados', (req, res) => {
-
-}).patch('/Estados', (req, res) => {
-
-});
+})
 
 module.exports = router;

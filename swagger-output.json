@@ -139,12 +139,14 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/api/Estudiantes/CambiarPassword/{id}": {
       "patch": {
         "tags": [
           "Estudiantes"
         ],
-        "description": "Endpoint para actualizar un estudiante.",
+        "description": "Endpoint para actualizar la contraseña de un estudiante.",
         "parameters": [
           {
             "name": "id",
@@ -206,7 +208,17 @@
         "tags": [
           "Estudiantes"
         ],
-        "description": "",
+        "description": "Endpoint para subir un archivo csv con los datos de los estudiantes.",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con los datos de los estudiantes.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -222,6 +234,9 @@
     },
     "/api/Admins": {
       "get": {
+        "tags": [
+          "Admins"
+        ],
         "description": "Endpoint para obtener todos los administradores.",
         "responses": {
           "200": {
@@ -243,34 +258,13 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
       }
     },
     "/api/Admins/{id}": {
       "get": {
+        "tags": [
+          "Admins"
+        ],
         "description": "Endpoint para obtener un Administrador por su ID.",
         "parameters": [
           {
@@ -381,6 +375,29 @@
         "responses": {
           "200": {
             "description": "Login exitoso."
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "correo": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -390,7 +407,7 @@
         "tags": [
           "Auth"
         ],
-        "description": "",
+        "description": "Endpoint para validar token.",
         "responses": {
           "200": {
             "description": "OK"
@@ -441,39 +458,6 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Docentes"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Docentes"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Docentes"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
       }
     },
     "/api/Docentes/{id}": {
@@ -489,6 +473,14 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con los datos de las carreras.",
+            "schema": {
+              "type": "file"
             }
           }
         ],
@@ -544,47 +536,24 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Asignaturas"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Asignaturas"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Asignaturas"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
       }
     },
     "/api/Asignaturas/upload": {
       "post": {
         "tags": [
-          "Asignatura"
+          "Asignaturas"
         ],
         "description": "Endpoint para crear asignaturas desde un archivo CSV.",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con los datos de las carreras.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Asignaturas creadas correctamente.",
@@ -618,21 +587,10 @@
         "tags": [
           "Carreras"
         ],
-        "description": "",
+        "description": "Endpoint para obtener todas las carreras.",
         "responses": {
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Carreras"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
@@ -642,7 +600,7 @@
         "tags": [
           "Carreras"
         ],
-        "description": "",
+        "description": "Endpoint para obtener una carrera por id.",
         "parameters": [
           {
             "name": "id",
@@ -666,9 +624,19 @@
     "/api/Carreras/upload": {
       "post": {
         "tags": [
-          "Carrera"
+          "Carreras"
         ],
         "description": "Endpoint para crear carreras desde un archivo CSV.",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con los datos de las carreras.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Carreras creadas correctamente.",
@@ -706,39 +674,6 @@
         "responses": {
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Configuracion calificaciones"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Configuracion calificaciones"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Configuracion calificaciones"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
@@ -779,28 +714,6 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "put": {
-        "tags": [
-          "Estados"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Estados"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
       }
     },
     "/api/Roles": {
@@ -839,28 +752,6 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "put": {
-        "tags": [
-          "Roles"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Roles"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
       }
     },
     "/api/Horarios": {
@@ -882,25 +773,20 @@
     "/api/Horarios/upload": {
       "post": {
         "tags": [
-          "Horario"
+          "Horarios"
         ],
         "description": "Endpoint para crear horarios desde un archivo CSV.",
-        "responses": {
-          "200": {
-            "description": "Horarios creados correctamente.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Horario"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Horario"
-                }
-              }
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Archivo csv con los datos de los horarios.",
+            "schema": {
+              "type": "file"
             }
-          },
+          }
+        ],
+        "responses": {
           "201": {
             "description": "Created"
           },
@@ -924,39 +810,6 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Estudiante_Seccion"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Estudiante_Seccion"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Estudiante_Seccion"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
       }
     },
     "/api/Estudiante_Seccion/{id}": {
@@ -973,9 +826,71 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "periodo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Estudiante_Seccion/calcularIndice/{id}": {
+      "get": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "Endpoint para obtener las secciones de un estudiante.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Estudiante_Seccion/CalcularIndicePorPeriodo/{id}": {
+      "get": {
+        "tags": [
+          "Estudiante_Seccion"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
           "500": {
             "description": "Internal Server Error"
           }

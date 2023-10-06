@@ -18,12 +18,16 @@ router.get('/Horarios', async (req, res) => {
 })
 
 router.post('/Horarios/upload', upload.single('csv'), async (req, res) => {
-    /* #swagger.tags = ['Horario']
+    /* #swagger.tags = ['Horarios']
     #swagger.description = 'Endpoint para crear horarios desde un archivo CSV.'
-    /*	#swagger.responses[200] = {
-            description: 'Horarios creados correctamente.',
-            schema: { $ref: "#/components/schemas/Horario" }
-    } */
+    #swagger.contentType = 'multipart/form-data'
+    #swagger.parameters['file'] = {
+            in: 'formData',
+            type: 'file',
+            description: 'Archivo csv con los datos de los horarios.'
+        }
+        } 
+    */
     try {
         const file = fs.createReadStream(req.file.path);
         config.complete = async function (results) {
