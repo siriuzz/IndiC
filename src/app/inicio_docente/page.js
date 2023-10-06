@@ -103,7 +103,7 @@ const AsignaturaStyle = {
     float: "right",
     marginRight: "60px",
     borderRadius: "10px",
-    marginTop: "20px",
+    marginTop: "10px",
     overflowY: "auto"
 };
 
