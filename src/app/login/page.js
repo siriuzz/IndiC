@@ -94,7 +94,7 @@ export default function Login() {
     const [password, setPassword] = useState(""); // hooks para el input de contraseña
     const [displayEML, setDisplayEML] = useState("none"); // hooks para desplegar el error de correo invalido
     const [displayPWD, setDisplayPWD] = useState("none"); // hooks para desplegar el error de contraseña invalida
-    const regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9][a-zA-Z0-9]+$/;
+    const regex = /^[a-zA-Z0-9.]*@[a-zA-Z0-9]+\.[a-zA-Z0-9][a-zA-Z0-9]+$/;
 
     const handleChangeCorreo = (event) => {
         const isValid = regex.test(event.target.value);

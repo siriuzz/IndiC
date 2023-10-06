@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SidebarCloseEstudiante from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
@@ -136,7 +136,7 @@ const StyledTab = styled(Tab)`
 
 const StyledTabPanel = styled(TabPanel)(
     ({ theme }) => `
-    width: 950px;
+    width: 90%;
     font-family: Kanit, sans-serif;
     font-size: 0.875rem;
     padding: 20px 12px;
@@ -199,58 +199,65 @@ const textCreditosStyle = {
     fontWeight: "bold",
 }
 
+
 export default function Calificaciones_Estudiante() {
+    const [user, setUser] = useState({});
+    const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        setUser(user);
+    }, []);
     return (
         <div style={wallpaperStyle}>
             <SidebarCloseEstudiante />
             <Paper elevation={3} style={useStyles.paperBig}>
-                        <div style={divUserStyle}>
-                            <div style={userInfoStyle}>
-                                <div style={{display: "inline-flex"}}>
-                                    <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
-                                    <div style={{marginLeft: "20px", marginTop: "10px"}}>Nombre: Nombre y Apellido<div>Id: ID</div></div>
-                                </div>
-                            </div>
-                            <IconButton style={notificationsButtonStyle}>
-                                <NotificationsIcon style={notificationsIconStyle} />
-                            </IconButton>
+                <div style={divUserStyle}>
+                    <div style={userInfoStyle}>
+                        <div style={{ display: "inline-flex" }}>
+                            <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
+                            <div style={{ marginLeft: "20px", marginTop: "10px" }}>Nombre: {user.nombre}<div>Id: {user.id}</div></div>
                         </div>
-                        <Tabs defaultValue={0} style={{width: "90%"}}>
-                            <StyledTabsList>
-                                <StyledTab value={0}>Finales</StyledTab>
-                                <StyledTab value={1}>Medio Termino</StyledTab>
-                            </StyledTabsList>
-                            <StyledTabPanel style={{width: "90%"}} value={0}>
-                                <ListItem style={listStyle}>
-                                    <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                        secondary={
-                                            <div>
-                                                <span>Profesor/a:</span>
-                                                <br style={{ marginTop: "20px" }} />
-                                                <span>Correo:</span>
-                                            </div>
-                                        } />
-                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
-                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
-                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
-                                </ListItem>
-                            </StyledTabPanel>
-                            <StyledTabPanel value={1}>
-                                <ListItem style={listStyle}>
-                                    <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                        secondary={
-                                            <div>
-                                                <span>Profesor/a:</span>
-                                                <br style={{ marginTop: "20px" }} />
-                                                <span>Correo:</span>
-                                            </div>
-                                        } />
-                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
-                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
-                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
-                                </ListItem>
-                            </StyledTabPanel>
-                        </Tabs>
+                    </div>
+                    <IconButton style={notificationsButtonStyle}>
+                        <NotificationsIcon style={notificationsIconStyle} />
+                    </IconButton>
+                </div>
+                <Tabs defaultValue={0} style={{ width: "90%" }}>
+                    <StyledTabsList>
+                        <StyledTab value={0}>Finales</StyledTab>
+                        <StyledTab value={1}>Medio Termino</StyledTab>
+                    </StyledTabsList>
+                    <StyledTabPanel style={{ width: "90%" }} value={0}>
+                        <ListItem style={listStyle}>
+                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                secondary={
+                                    <div>
+                                        <span>Profesor/a:</span>
+                                        <br style={{ marginTop: "20px" }} />
+                                        <span>Correo:</span>
+                                    </div>
+                                } />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
+                        </ListItem>
+                    </StyledTabPanel>
+                    <StyledTabPanel value={1}>
+                        <ListItem style={listStyle}>
+                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                secondary={
+                                    <div>
+                                        <span>Profesor/a:</span>
+                                        <br style={{ marginTop: "20px" }} />
+                                        <span>Correo:</span>
+                                    </div>
+                                } />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
+                        </ListItem>
+                    </StyledTabPanel>
+                </Tabs>
                 <div style={divBuscarStyle}>
                     <SearchBar placeholder={"Buscar asignaturas"} />
                 </div>

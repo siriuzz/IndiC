@@ -66,8 +66,8 @@ const divUserStyle = {
 const divUserInfoStyle = {
     fontSize: "26px",
     marginLeft: "40px",
-    marginTop: "10px",
-    width: "250px",
+    // marginTop: "px",
+    width: "75%",
 };
 
 const divIndiceGraphContainerStyle = {
@@ -262,9 +262,9 @@ export default function Perfil() {
                                         </div>
                                     </div> */
                                     }
-                                    <div>Nombre: {" " + estudiante.nombre}</div>
-                                    <div>Id: {" " + estudiante.id}</div>
-                                    <div>Carrera: {" " + estudiante.carrera ? estudiante.carrera.carrera : " "}</div>
+                                    <div>Nombre: {estudiante.nombre}</div>
+                                    <div>Id: {estudiante.id}</div>
+                                    <div>Carrera: {carrera.carrera}</div>
                                     {/* <div>{data.id}</div>
                                     <div>{data.id_carrera}</div> */}
                                 </div>
