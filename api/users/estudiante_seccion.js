@@ -24,6 +24,19 @@ router.get('/Estudiante_Seccion', async (req, res) => {
 
 });
 
+router.get('/Estudiante_Seccion/:id', async (req, res) => {
+    /* #swagger.tags = ['Estudiante_Seccion']
+            #swagger.description = 'Endpoint para obtener las secciones de un estudiante.' */
+
+    try {
+        const result = await EstudianteSeccionController.getEstudianteSeccionByIdAndPeriod(req, res);
+        return res.json(result);
+
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/Estudiante_Seccion/calcularIndice/:id', async (req, res) => {
     /* #swagger.tags = ['Estudiante_Seccion']
             #swagger.description = 'Endpoint para obtener las secciones de un estudiante.' */

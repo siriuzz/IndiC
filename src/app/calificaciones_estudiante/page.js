@@ -17,6 +17,7 @@ import SearchBar from "@/components/SearchBar/SearchBarPequena";
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
+import axios from "axios";
 
 import { Kanit } from "next/font/google";
 
@@ -199,13 +200,23 @@ const textCreditosStyle = {
     fontWeight: "bold",
 }
 
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
 export default function Calificaciones_Estudiante() {
+    //nombre carrera, nombre docente, correo docente, calificacion medio termino, calificacion final
+    //principalmente, poder conseguir las asignaturas que esta cursando el estudiante en el periodo actual
     const [user, setUser] = useState({});
-    const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+    const [asignaturas, setAsignaturas] = useState([]);
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
         setUser(user);
+
+        axios.get(`http://${apiURL}/api/Estudiante_Seccion/${user.id}?periodo=${user.periodos_cursados}`).then((res) => {
+            const asignaturas = res.data;
+            setAsignaturas(asignaturas);
+
+            // console.log(asignaturas);
+        });
     }, []);
     return (
         <div style={wallpaperStyle}>
@@ -227,7 +238,62 @@ export default function Calificaciones_Estudiante() {
                         <StyledTab value={0}>Finales</StyledTab>
                         <StyledTab value={1}>Medio Termino</StyledTab>
                     </StyledTabsList>
-                    <StyledTabPanel style={{ width: "90%" }} value={0}>
+                    {/* <StyledTabPanel style={{ width: "90%" }} value={0}>
+                        <ListItem style={listStyle}>
+                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                secondary={
+                                    <div>
+                                        <span>Profesor/a: </span>
+                                        <br style={{ marginTop: "20px" }} />
+                                        <span>Correo:</span>
+                                    </div>
+                                } />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
+                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
+                        </ListItem>
+                    </StyledTabPanel> */}
+                    {asignaturas && asignaturas.map((asignatura) => {
+                        return (
+                            <StyledTabPanel style={{ width: "90%" }} value={0} key={asignatura.id_seccion}>
+                                <ListItem style={listStyle}>
+                                    <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>{asignatura.Secciones.Asignatura.nombre}</span>
+                                        secondary={
+                                            <div>
+                                                <span>Profesor/a: {asignatura.Secciones.Docente.nombre}</span>
+                                                <br style={{ marginTop: "20px" }} />
+                                                <span>Correo: {asignatura.Secciones.Docente.correo}</span>
+                                            </div>
+                                        } />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary={asignatura.Secciones.Asignatura.creditos} />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary={asignatura.Secciones.calificacion_base_mt} />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary={asignatura.calificacion_final} />
+                                </ListItem>
+                            </StyledTabPanel>
+                        )
+                    })
+                    }
+                    {asignaturas && asignaturas.map((asignatura) => {
+                        return (
+                            <StyledTabPanel style={{ width: "90%" }} value={1} key={asignatura.id_seccion}>
+                                <ListItem style={listStyle}>
+                                    <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>{asignatura.Secciones.Asignatura.nombre}</span>
+                                        secondary={
+                                            <div>
+                                                <span>Profesor/a: {asignatura.Secciones.Docente.nombre}</span>
+                                                <br style={{ marginTop: "20px" }} />
+                                                <span>Correo: {asignatura.Secciones.Docente.correo}</span>
+                                            </div>
+                                        } />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary={asignatura.Secciones.Asignatura.creditos} />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary={asignatura.Secciones.calificacion_base_mt} />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary={asignatura.calificacion_mt} />
+                                </ListItem>
+                            </StyledTabPanel>
+                        )
+                    })
+                    }
+                    {/* <StyledTabPanel value={1}>
                         <ListItem style={listStyle}>
                             <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                 secondary={
@@ -241,22 +307,7 @@ export default function Calificaciones_Estudiante() {
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
                         </ListItem>
-                    </StyledTabPanel>
-                    <StyledTabPanel value={1}>
-                        <ListItem style={listStyle}>
-                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                secondary={
-                                    <div>
-                                        <span>Profesor/a:</span>
-                                        <br style={{ marginTop: "20px" }} />
-                                        <span>Correo:</span>
-                                    </div>
-                                } />
-                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
-                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
-                            <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
-                        </ListItem>
-                    </StyledTabPanel>
+                    </StyledTabPanel> */}
                 </Tabs>
                 <div style={divBuscarStyle}>
                     <SearchBar placeholder={"Buscar asignaturas"} />
