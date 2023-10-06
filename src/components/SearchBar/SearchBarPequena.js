@@ -8,13 +8,15 @@ import SearchIcon from "@mui/icons-material/Search";
 
 
 const style = {
-    backgroundColor: theme.palette.background.light,
-    borderRadius: "40px",
-    border: 0,
+    backgroundColor: "white",
+    borderRadius: "10px",
+    border: "2px solid #9370DB",
     fontSize: "16px",
     height: "50px",
     paddingLeft: "15px",
-    width: "35rem",
+    width: "300px",
+    marginLeft: "200px",
+    marginTop: "-50px",
 };
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] }) // Se usa para usar la fuente Kanit en los elementos que no se le aplica por defecto

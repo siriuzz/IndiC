@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
 import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -246,6 +246,7 @@ export default function Inicio_docente() {
                             }
                         </List>
                     </Paper>
+                    <div className={kanit.className}>Promedio de asistencias por asignatura</div>
                     <div style={LinearStyle}><Line data={data} />
                     </div>
                 </ThemeProvider>

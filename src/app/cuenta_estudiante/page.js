@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect } from "react";
 import styles from "./page.module.css";
-import SidebarClose from "@/components/Sidebar/sidebarClose/SidebarClose";
+import SidebarClose from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
 import { Button, IconButton, colors } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import EditIcon from "@mui/icons-material/EditOutlined";

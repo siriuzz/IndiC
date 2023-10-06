@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import SidebarClose from "@/components/Sidebar/sidebarClose/SidebarClose";
+import SidebarClose from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css'

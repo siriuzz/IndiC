@@ -1,66 +1,50 @@
 "use client"
 import React from "react";
 import styles from "./page.module.css";
-import SidebarCloseDocente from "@/components/Sidebar/sidebarCloseDocente/sidebarCloseDocente";
-import { Button, IconButton, colors } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import EditIcon from "@mui/icons-material/EditOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
-import { styled } from '@mui/material/styles';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
 import Link from "next/link";
+import SidebarDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
+import { useStyles } from "../layout";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
+const  editButtonStyle = {
+    borderRadius: "20px",
+    marginLeft: "-55px",
+    marginTop: "165px",
+    height: "35px",
+    width: " -20px",
+    backgroundColor: "#e4d1d1",
+};
+
+const buttonStyle = {
+    position: "absolute",
+    top: "50%", // Centra verticalmente el botón en relación con el contenedor
+    transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
+    backgroundColor: "#f2f2f2",
+    border: "solid",
+    color: "#424874",
+    marginTop: "-170px",
+    borderRadius: "50px",
+    padding: "10px 20px",
+    marginLeft: "700px",
+    height: "30x"
+};
+
 export default function Perfil() {
-
-    const EditButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText("#e4d1d1"),
-        backgroundColor: "#e4d1d1",
-        '&:hover': {
-            backgroundColor: "#a99b9b",
-        },
-        borderRadius: "20px",
-        marginLeft: "-55px",
-        marginTop: "165px",
-        height: "35px",
-        width: " -20px",
-    }));
-
-
-    const buttonStyle = {
-        position: "absolute",
-        top: "50%", // Centra verticalmente el botón en relación con el contenedor
-        transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
-        backgroundColor: "#f2f2f2",
-        border: "solid",
-        color: "#424874",
-        marginTop: "-170px",
-        borderRadius: "50px",
-        padding: "10px 20px",
-        zIndex: 1, // Coloca el botón por encima de la imagen
-        marginLeft: "700px",
-        height: "30x"
-    };
-
-
 
     return (
         <div className={styles.wallpaper}>
-            <SidebarCloseDocente />
+            <SidebarDocente />
             <Paper elevation={3}
-                style={{
-                    backgroundColor: "white",
-                    borderRadius: "40px",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    marginRight: "20px",
-                    height: "92.3vh",
-                    width: "100%",
-                }}>
+                style={useStyles.paperBig}>
 
                 <div className={styles.label}>
                     Bienvenido!
@@ -68,14 +52,14 @@ export default function Perfil() {
                         <NotificationsIcon style={{ height: "35px", width: "35px" }} />
                     </IconButton>
                 </div>
-                <Paper elevation={0} style={{}}>
+                <Paper elevation={0}>
                     <div style={{ display: "flex", flexDirection: "row" }}>
                         <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={130} width={130} style={{ marginLeft: "60px", marginTop: "60px" }}
                         />
-                        <EditButton variant="contained">
+                        <IconButton style={editButtonStyle} variant="contained">
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
-                        </EditButton>
-                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
+                        </IconButton>
+                        <div style={{ fontSize: "26px", marginLeft: "40px", marginTop: "70px" }}>
                             Nombre: Nombres y Apellidos<div>Id: ID<div>Estado: Estado</div></div>
                             <div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
