@@ -19,9 +19,16 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { Kanit } from "next/font/google";
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import EditIcon from "@mui/icons-material/EditOutlined";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Theme from "../theme";
+import theme from "../theme";
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -50,7 +57,6 @@ const notificationsIconStyle = {
     marginTop: "-180px",
 };
 
-
 const paperStyle = {
     width: "472px",
     marginTop: "30px",
@@ -69,52 +75,15 @@ const userInfoStyle = {
     marginTop: "10px"
 };
 
-const divBuscarStyle = {
-    marginLeft: "60px",
-    marginTop: "190px",
-};
-
-
-const purple = {
-
-    50: '#9370DB',
-};
-
-const blue = {
-    50: '#F0F7FF',
-    100: '#C2E0FF',
-    200: '#80BFFF',
-    300: '#66B2FF',
-    400: '#3399FF',
-    500: '#007FFF',
-    600: '#0072E5',
-    700: '#0059B2',
-    800: '#004C99',
-    900: '#003A75',
-};
-
-const grey = {
-    50: '#f6f8fa',
-    100: '#eaeef2',
-    200: '#d0d7de',
-    300: '#afb8c1',
-    400: '#8c959f',
-    500: '#6e7781',
-    600: '#57606a',
-    700: '#424a53',
-    800: '#32383f',
-    900: '#24292f',
-};
-
 const StyledTab = styled(Tab)`
-    color: #fff;
+    color: ${theme.palette.primary.main};
     cursor: pointer;
     font-weight: 400;
-    background-color: transparent;
-    width: 300px;
+    background-color: white;
+    width: 25%;
     height: 40px;
     padding: 10px 12px;
-    margin: 6px;
+    margin: 8%;
     border: 2px;
     border-radius: 20px;
     display: flex;
@@ -123,20 +92,15 @@ const StyledTab = styled(Tab)`
     font-size: 30px;
     align-items: center;
     fontfamily: Kanit, sans-serif;
-
-  
-    &:hover {
-      background-color: ${purple[50]};
-    }
   
     &:focus {
-      color: #fff;
-      outline: 3px solid ${purple[50]};
+      color: ${Theme.palette.primary.main};
+      outline: 3px solid ${Theme.palette.primary.main};
     }
   
     &.${tabClasses.selected} {
-      background-color: #fff;
-      color: ${purple[50]};
+      background-color: ${Theme.palette.primary.main};
+      color: white;
     }
   
     &.${buttonClasses.disabled} {
@@ -147,16 +111,13 @@ const StyledTab = styled(Tab)`
 
 const StyledTabPanel = styled(TabPanel)(
     ({ theme }) => `
-    width: 950px;
-    font-family: Kanit, sans-serif;
+    width: 89%;
+    font-family: Kanit;
     font-size: 0.875rem;
-    padding: 20px 12px;
-    background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-    border: 3.5px solid ${theme.palette.mode === 'dark' ? purple[50] : purple[50]};
-    border-radius: 20px;
+    padding: 20px 12px
     opacity: 0.6;
     margin-left: 100px;
-    margin-top: 50px;
+    margin-top: 20px;
     `,
 );
 
@@ -164,33 +125,22 @@ const StyledTabsList = styled(TabsList)(
     ({ theme }) => `
     min-width: 1000px;
     height: 70px;
-    background-color: ${purple[50]};
+    background-color: white;
     border-radius: 40px;
+    border: 2px solid ${Theme.palette.primary.main};
     display: flex;
     align-items: center;
     justify-content: center;
     align-content: space-between;
-    box-shadow: 0px 8px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
     margin-left: 80px;
     margin-top: 40px;
     `,
 );
 
-
-const listStyle = {
-    width: '1000px',
-    bgcolor: 'background.paper',
-    marginLeft: "-30px",
-    marginTop: "-20px",
-}
-
-
 const AsignaturasStyle = {
-    width: '800px',
-    height: '40px',
-    bgcolor: 'background.paper',
-    marginLeft: "30px",
-    marginTop: "3px",
+    width: '100%',
+    height: '100%',
+    marginLeft: "10px",
     fontWeight: "bold",
 }
 
@@ -201,32 +151,27 @@ const EditButton = styled(Button)(({ theme }) => ({
         backgroundColor: "#a99b9b",
     },
     borderRadius: "20px",
-    marginLeft: "0px",
-    marginTop: "70px",
+    marginRight: "10px",
     height: "40px",
     width: " 40px",
+    alignSelf: "center",
 }));
 
 export default function Calificaciones_Estudiante() {
-
+    const [expanded, setExpanded] = React.useState(false);
     const [displayEST, setDisplayEST] = useState("flex");
 
-    const handleEstudiante = (event) => {
-        if (displayEST == "none") {
-            setDisplayEST("flex");
-        } else {
-            setDisplayEST("none");
-        }
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
     };
 
     const EachStudentStyle = {
         display: displayEST,
         backgroundColor: "#f4eeff",
         borderRadius: "20px",
-        width: "700px",
-        height: "70px",
+        width: "100%",
+        height: "80px",
         justifySelf: "center",
-        marginLeft: "230px",
         marginTop: "0px",
         marginBottom: "10px",
     };
@@ -244,70 +189,88 @@ export default function Calificaciones_Estudiante() {
                                 <IconButton style={notificationsButtonStyle}>
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
-                                <Tabs defaultValue={0}>
+                                <Tabs className={kanit.className}  defaultValue={0}>
                                     <StyledTabsList>
                                         <StyledTab value={0}>Finales</StyledTab>
                                         <StyledTab value={1}>Medio Termino</StyledTab>
                                     </StyledTabsList>
-                                    <StyledTabPanel value={0}>
-                                        <ListItem style={listStyle}>
-
-                                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                                secondary={
-                                                    <div>
-                                                        <span>Profesor/a:</span>
-                                                        <br style={{ marginTop: "20px" }} />
-                                                        <span>Correo:</span>
-                                                    </div>
-
-                                                }
-                                            />
-
-                                        </ListItem>
-                                        <IconButton onClick={handleEstudiante} style={{ marginLeft: "850px", marginTop: "-60px" }}>
-                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }} />
-                                        </IconButton>
-                                        <EditButton variant="contained" style={{ marginTop: "-60px", marginLeft: "-125px" }}>
-                                            <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
-                                        </EditButton>
+                                    <StyledTabPanel style={{ height: "20" }} value={0}>
+                                        <Accordion style={{border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px"}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                            <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon style={{color: Theme.palette.primary.main, height: "35px", width: "35px"}} />}
+                                                aria-controls="panel1bh-content"
+                                                id="panel1bh-header"
+                                            >
+                                                <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                                    secondary={
+                                                        <div>
+                                                            <span>Profesor/a:</span>
+                                                            <br style={{ marginTop: "20px" }} />
+                                                            <span>Correo:</span>
+                                                        </div>
+                                                    } />
+                                                <EditButton variant="contained">
+                                                    <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                                </EditButton>
+                                            </AccordionSummary>
+                                            <AccordionDetails>
+                                                <div style={EachStudentStyle}>
+                                                    <ListItem>
+                                                        <ListItemAvatar>
+                                                            <Avatar style={{ color: "black", background: "transparent" }}>
+                                                                <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
+                                                            secondary={
+                                                                <div>
+                                                                    <span>juandanielu@est.example.edu</span>
+                                                                </div>
+                                                            } />
+                                                    </ListItem>
+                                                </div>
+                                            </AccordionDetails>
+                                        </Accordion>
                                     </StyledTabPanel>
                                     <StyledTabPanel value={1}>
-                                        <ListItem style={listStyle}>
-                                            <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                                secondary={
-                                                    <div>
-                                                        <span>Profesor/a:</span>
-                                                        <br style={{ marginTop: "20px" }} />
-                                                        <span>Correo:</span>
-                                                    </div>
-                                                } />
-                                        </ListItem>
-                                        <IconButton onClick={handleEstudiante} style={{ marginLeft: "850px", marginTop: "-60px" }}>
-                                            <AddCircleOutlineOutlinedIcon style={{ height: "45", width: "45", color: "#6750a4", }} />
-                                        </IconButton>
-                                        <EditButton style={{ marginTop: "-60px", marginLeft: "-125px" }}>
-                                            <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
-                                        </EditButton>
+                                    <Accordion style={{border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px"}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                            <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon style={{color: Theme.palette.primary.main, height: "35px", width: "35px"}} />}
+                                                aria-controls="panel1bh-content"
+                                                id="panel1bh-header"
+                                            >
+                                                <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                                    secondary={
+                                                        <div>
+                                                            <span>Profesor/a:</span>
+                                                            <br style={{ marginTop: "20px" }} />
+                                                            <span>Correo:</span>
+                                                        </div>
+                                                    } />
+                                                <EditButton variant="contained">
+                                                    <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                                </EditButton>
+                                            </AccordionSummary>
+                                            <AccordionDetails>
+                                                <div style={EachStudentStyle}>
+                                                    <ListItem>
+                                                        <ListItemAvatar>
+                                                            <Avatar style={{ color: "black", background: "transparent" }}>
+                                                                <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText primary=<span style={{ fontWeight: "bold"}}>Juan Daniel Ubiera</span>
+                                                            secondary={
+                                                                <div>
+                                                                    <span>juandanielu@est.example.edu</span>
+                                                                </div>
+                                                            } />
+                                                    </ListItem>
+                                                </div>
+                                            </AccordionDetails>
+                                        </Accordion>
                                     </StyledTabPanel>
                                 </Tabs>
-                                <div style={EachStudentStyle}>
-                                    <ListItem>
-                                        <ListItemAvatar>
-                                            <Avatar style={{ color: "black", background: "transparent" }}>
-                                                <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                        <ListItemText primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
-                                            secondary={
-                                                <div>
-                                                    <span>juandanielu@est.example.edu</span>
-                                                </div>
-                                            } />
-                                    </ListItem>
-                                    <Button style={{ marginTop: "-120px", marginLeft: "625px" }}>
-                                        <EditIcon style={{ height: "24", width: "24", color: "#6750a4" }} />
-                                    </Button>
-                                </div>
                             </div>
                         </div>
                     </div>
