@@ -29,19 +29,7 @@ const  editButtonStyle = {
     backgroundColor: "#e4d1d1",
 };
 
-    const [telefono, setTelefono] = React.useState("###-###-####");
-    const [user, setUser] = React.useState({});
     const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
-
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        setUser(user);
-        console.log(user.id);
-        axios.get(`http://${apiURL}/api/Docentes/${user.id}`).then((res) => {
-            const telefono = res.data.telefono;
-            setTelefono(telefono);
-        });
-    }, []);
 
 const buttonStyle = {
     position: "absolute",
@@ -59,6 +47,18 @@ const buttonStyle = {
 
 export default function Perfil() {
 
+    const [telefono, setTelefono] = React.useState("###-###-####");
+    const [user, setUser] = React.useState({});
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        setUser(user);
+        console.log(user.id);
+        axios.get(`http://${apiURL}/api/Docentes/${user.id}`).then((res) => {
+            const telefono = res.data.telefono;
+            setTelefono(telefono);
+        });
+    }, []);
 
     return (
         <div className={styles.wallpaper}>
