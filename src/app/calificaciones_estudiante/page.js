@@ -32,18 +32,15 @@ const wallpaperStyle = {
 
 const notificationsButtonStyle = {
     color: "black",
-    marginTop: "5px",
     width: "35px",
     height: "35px",
-    display: "flex",
-    marginRight: "24px",
+    marginTop: "20px",
+    marginRight: "20px",
 };
 
 const notificationsIconStyle = {
     height: "35px",
     width: "35px",
-    marginLeft: "2400px",
-    marginTop: "-180px",
 };
 
 
@@ -54,15 +51,17 @@ const paperStyle = {
 };
 
 const divUserStyle = {
+    justifyContent: "space-between",
     display: "flex",
     flexDirection: "row",
-    marginLeft: "-30px",
+    width: "100%",
 };
 
 const userInfoStyle = {
     fontSize: "26px",
-    marginLeft: "40px",
-    marginTop: "10px"
+    marginTop: "40px",
+    marginLeft: "70px",
+    float: "left",
 };
 
 const divBuscarStyle = {
@@ -197,72 +196,67 @@ const CreditosSytle = {
     marginLeft: "0px",
     marginTop: "10px",
     textAlign: "center",
-    }
-
-
-const textCreditosStyle = {
-    fontFamily: "kanit", 
-    fontSize:"16px",
-    fontWeight: "bold",
 }
 
 
+const textCreditosStyle = {
+    fontFamily: "kanit",
+    fontSize: "16px",
+    fontWeight: "bold",
+}
 
 export default function Calificaciones_Estudiante() {
-
     return (
         <div style={wallpaperStyle}>
             <SidebarCloseEstudiante />
             <Paper elevation={3} style={useStyles.paperBig}>
-                <Paper elevation={0} style={paperStyle}>
-                    <div style={{ display: "flex" }}>
                         <div style={divUserStyle}>
-                            <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
                             <div style={userInfoStyle}>
-                                Nombre y Apellido<div>ID</div>
-                                <IconButton style={notificationsButtonStyle}>
-                                    <NotificationsIcon style={notificationsIconStyle} />
-                                </IconButton>
-                                <Tabs defaultValue={0}>
-                                    <StyledTabsList>
-                                        <StyledTab value={0}>Finales</StyledTab>
-                                        <StyledTab value={1}>Medio Termino</StyledTab>
-                                    </StyledTabsList>
-                                    <StyledTabPanel value={0}>
-                                        <ListItem style={listStyle}>
-                                            <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                            secondary={
-                                                <div>
-                                                    <span>Profesor/a:</span>
-                                                    <br style={{marginTop:"20px"}} />
-                                                    <span>Correo:</span>
-                                                </div>
-                                            }    />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Creditos</span> secondary="2" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación Base</span> secondary="50" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación</span> secondary="49" />
-                                          </ListItem>
-                                          </StyledTabPanel>
-                                    <StyledTabPanel value={1}>
-                                    <ListItem style={listStyle}>
-                                            <ListItemText style={AsignaturasStyle} primary= <span style={{ fontWeight: "bold",   font: "kanit" }}>Aseguramiento de la Calidad</span>
-                                            secondary={
-                                                <div>
-                                                    <span>Profesor/a:</span>
-                                                    <br style={{marginTop:"20px"}} />
-                                                    <span>Correo:</span>
-                                                </div>
-                                            }    />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Creditos</span> secondary="2" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación Base</span> secondary="50" />
-                                            <ListItemText style={CreditosSytle} primary=<span style={{textCreditosStyle}}>Calificación</span> secondary="49" />
-                                          </ListItem>
-                                    </StyledTabPanel>
-                                </Tabs>
+                                <div style={{display: "inline-flex"}}>
+                                    <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
+                                    <div style={{marginLeft: "20px", marginTop: "10px"}}>Nombre: Nombre y Apellido<div>Id: ID</div></div>
+                                </div>
                             </div>
+                            <IconButton style={notificationsButtonStyle}>
+                                <NotificationsIcon style={notificationsIconStyle} />
+                            </IconButton>
                         </div>
-                    </div>
-                </Paper>
+                        <Tabs defaultValue={0}>
+                            <StyledTabsList>
+                                <StyledTab value={0}>Finales</StyledTab>
+                                <StyledTab value={1}>Medio Termino</StyledTab>
+                            </StyledTabsList>
+                            <StyledTabPanel value={0}>
+                                <ListItem style={listStyle}>
+                                    <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                        secondary={
+                                            <div>
+                                                <span>Profesor/a:</span>
+                                                <br style={{ marginTop: "20px" }} />
+                                                <span>Correo:</span>
+                                            </div>
+                                        } />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
+                                </ListItem>
+                            </StyledTabPanel>
+                            <StyledTabPanel value={1}>
+                                <ListItem style={listStyle}>
+                                    <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
+                                        secondary={
+                                            <div>
+                                                <span>Profesor/a:</span>
+                                                <br style={{ marginTop: "20px" }} />
+                                                <span>Correo:</span>
+                                            </div>
+                                        } />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
+                                    <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
+                                </ListItem>
+                            </StyledTabPanel>
+                        </Tabs>
                 <div style={divBuscarStyle}>
                     <SearchBar placeholder={"Buscar asignaturas"} />
                 </div>
