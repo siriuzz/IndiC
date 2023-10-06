@@ -43,13 +43,6 @@ const notificationsIconStyle = {
     width: "35px",
 };
 
-
-const paperStyle = {
-    width: "472px",
-    marginTop: "30px",
-    marginLeft: "60px",
-};
-
 const divUserStyle = {
     justifyContent: "space-between",
     display: "flex",
@@ -65,6 +58,7 @@ const userInfoStyle = {
 };
 
 const divBuscarStyle = {
+    width: "50%",
     marginLeft: "60px",
     marginTop: "190px",
 };
@@ -173,7 +167,7 @@ const StyledTabsList = styled(TabsList)(
 
 
 const listStyle = {
-    width: '1000px',
+    width: '100%',
     bgcolor: 'background.paper',
     marginLeft: "-30px",
     marginTop: "-20px",
@@ -181,7 +175,7 @@ const listStyle = {
 
 
 const AsignaturasStyle = {
-    width: '800px',
+    width: '100%',
     height: '40px',
     bgcolor: 'background.paper',
     marginLeft: "30px",
@@ -191,7 +185,7 @@ const AsignaturasStyle = {
 
 
 const CreditosSytle = {
-    width: '400px',
+    width: '100%',
     bgcolor: 'background.paper',
     marginLeft: "0px",
     marginTop: "10px",
@@ -221,12 +215,12 @@ export default function Calificaciones_Estudiante() {
                                 <NotificationsIcon style={notificationsIconStyle} />
                             </IconButton>
                         </div>
-                        <Tabs defaultValue={0}>
+                        <Tabs defaultValue={0} style={{width: "90%"}}>
                             <StyledTabsList>
                                 <StyledTab value={0}>Finales</StyledTab>
                                 <StyledTab value={1}>Medio Termino</StyledTab>
                             </StyledTabsList>
-                            <StyledTabPanel value={0}>
+                            <StyledTabPanel style={{width: "90%"}} value={0}>
                                 <ListItem style={listStyle}>
                                     <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                         secondary={
