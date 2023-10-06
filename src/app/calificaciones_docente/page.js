@@ -72,7 +72,7 @@ const userInfoStyle = {
 };
 
 const StyledTab = styled(Tab)`
-    color: ${theme.palette.primary.main};
+    color: ${Theme.palette.primary.main};
     cursor: pointer;
     font-weight: 400;
     background-color: white;
