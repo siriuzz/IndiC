@@ -16,6 +16,7 @@ import { Tab, tabClasses } from '@mui/base/Tab';
 import SearchBar from "@/components/SearchBar/SearchBarPequena";
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import Theme from "../theme";
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import axios from "axios";
 
@@ -44,7 +45,7 @@ const notificationsIconStyle = {
     width: "35px",
 };
 
-const divUserStyle = {
+const paperUserStyle = {
     justifyContent: "space-between",
     display: "flex",
     flexDirection: "row",
@@ -58,7 +59,7 @@ const userInfoStyle = {
     float: "left",
 };
 
-const divBuscarStyle = {
+const paperBuscarStyle = {
     width: "50%",
     marginLeft: "60px",
     marginTop: "190px",
@@ -97,14 +98,14 @@ const grey = {
 };
 
 const StyledTab = styled(Tab)`
-    color: #fff;
+    color: ${Theme.palette.primary.main};
     cursor: pointer;
     font-weight: 400;
-    background-color: transparent;
-    width: 300px;
+    background-color: white;
+    width: 25%;
     height: 40px;
     padding: 10px 12px;
-    margin: 6px;
+    margin: 8%;
     border: 2px;
     border-radius: 20px;
     display: flex;
@@ -113,20 +114,14 @@ const StyledTab = styled(Tab)`
     font-size: 30px;
     align-items: center;
     fontfamily: Kanit, sans-serif;
-
-  
-    &:hover {
-      background-color: ${purple[50]};
-    }
   
     &:focus {
-      color: #fff;
-      outline: 3px solid ${purple[50]};
+      outline: 3px solid ${Theme.palette.primary.main};
     }
   
     &.${tabClasses.selected} {
-      background-color: #fff;
-      color: ${purple[50]};
+      background-color: ${Theme.palette.primary.main};
+      color: white;
     }
   
     &.${buttonClasses.disabled} {
@@ -141,12 +136,12 @@ const StyledTabPanel = styled(TabPanel)(
     font-family: Kanit, sans-serif;
     font-size: 0.875rem;
     padding: 20px 12px;
-    background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-    border: 3.5px solid ${theme.palette.mode === 'dark' ? purple[50] : purple[50]};
+    background: white;
+    border: 3.5px solid ${Theme.palette.primary.main};
     border-radius: 20px;
     opacity: 0.6;
     margin-left: 100px;
-    margin-top: 50px;
+    margin-top: 30px;
     `,
 );
 
@@ -154,15 +149,15 @@ const StyledTabsList = styled(TabsList)(
     ({ theme }) => `
     min-width: 1000px;
     height: 70px;
-    background-color: ${purple[50]};
+    background-color: white;
     border-radius: 40px;
+    border: 2px solid ${Theme.palette.primary.main};
     display: flex;
     align-items: center;
     justify-content: center;
     align-content: space-between;
-    box-shadow: 0px 8px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
     margin-left: 80px;
-    margin-top: 40px;
+    margin-top: 30px;
     `,
 );
 
@@ -219,51 +214,51 @@ export default function Calificaciones_Estudiante() {
         });
     }, []);
     return (
-        <div style={wallpaperStyle}>
+        <paper style={wallpaperStyle}>
             <SidebarCloseEstudiante />
             <Paper elevation={3} style={useStyles.paperBig}>
-                <div style={divUserStyle}>
-                    <div style={userInfoStyle}>
-                        <div style={{ display: "inline-flex" }}>
+                <paper style={paperUserStyle}>
+                    <paper style={userInfoStyle}>
+                        <paper style={{ display: "inline-flex" }}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
-                            <div style={{ marginLeft: "20px", marginTop: "10px" }}>Nombre: {user.nombre}<div>Id: {user.id}</div></div>
-                        </div>
-                    </div>
+                            <paper style={{ display: "flex", flexDirection: "column", marginLeft: "20px", marginTop: "10px" }}>Nombre: {user.nombre}<paper>Id: {user.id}</paper></paper>
+                        </paper>
+                    </paper>
                     <IconButton style={notificationsButtonStyle}>
                         <NotificationsIcon style={notificationsIconStyle} />
                     </IconButton>
-                </div>
+                </paper>
                 <Tabs defaultValue={0} style={{ width: "90%" }}>
                     <StyledTabsList>
                         <StyledTab value={0}>Finales</StyledTab>
                         <StyledTab value={1}>Medio Termino</StyledTab>
                     </StyledTabsList>
-                    {/* <StyledTabPanel style={{ width: "90%" }} value={0}>
+                    <StyledTabPanel style={{ width: "90%" }} value={0}>
                         <ListItem style={listStyle}>
                             <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                 secondary={
-                                    <div>
+                                    <paper>
                                         <span>Profesor/a: </span>
                                         <br style={{ marginTop: "20px" }} />
                                         <span>Correo:</span>
-                                    </div>
+                                    </paper>
                                 } />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
                         </ListItem>
-                    </StyledTabPanel> */}
+                    </StyledTabPanel>
                     {asignaturas && asignaturas.map((asignatura) => {
                         return (
                             <StyledTabPanel style={{ width: "90%" }} value={0} key={asignatura.id_seccion}>
                                 <ListItem style={listStyle}>
                                     <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>{asignatura.Secciones.Asignatura.nombre}</span>
                                         secondary={
-                                            <div>
+                                            <paper>
                                                 <span>Profesor/a: {asignatura.Secciones.Docente.nombre}</span>
                                                 <br style={{ marginTop: "20px" }} />
                                                 <span>Correo: {asignatura.Secciones.Docente.correo}</span>
-                                            </div>
+                                            </paper>
                                         } />
                                     <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary={asignatura.Secciones.Asignatura.creditos} />
                                     <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary={asignatura.Secciones.calificacion_base_mt} />
@@ -279,11 +274,11 @@ export default function Calificaciones_Estudiante() {
                                 <ListItem style={listStyle}>
                                     <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>{asignatura.Secciones.Asignatura.nombre}</span>
                                         secondary={
-                                            <div>
+                                            <paper>
                                                 <span>Profesor/a: {asignatura.Secciones.Docente.nombre}</span>
                                                 <br style={{ marginTop: "20px" }} />
                                                 <span>Correo: {asignatura.Secciones.Docente.correo}</span>
-                                            </div>
+                                            </paper>
                                         } />
                                     <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary={asignatura.Secciones.Asignatura.creditos} />
                                     <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary={asignatura.Secciones.calificacion_base_mt} />
@@ -293,26 +288,26 @@ export default function Calificaciones_Estudiante() {
                         )
                     })
                     }
-                    {/* <StyledTabPanel value={1}>
+                    <StyledTabPanel value={1}>
                         <ListItem style={listStyle}>
                             <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                 secondary={
-                                    <div>
+                                    <paper>
                                         <span>Profesor/a:</span>
                                         <br style={{ marginTop: "20px" }} />
                                         <span>Correo:</span>
-                                    </div>
+                                    </paper>
                                 } />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Creditos</span> secondary="2" />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
                         </ListItem>
-                    </StyledTabPanel> */}
+                    </StyledTabPanel>
                 </Tabs>
-                <div style={divBuscarStyle}>
+                <div style={paperBuscarStyle}>
                     <SearchBar placeholder={"Buscar asignaturas"} />
                 </div>
             </Paper>
-        </div>
+        </paper>
     );
 }

@@ -185,15 +185,15 @@ export default function Calificaciones_Estudiante() {
                                 <IconButton style={notificationsButtonStyle}>
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
-                                <Tabs className={kanit.className}  defaultValue={0}>
+                                <Tabs className={kanit.className} defaultValue={0}>
                                     <StyledTabsList>
                                         <StyledTab value={0}>Finales</StyledTab>
                                         <StyledTab value={1}>Medio Termino</StyledTab>
                                     </StyledTabsList>
                                     <StyledTabPanel style={{ height: "20" }} value={0}>
-                                        <Accordion style={{border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px"}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                             <AccordionSummary
-                                                expandIcon={<ExpandMoreIcon style={{color: Theme.palette.primary.main, height: "35px", width: "35px"}} />}
+                                                expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
                                                 id="panel1bh-header"
                                             >
@@ -206,7 +206,7 @@ export default function Calificaciones_Estudiante() {
                                                         </paper>
                                                     } />
                                                 <EditButton variant="contained">
-                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main}} />
+                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                 </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
@@ -229,9 +229,9 @@ export default function Calificaciones_Estudiante() {
                                         </Accordion>
                                     </StyledTabPanel>
                                     <StyledTabPanel value={1}>
-                                    <Accordion style={{border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px"}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                             <AccordionSummary
-                                                expandIcon={<ExpandMoreIcon style={{color: Theme.palette.primary.main, height: "35px", width: "35px"}} />}
+                                                expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
                                                 id="panel1bh-header"
                                             >
@@ -244,7 +244,7 @@ export default function Calificaciones_Estudiante() {
                                                         </paper>
                                                     } />
                                                 <EditButton variant="contained">
-                                                    <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                 </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
@@ -255,7 +255,7 @@ export default function Calificaciones_Estudiante() {
                                                                 <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
                                                             </Avatar>
                                                         </ListItemAvatar>
-                                                        <ListItemText primary=<span style={{ fontWeight: "bold"}}>Juan Daniel Ubiera</span>
+                                                        <ListItemText primary=<span style={{ fontWeight: "bold" }}>Juan Daniel Ubiera</span>
                                                             secondary={
                                                                 <paper>
                                                                     <span>juandanielu@est.example.edu</span>
