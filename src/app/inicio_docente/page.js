@@ -103,7 +103,7 @@ const AsignaturaStyle = {
     float: "right",
     marginRight: "60px",
     borderRadius: "10px",
-    marginTop: "20px",
+    marginTop: "10px",
     overflowY: "auto"
 };
 
@@ -246,8 +246,9 @@ export default function Inicio_docente() {
                             }
                         </List>
                     </Paper>
-                    <div className={kanit.className}>Promedio de asistencias por asignatura</div>
-                    <div style={LinearStyle}><Line data={data} />
+                    <div style={LinearStyle}>
+                    <div>Promedio de calificaciones por asignatura: </div>
+                        <Line data={data} />
                     </div>
                 </ThemeProvider>
             </Paper>
