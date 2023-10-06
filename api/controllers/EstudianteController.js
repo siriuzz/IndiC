@@ -30,6 +30,38 @@ const createEstudiante = async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 }
+
+const updatePassword = async (req, res) => {
+    try {
+        const oldPassword = req.body.oldPassword;
+        const newPassword = req.body.newPassword;
+        let estudiante = await Estudiante.findByPk(req.params.id);
+
+        if (estudiante) {
+            console.log("Estudiante encontrado");
+        }
+
+        const match = await bcrypt.compare(oldPassword, estudiante.password)
+        if (match) {
+            const salt = await bcrypt.genSalt(10);
+            const hash = await bcrypt.hash(newPassword, salt);
+            estudiante.password = hash;
+            estudiante.salt = salt;
+            console.log("Actualizando contraseña");
+            const result = await estudiante.save();
+            // const newEstudiante = await Estudiante.update(estudiante, {
+            //     where: {
+            //         id: req.params.id
+            //     }
+            // });
+            return estudiante.dataValues;
+        }
+    } catch (error) {
+        console.log("Error al actualizar la contraseña");
+        return { error: error.message };
+    }
+}
+
 const getEstudianteById = async (req, res) => {
     try {
         console.log("Obteniendo estudiante por id");
@@ -42,7 +74,7 @@ const getEstudianteById = async (req, res) => {
     }
     catch (error) {
         console.log("Error al obtener el estudiante por id");
-        return res.status(500).json({ error: error.message });
+        return { error: error.message };
     }
 }
 const getEstudianteByCorreo = async (req, res) => {
@@ -111,5 +143,6 @@ module.exports = {
     createEstudiante,
     getEstudianteById,
     getEstudianteByCorreo,
-    createEstudianteFromCsv
+    createEstudianteFromCsv,
+    updatePassword
 }

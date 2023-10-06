@@ -41,11 +41,12 @@ router.post('/Carreras/upload', upload.single('csv'), async (req, res) => {
             schema: { $ref: "#/components/schemas/Carrera" }
     } */
     try {
-        const file = fs.createReadStream(req.file.path);
+        const file = fs.createReadStream(req.file.path, 'utf8');
         config.complete = async function (results) {
             // console.log(results);
             for (let i = 0; i < results.data.length; i++) {
                 const element = results.data[i];
+                console.log(element);
                 await CarreraController.createCarreraFromCsv(element);
             }
             fs.unlink(req.file.path, (err) => {

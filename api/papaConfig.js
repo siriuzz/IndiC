@@ -1,5 +1,6 @@
 
 const config = {
+    enconding: 'UTF-8',
     download: true,
     delimiter: ',',
     header: true,

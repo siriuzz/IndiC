@@ -10,10 +10,6 @@ module.exports = {
         autoIncrement: true,
         unique: true
       },
-      id_horario: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       id_asignatura: {
         type: Sequelize.INTEGER,
         allowNull: false
@@ -61,17 +57,17 @@ module.exports = {
       onUpdate: 'cascade'
     });
 
-    await queryInterface.addConstraint('Secciones', {
-      fields: ['id_horario'],
-      type: 'foreign key',
-      name: 'fk_seccion_horario',
-      references: {
-        table: 'Horarios',
-        field: 'id'
-      },
-      onDelete: 'cascade',
-      onUpdate: 'cascade'
-    });
+    // await queryInterface.addConstraint('Secciones', {
+    //   fields: ['id_horario'],
+    //   type: 'foreign key',
+    //   name: 'fk_seccion_horario',
+    //   references: {
+    //     table: 'Horarios',
+    //     field: 'id'
+    //   },
+    //   onDelete: 'cascade',
+    //   onUpdate: 'cascade'
+    // });
 
     await queryInterface.addConstraint('Secciones', {
       fields: ['id_docente'],

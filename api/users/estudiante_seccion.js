@@ -24,6 +24,28 @@ router.get('/Estudiante_Seccion', async (req, res) => {
 
 });
 
+router.get('/Estudiante_Seccion/calcularIndice/:id', async (req, res) => {
+    /* #swagger.tags = ['Estudiante_Seccion']
+            #swagger.description = 'Endpoint para obtener las secciones de un estudiante.' */
+
+    try {
+        const result = await EstudianteSeccionController.calcularIndice(req, res);
+        return res.json(result);
+
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/Estudiante_Seccion/CalcularIndicePorPeriodo/:id', async (req, res) => {
+    try {
+        const result = await EstudianteSeccionController.calcularIndicePorPeriodo(req, res);
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/Estudiante_Seccion/upload', upload.single('csv'), (req, res) => {
     /* #swagger.tags = ['Estudiante_Seccion']
          #swagger.description = 'Endpoint para subir un archivo csv con estudiantes_secciones.' */

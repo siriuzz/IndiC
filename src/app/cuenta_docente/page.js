@@ -10,8 +10,13 @@ import Image from "next/image";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
 import Link from "next/link";
+
+import axios from "axios";
+import { useEffect } from "react";
+
 import SidebarDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
 import { useStyles } from "../layout";
+
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -23,6 +28,20 @@ const  editButtonStyle = {
     width: " -20px",
     backgroundColor: "#e4d1d1",
 };
+
+    const [telefono, setTelefono] = React.useState("###-###-####");
+    const [user, setUser] = React.useState({});
+    const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        setUser(user);
+        console.log(user.id);
+        axios.get(`http://${apiURL}/api/Docentes/${user.id}`).then((res) => {
+            const telefono = res.data.telefono;
+            setTelefono(telefono);
+        });
+    }, []);
 
 const buttonStyle = {
     position: "absolute",
@@ -39,6 +58,7 @@ const buttonStyle = {
 };
 
 export default function Perfil() {
+
 
     return (
         <div className={styles.wallpaper}>
@@ -58,21 +78,22 @@ export default function Perfil() {
                         />
                         <IconButton style={editButtonStyle} variant="contained">
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
+
                         </IconButton>
                         <div style={{ fontSize: "26px", marginLeft: "40px", marginTop: "70px" }}>
-                            Nombre: Nombres y Apellidos<div>Id: ID<div>Estado: Estado</div></div>
+                            Nombre: {user.nombre}
+                            <div>Id: {user.id}
+                                <div>Estado: {user.id_estado == 1 ? "Activo" : "Inactivo"}</div>
+                            </div>
+
                             <div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
                                 <Link href="/" style={{ color: '#979797' }}>
-                                    <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>juandu@example.com </div>
+                                    <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{user.correo} </div>
                                 </Link>
-                                <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Email</div>
-                                <Link href="/" style={{ color: '#979797' }}>
-                                    <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>kelvinga@example.com<Link href="/"> <EditIcon style={{ height: "20", width: "20", color: "#6750a4", marginLeft: "20px", marginTop: "-5px" }} />
-                                    </Link></div>
-                                </Link>
+
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Teléfono</div>
-                                <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>849-587-6767  <Link href="/"><EditIcon style={{ height: "20", width: "20", color: "#6750a4", marginLeft: "10px", marginTop: "-5px" }} />
+                                <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>849-587-6767  <Link href="/">
                                 </Link></div>
                             </div>
                             <Button variant="contained" style={buttonStyle}>
@@ -83,7 +104,7 @@ export default function Perfil() {
                             </Button>
                             <Image
                                 src={"/assets/cuenta_docente.svg"}
-                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-290px" }}
+                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-230px" }}
                                 height={100}
                                 width={100}
                                 alt="Error image"
