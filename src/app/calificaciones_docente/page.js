@@ -59,7 +59,7 @@ const paperStyle = {
     marginLeft: "60px",
 };
 
-const divUserStyle = {
+const UserStyle = {
     display: "flex",
     flexDirection: "row",
     marginLeft: "-30px",
@@ -67,6 +67,8 @@ const divUserStyle = {
 
 const userInfoStyle = {
     fontSize: "26px",
+    display: "flex",
+    flexDirection: "column",
     marginLeft: "40px",
     marginTop: "10px"
 };
@@ -90,7 +92,6 @@ const StyledTab = styled(Tab)`
     fontfamily: Kanit, sans-serif;
   
     &:focus {
-      color: ${Theme.palette.primary.main};
       outline: 3px solid ${Theme.palette.primary.main};
     }
   
@@ -155,14 +156,13 @@ const EditButton = styled(Button)(({ theme }) => ({
 
 export default function Calificaciones_Estudiante() {
     const [expanded, setExpanded] = React.useState(false);
-    const [displayEST, setDisplayEST] = useState("flex");
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
     const EachStudentStyle = {
-        display: displayEST,
+        display: "flex",
         backgroundColor: "#f4eeff",
         borderRadius: "20px",
         width: "100%",
@@ -173,15 +173,15 @@ export default function Calificaciones_Estudiante() {
     };
 
     return (
-        <div style={wallpaperStyle}>
+        <paper style={wallpaperStyle}>
             <SidebarCloseDocente />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <Paper elevation={0} style={paperStyle}>
-                    <div style={{ display: "flex" }}>
-                        <div style={divUserStyle}>
+                    <paper style={{ display: "flex" }}>
+                        <paper style={UserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
-                            <div style={userInfoStyle}>
-                                Nombre: Nombre y Apellido<div>Id: ID</div>
+                            <paper style={userInfoStyle}>
+                                Nombre: Nombre y Apellido<paper>Id: ID</paper>
                                 <IconButton style={notificationsButtonStyle}>
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
@@ -199,18 +199,18 @@ export default function Calificaciones_Estudiante() {
                                             >
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
-                                                        <div>
+                                                        <paper>
                                                             <span>Profesor/a:</span>
                                                             <br style={{ marginTop: "20px" }} />
                                                             <span>Correo:</span>
-                                                        </div>
+                                                        </paper>
                                                     } />
                                                 <EditButton variant="contained">
-                                                    <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main}} />
                                                 </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <div style={EachStudentStyle}>
+                                                <paper style={EachStudentStyle}>
                                                     <ListItem>
                                                         <ListItemAvatar>
                                                             <Avatar style={{ color: "black", background: "transparent" }}>
@@ -219,12 +219,12 @@ export default function Calificaciones_Estudiante() {
                                                         </ListItemAvatar>
                                                         <ListItemText primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
                                                             secondary={
-                                                                <div>
+                                                                <paper>
                                                                     <span>juandanielu@est.example.edu</span>
-                                                                </div>
+                                                                </paper>
                                                             } />
                                                     </ListItem>
-                                                </div>
+                                                </paper>
                                             </AccordionDetails>
                                         </Accordion>
                                     </StyledTabPanel>
@@ -237,18 +237,18 @@ export default function Calificaciones_Estudiante() {
                                             >
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
-                                                        <div>
+                                                        <paper>
                                                             <span>Profesor/a:</span>
                                                             <br style={{ marginTop: "20px" }} />
                                                             <span>Correo:</span>
-                                                        </div>
+                                                        </paper>
                                                     } />
                                                 <EditButton variant="contained">
                                                     <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
                                                 </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <div style={EachStudentStyle}>
+                                                <paper style={EachStudentStyle}>
                                                     <ListItem>
                                                         <ListItemAvatar>
                                                             <Avatar style={{ color: "black", background: "transparent" }}>
@@ -257,21 +257,21 @@ export default function Calificaciones_Estudiante() {
                                                         </ListItemAvatar>
                                                         <ListItemText primary=<span style={{ fontWeight: "bold"}}>Juan Daniel Ubiera</span>
                                                             secondary={
-                                                                <div>
+                                                                <paper>
                                                                     <span>juandanielu@est.example.edu</span>
-                                                                </div>
+                                                                </paper>
                                                             } />
                                                     </ListItem>
-                                                </div>
+                                                </paper>
                                             </AccordionDetails>
                                         </Accordion>
                                     </StyledTabPanel>
                                 </Tabs>
-                            </div>
-                        </div>
-                    </div>
+                            </paper>
+                        </paper>
+                    </paper>
                 </Paper>
             </Paper>
-        </div>
+        </paper>
     );
 }
