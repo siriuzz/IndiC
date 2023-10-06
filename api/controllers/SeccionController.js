@@ -11,9 +11,9 @@ const getSecciones = async (req, res) => {
 
 const createSeccionesFromCsv = async (row) => {
     try {
+        console.log(row);
         const seccion = await Secciones.create({
             id_asignatura: row.id_asignatura,
-            id_horario: row.id_horario,
             numero: row.numero,
             id_docente: row.id_docente,
             aula: row.aula,

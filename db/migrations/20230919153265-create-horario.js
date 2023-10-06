@@ -10,6 +10,10 @@ module.exports = {
         unique: true,
         type: Sequelize.INTEGER
       },
+      id_seccion: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       dia: {
         type: Sequelize.INTEGER,
         allowNull: false
@@ -32,6 +36,17 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       }
+    });
+    await queryInterface.addConstraint('Horarios', {
+      fields: ['id_seccion'],
+      type: 'foreign key',
+      name: 'fk_horario_seccion',
+      references: {
+        table: 'Secciones',
+        field: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
     });
   },
   async down(queryInterface, Sequelize) {
