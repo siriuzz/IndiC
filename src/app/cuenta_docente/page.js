@@ -50,15 +50,15 @@ export default function Perfil() {
     const [telefono, setTelefono] = React.useState("###-###-####");
     const [user, setUser] = React.useState({});
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        setUser(user);
-        console.log(user.id);
-        axios.get(`http://${apiURL}/api/Docentes/${user.id}`).then((res) => {
-            const telefono = res.data.telefono;
-            setTelefono(telefono);
-        });
-    }, []);
+    // useEffect(() => {
+    //     const user = JSON.parse(localStorage.getItem("user"));
+    //     setUser(user);
+    //     console.log(user.id);
+    //     axios.get(`http://${apiURL}/api/Docentes/${user.id}`).then((res) => {
+    //         const telefono = res.data.telefono;
+    //         setTelefono(telefono);
+    //     });
+    // }, []);
 
     return (
         <div className={styles.wallpaper}>

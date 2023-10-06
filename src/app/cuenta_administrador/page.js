@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import styles from "./page.module.css";
-import SidebarCloseAdministrador from "@/components/Sidebar/sidebarCloseAdministrador/sidebarCloseAdministrador";
+import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/sidebarAdministrador";
 import { Button, IconButton, colors } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import EditIcon from "@mui/icons-material/EditOutlined";
@@ -14,6 +14,7 @@ import { Kanit } from '@next/font/google';
 import Link from "next/link";
 import axios from "axios";
 import { useEffect } from "react";
+import { useStyles } from "../layout";
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -64,18 +65,9 @@ export default function Perfil() {
 
     return (
         <div className={styles.wallpaper}>
-            <SidebarCloseAdministrador />
+            <SidebarAdministrador />
             <Paper elevation={3}
-                style={{
-                    backgroundColor: "white",
-                    borderRadius: "40px",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    marginRight: "20px",
-                    height: "92.3vh",
-                    width: "100%",
-                }}>
-
+                style={useStyles.paperBig}>
                 <div className={styles.label}>
                     Bienvenido!
                     <IconButton className={styles.notificationsButton}>
@@ -90,9 +82,7 @@ export default function Perfil() {
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
                         <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
-
                             Nombre: {user.nombre}<div>Id: {user.id}<div>Estado: {user.id_estado == 1 ? "Activo" : "Inactivo"}</div></div>
-
                             <div>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo</div>
                                 <Link href="/" style={{ color: '#979797' }}>
