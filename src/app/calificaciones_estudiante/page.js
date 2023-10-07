@@ -314,7 +314,8 @@ export default function Calificaciones_Estudiante() {
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación Base</span> secondary="50" />
                             <ListItemText style={CreditosSytle} primary=<span style={{ textCreditosStyle }}>Calificación</span> secondary="49" />
                         </ListItem>
-                    </StyledTabPanel>
+                    </StyledTabPanel>*/
+                    }
                 </Tabs>
                 <div style={paperBuscarStyle}>
                     <SearchBar placeholder={"Buscar asignaturas"} />
