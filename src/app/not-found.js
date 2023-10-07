@@ -43,18 +43,18 @@ export default function NotFound() {
     <div style={containerStyle}>
       <Image
         src={"/assets/404.svg"}
-        style={{height: "100vh", width: "100vw"}}
+        style={{ height: "100vh", width: "100vw" }}
         height={100}
         width={100}
         alt="Error image"
       />
 
-        <Button onClick={goBack} variant="contained" style={buttonStyle}>
-          <KeyboardBackspaceIcon style={{ height: "25px", width: "25px" }} />
-          <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", marginLeft: "5px" }}>
-            Volver a la página anterior
-          </div>
-        </Button>
+      <Button onClick={goBack} variant="contained" style={buttonStyle}>
+        <KeyboardBackspaceIcon style={{ height: "25px", width: "25px" }} />
+        <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", marginLeft: "5px" }}>
+          Volver a la página anterior
+        </div>
+      </Button>
     </div>
   );
 }
