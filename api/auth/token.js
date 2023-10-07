@@ -4,6 +4,9 @@ const router = app.router;
 require('dotenv').config()
 
 router.post('/token/validate', async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.description = 'Endpoint para validar token.'
+
     const { token } = req.body;
     // console.log(req.body)
     // console.log(token);

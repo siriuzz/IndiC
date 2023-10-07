@@ -14,21 +14,23 @@ router.get('/Asignaturas', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).post('/Asignaturas', (req, res) => {
-
-}).put('/Asignaturas', (req, res) => {
-
-}).patch('/Asignaturas', (req, res) => {
-
-});
+})
 
 router.post('/Asignaturas/upload', upload.single('csv'), (req, res) => {
-    /* #swagger.tags = ['Asignatura']
+    /* #swagger.tags = ['Asignaturas']
     #swagger.description = 'Endpoint para crear asignaturas desde un archivo CSV.'
     /*	#swagger.responses[200] = {
             description: 'Asignaturas creadas correctamente.',
             schema: { $ref: "#/components/schemas/Asignatura" }
-    } */
+    }
+    #swagger.contentType = 'multipart/form-data'
+
+    #swagger.parameters['file'] = {
+        in: 'formData',
+        type: 'file',
+        description: 'Archivo csv con los datos de las carreras.'
+    } 
+    */
     const file = fs.createReadStream(req.file.path);
     config.complete = async function (results) {
         // console.log(results);

@@ -23,6 +23,7 @@ router.get('/Estudiantes', async (req, res) => {
     }
 
 }).post("/Estudiantes", async (req, res) => {
+    // #swagger.tags = ['Estudiantes']
     // #swagger.description = 'Endpoint para crear un estudiante.'
     /*	#swagger.responses[200] = {
             description: 'Estudiante creado correctamente.',
@@ -60,8 +61,8 @@ router.get('/Estudiantes/:id', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).patch('/Estudiantes/:id', async (req, res) => {
-    // #swagger.description = 'Endpoint para actualizar un estudiante.'
+}).patch('/Estudiantes/CambiarPassword/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para actualizar la contraseña de un estudiante.'
     /*	#swagger.responses[200] = {
             description: 'Estudiante actualizado correctamente.',
     } */
@@ -75,7 +76,6 @@ router.get('/Estudiantes/:id', async (req, res) => {
     ] */
     try {
         const result = await EstudianteController.updatePassword(req, res);
-        console.log("Este es el resultadooooo", result);
         res.json(result);
     } catch (error) {
         return res.status(500).json({ error: error.message });
@@ -84,6 +84,16 @@ router.get('/Estudiantes/:id', async (req, res) => {
 });
 
 router.post('/Estudiantes/upload', upload.single('csv'), async (req, res) => {
+    /* #swagger.tags = ['Estudiantes']
+    #swagger.description = 'Endpoint para subir un archivo csv con los datos de los estudiantes.'
+    #swagger.contentType = 'multipart/form-data'
+
+    #swagger.parameters['file'] = {
+        in: 'formData',
+        type: 'file',
+        description: 'Archivo csv con los datos de los estudiantes.'
+    }
+    */
     const file = fs.createReadStream(req.file.path);
     config.complete = async function (results) {
         // console.log(results);
