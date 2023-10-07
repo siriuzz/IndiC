@@ -70,6 +70,7 @@ export default function Perfil() {
             setCondicionAcademica("En Peligro");
         }
     }, []);
+    
     return (
         <div className={styles.wallpaper}>
             <SidebarClose />

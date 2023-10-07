@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import SidebarCloseDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
+import SidebarCloseDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
 import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -59,7 +59,7 @@ const paperStyle = {
     marginLeft: "60px",
 };
 
-const divUserStyle = {
+const UserStyle = {
     display: "flex",
     flexDirection: "row",
     marginLeft: "-30px",
@@ -67,6 +67,8 @@ const divUserStyle = {
 
 const userInfoStyle = {
     fontSize: "26px",
+    display: "flex",
+    flexDirection: "column",
     marginLeft: "40px",
     marginTop: "10px"
 };
@@ -90,7 +92,6 @@ const StyledTab = styled(Tab)`
     fontfamily: Kanit, sans-serif;
   
     &:focus {
-      color: ${Theme.palette.primary.main};
       outline: 3px solid ${Theme.palette.primary.main};
     }
   
@@ -155,14 +156,13 @@ const EditButton = styled(Button)(({ theme }) => ({
 
 export default function Calificaciones_Estudiante() {
     const [expanded, setExpanded] = React.useState(false);
-    const [displayEST, setDisplayEST] = useState("flex");
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
     const EachStudentStyle = {
-        display: displayEST,
+        display: "flex",
         backgroundColor: "#f4eeff",
         borderRadius: "20px",
         width: "100%",
@@ -173,44 +173,44 @@ export default function Calificaciones_Estudiante() {
     };
 
     return (
-        <div style={wallpaperStyle}>
+        <paper style={wallpaperStyle}>
             <SidebarCloseDocente />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <Paper elevation={0} style={paperStyle}>
-                    <div style={{ display: "flex" }}>
-                        <div style={divUserStyle}>
+                    <paper style={{ display: "flex" }}>
+                        <paper style={UserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
-                            <div style={userInfoStyle}>
-                                Nombre: Nombre y Apellido<div>Id: ID</div>
+                            <paper style={userInfoStyle}>
+                                Nombre: Nombre y Apellido<paper>Id: ID</paper>
                                 <IconButton style={notificationsButtonStyle}>
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
-                                <Tabs className={kanit.className}  defaultValue={0}>
+                                <Tabs className={kanit.className} defaultValue={0}>
                                     <StyledTabsList>
                                         <StyledTab value={0}>Finales</StyledTab>
                                         <StyledTab value={1}>Medio Termino</StyledTab>
                                     </StyledTabsList>
                                     <StyledTabPanel style={{ height: "20" }} value={0}>
-                                        <Accordion style={{border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px"}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                             <AccordionSummary
-                                                expandIcon={<ExpandMoreIcon style={{color: Theme.palette.primary.main, height: "35px", width: "35px"}} />}
+                                                expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
                                                 id="panel1bh-header"
                                             >
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
-                                                        <div>
+                                                        <paper>
                                                             <span>Profesor/a:</span>
                                                             <br style={{ marginTop: "20px" }} />
                                                             <span>Correo:</span>
-                                                        </div>
+                                                        </paper>
                                                     } />
                                                 <EditButton variant="contained">
-                                                    <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                 </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <div style={EachStudentStyle}>
+                                                <paper style={EachStudentStyle}>
                                                     <ListItem>
                                                         <ListItemAvatar>
                                                             <Avatar style={{ color: "black", background: "transparent" }}>
@@ -219,59 +219,59 @@ export default function Calificaciones_Estudiante() {
                                                         </ListItemAvatar>
                                                         <ListItemText primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
                                                             secondary={
-                                                                <div>
+                                                                <paper>
                                                                     <span>juandanielu@est.example.edu</span>
-                                                                </div>
+                                                                </paper>
                                                             } />
                                                     </ListItem>
-                                                </div>
+                                                </paper>
                                             </AccordionDetails>
                                         </Accordion>
                                     </StyledTabPanel>
                                     <StyledTabPanel value={1}>
-                                    <Accordion style={{border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px"}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                             <AccordionSummary
-                                                expandIcon={<ExpandMoreIcon style={{color: Theme.palette.primary.main, height: "35px", width: "35px"}} />}
+                                                expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
                                                 id="panel1bh-header"
                                             >
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
-                                                        <div>
+                                                        <paper>
                                                             <span>Profesor/a:</span>
                                                             <br style={{ marginTop: "20px" }} />
                                                             <span>Correo:</span>
-                                                        </div>
+                                                        </paper>
                                                     } />
                                                 <EditButton variant="contained">
-                                                    <EditIcon style={{ height: "28", width: "28", color: "#6750a4" }} />
+                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                 </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <div style={EachStudentStyle}>
+                                                <paper style={EachStudentStyle}>
                                                     <ListItem>
                                                         <ListItemAvatar>
                                                             <Avatar style={{ color: "black", background: "transparent" }}>
                                                                 <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
                                                             </Avatar>
                                                         </ListItemAvatar>
-                                                        <ListItemText primary=<span style={{ fontWeight: "bold"}}>Juan Daniel Ubiera</span>
+                                                        <ListItemText primary=<span style={{ fontWeight: "bold" }}>Juan Daniel Ubiera</span>
                                                             secondary={
-                                                                <div>
+                                                                <paper>
                                                                     <span>juandanielu@est.example.edu</span>
-                                                                </div>
+                                                                </paper>
                                                             } />
                                                     </ListItem>
-                                                </div>
+                                                </paper>
                                             </AccordionDetails>
                                         </Accordion>
                                     </StyledTabPanel>
                                 </Tabs>
-                            </div>
-                        </div>
-                    </div>
+                            </paper>
+                        </paper>
+                    </paper>
                 </Paper>
             </Paper>
-        </div>
+        </paper>
     );
 }
