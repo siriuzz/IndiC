@@ -14,13 +14,13 @@ import Link from "next/link";
 import axios from "axios";
 import { useEffect } from "react";
 
-import SidebarDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
+import SidebarDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
 import { useStyles } from "../layout";
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
-const  editButtonStyle = {
+const editButtonStyle = {
     borderRadius: "20px",
     marginLeft: "-55px",
     marginTop: "165px",
@@ -29,7 +29,7 @@ const  editButtonStyle = {
     backgroundColor: "#e4d1d1",
 };
 
-    const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
 const buttonStyle = {
     position: "absolute",
@@ -50,15 +50,15 @@ export default function Perfil() {
     const [telefono, setTelefono] = React.useState("###-###-####");
     const [user, setUser] = React.useState({});
 
-    // useEffect(() => {
-    //     const user = JSON.parse(localStorage.getItem("user"));
-    //     setUser(user);
-    //     console.log(user.id);
-    //     axios.get(`http://${apiURL}/api/Docentes/${user.id}`).then((res) => {
-    //         const telefono = res.data.telefono;
-    //         setTelefono(telefono);
-    //     });
-    // }, []);
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        setUser(user);
+        console.log(user.id);
+        axios.get(`http://${apiURL}/api/Docentes/${user.id}`).then((res) => {
+            const telefono = res.data.telefono;
+            setTelefono(telefono);
+        });
+    }, []);
 
     return (
         <div className={styles.wallpaper}>

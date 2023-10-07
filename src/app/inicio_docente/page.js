@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import SidebarDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
+import SidebarDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
 import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -75,7 +75,7 @@ const userInfoStyle = {
     fontSize: "30px",
     marginLeft: "50px",
     marginTop: "5px",
-    width: "280px",
+    width: "75%",
 };
 
 const CalendarStyle = {
@@ -247,7 +247,7 @@ export default function Inicio_docente() {
                         </List>
                     </Paper>
                     <div style={LinearStyle}>
-                    <div>Promedio de calificaciones por asignatura: </div>
+                        <div>Promedio de calificaciones por asignatura: </div>
                         <Line data={data} />
                     </div>
                 </ThemeProvider>
