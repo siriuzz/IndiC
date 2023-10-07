@@ -21,13 +21,23 @@ router.get('/Docentes', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).get('/Docentes/:id', async (req, res) => {
+});
+
+router.get('/Docentes/:id', async (req, res) => {
 
     // #swagger.description = 'Endpoint para obtener un Docente por su ID.'
     /*	#swagger.responses[200] = {
             description: 'Docente obtenido correctamente.',
             schema: { $ref: "#/components/schemas/Docente" }
-    } */
+    } 
+    #swagger.contentType = 'multipart/form-data'
+
+    #swagger.parameters['file'] = {
+        in: 'formData',
+        type: 'file',
+        description: 'Archivo csv con los datos de las carreras.'
+    }
+    */
     try {
         const result = await DocenteController.getDocenteById(req, res);
         console.log(result);
@@ -36,16 +46,8 @@ router.get('/Docentes', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).post('/Docentes', (req, res) => {
+})
 
-
-}).put('/Docentes', (req, res) => {
-
-
-}).patch('/Docentes', (req, res) => {
-
-
-});
 
 router.post('/Docentes/upload', upload.single('csv'), async (req, res) => {
     try {
