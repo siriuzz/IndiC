@@ -14,7 +14,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useEffect } from "react";
 
-import SidebarDocente from "@/components/Sidebar/sidebarDocente/sidebarDocente";
+import SidebarDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
 import { useStyles } from "../layout";
 
 

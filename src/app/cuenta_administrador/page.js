@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import styles from "./page.module.css";
-import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/sidebarAdministrador";
+import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/SidebarAdministrador";
 import { Button, IconButton, colors } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import EditIcon from "@mui/icons-material/EditOutlined";
