@@ -81,6 +81,7 @@ export default function Perfil() {
                     marginTop: "20px",
                     marginBottom: "20px",
                     marginRight: "20px",
+                    marginLeft: "5rem",
                     height: "92.3vh",
                     width: "100%",
                 }}>
@@ -95,7 +96,7 @@ export default function Perfil() {
                     <div style={{ display: "flex", flexDirection: "row" }}>
                         <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={130} width={130} style={{ marginLeft: "60px", marginTop: "20px" }}
                         />
-                        <EditButton variant="contained" style={{ marginTop: "130px" }}>
+                        <EditButton variant="contained" style={{ marginTop: "130px" }} >
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
 
@@ -130,6 +131,6 @@ export default function Perfil() {
                     </div>
                 </Paper>
             </Paper>
-        </div>
+        </div >
     );
 }
