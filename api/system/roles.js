@@ -21,10 +21,6 @@ app.router.get('/Roles', async (req, res) => {
     const Rol = await RolController.createRol(req, res);
     return res.status(200).json(Rol);
 
-}).put('/Roles', (req, res) => {
-
-}).patch('/Roles', (req, res) => {
-
 });
 
 module.exports = router;

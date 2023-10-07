@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 
 
 router.get('/Admins', async (req, res) => {
-
+    // #swagger.tags = ['Admins']
     // #swagger.description = 'Endpoint para obtener todos los administradores.'
     /*	#swagger.responses[200] = {
             description: 'Administradores obtenidos correctamente.',
@@ -26,6 +26,7 @@ router.get('/Admins', async (req, res) => {
     }
 
 }).get('/Admins/:id', async (req, res) => {
+    // #swagger.tags = ['Admins']
 
     // #swagger.description = 'Endpoint para obtener un Administrador por su ID.'
     /*	#swagger.responses[200] = {
@@ -40,20 +41,13 @@ router.get('/Admins', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).post('/Admins', (req, res) => {
-
-
-}).put('/Admins', (req, res) => {
-
-
-}).patch('/Admins', (req, res) => {
-
-
-});
+})
 
 router.post('/Admins/upload', upload.single('csv'), async (req, res) => {
     /* #swagger.tags = ['Admins']
          #swagger.description = 'Endpoint para subir un archivo csv con los datos de los administradores.'
+    #swagger.contentType = 'multipart/form-data'
+
          #swagger.parameters['file'] = {
               in: 'formData',
               type: 'file',
