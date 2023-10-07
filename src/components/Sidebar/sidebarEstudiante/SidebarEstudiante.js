@@ -138,7 +138,7 @@ export default function SidebarCloseEstudiante() {
             backgroundColor: backgroundColor,
             borderTopRightRadius: "40px",
             borderBottomRightRadius: "40px",
-            zindex: 1,
+            zIndex: 1,
             paddingLeft: "0.7rem"
         }}>
             <ThemeProvider theme={theme}>
