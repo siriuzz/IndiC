@@ -58,15 +58,15 @@ const paperStyle = {
     display: "flex",
 };
 
-const divUserStyle = {
+const containerUserStyle = {
     display: "flex",
     flexDirection: "row",
 };
 
-const divUserInfoStyle = {
-    fontSize: "26px",
+const userInfoStyle = {
+    fontSize: "18px",
+    color: "grey",
     marginLeft: "40px",
-    // marginTop: "px",
     width: "75%",
 };
 
@@ -248,23 +248,13 @@ export default function Perfil() {
                 <ThemeProvider theme={theme}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <Paper elevation={0} style={paperStyle}>
-                            <div style={divUserStyle}>
+                            <div style={containerUserStyle}>
                                 <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
                                 />
-                                <div style={divUserInfoStyle}>
-                                    {/* Nombres y Apellidos
-                                    <div>
-                                        Id
-                                        <div>
-                                            Carrera
-                                        </div>
-                                    </div> */
-                                    }
-                                    <div>Nombre: {estudiante.nombre}</div>
-                                    <div>Id: {estudiante.id}</div>
-                                    <div>Carrera: {carrera.carrera}</div>
-                                    {/* <div>{data.id}</div>
-                                    <div>{data.id_carrera}</div> */}
+                                <div style={userInfoStyle}>
+                                    <div>Nombre: <div style={{fontSize: "26px", color: "black"}}>{estudiante.nombre}</div></div>
+                                    <div>ID: <div style={{fontSize: "26px", color: "black"}}>{estudiante.id}</div></div>
+                                    <div>Carrera: <div style={{fontSize: "26px", color: "black"}}>{carrera.carrera}</div></div>
                                 </div>
                             </div>
                         </Paper>

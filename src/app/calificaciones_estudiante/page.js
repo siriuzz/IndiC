@@ -222,7 +222,7 @@ export default function Calificaciones_Estudiante() {
                     <paper style={userInfoStyle}>
                         <paper style={{ display: "inline-flex" }}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
-                            <paper style={{ display: "flex", flexDirection: "column", marginLeft: "20px", marginTop: "10px" }}>Nombre: {user.nombre}<paper>Id: {user.id}</paper></paper>
+                            <paper style={{ display: "flex", flexDirection: "column", marginLeft: "20px", fontSize: "18px", color: "grey" }}>Nombre: <div style={{fontSize: "26px", color: "black"}}>{user.nombre}</div><paper>ID: <div style={{fontSize: "26px", color: "black"}}>{user.id}</div></paper></paper>
                         </paper>
                     </paper>
                     <IconButton style={notificationsButtonStyle}>

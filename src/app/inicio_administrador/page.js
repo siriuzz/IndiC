@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from "react";
-import SidebarCloseAdministrador from "@/components/Sidebar/sidebarCloseAdministrador/sidebarCloseAdministrador";
+import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/sidebarAdministrador";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
@@ -165,7 +165,7 @@ export default function InicioAdministrador() {
     }, []);
     return (
         <div style={wallpaperStyle}>
-            <SidebarCloseAdministrador />
+            <SidebarAdministrador />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <ThemeProvider theme={theme}>
                     <Paper elevation={0} style={{ display: "inline-flex", justifyContent: "space-between", width: "100%" }}>

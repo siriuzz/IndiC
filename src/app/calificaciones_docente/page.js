@@ -66,7 +66,8 @@ const UserStyle = {
 };
 
 const userInfoStyle = {
-    fontSize: "26px",
+    fontSize: "18px",
+    color: "grey",
     display: "flex",
     flexDirection: "column",
     marginLeft: "40px",
@@ -181,7 +182,7 @@ export default function Calificaciones_Estudiante() {
                         <paper style={UserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
                             <paper style={userInfoStyle}>
-                                Nombre: Nombre y Apellido<paper>Id: ID</paper>
+                                Nombre: <div style={{fontSize: "26px", color: "black"}}>Nombre y Apellido</div><paper>ID: <div style={{fontSize: "26px", color: "black"}}>ID</div></paper>
                                 <IconButton style={notificationsButtonStyle}>
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
