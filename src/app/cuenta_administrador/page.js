@@ -53,15 +53,15 @@ export default function Perfil() {
     const [user, setUser] = React.useState({});
     const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        setUser(user);
-        console.log(user.id);
-        axios.get(`http://${apiURL}/api/Admins/${user.id}`).then((res) => {
-            const telefono = res.data.telefono;
-            setTelefono(telefono);
-        });
-    }, []);
+    // useEffect(() => {
+    //     const user = JSON.parse(localStorage.getItem("user"));
+    //     setUser(user);
+    //     console.log(user.id);
+    //     axios.get(`http://${apiURL}/api/Admins/${user.id}`).then((res) => {
+    //         const telefono = res.data.telefono;
+    //         setTelefono(telefono);
+    //     });
+    // }, []);
 
     return (
         <div className={styles.wallpaper}>
@@ -81,9 +81,9 @@ export default function Perfil() {
                         <EditButton variant="contained">
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
-                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "70px" }}>
-                            Nombre: {user.nombre}<div>Id: {user.id}<div>Estado: {user.id_estado == 1 ? "Activo" : "Inactivo"}</div></div>
-                            <div>
+                        <div style={{ fontSize: "18px", marginLeft: "20px", marginTop: "70px", color: "grey" }}>
+                            Nombre: <div style={{fontSize: "26px", color: "black"}}>{user.nombre}</div><div>Id: <div style={{fontSize: "26px", color: 'black'}}>{user.id}</div><div>Estado: <div style={{fontSize: "24px", color: "black"}}>{user.id_estado == 1 ? "Activo" : "Inactivo"}</div></div></div>
+                            <div style={{color: "black"}}>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo</div>
                                 <Link href="/" style={{ color: '#979797' }}>
                                     <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{user.correo} </div>
