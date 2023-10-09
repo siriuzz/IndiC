@@ -300,9 +300,9 @@ export default function Configuración() {
                                         />
                                     </RadioGroup>
                                 </FormControl>
-                                <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", width: "400px", marginLeft: "650px", marginTop: "-490px" }}>
+                                <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", width: "400px", marginLeft: "650px", marginTop: "-490px", height:"200px"}}>
                                     Medidas para Índice Academico
-                                    <FormControl sx={{ m: 1, minWidth: 120, borderColor: "#6750A4", marginTop: "50px", marginLeft: "-350px", }} size="small">
+                                    <FormControl sx={{ m: 1, minWidth: 120, borderColor: "#6750A4", marginTop: "100px", marginLeft: "-350px", }} size="small">
                                         <InputLabel id="demo-simple-select-autowidth-label">Sistema 1</InputLabel>
                                         <Select
                                             labelId="demo-simple-select-autowidth-label"
@@ -404,7 +404,7 @@ export default function Configuración() {
                                         </Select>
                                     </FormControl>
 
-                                    <FormControl sx={{ m: 1, minWidth: 120, marginTop: "50px", marginLeft: "70px", }} size="small">
+                                    <FormControl sx={{ m: 1, minWidth: 120, marginTop: "100px", marginLeft: "70px", }} size="small">
                                         <InputLabel id="demo-simple-select-autowidth-label">Sistema 2</InputLabel>
                                         <Select
                                             labelId="demo-simple-select-autowidth-label"
@@ -482,7 +482,7 @@ export default function Configuración() {
                                         </Select>
                                     </FormControl>
 
-                                    <FormControl sx={{ m: 1, minWidth: 120, borderBlockColor: "#6750A4", marginTop: "50px", marginLeft: "70px", }} size="small">
+                                    <FormControl sx={{ m: 1, minWidth: 120, borderBlockColor: "#6750A4", marginTop: "100px", marginLeft: "70px", }} size="small">
                                         <InputLabel id="demo-simple-select-autowidth-label">Sistema 3</InputLabel>
                                         <Select
                                             labelId="demo-simple-select-autowidth-label"
@@ -576,7 +576,7 @@ export default function Configuración() {
                                         >
                                             <FormControlLabel
                                                 value="Sistema 1"
-                                                control={<Radio style={{ color: "#9370DB", marginLeft: "20px" }} />}
+                                                control={<Radio style={{ color: "#9370DB", marginLeft: "100px" }} />}
                                             />
                                             <FormControlLabel
                                                 value="Sistema 2"
@@ -587,6 +587,13 @@ export default function Configuración() {
                                         </RadioGroup>
                                     </FormControl>
                                 </div>
+                                <Image
+                                    src={"/assets/settings.svg"}
+                                    style={{ height: "300px", width: "300px", marginLeft:"600px", opacity: "0.5", marginTop: "-20px"}}
+                                    height={100}
+                                    width={100}
+                                    alt="Settings Image"
+                                />
                             </div>
                         </div>
                     </div>
