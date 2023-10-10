@@ -196,16 +196,15 @@ export default function Calificaciones_Estudiante() {
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
-                                                id="panel1bh-header"
-                                            >
+                                                id="panel1bh-header">
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
-                                                        <paper>
+                                                        <div>
                                                             <span>Profesor/a:</span>
                                                             <br style={{ marginTop: "20px" }} />
                                                             <span>Correo:</span>
-                                                        </paper>
-                                                    } />
+                                                        </div>
+                                                    }/>
                                                 <EditButton variant="contained">
                                                     <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                 </EditButton>
