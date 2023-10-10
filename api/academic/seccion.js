@@ -53,4 +53,13 @@ router.post('/Secciones/upload', upload.single('csv'), async (req, res) => {
     }
 });
 
+router.get('/Secciones/Seleccion/:id', async (req, res) => {
+    try {
+        const result = await SeccionController.getSeleccion(req, res);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;
