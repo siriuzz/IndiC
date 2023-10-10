@@ -30,11 +30,43 @@ router.get('/Estudiante_Seccion/:id', async (req, res) => {
     }
 });
 
+router.post('/Estudiante_Seccion/seleccion/:id_estudiante/Seccion/:id_seccion', async (req, res) => {
+    //endpoint para seleccion
+
+    /* #swagger.tags = ['Estudiante_Seccion']
+            #swagger.description = 'Endpoint para crear las secciones de un estudiante.'
+            #swagger.requestBody = {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: { $ref: "#/components/schemas/Estudiante_Seccion" }
+                    }
+                }
+            }
+             */
+    try {
+        const result = await EstudianteSeccionController.createEstudianteSeccion(req, res);
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}
+).put('/Estudiante_Seccion/:id_estudiante/Seccion/:id_seccion', async (req, res) => {
+    //endpoint para calificaciones
+    /* #swagger.tags = ['Estudiante_Seccion']
+            #swagger.description = 'Endpoint para actualizar las secciones de un estudiante.' */
+
+    try {
+        const result = await EstudianteSeccionController.updateEstudianteSeccion(req, res);
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/Estudiante_Seccion/calcularIndice/:id', async (req, res) => {
     /* #swagger.tags = ['Estudiante_Seccion']
             #swagger.description = 'Endpoint para obtener las secciones de un estudiante.' */
-
-
     try {
         const result = await EstudianteSeccionController.calcularIndice(req, res);
         return res.json(result);
@@ -45,6 +77,8 @@ router.get('/Estudiante_Seccion/calcularIndice/:id', async (req, res) => {
 });
 
 router.get('/Estudiante_Seccion/CalcularIndicePorPeriodo/:id', async (req, res) => {
+    /* #swagger.tags = ['Estudiante_Seccion']
+            #swagger.description = 'Endpoint para obtener las secciones de un estudiante.' */
     try {
         const result = await EstudianteSeccionController.calcularIndicePorPeriodo(req, res);
         return res.json(result);

@@ -64,6 +64,19 @@ const getSeleccion = async (req, res) => {
     }
 }
 
+const updateSeccion = async (req, res) => {
+    try {
+        const seccion = await Secciones.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return seccion;
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 const createSeccionesFromCsv = async (row) => {
     try {
         console.log(row);
@@ -85,5 +98,6 @@ module.exports = {
     getAllSecciones,
     createSeccionesFromCsv,
     getSeccionById,
-    getSeleccion
+    getSeleccion,
+    updateSeccion
 }
