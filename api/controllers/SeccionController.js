@@ -39,7 +39,8 @@ const getSeleccion = async (req, res) => {
             where: {
                 id: {
                     [Op.notIn]: seccionesTomadasIds
-                }
+                },
+                is_active: 1
             },
             include: [{
                 model: Asignatura,
