@@ -42,7 +42,7 @@ const wallpaperStyle = {
 
 const notificationsButtonStyle = {
     color: "black",
-    marginTop: "5px",
+    marginTop: "-10px",
     width: "35px",
     height: "35px",
     display: "flex",
@@ -52,7 +52,6 @@ const notificationsButtonStyle = {
 const notificationsIconStyle = {
     height: "35px",
     width: "35px",
-    marginTop: "-30px"
 };
 
 const labelStyle = {
@@ -64,17 +63,18 @@ const labelStyle = {
     justifyContent: "space-between",
 };
 
-const divUserStyle = {
+const containerUserStyle = {
     display: "flex",
     float: "right",
     marginLeft: "90px",
-    marginTop: "40px"
+    marginTop: "30px"
 };
 
 const userInfoStyle = {
-    fontSize: "30px",
-    marginLeft: "50px",
-    marginTop: "5px",
+    fontSize: "18px",
+    color: "grey",
+    marginTop: "-20px",
+    marginLeft: "40px",
     width: "75%",
 };
 
@@ -82,7 +82,7 @@ const CalendarStyle = {
     fontSize: "24px",
     float: "right",
     marginRight: "90px",
-    marginTop: "-60px",
+    marginTop: "-80px",
     height: "310px",
     borderRadius: "10px",
     border: "2px solid #A6B1E1"
@@ -91,7 +91,6 @@ const CalendarStyle = {
 const LinearStyle = {
     width: "570px",
     height: "auto",
-    marginTop: "-10px",
     marginLeft: "80px",
 }
 
@@ -172,11 +171,11 @@ export default function Inicio_docente() {
                 </div>
                 <ThemeProvider theme={theme}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <div style={divUserStyle}>
+                        <div style={containerUserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150} />
                             <div style={userInfoStyle}>
-                                Nombre: {" " + profesor.nombre}<br></br>
-                                Id: {" " + profesor.id}<div>Estado: {" " + profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div>
+                                Nombre: <div style={{fontSize: "26px", color: "black"}}>{" " + profesor.nombre}</div>
+                                ID: <div style={{fontSize: "26px", color: "black"}}>{" " + profesor.id}</div><div>Estado: <div style={{fontSize: "26px", color: "black"}}>{" " + profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div></div>
                             </div>
                         </div>
                         <Paper elevation={2} style={CalendarStyle}>

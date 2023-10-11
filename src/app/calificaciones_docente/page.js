@@ -25,6 +25,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Theme from "../theme";
+import Badge from '@mui/material/Badge';
+
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -66,7 +68,8 @@ const UserStyle = {
 };
 
 const userInfoStyle = {
-    fontSize: "26px",
+    fontSize: "18px",
+    color: "grey",
     display: "flex",
     flexDirection: "column",
     marginLeft: "40px",
@@ -130,7 +133,6 @@ const StyledTabsList = styled(TabsList)(
     justify-content: center;
     align-content: space-between;
     margin-left: 80px;
-    margin-top: 40px;
     `,
 );
 
@@ -181,9 +183,11 @@ export default function Calificaciones_Estudiante() {
                         <paper style={UserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
                             <paper style={userInfoStyle}>
-                                Nombre: Nombre y Apellido<paper>Id: ID</paper>
+                                Nombre: <div style={{ fontSize: "26px", color: "black" }}>Nombre y Apellido</div><paper>ID: <div style={{ fontSize: "26px", color: "black" }}>ID</div></paper>
                                 <IconButton style={notificationsButtonStyle}>
-                                    <NotificationsIcon style={notificationsIconStyle} />
+                                <Badge badgeContent={1} color="secondary">
+                            <NotificationsIcon style={notificationsIconStyle} />
+                            </Badge>
                                 </IconButton>
                                 <Tabs className={kanit.className} defaultValue={0}>
                                     <StyledTabsList>
@@ -195,8 +199,7 @@ export default function Calificaciones_Estudiante() {
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
-                                                id="panel1bh-header"
-                                            >
+                                                id="panel1bh-header">
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
                                                         <paper>
@@ -261,6 +264,9 @@ export default function Calificaciones_Estudiante() {
                                                                     <span>juandanielu@est.example.edu</span>
                                                                 </paper>
                                                             } />
+                                                        <EditButton variant="contained">
+                                                            <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
+                                                        </EditButton>
                                                     </ListItem>
                                                 </paper>
                                             </AccordionDetails>
