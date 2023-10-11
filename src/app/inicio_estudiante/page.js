@@ -15,6 +15,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
+import Badge from '@mui/material/Badge';
+
 // const checkTokenValidity = require("@/utils/jwtValidation").checkTokenValidity;
 
 
@@ -242,8 +244,10 @@ export default function Perfil() {
                 <div className={kanit.className} style={labelStyle}>
                     Bienvenido!
                     <IconButton style={notificationsButtonStyle}>
+                    <Badge badgeContent={1} color="secondary">
                         <NotificationsIcon style={notificationsIconStyle} />
-                    </IconButton>
+                        </Badge>
+                   </IconButton>
                 </div>
                 <ThemeProvider theme={theme}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
