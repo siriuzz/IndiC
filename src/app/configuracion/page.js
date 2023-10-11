@@ -19,7 +19,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ListItemText from '@mui/material/ListItemText';
 import Badge from '@mui/material/Badge';
-
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 
 
 
@@ -126,6 +132,28 @@ const GuardarStyle = {
     width: "100px",
 };
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
+const EachAsignaturaStyle = {
+    backgroundColor: "#f4eeff",
+    borderRadius: "5px",
+    width: "370px",
+    justifySelf: "center",
+    marginLeft: "10px",
+    marginTop: "5px",
+    marginBottom: "10px",
+};
+
 
 export default function Configuración() {
 
@@ -135,6 +163,9 @@ export default function Configuración() {
         setAge(event.target.value);
     };
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
 
@@ -144,14 +175,33 @@ export default function Configuración() {
                     <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={80} width={80} />
                     <div style={userInfoStyle}>
                         Nombre: Nombre y Apellido<div>Id: ID</div>
-                       <div style={{marginLeft:"1120px", marginTop:"-80px"}}>
-                       <IconButton style={notificationsButtonStyle}>
-                        <Badge badgeContent={1} color="secondary">
-                            <NotificationsIcon style={notificationsIconStyle} />
-                            </Badge>
-                        </IconButton>
-                       </div>
-                     
+                        <div style={{ marginLeft: "1120px", marginTop: "-80px" }}>
+                            <IconButton style={notificationsButtonStyle} onClick={handleOpen}>
+                                <Badge badgeContent={1} color="secondary">
+                                    <NotificationsIcon style={notificationsIconStyle} />
+                                </Badge>
+                                <Modal
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box sx={style}>
+                                        <div style={EachAsignaturaStyle}>
+                                            <ListItem>
+                                                <ListItemAvatar>
+                                                    <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                                        <BookmarkBorderOutlinedIcon />
+                                                    </Avatar>
+                                                </ListItemAvatar>
+                                                <ListItemText primary= "hola" secondary="Sección"/>
+                                            </ListItem>
+                                        </div>
+                                    </Box>
+                                </Modal>
+                            </IconButton>
+                        </div>
+
                         <Button style={GuardarStyle}>
                             <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", fontWeight: "500", width: "270px", color: "#381E72" }}>
                                 Guardar
@@ -307,7 +357,7 @@ export default function Configuración() {
                                         />
                                     </RadioGroup>
                                 </FormControl>
-                                <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", width: "400px", marginLeft: "650px", marginTop: "-490px", height:"200px"}}>
+                                <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", width: "400px", marginLeft: "650px", marginTop: "-490px", height: "200px" }}>
                                     Medidas para Índice Academico
                                     <FormControl sx={{ m: 1, minWidth: 120, borderColor: "#6750A4", marginTop: "100px", marginLeft: "-350px", }} size="small">
                                         <InputLabel id="demo-simple-select-autowidth-label">Sistema 1</InputLabel>
@@ -596,7 +646,7 @@ export default function Configuración() {
                                 </div>
                                 <Image
                                     src={"/assets/settings.svg"}
-                                    style={{ height: "300px", width: "300px", marginLeft:"600px", opacity: "0.5", marginTop: "-20px"}}
+                                    style={{ height: "300px", width: "300px", marginLeft: "600px", opacity: "0.5", marginTop: "-20px" }}
                                     height={100}
                                     width={100}
                                     alt="Settings Image"
