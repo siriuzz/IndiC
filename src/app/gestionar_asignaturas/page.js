@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { Button, IconButton, Paper, Avatar, Badge, Modal, List, ListItem, ListItemAvatar, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { Button, IconButton, Paper, Avatar, Badge, Modal, List, ListItem, ListItemAvatar, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
 import Image from "next/image";
@@ -155,6 +155,8 @@ const editButtonStyle = {
 export default function GestionarAsignatura() {
     const [isSwitchOn, setIsSwitchOn] = useState(true); // Establece el interruptor en estado inicial encendido
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+    const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
+
 
     const handleSwitchToggle = () => {
         if (isSwitchOn) {
@@ -175,6 +177,14 @@ export default function GestionarAsignatura() {
         setConfirmationDialogOpen(false);
     };
 
+
+    const handleOpenCreateDialog = () => {
+        setCreateDialogOpen(true);
+    };
+
+    const handleCloseCreateDialog = () => {
+        setCreateDialogOpen(false);
+    };
 
     return (
         <div style={wallpaperStyle}>
@@ -211,14 +221,14 @@ export default function GestionarAsignatura() {
                                     </Stack>
                                 </FormGroup>
                                 <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
-                                    <DialogContent style={{borderRadius:"200px", height:"100px", justifyContent:"center"}}>
+                                    <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
                                         ¿Está seguro que quiere desactivar esta asignatura?
                                     </DialogContent>
-                                    <DialogActions  style={{ justifyContent: "center" }}>
-                                        <Button onClick={handleCancelSwitch} style={{background:"#ffffff", color:"#6750A4", border:"1px solid #6750A4", borderRadius:"20px", width:"125px"}}>
+                                    <DialogActions style={{ justifyContent: "center" }}>
+                                        <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
                                             Cancelar
                                         </Button>
-                                        <Button onClick={handleConfirmSwitch} style={{background:"#6750A4", color:"#ffffff", borderRadius:"20px", width:"125px"}} >
+                                        <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
                                             Desactivar
                                         </Button>
                                     </DialogActions>
@@ -226,12 +236,28 @@ export default function GestionarAsignatura() {
                             </ListItem>
                         </div>
 
-                        <Button style={CrearStyle}>
+                        <Button style={CrearStyle} onClick={handleOpenCreateDialog}>
                             <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", fontWeight: "500", width: "270px", color: "#3E44CC" }}>
                                 Crear
                             </div>
                             <AddIcon style={{ color: "#333E8E", marginLeft: "10px" }} />
                         </Button>
+                        <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
+                            <DialogTitle style={{fontSize:"16px", color:"#7E57C6",width:"300px", textAlign: "center"}}>Editar Asignatura</DialogTitle>
+                            <DialogContent style={{ display:"flex", flexDirection:"column", alignItems:"center" }}>
+                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Nombre"  />
+                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Código"  />
+                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Credito"  />
+                            </DialogContent>
+                            <DialogActions style={{ justifyContent: "center" }}>
+                                <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                    Cancelar
+                                </Button>
+                                <Button onClick={handleCloseCreateDialog} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                    Guardar
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </div>
                     <Paper elevation={0} style={paperStyle}>
                     </Paper>
