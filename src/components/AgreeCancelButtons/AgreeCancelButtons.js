@@ -15,7 +15,7 @@ const divContainerStyle = {
 
 const GuardarStyle = {
     backgroundColor: theme.palette.primary.main,
-    color: "black",
+    color: "white",
     marginLeft: "10px",
     borderRadius: "25px",
     textTransform: "none",

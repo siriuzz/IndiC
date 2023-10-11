@@ -131,7 +131,6 @@ const StyledTabsList = styled(TabsList)(
     justify-content: center;
     align-content: space-between;
     margin-left: 80px;
-    margin-top: 40px;
     `,
 );
 
@@ -182,7 +181,7 @@ export default function Calificaciones_Estudiante() {
                         <paper style={UserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
                             <paper style={userInfoStyle}>
-                                Nombre: <div style={{fontSize: "26px", color: "black"}}>Nombre y Apellido</div><paper>ID: <div style={{fontSize: "26px", color: "black"}}>ID</div></paper>
+                                Nombre: <div style={{ fontSize: "26px", color: "black" }}>Nombre y Apellido</div><paper>ID: <div style={{ fontSize: "26px", color: "black" }}>ID</div></paper>
                                 <IconButton style={notificationsButtonStyle}>
                                     <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
@@ -199,12 +198,12 @@ export default function Calificaciones_Estudiante() {
                                                 id="panel1bh-header">
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
-                                                        <div>
+                                                        <paper>
                                                             <span>Profesor/a:</span>
                                                             <br style={{ marginTop: "20px" }} />
                                                             <span>Correo:</span>
-                                                        </div>
-                                                    }/>
+                                                        </paper>
+                                                    } />
                                                 <EditButton variant="contained">
                                                     <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                 </EditButton>
@@ -261,6 +260,9 @@ export default function Calificaciones_Estudiante() {
                                                                     <span>juandanielu@est.example.edu</span>
                                                                 </paper>
                                                             } />
+                                                        <EditButton variant="contained">
+                                                            <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
+                                                        </EditButton>
                                                     </ListItem>
                                                 </paper>
                                             </AccordionDetails>
