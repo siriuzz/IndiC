@@ -24,7 +24,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormGroup from '@mui/material/FormGroup';
 import Grid from "@mui/material/Grid";
 import AddIcon from '@mui/icons-material/Add';
-import {ThemeProvider} from "@mui/material/";
+import { ThemeProvider } from "@mui/material/";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -35,6 +35,18 @@ export default function SeleccionarAsignaturasPage() {
     const [selectedOption, setSelectedOption] = useState(null);
     const options = ['Opción 1', 'Opción 2', 'Opción 3'];
     const [selectedId, setSelectedId] = useState();
+
+    const [data, setData] = useState([
+        { id: 1, tipo: 'T', asignatura: 'Tendencias', cupos: 30, seccion: 'A', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
+        { id: 2, tipo: 'T', asignatura: 'Ecuaciones Diferenciales', cupos: 25, seccion: 'B', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
+        { id: 3, tipo: 'T', asignatura: 'Desarrollo Web', cupos: 20, seccion: 'C', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
+    ]);
+
+    const [data2, setData2] = useState([
+        { id: 4, tipo: 'T', asignatura: 'Aseguramiento de la Calidad', cupos: 30, seccion: 'A', profesor: "Francia Mejia", lun: "13/15", jue: "13/15", sab: "12/14" },
+        { id: 5, tipo: 'T', asignatura: 'Aseguramiento de la Calidad', cupos: 25, seccion: 'B', profesor: "Francia Mejia", lun: "18/20", jue: "16/18", sab: "14/16" },
+        { id: 6, tipo: 'T', asignatura: 'Aseguramiento de la Calidad', cupos: 20, seccion: 'C', profesor: "Francia Mejia", lun: "20/22", jue: "20/22", sab: "16/18" },
+    ]);
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -75,12 +87,18 @@ export default function SeleccionarAsignaturasPage() {
         fontWeight: "bold",
     };
 
-    const data = [
-        { id: 1, tipo: 'T', asignatura: 'Mate', cupos: 30, seccion: 'A', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
-        { id: 2, tipo: 'T', asignatura: 'Ecuaciones', cupos: 25, seccion: 'B', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
-        { id: 3, tipo: 'T', asignatura: 'Desarrollo Web', cupos: 20, seccion: 'C', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
-        // puedes agregar más datos aquí
-    ];
+    const handleAddClick = () => {
+        // Comprueba si se ha seleccionado una opción
+        if (selectedOption === null) {
+            alert("Seleccione una seccion")
+        }
+        else if (data.some(item => item.asignatura === data2[selectedOption].asignatura)){
+            alert("Ya se ha seleccionado esta asignatura")
+        }
+        else {
+            setData(prevData => [...prevData, data2[selectedOption]]);
+        }
+    };
 
 
     return (
@@ -94,70 +112,70 @@ export default function SeleccionarAsignaturasPage() {
                 </div>
 
                 <ThemeProvider theme={Theme}>
-                <div style={{ display: "flex", justifyContent: 'center', marginTop: "1%", }}>
-                    <Accordion className={kanit.className} style={{ border: '2px solid', width: "60%", borderColor: Theme.palette.primary.main, borderRadius: "20px", height: "25%" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
-                            aria-controls="panel1bh-content"
-                            id="panel1bh-header">
-                            <ListItemText className={kanit.className} style={AsignaturasStyle} primary=<span style={{ fontSize: "20px", fontWeight: "bold" }}>Aseguramiento de la Calidad</span> />
-                            <IconButton aria-label="add" style={{ marginLeft: "auto", marginRight: "10px" }}>
-                                <AddIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />
-                            </IconButton>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <paper >
-                                <TableContainer style={{ backgroundColor: "transparent", borderRadius: "20px" }}>
-                                    <Table>
-                                        <TableHead style={{ backgroundColor: Theme.palette.secondary.table, }}>
-                                            <TableRow>
-                                                <TableCell></TableCell>
-                                                <TableCell style={tableCellStyle2}>Tipo</TableCell>
-                                                <TableCell style={tableCellStyle2}>cupos</TableCell>
-                                                <TableCell style={tableCellStyle2}>Seccion</TableCell>
-                                                <TableCell style={tableCellStyle2}>Profesor</TableCell>
-                                                <TableCell style={tableCellStyle2}>Lun</TableCell>
-                                                <TableCell style={tableCellStyle2}>Mar</TableCell>
-                                                <TableCell style={tableCellStyle2}>Mier</TableCell>
-                                                <TableCell style={tableCellStyle2}>Jue</TableCell>
-                                                <TableCell style={tableCellStyle2}>Vie</TableCell>
-                                                <TableCell style={tableCellStyle2}>Sab</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {data.map((row, index) => (
-                                                <TableRow key={row.id}>
-                                                    <TableCell>
-                                                        <RadioGroup
-                                                            value={selectedOption}
-                                                            onChange={(event) => setSelectedOption(event.target.value)}
-                                                        >
-                                                            <FormControlLabel
-                                                                value={index.toString()}
-                                                                control={<Radio  style={{marginLeft: "50%"}} />}
-                                                                label=""
-                                                            />
-                                                        </RadioGroup>
-                                                    </TableCell>
-                                                    <TableCell>{row.tipo}</TableCell>
-                                                    <TableCell>{row.cupos}</TableCell>
-                                                    <TableCell>{row.seccion}</TableCell>
-                                                    <TableCell>{row.profesor}</TableCell>
-                                                    <TableCell>{row.lun}</TableCell>
-                                                    <TableCell>{row.mar}</TableCell>
-                                                    <TableCell>{row.mier}</TableCell>
-                                                    <TableCell>{row.jue}</TableCell>
-                                                    <TableCell>{row.vier}</TableCell>
-                                                    <TableCell>{row.sab}</TableCell>
+                    <div style={{ display: "flex", justifyContent: 'center', marginTop: "1%", }}>
+                        <Accordion className={kanit.className} style={{ border: '2px solid', width: "60%", borderColor: Theme.palette.primary.main, borderRadius: "20px", height: "25%" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header">
+                                <ListItemText className={kanit.className} style={AsignaturasStyle} primary=<span style={{ fontSize: "20px", fontWeight: "bold" }}>Aseguramiento de la Calidad</span> />
+                                <IconButton aria-label="add" style={{ marginLeft: "auto", marginRight: "10px" }} onClick={handleAddClick}>
+                                    <AddIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />
+                                </IconButton>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <paper >
+                                    <TableContainer style={{ backgroundColor: "transparent", borderRadius: "20px" }}>
+                                        <Table>
+                                            <TableHead style={{ backgroundColor: Theme.palette.secondary.table, }}>
+                                                <TableRow>
+                                                    <TableCell></TableCell>
+                                                    <TableCell style={tableCellStyle2}>Tipo</TableCell>
+                                                    <TableCell style={tableCellStyle2}>cupos</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Seccion</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Profesor</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Lun</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Mar</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Mier</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Jue</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Vie</TableCell>
+                                                    <TableCell style={tableCellStyle2}>Sab</TableCell>
                                                 </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </paper>
-                        </AccordionDetails>
-                    </Accordion>
-                </div>
+                                            </TableHead>
+                                            <TableBody>
+                                                {data2.map((row, index) => (
+                                                    <TableRow key={row.id}>
+                                                        <TableCell>
+                                                            <RadioGroup
+                                                                value={selectedOption}
+                                                                onChange={(event) => setSelectedOption(event.target.value)}
+                                                            >
+                                                                <FormControlLabel
+                                                                    value={index.toString()}
+                                                                    control={<Radio style={{ marginLeft: "50%" }} />}
+                                                                    label=""
+                                                                />
+                                                            </RadioGroup>
+                                                        </TableCell>
+                                                        <TableCell>{row.tipo}</TableCell>
+                                                        <TableCell>{row.cupos}</TableCell>
+                                                        <TableCell>{row.seccion}</TableCell>
+                                                        <TableCell>{row.profesor}</TableCell>
+                                                        <TableCell>{row.lun}</TableCell>
+                                                        <TableCell>{row.mar}</TableCell>
+                                                        <TableCell>{row.mier}</TableCell>
+                                                        <TableCell>{row.jue}</TableCell>
+                                                        <TableCell>{row.vier}</TableCell>
+                                                        <TableCell>{row.sab}</TableCell>
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                </paper>
+                            </AccordionDetails>
+                        </Accordion>
+                    </div>
                 </ThemeProvider>
 
                 <div style={{ display: "flex", justifyContent: 'center', marginTop: "1%" }}>
