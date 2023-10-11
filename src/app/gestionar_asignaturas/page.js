@@ -65,7 +65,7 @@ const CrearStyle = {
     transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
     backgroundColor: "#ffffff",
     color: "black",
-    border:" 3px solid #4F69DD",
+    border: " 3px solid #4F69DD",
     marginTop: "250px",
     borderRadius: "50px",
     padding: "10px 20px",
@@ -153,8 +153,28 @@ const editButtonStyle = {
 
 
 export default function GestionarAsignatura() {
+    const [isSwitchOn, setIsSwitchOn] = useState(true); // Establece el interruptor en estado inicial encendido
+    const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
 
-    
+    const handleSwitchToggle = () => {
+        if (isSwitchOn) {
+            setConfirmationDialogOpen(true); // Mostrar el mensaje de confirmación solo al apagar
+        } else {
+            // Cambiar el estado del interruptor directamente si está apagado
+            setIsSwitchOn(true);
+        }
+    };
+
+    const handleConfirmSwitch = () => {
+        // Apagar el interruptor
+        setIsSwitchOn(false);
+        setConfirmationDialogOpen(false);
+    };
+
+    const handleCancelSwitch = () => {
+        setConfirmationDialogOpen(false);
+    };
+
 
     return (
         <div style={wallpaperStyle}>
@@ -181,19 +201,36 @@ export default function GestionarAsignatura() {
                                 <IconButton style={editButtonStyle} variant="contained">
                                     <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                                 </IconButton>
-                                <FormGroup style={{marginLeft:"10px"}}>
+                                <FormGroup style={{ marginLeft: "10px" }}>
                                     <Stack direction="row" spacing={1} alignItems="center">
-                                        <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
+                                        <AntSwitch
+                                            checked={isSwitchOn}
+                                            onChange={handleSwitchToggle}
+                                            inputProps={{ 'aria-label': 'ant design' }}
+                                        />
                                     </Stack>
                                 </FormGroup>
+                                <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
+                                    <DialogContent style={{borderRadius:"200px", height:"100px", justifyContent:"center"}}>
+                                        ¿Está seguro que quiere desactivar esta asignatura?
+                                    </DialogContent>
+                                    <DialogActions  style={{ justifyContent: "center" }}>
+                                        <Button onClick={handleCancelSwitch} style={{background:"#ffffff", color:"#6750A4", border:"1px solid #6750A4", borderRadius:"20px", width:"125px"}}>
+                                            Cancelar
+                                        </Button>
+                                        <Button onClick={handleConfirmSwitch} style={{background:"#6750A4", color:"#ffffff", borderRadius:"20px", width:"125px"}} >
+                                            Desactivar
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
                             </ListItem>
                         </div>
-                        
+
                         <Button style={CrearStyle}>
-                            <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", fontWeight: "500", width: "270px", color: "#3E44CC"}}>
+                            <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", fontWeight: "500", width: "270px", color: "#3E44CC" }}>
                                 Crear
                             </div>
-                            <AddIcon style={{color:"#333E8E", marginLeft:"10px"}}/>
+                            <AddIcon style={{ color: "#333E8E", marginLeft: "10px" }} />
                         </Button>
                     </div>
                     <Paper elevation={0} style={paperStyle}>
