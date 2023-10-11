@@ -15,6 +15,8 @@ import Link from "next/link";
 import axios from "axios";
 import { useEffect } from "react";
 import { useStyles } from "../layout";
+import Badge from '@mui/material/Badge';
+
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -71,7 +73,9 @@ export default function Perfil() {
                 <div className={styles.label}>
                     Bienvenido!
                     <IconButton className={styles.notificationsButton}>
+                    <Badge badgeContent={1} color="secondary">
                         <NotificationsIcon style={{ height: "35px", width: "35px" }} />
+                        </Badge>
                     </IconButton>
                 </div>
                 <Paper elevation={0} style={{}}>

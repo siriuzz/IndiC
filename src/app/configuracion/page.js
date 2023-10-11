@@ -18,6 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ListItemText from '@mui/material/ListItemText';
+import Badge from '@mui/material/Badge';
 
 
 
@@ -57,8 +58,8 @@ const notificationsButtonStyle = {
 const notificationsIconStyle = {
     height: "35px",
     width: "35px",
-    marginLeft: "2100px",
-    marginTop: "-120px",
+    marginLeft: "0px",
+    marginTop: "0px",
 };
 
 
@@ -134,6 +135,7 @@ export default function Configuración() {
         setAge(event.target.value);
     };
 
+
     return (
 
         <div style={wallpaperStyle}>
@@ -142,9 +144,14 @@ export default function Configuración() {
                     <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={80} width={80} />
                     <div style={userInfoStyle}>
                         Nombre: Nombre y Apellido<div>Id: ID</div>
-                        <IconButton style={notificationsButtonStyle}>
+                       <div style={{marginLeft:"1120px", marginTop:"-80px"}}>
+                       <IconButton style={notificationsButtonStyle}>
+                        <Badge badgeContent={1} color="secondary">
                             <NotificationsIcon style={notificationsIconStyle} />
+                            </Badge>
                         </IconButton>
+                       </div>
+                     
                         <Button style={GuardarStyle}>
                             <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", fontWeight: "500", width: "270px", color: "#381E72" }}>
                                 Guardar

@@ -14,6 +14,8 @@ import { Kanit } from '@next/font/google';
 // import bootstrap from 'bootstrap';
 import Link from "next/link";
 import axios from "axios";
+import Badge from '@mui/material/Badge';
+
 
 const EditButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#e4d1d1"),
@@ -89,7 +91,9 @@ export default function Perfil() {
                 <div className={styles.label}>
                     Bienvenido!
                     <IconButton className={styles.notificationsButton}>
+                    <Badge badgeContent={1} color="secondary">
                         <NotificationsIcon style={{ height: "35px", width: "35px" }} />
+                        </Badge>
                     </IconButton>
                 </div>
                 <Paper elevation={0} style={{}}>

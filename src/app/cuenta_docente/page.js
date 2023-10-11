@@ -10,6 +10,8 @@ import Image from "next/image";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Kanit } from '@next/font/google';
 import Link from "next/link";
+import Badge from '@mui/material/Badge';
+
 
 import axios from "axios";
 import { useEffect } from "react";
@@ -69,7 +71,9 @@ export default function Perfil() {
                 <div className={styles.label}>
                     Bienvenido!
                     <IconButton className={styles.notificationsButton}>
+                    <Badge badgeContent={1} color="secondary">
                         <NotificationsIcon style={{ height: "35px", width: "35px" }} />
+                        </Badge>
                     </IconButton>
                 </div>
                 <Paper elevation={0}>

@@ -21,6 +21,8 @@ import Avatar from '@mui/material/Avatar';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import axios from "axios";
+import Badge from '@mui/material/Badge';
+
 // require('dotenv').config()
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -190,7 +192,9 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>3K</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
+                        <Badge badgeContent={1} color="secondary">
                             <NotificationsIcon style={notificationsIconStyle} />
+                            </Badge>
                         </IconButton>
                     </Paper>
                     <Paper elevation={4} style={UsuariosStyle}>

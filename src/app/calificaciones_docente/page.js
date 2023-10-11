@@ -25,6 +25,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Theme from "../theme";
+import Badge from '@mui/material/Badge';
+
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -183,7 +185,9 @@ export default function Calificaciones_Estudiante() {
                             <paper style={userInfoStyle}>
                                 Nombre: <div style={{ fontSize: "26px", color: "black" }}>Nombre y Apellido</div><paper>ID: <div style={{ fontSize: "26px", color: "black" }}>ID</div></paper>
                                 <IconButton style={notificationsButtonStyle}>
-                                    <NotificationsIcon style={notificationsIconStyle} />
+                                <Badge badgeContent={1} color="secondary">
+                            <NotificationsIcon style={notificationsIconStyle} />
+                            </Badge>
                                 </IconButton>
                                 <Tabs className={kanit.className} defaultValue={0}>
                                     <StyledTabsList>
