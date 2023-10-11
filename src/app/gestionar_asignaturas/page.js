@@ -208,7 +208,7 @@ export default function GestionarAsignatura() {
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText style={{ fontWeight: "600" }} primary="IDS335 - Diseño de Software" secondary="BERNARDO ANTONIO BATISTA DIAZ" />
-                                <IconButton style={editButtonStyle} variant="contained">
+                                <IconButton style={editButtonStyle} variant="contained" onClick={handleOpenCreateDialog}>
                                     <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                                 </IconButton>
                                 <FormGroup style={{ marginLeft: "10px" }}>
@@ -243,7 +243,7 @@ export default function GestionarAsignatura() {
                             <AddIcon style={{ color: "#333E8E", marginLeft: "10px" }} />
                         </Button>
                         <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
-                            <DialogTitle style={{fontSize:"16px", color:"#7E57C6",width:"300px", textAlign: "center"}}>Editar Asignatura</DialogTitle>
+                            <DialogTitle style={{fontSize:"16px", color:"#7E57C6",width:"300px", textAlign: "center"}}>Editar/Crear Asignatura</DialogTitle>
                             <DialogContent style={{ display:"flex", flexDirection:"column", alignItems:"center" }}>
                                 <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Nombre"  />
                                 <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Código"  />
