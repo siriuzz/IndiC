@@ -10,6 +10,7 @@ const theme = createTheme({
             main: '#424874',
             label: '#939191',
             input: '#f3f3f3',
+            table: "#e4d1d1"
         },
         background: {
             default: '#f4eeff',

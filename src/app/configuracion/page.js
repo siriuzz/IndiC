@@ -6,24 +6,50 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
 import { useStyles } from "../layout";
-import { styled } from '@mui/system';
-import { Tabs } from '@mui/base/Tabs';
-import { TabsList } from '@mui/base/TabsList';
-import { TabPanel } from '@mui/base/TabPanel';
-import { buttonClasses } from '@mui/base/Button';
-import { Tab, tabClasses } from '@mui/base/Tab';
 import { Kanit } from "next/font/google";
+import CircleIcon from '@mui/icons-material/Circle';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Avatar from '@mui/material/Avatar';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import ListItemText from '@mui/material/ListItemText';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
+const containerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%", // Centrar verticalmente en la pantalla
+    position: "relative", // Permite superponer elementos
+};
+
+
 const wallpaperStyle = {
-    backgroundColor: "#FFFFFFFF",
+    backgroundColor: "#FFFFFF",
     minHeight: "100vh",
     minWidth: "100vw",
     display: "flex",
-    justifyContent: "left",
+    backgroundImage: "url('/assets/configuracion.svg')",
+    backgroundSize: "52%", // Ajustar el tamaño de la imagen para cubrir todo el fondo
+    backgroundPosition: "90% -150%",
+    backgroundRepeat: "no-repeat",
 };
 
 const notificationsButtonStyle = {
@@ -38,8 +64,8 @@ const notificationsButtonStyle = {
 const notificationsIconStyle = {
     height: "35px",
     width: "35px",
-    marginLeft: "2400px",
-    marginTop: "-180px",
+    marginLeft: "0px",
+    marginTop: "0px",
 };
 
 
@@ -52,33 +78,580 @@ const paperStyle = {
 const divUserStyle = {
     display: "flex",
     flexDirection: "row",
-    marginLeft: "-30px",
+    marginLeft: "220px",
+    marginTop: "30px",
 };
 
 const userInfoStyle = {
-    fontSize: "26px",
-    marginLeft: "40px",
-    marginTop: "10px"
+    fontSize: "20px",
+    marginLeft: "20px",
+    marginTop: "10px",
+    color: "#000000",
+    width: "800px",
 };
 
+
+const paperBigConfig = {
+    backgroundColor: "#F7F2FA",
+    borderRadius: "40px",
+    marginTop: "150px",
+    marginRight: "10px",
+    marginLeft: "-900px",
+    height: "540px",
+    width: "1100px",
+}
+
+
+const buttonStyle = {
+    position: "absolute",
+    top: "50%", // Centra verticalmente el botón en relación con el contenedor
+    transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
+    backgroundColor: "#e8def8",
+    color: "black",
+    marginTop: "-70px",
+    borderRadius: "50px",
+    padding: "10px 20px",
+    zIndex: 1, // Coloca el botón por encima de la imagen
+    marginLeft: "-32px",
+    height: "30x",
+};
+
+
+const GuardarStyle = {
+    position: "absolute",
+    top: "50%", // Centra verticalmente el botón en relación con el contenedor
+    transform: "translateY(-50%)", // Alinea verticalmente el botón correctamente
+    backgroundColor: "#D0BCFF",
+    color: "black",
+    marginTop: "-298px",
+    borderRadius: "50px",
+    padding: "10px 20px",
+    zIndex: 1, // Coloca el botón por encima de la imagen
+    marginLeft: "850px",
+    height: "30x",
+    width: "100px",
+};
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
+const EachAsignaturaStyle = {
+    backgroundColor: "#f4eeff",
+    borderRadius: "5px",
+    width: "370px",
+    justifySelf: "center",
+    marginLeft: "10px",
+    marginTop: "5px",
+    marginBottom: "10px",
+};
 
 
 export default function Configuración() {
 
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
+
         <div style={wallpaperStyle}>
-            <Paper elevation={3} style={useStyles.paperBig}>
-                <Paper elevation={0} style={paperStyle}>
-                    <div style={{ display: "flex" }}>
-                        <div style={divUserStyle}>
-                            <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
-                            <div style={userInfoStyle}>
-                                Nombre: Nombre y Apellido<div>Id: ID</div>
-                                <IconButton style={notificationsButtonStyle}>
+            <div style={{ display: "flex" }}>
+                <div style={divUserStyle}>
+                    <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={80} width={80} />
+                    <div style={userInfoStyle}>
+                        Nombre: Nombre y Apellido<div>Id: ID</div>
+                        <div style={{ marginLeft: "1120px", marginTop: "-80px" }}>
+                            <IconButton style={notificationsButtonStyle} onClick={handleOpen}>
+                                <Badge badgeContent={1} color="secondary">
                                     <NotificationsIcon style={notificationsIconStyle} />
-                                </IconButton>
-                        </div>  
+                                </Badge>
+                                <Modal
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box sx={style}>
+                                        <div style={EachAsignaturaStyle}>
+                                            <ListItem>
+                                                <ListItemAvatar>
+                                                    <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                                        <BookmarkBorderOutlinedIcon />
+                                                    </Avatar>
+                                                </ListItemAvatar>
+                                                <ListItemText primary= "hola" secondary="Sección"/>
+                                            </ListItem>
+                                        </div>
+                                    </Box>
+                                </Modal>
+                            </IconButton>
+                        </div>
+
+                        <Button style={GuardarStyle}>
+                            <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", fontWeight: "500", width: "270px", color: "#381E72" }}>
+                                Guardar
+                            </div>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            <Paper elevation={3} style={paperBigConfig}>
+                <Paper elevation={0} style={paperStyle}>
+                    <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "32px", weight: "232px", height: "100px", marginTop: "-30px" }}>
+                        Configuraciones
+                    </div>
+                    <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", weight: "232px", marginLeft: "-10px", marginTop: "-20px" }}>
+                        Seguridad
+                        <div>
+                            <Button style={buttonStyle}>
+                                <CircleIcon style={{ height: "12px", width: "12px" }} />
+                                <div className={kanit.className} style={{ fontSize: "12px", textTransform: "none", marginLeft: "-50px", fontWeight: "500", width: "270px" }}>
+                                    Cambiar contraseña
+                                </div>
+                            </Button>
+                        </div>
+                        <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", weight: "232px", marginLeft: "2px", marginTop: "103px" }}>
+                            Notificaciones
+                            <FormControl>
+                                <RadioGroup
+                                    aria-labelledby="demo-radio-buttons-group-label"
+                                    defaultValue="female"
+                                    name="radio-buttons-group"
+                                    style={{ marginTop: "50px", marginLeft: "-90px" }}
+                                >
+                                    <FormControlLabel
+                                        value="female"
+                                        control={<Radio style={{ color: "#9370DB", marginLeft: "-160px" }} />}
+                                        label={
+                                            <div style={{ display: "flex", alignItems: "center" }}>
+                                                <CircleIcon style={{ height: "12px", width: "12px" }} />
+                                                <div
+                                                    className={kanit.className}
+                                                    style={{
+                                                        fontSize: "12px",
+                                                        textTransform: "none",
+                                                        marginLeft: "10px",
+                                                        fontWeight: "500",
+                                                        width: "350px",
+                                                    }}
+                                                >
+                                                    Solo de mayor prioridad
+                                                </div>
+                                            </div>
+                                        }
+                                        style={{ flexDirection: "row-reverse", marginLeft: "-10px", marginTop: "-20px" }}
+                                    />
+                                    <FormControlLabel
+                                        value="male"
+                                        control={<Radio style={{ color: "#9370DB", marginLeft: "-160px" }} />}
+                                        label={
+                                            <div style={{ display: "flex", alignItems: "center" }}>
+                                                <CircleIcon style={{ height: "12px", width: "12px" }} />
+                                                <div
+                                                    className={kanit.className}
+                                                    style={{
+                                                        fontSize: "12px",
+                                                        textTransform: "none",
+                                                        marginLeft: "10px",
+                                                        fontWeight: "500",
+                                                        width: "350px",
+                                                    }}
+                                                >
+                                                    Deshabilitar notificaciones
+                                                </div>
+                                            </div>
+                                        }
+                                        style={{ flexDirection: "row-reverse", marginLeft: "-10px" }}
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                            <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", weight: "232px", marginLeft: "2px", marginTop: "40px" }}>
+                                Apariencia
+                                <FormControl>
+                                    <RadioGroup
+                                        aria-labelledby="demo-radio-buttons-group-label"
+                                        defaultValue="systemDefault"
+                                        name="radio-buttons-group"
+                                        style={{ marginTop: "50px", marginLeft: "-70px" }}
+                                    >
+                                        <FormControlLabel
+                                            value="darkMode"
+                                            control={<Radio style={{ color: "#9370DB", marginLeft: "-160px" }} />}
+                                            label={
+                                                <div style={{ display: "flex", alignItems: "center" }}>
+                                                    <Avatar style={{ backgroundColor: "#EADDFF", color: "#21005D", fontWeight: '600', fontSize: "12px", marginLeft: "-10px", height: "30px", width: "30px" }}>D</Avatar>
+                                                    <div
+                                                        className={kanit.className}
+                                                        style={{
+                                                            fontSize: "12px",
+                                                            textTransform: "none",
+                                                            marginLeft: "10px",
+                                                            fontWeight: "500",
+                                                            width: "350px",
+                                                        }}
+                                                    >
+                                                        Modo Oscuro
+                                                    </div>
+                                                </div>
+                                            }
+                                            style={{ flexDirection: "row-reverse", marginLeft: "-10px", marginTop: "-20px" }}
+                                        />
+                                        <FormControlLabel
+                                            value="lightMode"
+                                            control={<Radio style={{ color: "#9370DB", marginLeft: "-160px" }} />}
+                                            label={
+                                                <div style={{ display: "flex", alignItems: "center" }}>
+                                                    <Avatar style={{ backgroundColor: "#EADDFF", color: "#21005D", fontWeight: '600', fontSize: "12px", marginLeft: "-10px", height: "30px", width: "30px" }}>L</Avatar>
+                                                    <div
+                                                        className={kanit.className}
+                                                        style={{
+                                                            fontSize: "12px",
+                                                            textTransform: "none",
+                                                            marginLeft: "10px",
+                                                            fontWeight: "500",
+                                                            width: "350px",
+                                                        }}
+                                                    >
+                                                        Modo Claro
+                                                    </div>
+                                                </div>
+                                            }
+                                            style={{ flexDirection: "row-reverse", marginLeft: "-10px" }}
+                                        />
+                                        <FormControlLabel
+                                            value="systemDefault"
+                                            control={<Radio style={{ color: "#9370DB", marginLeft: "-160px" }} />}
+                                            label={
+                                                <div style={{ display: "flex", alignItems: "center" }}>
+                                                    <Avatar style={{ backgroundColor: "#EADDFF", color: "#21005D", fontWeight: '600', fontSize: "12px", marginLeft: "-10px", height: "30px", width: "30px" }}>S</Avatar>
+                                                    <div
+                                                        className={kanit.className}
+                                                        style={{
+                                                            fontSize: "12px",
+                                                            textTransform: "none",
+                                                            marginLeft: "10px",
+                                                            fontWeight: "500",
+                                                            width: "350px",
+                                                        }}
+                                                    >
+                                                        System Default
+                                                    </div>
+                                                </div>
+                                            }
+                                            style={{ flexDirection: "row-reverse", marginLeft: "-10px" }}
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
+                                <div style={{ fontWeight: "400", background: "#F7F2FA", fontSize: "13px", width: "400px", marginLeft: "650px", marginTop: "-490px", height: "200px" }}>
+                                    Medidas para Índice Academico
+                                    <FormControl sx={{ m: 1, minWidth: 120, borderColor: "#6750A4", marginTop: "100px", marginLeft: "-350px", }} size="small">
+                                        <InputLabel id="demo-simple-select-autowidth-label">Sistema 1</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-autowidth-label"
+                                            id="demo-simple-select-autowidth"
+                                            value={age}
+                                            onChange={handleChange}
+                                            autoWidth
+                                            label="Sistema 1"
+                                        >
+                                            <MenuItem value={1} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="Calificación"
+                                                    secondary=""
+                                                    style={{ fontWeight: 600 }}
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={2} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="A+"
+                                                    secondary="93-100"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={3} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="A  "
+                                                    secondary="90-92"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={4} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="B+ "
+                                                    secondary="87-89"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={5} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="B  "
+                                                    secondary="83-86"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={6} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="C+ "
+                                                    secondary="80-82"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={7} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="C  "
+                                                    secondary="77-79"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={8} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="C- "
+                                                    secondary="73-76"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={9} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="D+ "
+                                                    secondary="70-72"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={10} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="D "
+                                                    secondary="60-69"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={11} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="F "
+                                                    secondary="0-59"
+                                                />
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl sx={{ m: 1, minWidth: 120, marginTop: "100px", marginLeft: "70px", }} size="small">
+                                        <InputLabel id="demo-simple-select-autowidth-label">Sistema 2</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-autowidth-label"
+                                            id="demo-simple-select-autowidth"
+                                            value={age}
+                                            onChange={handleChange}
+                                            autoWidth
+                                            label="Sistema 2"
+                                        >
+                                            <MenuItem value={1} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="Calificación"
+                                                    secondary=""
+                                                    style={{ fontWeight: 600 }}
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={2} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="A"
+                                                    secondary="90-100"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={3} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="B+"
+                                                    secondary="85-89"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={4} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="B"
+                                                    secondary="80-84"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={5} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="C+"
+                                                    secondary="75-79"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={6} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="C"
+                                                    secondary="70-74"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={7} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="D"
+                                                    secondary="60-69"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={8} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="F"
+                                                    secondary="0-59"
+                                                />
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl sx={{ m: 1, minWidth: 120, borderBlockColor: "#6750A4", marginTop: "100px", marginLeft: "70px", }} size="small">
+                                        <InputLabel id="demo-simple-select-autowidth-label">Sistema 3</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-autowidth-label"
+                                            id="demo-simple-select-autowidth"
+                                            value={age}
+                                            onChange={handleChange}
+                                            autoWidth
+                                            label="Sistema 3"
+                                        >
+                                            <MenuItem value={1} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="Calificación"
+                                                    secondary=""
+                                                    style={{ fontWeight: 600 }}
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={2} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="A+"
+                                                    secondary="10"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={3} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="A"
+                                                    secondary="9"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={4} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="B+"
+                                                    secondary="8"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={5} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="B"
+                                                    secondary="7"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={6} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="C+"
+                                                    secondary="6"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={7} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="C"
+                                                    secondary="5"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={8} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="D"
+                                                    secondary="4"
+                                                />
+                                            </MenuItem>
+                                            <MenuItem value={9} disabled>
+                                                <ListItemText
+                                                    primaryTypographyProps={{ textAlign: 'center' }}
+                                                    secondaryTypographyProps={{ textAlign: 'center' }}
+                                                    primary="F"
+                                                    secondary="0-3"
+                                                />
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl>
+                                        <RadioGroup
+                                            aria-labelledby="demo-radio-buttons-group-label"
+                                            defaultValue="female"
+                                            name="radio-buttons-group"
+                                            style={{ marginTop: "50px", marginLeft: "-580px", flexDirection: "row", display: "flex" }}
+                                        >
+                                            <FormControlLabel
+                                                value="Sistema 1"
+                                                control={<Radio style={{ color: "#9370DB", marginLeft: "100px" }} />}
+                                            />
+                                            <FormControlLabel
+                                                value="Sistema 2"
+                                                control={<Radio style={{ color: "#9370DB", marginLeft: "150px" }} />} />
+                                            <FormControlLabel
+                                                value="Sistema 3"
+                                                control={<Radio style={{ color: "#9370DB", marginLeft: "150px" }} />} />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </div>
+                                <Image
+                                    src={"/assets/settings.svg"}
+                                    style={{ height: "300px", width: "300px", marginLeft: "600px", opacity: "0.5", marginTop: "-20px" }}
+                                    height={100}
+                                    width={100}
+                                    alt="Settings Image"
+                                />
+                            </div>
                         </div>
                     </div>
                 </Paper>

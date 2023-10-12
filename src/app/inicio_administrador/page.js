@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from "react";
-import SidebarCloseAdministrador from "@/components/Sidebar/sidebarCloseAdministrador/sidebarCloseAdministrador";
+import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/sidebarAdministrador";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import { IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
@@ -21,6 +21,8 @@ import Avatar from '@mui/material/Avatar';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import axios from "axios";
+import Badge from '@mui/material/Badge';
+
 // require('dotenv').config()
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -165,7 +167,7 @@ export default function InicioAdministrador() {
     }, []);
     return (
         <div style={wallpaperStyle}>
-            <SidebarCloseAdministrador />
+            <SidebarAdministrador />    
             <Paper elevation={3} style={useStyles.paperBig}>
                 <ThemeProvider theme={theme}>
                     <Paper elevation={0} style={{ display: "inline-flex", justifyContent: "space-between", width: "100%" }}>
@@ -190,12 +192,16 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>3K</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
+                        <Badge badgeContent={1} color="secondary">
                             <NotificationsIcon style={notificationsIconStyle} />
+                            </Badge>
                         </IconButton>
                     </Paper>
                     <Paper elevation={4} style={UsuariosStyle}>
                         <List sx={{ width: "190px" }}>
-                            <SearchBar placeholder="Buscar Usuarios" />
+                            <div style={{marginLeft: "16px", marginTop: "10px"}}>
+                                <SearchBar placeholder="Buscar Usuarios" />
+                            </div>
                             {
                                 estudiantes.map((estudiante) => {
                                     return (

@@ -14,6 +14,8 @@ import { Kanit } from '@next/font/google';
 // import bootstrap from 'bootstrap';
 import Link from "next/link";
 import axios from "axios";
+import Badge from '@mui/material/Badge';
+
 
 const EditButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#e4d1d1"),
@@ -89,7 +91,9 @@ export default function Perfil() {
                 <div className={styles.label}>
                     Bienvenido!
                     <IconButton className={styles.notificationsButton}>
+                    <Badge badgeContent={1} color="secondary">
                         <NotificationsIcon style={{ height: "35px", width: "35px" }} />
+                        </Badge>
                     </IconButton>
                 </div>
                 <Paper elevation={0} style={{}}>
@@ -100,10 +104,10 @@ export default function Perfil() {
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
 
-                        <div style={{ fontSize: "26px", marginLeft: "20px", marginTop: "30px" }}>
-                            Nombre: {user.nombre}<div>Id: {user.id}<div>Carrera: {carrera.carrera}</div></div>
+                        <div style={{ fontSize: "18px", color: "grey", marginLeft: "20px", marginTop: "30px" }}>
+                            Nombre: <div style={{fontSize: "26px", color: "black"}}>{user.nombre}</div><div>ID: <div style={{fontSize: "26px", color: "black"}}>{user.id}</div><div>Carrera: <div style={{fontSize: "26px", color: "black"}}>{carrera.carrera}</div></div></div>
 
-                            <div style={{ marginTop: "90px" }}>
+                            <div style={{ marginTop: "90px", color: "black" }}>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo Institucional</div>
                                 <Link href="/" style={{ color: '#979797' }}>
                                     <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{user.correo}</div>
@@ -122,7 +126,7 @@ export default function Perfil() {
                             </Button>
                             <Image
                                 src={"/assets/cuenta_estudiante.svg"}
-                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-360px" }}
+                                style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-280px" }}
                                 height={100}
                                 width={100}
                                 alt="Error image"
