@@ -27,6 +27,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider } from "@mui/material/";
 import axios from "axios";
 import { set } from "date-fns";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
@@ -60,6 +61,8 @@ export default function SeleccionarAsignaturasPage() {
         // { id: 3, tipo: 'T', asignatura: 'Desarrollo Web', cupos: 20, seccion: 'C', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
         // { id: 7, tipo: 'T', asignatura: 'Aseguramiento de la Calidad', cupos: 20, seccion: 'C', profesor: "Francia Mejia", lun: "20/22", jue: "20/22", sab: "16/18" },
     ]);
+
+    const [selectedData, setSelectedData] = useState([]);
 
     const [data2, setData2] = useState([
         { id: 4, tipo: 'T', asignatura: 'Aseguramiento de la Calidad', cupos: 30, seccion: 'A', profesor: "Francia Mejia", lun: "13/15", jue: "13/15", sab: "12/14" },
@@ -130,10 +133,10 @@ export default function SeleccionarAsignaturasPage() {
             setFilteredData([]);
         }
 
-        const newData = [data.find(item =>
+        const newData = [data.filter(item =>
 
             item.Asignatura.nombre.toLowerCase().replace(' ', '').includes(searchValue.toLowerCase().replace(' ', '')) ? item : '')];
-        console.log(newData);
+        console.log("nueva data ", newData);
         setFilteredData(newData);
         // console.log(filteredData);
         setExpanded(null);
@@ -158,7 +161,7 @@ export default function SeleccionarAsignaturasPage() {
                                     expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                     aria-controls="panel1bh-content"
                                     id="panel1bh-header">
-                                    <ListItemText className={kanit.className} style={AsignaturasStyle} primary=<span style={{ fontSize: "20px", fontWeight: "bold" }}>{row.Asignatura.nombre}</span> />
+                                    <ListItemText className={kanit.className} style={AsignaturasStyle} primary=<span style={{ fontSize: "20px", fontWeight: "bold" }}>{row.Asignatura}</span> />
                                     <IconButton aria-label="add" style={{ marginLeft: "auto", marginRight: "10px" }} onClick={handleAddClick}>
                                         <AddIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />
                                     </IconButton>
@@ -184,19 +187,23 @@ export default function SeleccionarAsignaturasPage() {
                                                 </TableHead>
                                                 <TableBody>
                                                     {filteredData.map((row, index) => {
-                                                        const dias = [1, 2, 3, 4, 5, 6]
-                                                        row.Horarios = dias.map((dia) => {
-                                                            return row.Horarios.find((horario) => horario.dia == dia) || { dia: 0, hora_inicio: "", hora_fin: "" }
-                                                        })
+                                                        const dias = [1, 2, 3, 4, 5, 6];
+                                                        console.log(row)
+                                                        if (row.Horarios) {
+                                                            row.Horarios = dias.map((dia) => {
+                                                                // console.log(row.Horarios[dia - 1])
+                                                                return row.Horarios.find((horario) => horario.dia == dia) || { dia: 0, hora_inicio: "", hora_fin: "" }
+                                                            })
+                                                        }
                                                         return (
-                                                            <TableRow key={row.id}>
+                                                            <TableRow key={row.id && row.id.toString()}>
                                                                 <TableCell>
                                                                     <RadioGroup
                                                                         value={selectedOption}
                                                                         onChange={(event) => setSelectedOption(event.target.value)}
                                                                     >
                                                                         <FormControlLabel
-                                                                            value={row.id.toString()}
+                                                                            value={row.id}
                                                                             control={<Radio style={{ marginLeft: "50%" }} />}
                                                                             label=""
                                                                         />
@@ -205,8 +212,8 @@ export default function SeleccionarAsignaturasPage() {
                                                                 <TableCell>T</TableCell>
                                                                 <TableCell>{row.cupo}</TableCell>
                                                                 <TableCell>{row.numero}</TableCell>
-                                                                <TableCell>{row.Docente.nombre}</TableCell>
-                                                                {row.Horarios.map((horario) => {
+                                                                <TableCell>{row.Docente && row.Docente.nombre}</TableCell>
+                                                                {row.Horarios && row.Horarios.map((horario) => {
                                                                     return <TableCell>{horario.dia != 0 ? horario.hora_inicio + "/" + horario.hora_fin : ""}</TableCell>
                                                                 })}
                                                             </TableRow>
