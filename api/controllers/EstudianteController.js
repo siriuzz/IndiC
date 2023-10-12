@@ -138,11 +138,79 @@ const createEstudianteFromCsv = async (row) => {
     }
 };
 
+const updateEstudiante = async (req, res) => {
+    try {
+        console.log("Actualizando estudiante");
+        const estudiante = await Estudiante.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return estudiante;
+    } catch (error) {
+        console.log("Error al actualizar el estudiante");
+        return { error: error.message };
+    }
+}
+
+const deleteEstudiante = async (req, res) => {
+    try {
+        console.log("Eliminando estudiante");
+        const estudiante = await Estudiante.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        return estudiante;
+    } catch (error) {
+        console.log("Error al eliminar el estudiante");
+        return { error: error.message };
+    }
+}
+
+const desactivarEstudiante = async (req, res) => {
+    try {
+        console.log("Desactivando estudiante");
+        const estudiante = await Estudiante.update({
+            id_estado: 2
+        }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return estudiante;
+    } catch (error) {
+        console.log("Error al desactivar el estudiante");
+        return { error: error.message };
+    }
+}
+
+const activarEstudiante = async (req, res) => {
+    try {
+        console.log("Activando estudiante");
+        const estudiante = await Estudiante.update({
+            id_estado: 1
+        }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return estudiante;
+    } catch (error) {
+        console.log("Error al activar el estudiante");
+        return { error: error.message };
+    }
+}
+
 module.exports = {
     getAllEstudiantes,
     createEstudiante,
     getEstudianteById,
     getEstudianteByCorreo,
     createEstudianteFromCsv,
-    updatePassword
+    updatePassword,
+    updateEstudiante,
+    deleteEstudiante,
+    desactivarEstudiante,
+    activarEstudiante
 }

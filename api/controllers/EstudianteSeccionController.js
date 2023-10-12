@@ -116,6 +116,31 @@ const calcularIndicePorPeriodo = async (req, res) => {
     }
 }
 
+const createEstudianteSeccion = async (req, res) => {
+    try {
+        const estudianteSeccion = await Estudiante_Seccion.create(req.body);
+        return estudianteSeccion;
+    } catch (error) {
+        console.log("Error al crear el estudianteSeccion");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+const updateEstudianteSeccion = async (req, res) => {
+    try {
+        const estudianteSeccion = await Estudiante_Seccion.update(req.body, {
+            where: {
+                id_estudiante: req.params.id,
+                id_seccion: req.params.id_seccion,
+            }
+        });
+        return estudianteSeccion;
+    } catch (error) {
+        console.log("Error al actualizar el estudianteSeccion");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 
 const createEstudianteSeccionFromCsv = async (row) => {
     try {
@@ -131,5 +156,7 @@ module.exports = {
     createEstudianteSeccionFromCsv,
     calcularIndice,
     calcularIndicePorPeriodo,
-    getEstudianteSeccionByIdAndPeriod
+    getEstudianteSeccionByIdAndPeriod,
+    updateEstudianteSeccion,
+    createEstudianteSeccion
 }

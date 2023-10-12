@@ -46,7 +46,53 @@ router.get('/Docentes/:id', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-})
+}).put('/Docentes/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para actualizar un Docente por su ID.'
+    /*	#swagger.responses[200] = {
+            description: 'Docente actualizado correctamente.',
+            schema: { $ref: "#/components/schemas/Docente" }
+    } */
+    try {
+        const result = await DocenteController.updateDocente(req, res);
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
+
+router.patch('/Docentes/desactivar/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para desactivar un Docente por su ID.'
+    /*	#swagger.responses[200] = {
+            description: 'Docente desactivado correctamente.',
+            schema: { $ref: "#/components/schemas/Docente" }
+    } */
+    try {
+        const result = await DocenteController.desactivarDocente(req, res);
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
+
+router.patch('/Docentes/activar/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para activar un Docente por su ID.'
+    /*	#swagger.responses[200] = {
+            description: 'Docente activado correctamente.',
+            schema: { $ref: "#/components/schemas/Docente" }
+    } */
+    try {
+        const result = await DocenteController.activarDocente(req, res);
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
 
 
 router.post('/Docentes/upload', upload.single('csv'), async (req, res) => {

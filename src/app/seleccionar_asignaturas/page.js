@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import SidebarEstudiante from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante"
 import Paper from "@mui/material/Paper";
 import { useStyles } from "../layout";
@@ -25,8 +25,11 @@ import FormGroup from '@mui/material/FormGroup';
 import Grid from "@mui/material/Grid";
 import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider } from "@mui/material/";
+import axios from "axios";
+import { set } from "date-fns";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
 export default function SeleccionarAsignaturasPage() {
 
@@ -34,12 +37,28 @@ export default function SeleccionarAsignaturasPage() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [searchValue, setSearchValue] = useState('');
     const [filteredData, setFilteredData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [counter, setCounter] = useState(0);
+
+    useEffect(() => {
+        setLoading(true);
+        const user = JSON.parse(localStorage.getItem('user'));
+        const fetchData = async () => {
+            await axios.get(`http://${apiURL}/api/Secciones/Seleccion/${user.id}`).then((response) => {
+                // console.log(response.data);
+                setData(response.data)
+                setLoading(false);
+            })
+        };
+        fetchData();
+
+    }, []);
 
     const [data, setData] = useState([
-        { id: 1, tipo: 'T', asignatura: 'Tendencias', cupos: 30, seccion: 'A', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
-        { id: 2, tipo: 'T', asignatura: 'Ecuaciones Diferenciales', cupos: 25, seccion: 'B', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
-        { id: 3, tipo: 'T', asignatura: 'Desarrollo Web', cupos: 20, seccion: 'C', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
-        { id: 7, tipo: 'T', asignatura: 'Aseguramiento de la Calidad', cupos: 20, seccion: 'C', profesor: "Francia Mejia", lun: "20/22", jue: "20/22", sab: "16/18" },
+        // { id: 1, tipo: 'T', asignatura: 'Tendencias', cupos: 30, seccion: 'A', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
+        // { id: 2, tipo: 'T', asignatura: 'Ecuaciones Diferenciales', cupos: 25, seccion: 'B', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
+        // { id: 3, tipo: 'T', asignatura: 'Desarrollo Web', cupos: 20, seccion: 'C', profesor: "Juan Perez", lun: "13/15", jue: "13/15", sab: "13/15" },
+        // { id: 7, tipo: 'T', asignatura: 'Aseguramiento de la Calidad', cupos: 20, seccion: 'C', profesor: "Francia Mejia", lun: "20/22", jue: "20/22", sab: "16/18" },
     ]);
 
     const [data2, setData2] = useState([
@@ -49,6 +68,10 @@ export default function SeleccionarAsignaturasPage() {
     ]);
 
     const [data3, setData3] = useState([]);
+
+    const setSearchValueData = (value) => {
+        setSearchValue(value);
+    }
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -106,8 +129,13 @@ export default function SeleccionarAsignaturasPage() {
         if (searchValue === '') {
             setFilteredData([]);
         }
-        setFilteredData([data.find(item =>
-            item.asignatura.toLowerCase().includes(searchValue.toLowerCase()))]);
+
+        const newData = [data.find(item =>
+
+            item.Asignatura.nombre.toLowerCase().replace(' ', '').includes(searchValue.toLowerCase().replace(' ', '')) ? item : '')];
+        console.log(newData);
+        setFilteredData(newData);
+        // console.log(filteredData);
         setExpanded(null);
     };
 
@@ -118,7 +146,7 @@ export default function SeleccionarAsignaturasPage() {
                 <AgreeCancelButtons />
 
                 <div style={SearchBarContainer}>
-                    <SearchBar placeholder={"Buscar asignaturas"} onChange={(event) => setSearchValue(event.target.value)} onClick={handleSearchClick} />
+                    <SearchBar placeholder={"Buscar asignaturas"} value={searchValue} setSearchValueData={setSearchValueData} onChange={(event) => { console.log(event.target.value); setSearchValue(event.target.value) }} onClick={handleSearchClick} />
                 </div>
 
                 <ThemeProvider theme={Theme}>
@@ -130,7 +158,7 @@ export default function SeleccionarAsignaturasPage() {
                                     expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                     aria-controls="panel1bh-content"
                                     id="panel1bh-header">
-                                    <ListItemText className={kanit.className} style={AsignaturasStyle} primary=<span style={{ fontSize: "20px", fontWeight: "bold" }}>{row.asignatura}</span> />
+                                    <ListItemText className={kanit.className} style={AsignaturasStyle} primary=<span style={{ fontSize: "20px", fontWeight: "bold" }}>{row.Asignatura.nombre}</span> />
                                     <IconButton aria-label="add" style={{ marginLeft: "auto", marginRight: "10px" }} onClick={handleAddClick}>
                                         <AddIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />
                                     </IconButton>
@@ -143,7 +171,7 @@ export default function SeleccionarAsignaturasPage() {
                                                     <TableRow>
                                                         <TableCell></TableCell>
                                                         <TableCell style={tableCellStyle2}>Tipo</TableCell>
-                                                        <TableCell style={tableCellStyle2}>cupos</TableCell>
+                                                        <TableCell style={tableCellStyle2}>Cupos</TableCell>
                                                         <TableCell style={tableCellStyle2}>Seccion</TableCell>
                                                         <TableCell style={tableCellStyle2}>Profesor</TableCell>
                                                         <TableCell style={tableCellStyle2}>Lun</TableCell>
@@ -155,32 +183,35 @@ export default function SeleccionarAsignaturasPage() {
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
-                                                    {filteredData.map((row, index) => (
-                                                        <TableRow key={row.id}>
-                                                            <TableCell>
-                                                                <RadioGroup
-                                                                    value={selectedOption}
-                                                                    onChange={(event) => setSelectedOption(event.target.value)}
-                                                                >
-                                                                    <FormControlLabel
-                                                                        value={row.id.toString()}
-                                                                        control={<Radio style={{ marginLeft: "50%" }} />}
-                                                                        label=""
-                                                                    />
-                                                                </RadioGroup>
-                                                            </TableCell>
-                                                            <TableCell>{row.tipo}</TableCell>
-                                                            <TableCell>{row.cupos}</TableCell>
-                                                            <TableCell>{row.seccion}</TableCell>
-                                                            <TableCell>{row.profesor}</TableCell>
-                                                            <TableCell>{row.lun}</TableCell>
-                                                            <TableCell>{row.mar}</TableCell>
-                                                            <TableCell>{row.mier}</TableCell>
-                                                            <TableCell>{row.jue}</TableCell>
-                                                            <TableCell>{row.vier}</TableCell>
-                                                            <TableCell>{row.sab}</TableCell>
-                                                        </TableRow>
-                                                    ))}
+                                                    {filteredData.map((row, index) => {
+                                                        const dias = [1, 2, 3, 4, 5, 6]
+                                                        row.Horarios = dias.map((dia) => {
+                                                            return row.Horarios.find((horario) => horario.dia == dia) || { dia: 0, hora_inicio: "", hora_fin: "" }
+                                                        })
+                                                        return (
+                                                            <TableRow key={row.id}>
+                                                                <TableCell>
+                                                                    <RadioGroup
+                                                                        value={selectedOption}
+                                                                        onChange={(event) => setSelectedOption(event.target.value)}
+                                                                    >
+                                                                        <FormControlLabel
+                                                                            value={row.id.toString()}
+                                                                            control={<Radio style={{ marginLeft: "50%" }} />}
+                                                                            label=""
+                                                                        />
+                                                                    </RadioGroup>
+                                                                </TableCell>
+                                                                <TableCell>T</TableCell>
+                                                                <TableCell>{row.cupo}</TableCell>
+                                                                <TableCell>{row.numero}</TableCell>
+                                                                <TableCell>{row.Docente.nombre}</TableCell>
+                                                                {row.Horarios.map((horario) => {
+                                                                    return <TableCell>{horario.dia != 0 ? horario.hora_inicio + "/" + horario.hora_fin : ""}</TableCell>
+                                                                })}
+                                                            </TableRow>
+                                                        )
+                                                    })}
                                                 </TableBody>
                                             </Table>
                                         </TableContainer>
@@ -197,7 +228,7 @@ export default function SeleccionarAsignaturasPage() {
                             <TableHead style={{ backgroundColor: Theme.palette.secondary.table }}>
                                 <TableRow>
                                     <TableCell style={tableCellStyle}>Asignatura</TableCell>
-                                    <TableCell style={tableCellStyle}>cupos</TableCell>
+                                    <TableCell style={tableCellStyle}>Cupos</TableCell>
                                     <TableCell style={tableCellStyle}>Seccion</TableCell>
                                     <TableCell style={tableCellStyle}>Profesor</TableCell>
                                     <TableCell style={tableCellStyle}>Lun</TableCell>
@@ -209,22 +240,35 @@ export default function SeleccionarAsignaturasPage() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data.map((row) => (
-                                    <>
-                                        <TableRow key={row.id}>
-                                            <TableCell>{row.asignatura}</TableCell>
-                                            <TableCell>{row.cupos}</TableCell>
-                                            <TableCell>{row.seccion}</TableCell>
-                                            <TableCell>{row.profesor}</TableCell>
-                                            <TableCell>{row.lun}</TableCell>
-                                            <TableCell>{row.mar}</TableCell>
+                                {loading ? (<TableRow>
+                                    <TableCell colSpan={10}>Loading...</TableCell>
+                                </TableRow>) : (data.map((row) => {
+                                    const dias = [1, 2, 3, 4, 5, 6]
+                                    row.Horarios = dias.map((dia) => {
+                                        return row.Horarios.find((horario) => horario.dia == dia) || { dia: 0, hora_inicio: "", hora_fin: "" }
+                                    })
+                                    return (
+                                        <>
+                                            {/* {console.log(row.Horarios)} */}
+                                            <TableRow key={row.id}>
+                                                <TableCell>{row.Asignatura.nombre}</TableCell>
+                                                <TableCell>{row.cupo}</TableCell>
+                                                <TableCell>{row.numero}</TableCell>
+                                                <TableCell>{row.Docente.nombre}</TableCell>
+                                                {
+                                                    row.Horarios.map((horario) => {
+                                                        return <TableCell>{horario.dia != 0 ? horario.hora_inicio + "/" + horario.hora_fin : ""}</TableCell>
+                                                    })}
+                                                {/* <TableCell>{row.Horarios.forEach((horario) => { return horario.hora_inicio; if (horario.dia == 1) { return horario.hora_inicio + "/" + horario.hora_fin; } })}</TableCell>
+                                            <TableCell>{row.Horarios.dia == 2 ? row.Horarios.hora_inicio + "/" + row.Horarios.hora_inicio : ""}</TableCell>
                                             <TableCell>{row.mier}</TableCell>
                                             <TableCell>{row.jue}</TableCell>
                                             <TableCell>{row.vier}</TableCell>
-                                            <TableCell>{row.sab}</TableCell>
-                                        </TableRow>
-                                    </>
-                                ))}
+                                            <TableCell>{row.sab}</TableCell> */}
+                                            </TableRow>
+                                        </>
+                                    )
+                                }))}
                             </TableBody>
                         </Table>
                     </TableContainer>
