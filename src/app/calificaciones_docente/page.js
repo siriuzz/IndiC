@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import SidebarCloseDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
+import SidebarDocente from "@/components/Sidebar/sidebarDocente/SidebarDocente";
 import { Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -176,7 +176,7 @@ export default function Calificaciones_Estudiante() {
 
     return (
         <paper style={wallpaperStyle}>
-            <SidebarCloseDocente />
+            <SidebarDocente />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <Paper elevation={0} style={paperStyle}>
                     <paper style={{ display: "flex" }}>
