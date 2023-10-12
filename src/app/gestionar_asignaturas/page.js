@@ -157,6 +157,10 @@ export default function GestionarAsignatura() {
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
     const [isCreateDialogOpen2, setCreateDialogOpen2] = useState(false);
+    const [isSaveConfirmationOpen, setSaveConfirmationOpen] = useState(false);
+    const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
+
+
 
 
     const handleSwitchToggle = () => {
@@ -187,7 +191,7 @@ export default function GestionarAsignatura() {
         setCreateDialogOpen(false);
     };
 
-    
+
     const handleOpenCreateDialog2 = () => {
         setCreateDialogOpen2(true);
     };
@@ -195,6 +199,33 @@ export default function GestionarAsignatura() {
     const handleCloseCreateDialog2 = () => {
         setCreateDialogOpen2(false);
     };
+
+    const handleOpenSaveConfirmation = () => {
+        setSaveConfirmationOpen(true);
+    };
+
+    const handleCloseSaveConfirmation = () => {
+        setSaveConfirmationOpen(false);
+    };
+
+    const handleSaveAsignatura = () => {
+        // Aquí puedes agregar la lógica para guardar la asignatura
+        // Y luego cerrar el diálogo de confirmación de guardado
+        setSaveConfirmationOpen(false);
+    };
+
+    const handleCloseEditConfirmation = () => {
+        setEditConfirmationOpen(false);
+    };
+
+    const handleEditAsignatura = () => {
+        // Aquí puedes agregar la lógica para editar la asignatura
+
+        // Cierra el diálogo de confirmación
+        handleCloseEditConfirmation();
+
+    };
+
 
     return (
         <div style={wallpaperStyle}>
@@ -253,35 +284,63 @@ export default function GestionarAsignatura() {
                             <AddIcon style={{ color: "#333E8E", marginLeft: "10px" }} />
                         </Button>
                         <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
-                            <DialogTitle style={{fontSize:"16px", color:"#7E57C6",width:"300px", textAlign: "center"}}>Editar Asignatura</DialogTitle>
-                            <DialogContent style={{ display:"flex", flexDirection:"column", alignItems:"center" }}>
-                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Nombre"  />
-                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Código"  />
-                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Credito"  />
+                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Editar Asignatura</DialogTitle>
+                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
+                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
+                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
                             </DialogContent>
                             <DialogActions style={{ justifyContent: "center" }}>
                                 <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
                                     Cancelar
                                 </Button>
-                                <Button onClick={handleCloseCreateDialog} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
                                     Guardar
                                 </Button>
+                                <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
+                                    <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
+                                    <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                        <p>¿Desea editar esta asignatura?</p>
+                                    </DialogContent>
+                                    <DialogActions style={{ justifyContent: "center" }}>
+                                        <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                            Cancelar
+                                        </Button>
+                                        <Button onClick={handleEditAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                            Confirmar
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
                             </DialogActions>
                         </Dialog>
 
                         <Dialog open={isCreateDialogOpen2} onClose={handleCloseCreateDialog2}>
-                            <DialogTitle style={{fontSize:"16px", color:"#7E57C6",width:"300px", textAlign: "center"}}>Crear Asignatura</DialogTitle>
-                            <DialogContent style={{ display:"flex", flexDirection:"column", alignItems:"center" }}>
-                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Nombre"  />
-                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Código"  />
-                                <TextField style= {{width:"210px", height:"56px", borderRadius:"90px", borderColor:"#7E57C266", marginTop:"20px"}}label="Credito"  />
+                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Crear Asignatura</DialogTitle>
+                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
+                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
+                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
                             </DialogContent>
                             <DialogActions style={{ justifyContent: "center" }}>
                                 <Button onClick={handleCloseCreateDialog2} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
                                     Cancelar
                                 </Button>
-                                <Button onClick={handleCloseCreateDialog2} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                <Button onClick={handleOpenSaveConfirmation} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
                                     Guardar
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+                        <Dialog open={isSaveConfirmationOpen} onClose={handleCloseSaveConfirmation}>
+                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Guardado</DialogTitle>
+                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                <p>¿Desea crear esta asignatura?</p>
+                            </DialogContent>
+                            <DialogActions style={{ justifyContent: "center" }}>
+                                <Button onClick={handleCloseSaveConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                    Cancelar
+                                </Button>
+                                <Button onClick={handleSaveAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                    Confirmar
                                 </Button>
                             </DialogActions>
                         </Dialog>
