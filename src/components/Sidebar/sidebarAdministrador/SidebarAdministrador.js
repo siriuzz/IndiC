@@ -176,13 +176,6 @@ export default function SidebarAdministrador() {
                         </Button>
                     </Link>
 
-                    <Link href="/calificaciones_docente">
-                        <Button style={buttonStyle2} variant={contained}>
-                            <GradeOutlined style={iconStyle} />
-                            <div style={divStyle}>Calificaciones</div>
-                        </Button>
-                    </Link>
-
                     <Link href="/cuenta_administrador">
                         <Button style={buttonStyle2} variant={contained}>
                             <PeopleAltOutlinedIcon style={iconStyle} />
