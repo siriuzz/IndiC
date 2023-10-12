@@ -169,35 +169,21 @@ export default function SidebarAdministrador() {
                 ></hr>
 
                 <div>
-                    <Link href="/inicio_estudiante">
+                    <Link href="/inicio_administrador">
                         <Button style={buttonStyle} variant={contained}>
                             <HomeOutlined style={iconStyle} />
                             <div style={divStyle}>Inicio</div>
                         </Button>
                     </Link>
 
-                    <Link href="/calificaciones_estudiante">
+                    <Link href="/calificaciones_docente">
                         <Button style={buttonStyle2} variant={contained}>
                             <GradeOutlined style={iconStyle} />
                             <div style={divStyle}>Calificaciones</div>
                         </Button>
                     </Link>
 
-                    <Link href="/calculadora">
-                        <Button style={buttonStyle2} variant={contained}>
-                            <SignalCellularAltIcon style={iconStyle} />
-                            <div style={divStyle}>Calculadora de indice</div>
-                        </Button>
-                    </Link>
-
-                    <Link href="/seleccionar_asignaturas">
-                        <Button style={buttonStyle2} variant={contained}>
-                            <EditOutlined style={iconStyle} />
-                            <div style={divStyle}>Selección</div>
-                        </Button>
-                    </Link>
-
-                    <Link href="/cuenta_estudiante">
+                    <Link href="/cuenta_administrador">
                         <Button style={buttonStyle2} variant={contained}>
                             <PeopleAltOutlinedIcon style={iconStyle} />
                             <div style={divStyle}>Cuenta</div>
