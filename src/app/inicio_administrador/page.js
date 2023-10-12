@@ -152,19 +152,19 @@ const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_
 
 export default function InicioAdministrador() {
     const [estudiantes, setEstudiantes] = React.useState([]);
-    // useEffect(() => {
-    //     // console.log(process.env.NEXT_PUBLIC_API_HOST);
-    //     axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
-    //         console.log(response.data);
-    //     }).catch((error) => {
-    //         console.log(error);
-    //         localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
-    //         window.location.href = '/login';
-    //     });;
-    //     axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-    //         setEstudiantes(response.data);
-    //     });
-    // }, []);
+    useEffect(() => {
+        // console.log(process.env.NEXT_PUBLIC_API_HOST);
+        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
+            window.location.href = '/login';
+        });;
+        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+            setEstudiantes(response.data);
+        });
+    }, []);
     return (
         <div style={wallpaperStyle}>
             <SidebarAdministrador />    
