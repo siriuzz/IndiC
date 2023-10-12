@@ -19,7 +19,7 @@ const style = {
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] }) // Se usa para usar la fuente Kanit en los elementos que no se le aplica por defecto
 
-export default function SearchBar({ placeholder, value, onClick }) {
+export default function SearchBar({ placeholder, onClick }) {
     return (
         <Input disableUnderline={true} className={kanit.className} style={style} placeholder={placeholder}
             endAdornment={
