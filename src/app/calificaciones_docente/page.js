@@ -26,7 +26,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Theme from "../theme";
 import Badge from '@mui/material/Badge';
-
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import { TextField, DialogContent, DialogActions } from '@mui/material';
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -163,6 +165,44 @@ export default function Calificaciones_Estudiante() {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const [isGradeDialogOpen, setGradeDialogOpen] = useState(false);
+    const [isSecondGradeDialogOpen, setSecondGradeDialogOpen] = useState(false);
+    const [baseGrade, setBaseGrade] = useState(''); // Estado para la calificación base
+    const [obtainedGrade, setObtainedGrade] = useState(''); // Estado para la calificación obtenida
+    const [secondBaseGrade, setSecondBaseGrade] = useState(''); // Estado para la segunda calificación base
+    const [secondObtainedGrade, setSecondObtainedGrade] = useState(''); // Estado para la segunda calificación obtenida
+
+
+    const handleCloseGradeDialog = () => {
+        setGradeDialogOpen(false);
+    };
+
+    const handleSaveGrades = () => {
+        // Aquí puedes agregar la lógica para guardar las calificaciones
+        console.log('Calificación base:', baseGrade);
+        console.log('Calificación obtenida:', obtainedGrade);
+
+        // Limpia los campos y cierra el diálogo
+        setBaseGrade('');
+        setObtainedGrade('');
+        handleCloseGradeDialog();
+    };
+
+    const handleCloseSecondGradeDialog = () => {
+        setSecondGradeDialogOpen(false);
+    };
+
+    const handleSaveSecondGrades = () => {
+        // Aquí puedes agregar la lógica para guardar las segundas calificaciones
+        console.log('Segunda calificación base:', secondBaseGrade);
+        console.log('Segunda calificación obtenida:', secondObtainedGrade);
+
+        // Limpia los campos y cierra el diálogo
+        setSecondBaseGrade('');
+        setSecondObtainedGrade('');
+        handleCloseSecondGradeDialog();
+    };
+
     const EachStudentStyle = {
         display: "flex",
         backgroundColor: "#f4eeff",
@@ -224,9 +264,40 @@ export default function Calificaciones_Estudiante() {
                                                                 </paper>
 
                                                             } />
-                                                        <EditButton variant="contained">
+                                                        <EditButton variant="contained" onClick={() => setGradeDialogOpen(true)}>
                                                             <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                         </EditButton>
+                                                        <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
+                                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Final</DialogTitle>
+                                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                <TextField
+                                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                    label="Calificación Base Final"
+                                                                    value={baseGrade}
+                                                                    onChange={(e) => setBaseGrade(e.target.value)}
+                                                                />
+                                                                <TextField
+                                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                    label="Calificación Obtenida Final"
+                                                                    value={obtainedGrade}
+                                                                    onChange={(e) => setObtainedGrade(e.target.value)}
+                                                                />
+                                                            </DialogContent>
+                                                            <DialogActions style={{ justifyContent: "center" }}>
+                                                                <Button
+                                                                    onClick={handleCloseGradeDialog}
+                                                                    style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
+                                                                >
+                                                                    Cancelar
+                                                                </Button>
+                                                                <Button
+                                                                    onClick={handleSaveGrades}
+                                                                    style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
+                                                                >
+                                                                    Guardar
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Dialog>
                                                     </ListItem>
                                                 </paper>
                                             </AccordionDetails>
@@ -262,9 +333,43 @@ export default function Calificaciones_Estudiante() {
                                                                     <span>juandanielu@est.example.edu</span>
                                                                 </paper>
                                                             } />
-                                                        <EditButton variant="contained">
+                                                        <EditButton variant="contained" onClick={() => setSecondGradeDialogOpen(true)}>
                                                             <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                         </EditButton>
+                                                        <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
+                                                            {/* ... Ventana emergente similar para el primer botón de "Editar" */}
+                                                        </Dialog>
+                                                        <Dialog open={isSecondGradeDialogOpen} onClose={handleCloseSecondGradeDialog}>
+                                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Medio Término</DialogTitle>
+                                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                <TextField
+                                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                    label="Calificación Base MT"
+                                                                    value={secondBaseGrade}
+                                                                    onChange={(e) => setSecondBaseGrade(e.target.value)}
+                                                                />
+                                                                <TextField
+                                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                    label="Calificación Obtenida MT"
+                                                                    value={secondObtainedGrade}
+                                                                    onChange={(e) => setSecondObtainedGrade(e.target.value)}
+                                                                />
+                                                            </DialogContent>
+                                                            <DialogActions style={{ justifyContent: "center" }}>
+                                                                <Button
+                                                                    onClick={handleCloseSecondGradeDialog}
+                                                                    style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
+                                                                >
+                                                                    Cancelar
+                                                                </Button>
+                                                                <Button
+                                                                    onClick={handleSaveSecondGrades}
+                                                                    style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
+                                                                >
+                                                                    Guardar
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Dialog>
                                                     </ListItem>
                                                 </paper>
                                             </AccordionDetails>
