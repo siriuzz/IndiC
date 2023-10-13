@@ -208,9 +208,6 @@ export default function Calificaciones_Estudiante() {
                                                             <span>Correo:</span>
                                                         </paper>
                                                     } />
-                                                <EditButton variant="contained">
-                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
-                                                </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
                                                 <paper style={EachStudentStyle}>
@@ -225,7 +222,11 @@ export default function Calificaciones_Estudiante() {
                                                                 <paper>
                                                                     <span>juandanielu@est.example.edu</span>
                                                                 </paper>
+                                                                
                                                             } />
+                                                                                                                    <EditButton variant="contained">
+                                                            <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
+                                                        </EditButton>
                                                     </ListItem>
                                                 </paper>
                                             </AccordionDetails>
@@ -246,9 +247,6 @@ export default function Calificaciones_Estudiante() {
                                                             <span>Correo:</span>
                                                         </paper>
                                                     } />
-                                                <EditButton variant="contained">
-                                                    <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
-                                                </EditButton>
                                             </AccordionSummary>
                                             <AccordionDetails>
                                                 <paper style={EachStudentStyle}>
