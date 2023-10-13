@@ -226,10 +226,14 @@ export default function InicioAdministrador() {
     const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
     const [analytics, setAnalytics] = useState({ estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }); // { estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }
     const [estado, setEstado] = React.useState();
+    const [currentUserId, setCurrentUserId] = React.useState();
+    const [count, setCount] = useState(0); //initial value of this 
 
     const [usuarios, setUsuarios] = useState([]);
 
-    const handleSwitchToggle = () => {
+    const handleSwitchToggle = (id) => {
+        setCurrentUserId(id);
+        // setCount((count) => count + 1);
         if (isSwitchOn) {
             setConfirmationDialogOpen(true); // Mostrar el mensaje de confirmación solo al apagar
         } else {
@@ -240,6 +244,7 @@ export default function InicioAdministrador() {
     };
 
     const handleConfirmSwitch = () => {
+        usuarios.find((usuario) => usuario.id == currentUserId).id_estado = 0;
         // Apagar el interruptor
         setIsSwitchOn(false);
         // setEstudiantes.id_estado = 0;
@@ -352,7 +357,7 @@ export default function InicioAdministrador() {
                                                             <Stack direction="row" spacing={1} alignItems="center">
                                                                 <AntSwitch
                                                                     checked={usuario.id_estado == 1 ? true : false}
-                                                                    onChange={handleSwitchToggle}
+                                                                    onChange={handleSwitchToggle(usuario.id)}
                                                                     inputProps={{ 'aria-label': 'ant design' }}
                                                                 />
                                                             </Stack>
@@ -363,54 +368,58 @@ export default function InicioAdministrador() {
                                                     </div>
                                                 </ListItem>
 
-                                                <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
-                                                    <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center", fontSize: "24px", }}>Editar Usuario</DialogTitle>
-                                                    <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Correo" />
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Telefono" />
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266" }} label="Cedula" />
-                                                    </DialogContent>
-                                                    <DialogActions style={{ justifyContent: "center", marginBottom: "10px" }}>
-                                                        <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                                            Cancelar
-                                                        </Button>
-                                                        <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
-                                                            Guardar
-                                                        </Button>
-                                                        <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
-                                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
-                                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                                <p>¿Desea editar esta asignatura?</p>
-                                                            </DialogContent>
-                                                            <DialogActions style={{ justifyContent: "center" }}>
-                                                                <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                                                    Cancelar
-                                                                </Button>
-                                                                <Button onClick={handleEditUsuario(usuario.id)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
-                                                                    Confirmar
-                                                                </Button>
-                                                            </DialogActions>
-                                                        </Dialog>
-                                                    </DialogActions>
-                                                </Dialog>
-                                                <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
-                                                    <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
-                                                        ¿Está seguro que quiere desactivar esta asignatura?
-                                                    </DialogContent>
-                                                    <DialogActions style={{ justifyContent: "center" }}>
-                                                        <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                                            Cancelar
-                                                        </Button>
-                                                        <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
-                                                            Desactivar
-                                                        </Button>
-                                                    </DialogActions>
-                                                </Dialog>
                                             </div>
+
                                         );
                                     })
                                 }
+                                <div className="App">
+                                    <p> value of count: {count} </p>
+                                </div>
+                                <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
+                                    <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center", fontSize: "24px", }}>Editar Usuario</DialogTitle>
+                                    <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Correo" />
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Telefono" />
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266" }} label="Cedula" />
+                                    </DialogContent>
+                                    <DialogActions style={{ justifyContent: "center", marginBottom: "10px" }}>
+                                        <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                            Cancelar
+                                        </Button>
+                                        <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                            Guardar
+                                        </Button>
+                                        <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
+                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
+                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                <p>¿Desea editar este usuario?</p>
+                                            </DialogContent>
+                                            <DialogActions style={{ justifyContent: "center" }}>
+                                                <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                                    Cancelar
+                                                </Button>
+                                                <Button onClick={handleEditUsuario} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                                    Confirmar
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                    </DialogActions>
+                                </Dialog>
+                                <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
+                                    <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
+                                        ¿Está seguro que quiere desactivar este usuario?
+                                    </DialogContent>
+                                    <DialogActions style={{ justifyContent: "center" }}>
+                                        <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                            Cancelar
+                                        </Button>
+                                        <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                            Desactivar
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
                             </List>
                         </Paper>
                     </div>
