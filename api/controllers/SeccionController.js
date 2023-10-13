@@ -1,11 +1,79 @@
-const { Secciones } = require('../../db/models'); // Importa los modelos necesarios
+const { Secciones, Estudiante_Seccion, Asignatura, Docente, Horario } = require('../../db/models'); // Importa los modelos necesarios
+const { Op } = require('sequelize');
 
-const getSecciones = async (req, res) => {
+const getAllSecciones = async (req, res) => {
     try {
         const secciones = await Secciones.findAll();
         return res.status(200).json({ secciones });
     } catch (error) {
         return res.status(500).send(error.message);
+    }
+}
+
+const getSeccionById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const seccion = await Secciones.findOne({
+            where: { id: id }
+        });
+        if (seccion) {
+            return res.status(200).json({ seccion });
+        }
+        return res.status(404).send('Seccion with the specified ID does not exists');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
+const getSeleccion = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const seccionesTomadas = await Estudiante_Seccion.findAll({
+            where: { id_estudiante: id }
+        });
+
+        const seccionesTomadasIds = seccionesTomadas.map((seccion) => seccion.id_seccion);
+        // console.log(seccionesTomadasIds);
+
+        const seccion = await Secciones.findAll({
+            where: {
+                id: {
+                    [Op.notIn]: seccionesTomadasIds
+                },
+                is_active: 1
+            },
+            include: [{
+                model: Asignatura,
+                attributes: ['nombre', 'codigo']
+            }, {
+                model: Docente,
+                attributes: ['nombre']
+            }, {
+                model: Horario,
+                attributes: ['dia', 'hora_inicio', 'hora_fin']
+            }]
+        }).catch((error) => {
+            console.log(error);
+        });
+        if (seccion) {
+            return seccion;
+        }
+        return 'Seccion with the specified ID does not exists';
+    } catch (error) {
+        return error.message;
+    }
+}
+
+const updateSeccion = async (req, res) => {
+    try {
+        const seccion = await Secciones.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return seccion;
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
     }
 }
 
@@ -27,6 +95,9 @@ const createSeccionesFromCsv = async (row) => {
 }
 
 module.exports = {
-    getSecciones,
-    createSeccionesFromCsv
+    getAllSecciones,
+    createSeccionesFromCsv,
+    getSeccionById,
+    getSeleccion,
+    updateSeccion
 }

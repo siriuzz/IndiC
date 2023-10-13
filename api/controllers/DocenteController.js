@@ -97,10 +97,61 @@ const createDocenteFromCsv = async (element) => {
     }
 }
 
+const updateDocente = async (req, res) => {
+    try {
+        console.log("Actualizando docente");
+        const docente = await Docente.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return docente;
+    }
+    catch (error) {
+        console.log("Error al actualizar el docente");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+const desactivarDocente = async (req, res) => {
+    try {
+        console.log("Desactivando docente");
+        const docente = await Docente.update({ id_estado: 2 }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return docente;
+    }
+    catch (error) {
+        console.log("Error al desactivar el docente");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+const activarDocente = async (req, res) => {
+    try {
+        console.log("Activando docente");
+        const docente = await Docente.update({ id_estado: 1 }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        return docente;
+    }
+    catch (error) {
+        console.log("Error al activar el docente");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 module.exports = {
     getAllDocentes,
     getDocenteById,
     createDocenteFromCsv,
     getDocenteByCorreo,
-    getSeccionesDocenteById
+    getSeccionesDocenteById,
+    updateDocente,
+    desactivarDocente,
+    activarDocente
 }

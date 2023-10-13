@@ -63,7 +63,7 @@ export default function Perfil() {
             const telefono = res.data.telefono;
             setTelefono(telefono);
         });
-    }, []);
+    }, [apiURL]);
 
     return (
         <div className={styles.wallpaper}>
@@ -73,8 +73,8 @@ export default function Perfil() {
                 <div className={styles.label}>
                     Bienvenido!
                     <IconButton className={styles.notificationsButton}>
-                    <Badge badgeContent={1} color="secondary">
-                        <NotificationsIcon style={{ height: "35px", width: "35px" }} />
+                        <Badge badgeContent={1} color="secondary">
+                            <NotificationsIcon style={{ height: "35px", width: "35px" }} />
                         </Badge>
                     </IconButton>
                 </div>
@@ -86,8 +86,8 @@ export default function Perfil() {
                             <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
                         </EditButton>
                         <div style={{ fontSize: "18px", marginLeft: "20px", marginTop: "70px", color: "grey" }}>
-                            Nombre: <div style={{fontSize: "26px", color: "black"}}>{user.nombre}</div><div>ID: <div style={{fontSize: "26px", color: 'black'}}>{user.id}</div><div>Estado: <div style={{fontSize: "24px", color: "black"}}>{user.id_estado == 1 ? "Activo" : "Inactivo"}</div></div></div>
-                            <div style={{color: "black"}}>
+                            Nombre: <div style={{ fontSize: "26px", color: "black" }}>{user.nombre}</div><div>ID: <div style={{ fontSize: "26px", color: 'black' }}>{user.id}</div><div>Estado: <div style={{ fontSize: "24px", color: "black" }}>{user.id_estado == 1 ? "Activo" : "Inactivo"}</div></div></div>
+                            <div style={{ color: "black" }}>
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "60px", marginLeft: "-160px" }}>Correo</div>
                                 <Link href="/" style={{ color: '#979797' }}>
                                     <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{user.correo} </div>
