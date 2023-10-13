@@ -1,9 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { Button, IconButton, Paper, Avatar, Badge, Modal, List, ListItem, ListItemAvatar, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
-import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
-import Image from "next/image";
 import { Kanit } from "next/font/google";
 import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/SidebarAdministrador";
 import SearchBar from "@/components/SearchBar/SearchBar";
@@ -85,36 +83,10 @@ const wallpaperStyle = {
     display: "flex",
 };
 
-const notificationsButtonStyle = {
-    color: "black",
-    marginTop: "5px",
-    width: "35px",
-    height: "35px",
-    display: "flex",
-    marginRight: "24px",
-};
-
-const notificationsIconStyle = {
-    height: "35px",
-    width: "35px",
-    marginLeft: "0px",
-    marginTop: "0px",
-};
-
 const paperStyle = {
     width: "472px",
     marginTop: "30px",
     marginLeft: "60px",
-};
-
-const paperBigConfig = {
-    backgroundColor: "#ffffff",
-    borderRadius: "40px",
-    marginTop: "70px",
-    marginRight: "10px",
-    marginLeft: "-1050px",
-    height: "600px",
-    width: "1300px",
 };
 
 const SearchBarStyle = {
@@ -137,7 +109,6 @@ const EachAsignaturaStyle = {
     marginBottom: "8px"
 };
 
-const label = { inputProps: { 'aria-label': 'Size switch demo' } };
 
 const editButtonStyle = {
     borderRadius: "20px",
