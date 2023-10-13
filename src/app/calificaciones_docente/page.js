@@ -185,9 +185,9 @@ export default function Calificaciones_Estudiante() {
                             <paper style={userInfoStyle}>
                                 Nombre: <div style={{ fontSize: "26px", color: "black" }}>Nombre y Apellido</div><paper>ID: <div style={{ fontSize: "26px", color: "black" }}>ID</div></paper>
                                 <IconButton style={notificationsButtonStyle}>
-                                <Badge badgeContent={1} color="secondary">
-                            <NotificationsIcon style={notificationsIconStyle} />
-                            </Badge>
+                                    <Badge badgeContent={1} color="secondary">
+                                        <NotificationsIcon style={notificationsIconStyle} />
+                                    </Badge>
                                 </IconButton>
                                 <Tabs className={kanit.className} defaultValue={0}>
                                     <StyledTabsList>
@@ -222,9 +222,9 @@ export default function Calificaciones_Estudiante() {
                                                                 <paper>
                                                                     <span>juandanielu@est.example.edu</span>
                                                                 </paper>
-                                                                
+
                                                             } />
-                                                                                                                    <EditButton variant="contained">
+                                                        <EditButton variant="contained">
                                                             <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                         </EditButton>
                                                     </ListItem>
