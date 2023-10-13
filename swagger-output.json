@@ -455,6 +455,22 @@
         }
       }
     },
+    "/api/Admins/analytics/get": {
+      "get": {
+        "tags": [
+          "Admins"
+        ],
+        "description": "Endpoint para obtener las estadisticas de los administradores.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/Admins/upload": {
       "post": {
         "tags": [
