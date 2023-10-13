@@ -11,6 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import EditIcon from "@mui/icons-material/EditOutlined";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import Switch from '@mui/material/Switch';
+import { useStyles } from "../layout";
 import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import AddIcon from '@mui/icons-material/Add';
@@ -168,6 +169,7 @@ export default function GestionarAsignatura() {
     const handleConfirmSwitch = () => {
         // Apagar el interruptor
         setIsSwitchOn(false);
+        set
         setConfirmationDialogOpen(false);
     };
 
