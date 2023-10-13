@@ -1,9 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { Button, IconButton, Paper, Avatar, Badge, Modal, List, ListItem, ListItemAvatar, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
-import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
-import Image from "next/image";
 import { Kanit } from "next/font/google";
 import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/SidebarAdministrador";
 import SearchBar from "@/components/SearchBar/SearchBar";
@@ -85,36 +83,10 @@ const wallpaperStyle = {
     display: "flex",
 };
 
-const notificationsButtonStyle = {
-    color: "black",
-    marginTop: "5px",
-    width: "35px",
-    height: "35px",
-    display: "flex",
-    marginRight: "24px",
-};
-
-const notificationsIconStyle = {
-    height: "35px",
-    width: "35px",
-    marginLeft: "0px",
-    marginTop: "0px",
-};
-
 const paperStyle = {
     width: "472px",
     marginTop: "30px",
     marginLeft: "60px",
-};
-
-const paperBigConfig = {
-    backgroundColor: "#ffffff",
-    borderRadius: "40px",
-    marginTop: "70px",
-    marginRight: "10px",
-    marginLeft: "-1050px",
-    height: "600px",
-    width: "1300px",
 };
 
 const SearchBarStyle = {
@@ -129,7 +101,7 @@ const EachAsignaturaStyle = {
     borderRight: "3px solid #F5F5F5",
     borderLeft: "3px solid #F5F5F5",
     borderBottom: "3px solid #F5F5F5",
-    borderRadius: "10px",
+    borderRadius: "40px",
     width: "750px",
     justifySelf: "center",
     marginLeft: "-100px",
@@ -137,7 +109,6 @@ const EachAsignaturaStyle = {
     marginBottom: "8px"
 };
 
-const label = { inputProps: { 'aria-label': 'Size switch demo' } };
 
 const editButtonStyle = {
     borderRadius: "20px",
@@ -272,10 +243,10 @@ export default function GestionarAsignatura() {
                     <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
                         <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Editar Asignatura</DialogTitle>
                         <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "40px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Profesor" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Código" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Creditos" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266" }} label="Profesor" />
                         </DialogContent>
                         <DialogActions style={{ justifyContent: "center" }}>
                             <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
@@ -306,7 +277,8 @@ export default function GestionarAsignatura() {
                         <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
                             <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Creditos" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Profesor" />
                         </DialogContent>
                         <DialogActions style={{ justifyContent: "center" }}>
                             <Button onClick={handleCloseCreateDialog2} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>

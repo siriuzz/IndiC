@@ -329,9 +329,7 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>{analytics.docentesActivos}</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
-                            <Badge badgeContent={1} color="secondary">
                                 <NotificationsIcon style={notificationsIconStyle} />
-                            </Badge>
                         </IconButton>
                     </Paper>
                     <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>

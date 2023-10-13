@@ -103,9 +103,7 @@ export default function Perfil() {
                 <div className={styles.label}>
                     Bienvenido!
                     <IconButton className={styles.notificationsButton}>
-                    <Badge badgeContent={1} color="secondary">
                         <NotificationsIcon style={{ height: "35px", width: "35px" }} />
-                        </Badge>
                     </IconButton>
                 </div>
                 <Paper elevation={0} style={{}}>
