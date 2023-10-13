@@ -129,7 +129,7 @@ const EachAsignaturaStyle = {
     borderRight: "3px solid #F5F5F5",
     borderLeft: "3px solid #F5F5F5",
     borderBottom: "3px solid #F5F5F5",
-    borderRadius: "10px",
+    borderRadius: "40px",
     width: "750px",
     justifySelf: "center",
     marginLeft: "-100px",
@@ -272,10 +272,10 @@ export default function GestionarAsignatura() {
                     <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
                         <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Editar Asignatura</DialogTitle>
                         <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "40px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Profesor" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Código" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Creditos" />
+                            <TextField style={{ width: "210px", height: "56px", borderColor: "#7E57C266" }} label="Profesor" />
                         </DialogContent>
                         <DialogActions style={{ justifyContent: "center" }}>
                             <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
@@ -306,7 +306,8 @@ export default function GestionarAsignatura() {
                         <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
                             <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
-                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Creditos" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Profesor" />
                         </DialogContent>
                         <DialogActions style={{ justifyContent: "center" }}>
                             <Button onClick={handleCloseCreateDialog2} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
