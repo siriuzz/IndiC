@@ -177,9 +177,7 @@ export default function Configuración() {
                         Nombre: Nombre y Apellido<div>Id: ID</div>
                         <div style={{ marginLeft: "1120px", marginTop: "-80px" }}>
                             <IconButton style={notificationsButtonStyle} onClick={handleOpen}>
-                                <Badge badgeContent={1} color="secondary">
                                     <NotificationsIcon style={notificationsIconStyle} />
-                                </Badge>
                                 <Modal
                                     open={open}
                                     onClose={handleClose}

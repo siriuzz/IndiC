@@ -228,9 +228,7 @@ export default function Perfil() {
                 <div className={kanit.className} style={labelStyle}>
                     Bienvenido!
                     <IconButton style={notificationsButtonStyle}>
-                        <Badge badgeContent={1} color="secondary">
                             <NotificationsIcon style={notificationsIconStyle} />
-                        </Badge>
                     </IconButton>
                 </div>
                 <ThemeProvider theme={theme}>

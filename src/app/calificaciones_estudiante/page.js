@@ -228,9 +228,7 @@ export default function Calificaciones_Estudiante() {
                         </paper>
                     </paper>
                     <IconButton style={notificationsButtonStyle}>
-                        <Badge badgeContent={1} color="secondary">
                             <NotificationsIcon style={notificationsIconStyle} />
-                        </Badge>
                     </IconButton>
 
                 </paper>

@@ -274,19 +274,19 @@ export default function InicioAdministrador() {
 
     };
 
-    useEffect(() => {
-        // console.log(process.env.NEXT_PUBLIC_API_HOST);
-        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
-            console.log(response.data);
-        }).catch((error) => {
-            console.log(error);
-            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
-            window.location.href = '/login';
-        });;
-        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-            setEstudiantes(response.data);
-        });
-    }, []);
+    // useEffect(() => {
+    //     // console.log(process.env.NEXT_PUBLIC_API_HOST);
+    //     axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
+    //         console.log(response.data);
+    //     }).catch((error) => {
+    //         console.log(error);
+    //         localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
+    //         window.location.href = '/login';
+    //     });;
+    //     axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+    //         setEstudiantes(response.data);
+    //     });
+    // }, []);
 
     return (
         <div style={wallpaperStyle}>
@@ -315,9 +315,7 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>3K</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
-                            <Badge badgeContent={1} color="secondary">
                                 <NotificationsIcon style={notificationsIconStyle} />
-                            </Badge>
                         </IconButton>
                     </Paper>
                     <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
