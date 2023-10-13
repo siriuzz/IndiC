@@ -251,9 +251,10 @@ export default function Calificaciones_Estudiante() {
                                                         <ListItemText primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>
                                                             secondary={
                                                                 <paper>
-                                                                    <span>juandanielu@est.example.edu</span>
+                                                                    <span style={{marginRight: "100px"}}>juandanielu@est.example.edu</span>
+                                                                    <span style={{marginRight: "80px"}}>Calificacion base: </span>
+                                                                    <span>Calificacion obtenida: </span>
                                                                 </paper>
-
                                                             } />
                                                         <EditButton variant="contained" onClick={() => setGradeDialogOpen(true)}>
                                                             <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
@@ -376,7 +377,7 @@ export default function Calificaciones_Estudiante() {
                                 marginTop: "-0.5rem",
                             }}>
                                 <IconButton style={notificationsButtonStyle}>
-                                        <NotificationsIcon style={notificationsIconStyle} />
+                                    <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
                             </div>
                         </paper>
