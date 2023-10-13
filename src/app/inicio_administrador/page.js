@@ -167,7 +167,7 @@ export default function InicioAdministrador() {
     }, []);
     return (
         <div style={wallpaperStyle}>
-            <SidebarAdministrador />    
+            <SidebarAdministrador />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <ThemeProvider theme={theme}>
                     <Paper elevation={0} style={{ display: "inline-flex", justifyContent: "space-between", width: "100%" }}>
@@ -192,14 +192,14 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>3K</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
-                        <Badge badgeContent={1} color="secondary">
-                            <NotificationsIcon style={notificationsIconStyle} />
+                            <Badge badgeContent={1} color="secondary">
+                                <NotificationsIcon style={notificationsIconStyle} />
                             </Badge>
                         </IconButton>
                     </Paper>
                     <Paper elevation={4} style={UsuariosStyle}>
                         <List sx={{ width: "190px" }}>
-                            <div style={{marginLeft: "16px", marginTop: "10px"}}>
+                            <div style={{ marginLeft: "16px", marginTop: "10px" }}>
                                 <SearchBar placeholder="Buscar Usuarios" />
                             </div>
                             {

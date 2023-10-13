@@ -220,22 +220,6 @@ export default function Perfil() {
             localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
             window.location.href = '/login';
         });
-
-
-
-
-
-        // console.log(token);
-        // Send a request to your server to validate the token
-        // async function validateToken() {
-        //     const valid = await checkTokenValidity(token);
-        //     console.log("Este es el resultado de la validacion " + valid);
-        //     if (!valid) {
-        //         localStorage.removeItem('jwtToken');
-        //         window.location.href = '/login';
-        //     }
-        // }
-        // validateToken();
     }, []);
     return (
         < div style={wallpaperStyle} >
@@ -244,10 +228,10 @@ export default function Perfil() {
                 <div className={kanit.className} style={labelStyle}>
                     Bienvenido!
                     <IconButton style={notificationsButtonStyle}>
-                    <Badge badgeContent={1} color="secondary">
-                        <NotificationsIcon style={notificationsIconStyle} />
+                        <Badge badgeContent={1} color="secondary">
+                            <NotificationsIcon style={notificationsIconStyle} />
                         </Badge>
-                   </IconButton>
+                    </IconButton>
                 </div>
                 <ThemeProvider theme={theme}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -256,9 +240,9 @@ export default function Perfil() {
                                 <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150}
                                 />
                                 <div style={userInfoStyle}>
-                                    <div>Nombre: <div style={{fontSize: "26px", color: "black"}}>{estudiante.nombre}</div></div>
-                                    <div>ID: <div style={{fontSize: "26px", color: "black"}}>{estudiante.id}</div></div>
-                                    <div>Carrera: <div style={{fontSize: "26px", color: "black"}}>{carrera.carrera}</div></div>
+                                    <div>Nombre: <div style={{ fontSize: "26px", color: "black" }}>{estudiante.nombre}</div></div>
+                                    <div>ID: <div style={{ fontSize: "26px", color: "black" }}>{estudiante.id}</div></div>
+                                    <div>Carrera: <div style={{ fontSize: "26px", color: "black" }}>{carrera.carrera}</div></div>
                                 </div>
                             </div>
                         </Paper>
@@ -277,7 +261,7 @@ export default function Perfil() {
                     <div style={{ display: "flex", justifyContent: "space-between", alignContent: "space-between", flexDirection: "column", height: "45%", marginTop: "-55px" }}>
 
                         {periodos.map((periodo) => (
-                            <div style={useStyles.divlinearProgressHead}>
+                            <div style={useStyles.divlinearProgressHead} key={periodo}>
                                 {periodo.indice * 4 / 100}/4.00
                                 <LinearProgress style={useStyles.linearProgress} variant="determinate" value={periodo.indice} />
                                 Período: {periodo.periodo} | Año:  {periodo.year}
