@@ -5,7 +5,7 @@ import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
 import Image from "next/image";
 import { Kanit } from "next/font/google";
-import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/sidebarAdministrador";
+import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/SidebarAdministrador";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import ListItemText from '@mui/material/ListItemText';
 import EditIcon from "@mui/icons-material/EditOutlined";
@@ -15,6 +15,7 @@ import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
+import { useStyles } from "../layout";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 40,
@@ -117,8 +118,9 @@ const paperBigConfig = {
 };
 
 const SearchBarStyle = {
-    marginLeft: "350px",
-    marginTop: "20px",
+    display: "flex",
+    marginTop: "10px",
+    justifyContent: "center",
 };
 
 const EachAsignaturaStyle = {
@@ -135,10 +137,7 @@ const EachAsignaturaStyle = {
     marginBottom: "8px"
 };
 
-
 const label = { inputProps: { 'aria-label': 'Size switch demo' } };
-
-
 
 const editButtonStyle = {
     borderRadius: "20px",
@@ -149,9 +148,6 @@ const editButtonStyle = {
     backgroundColor: "#EADDFF",
 };
 
-
-
-
 export default function GestionarAsignatura() {
     const [isSwitchOn, setIsSwitchOn] = useState(true); // Establece el interruptor en estado inicial encendido
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
@@ -159,9 +155,6 @@ export default function GestionarAsignatura() {
     const [isCreateDialogOpen2, setCreateDialogOpen2] = useState(false);
     const [isSaveConfirmationOpen, setSaveConfirmationOpen] = useState(false);
     const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
-
-
-
 
     const handleSwitchToggle = () => {
         if (isSwitchOn) {
@@ -226,129 +219,122 @@ export default function GestionarAsignatura() {
 
     };
 
-
     return (
         <div style={wallpaperStyle}>
             <SidebarAdministrador />
-            <div style={{ display: "flex" }}>
-                <div style={{ marginLeft: "1120px", marginTop: "-80px" }}>
-                    <IconButton style={notificationsButtonStyle}>
-                        <Badge badgeContent={1} color="secondary">
-                            <NotificationsIcon style={notificationsIconStyle} />
-                        </Badge>
-                    </IconButton>
-                </div>
-                <Paper elevation={3} style={paperBigConfig}>
-                    <div style={SearchBarStyle}>
-                        <SearchBar placeholder="Buscar Asignaturas" />
-                        <div style={EachAsignaturaStyle}>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar style={{ backgroundColor: '#A6B1E1' }}>
-                                        <BookmarkIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText style={{ fontWeight: "600" }} primary="IDS335 - Diseño de Software" secondary="BERNARDO ANTONIO BATISTA DIAZ" />
-                                <IconButton style={editButtonStyle} variant="contained" onClick={handleOpenCreateDialog}>
-                                    <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
-                                </IconButton>
-                                <FormGroup style={{ marginLeft: "10px" }}>
-                                    <Stack direction="row" spacing={1} alignItems="center">
-                                        <AntSwitch
-                                            checked={isSwitchOn}
-                                            onChange={handleSwitchToggle}
-                                            inputProps={{ 'aria-label': 'ant design' }}
-                                        />
-                                    </Stack>
-                                </FormGroup>
-                                <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
-                                    <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
-                                        ¿Está seguro que quiere desactivar esta asignatura?
-                                    </DialogContent>
-                                    <DialogActions style={{ justifyContent: "center" }}>
-                                        <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                            Cancelar
-                                        </Button>
-                                        <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
-                                            Desactivar
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
-                            </ListItem>
+            <Paper elevation={3} style={useStyles.paperBig}>
+                <div style={{ display: 'flex', justifyContent: "center" }}>
+                    <div style={EachAsignaturaStyle}>
+                        <div style={SearchBarStyle}>
+                            <SearchBar style={{marginLeft: '40px'}} placeholder="Buscar asignaturas" />
                         </div>
-
-                        <Button style={CrearStyle} onClick={handleOpenCreateDialog2}>
-                            <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", fontWeight: "500", width: "270px", color: "#3E44CC" }}>
-                                Crear
-                            </div>
-                            <AddIcon style={{ color: "#333E8E", marginLeft: "10px" }} />
-                        </Button>
-                        <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
-                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Editar Asignatura</DialogTitle>
-                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
-                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
-                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
-                            </DialogContent>
-                            <DialogActions style={{ justifyContent: "center" }}>
-                                <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                    Cancelar
-                                </Button>
-                                <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
-                                    Guardar
-                                </Button>
-                                <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
-                                    <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
-                                    <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                        <p>¿Desea editar esta asignatura?</p>
-                                    </DialogContent>
-                                    <DialogActions style={{ justifyContent: "center" }}>
-                                        <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                            Cancelar
-                                        </Button>
-                                        <Button onClick={handleEditAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
-                                            Confirmar
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
-                            </DialogActions>
-                        </Dialog>
-
-                        <Dialog open={isCreateDialogOpen2} onClose={handleCloseCreateDialog2}>
-                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Crear Asignatura</DialogTitle>
-                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
-                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
-                                <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
-                            </DialogContent>
-                            <DialogActions style={{ justifyContent: "center" }}>
-                                <Button onClick={handleCloseCreateDialog2} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                    Cancelar
-                                </Button>
-                                <Button onClick={handleOpenSaveConfirmation} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
-                                    Guardar
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                        <Dialog open={isSaveConfirmationOpen} onClose={handleCloseSaveConfirmation}>
-                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Guardado</DialogTitle>
-                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <p>¿Desea crear esta asignatura?</p>
-                            </DialogContent>
-                            <DialogActions style={{ justifyContent: "center" }}>
-                                <Button onClick={handleCloseSaveConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                    Cancelar
-                                </Button>
-                                <Button onClick={handleSaveAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
-                                    Confirmar
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                    <BookmarkIcon />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText style={{ fontWeight: "600" }} primary="IDS335 - Diseño de Software" secondary="BERNARDO ANTONIO BATISTA DIAZ" />
+                            <IconButton style={editButtonStyle} variant="contained" onClick={handleOpenCreateDialog}>
+                                <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
+                            </IconButton>
+                            <FormGroup style={{ marginLeft: "10px" }}>
+                                <Stack direction="row" spacing={1} alignItems="center">
+                                    <AntSwitch
+                                        checked={isSwitchOn}
+                                        onChange={handleSwitchToggle}
+                                        inputProps={{ 'aria-label': 'ant design' }}
+                                    />
+                                </Stack>
+                            </FormGroup>
+                            <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
+                                <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
+                                    ¿Está seguro que quiere desactivar esta asignatura?
+                                </DialogContent>
+                                <DialogActions style={{ justifyContent: "center" }}>
+                                    <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                        Cancelar
+                                    </Button>
+                                    <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                        Desactivar
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </ListItem>
                     </div>
-                    <Paper elevation={0} style={paperStyle}>
-                    </Paper>
+
+                    <Button style={CrearStyle} onClick={handleOpenCreateDialog2}>
+                        <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", fontWeight: "500", width: "270px", color: "#3E44CC" }}>
+                            Crear
+                        </div>
+                        <AddIcon style={{ color: "#333E8E", marginLeft: "10px" }} />
+                    </Button>
+                    <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
+                        <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Editar Asignatura</DialogTitle>
+                        <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "40px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Profesor" />
+                        </DialogContent>
+                        <DialogActions style={{ justifyContent: "center" }}>
+                            <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                Cancelar
+                            </Button>
+                            <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                Guardar
+                            </Button>
+                            <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
+                                <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
+                                <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                    <p>¿Desea editar esta asignatura?</p>
+                                </DialogContent>
+                                <DialogActions style={{ justifyContent: "center" }}>
+                                    <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                        Cancelar
+                                    </Button>
+                                    <Button onClick={handleEditAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                        Confirmar
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </DialogActions>
+                    </Dialog>
+
+                    <Dialog open={isCreateDialogOpen2} onClose={handleCloseCreateDialog2}>
+                        <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Crear Asignatura</DialogTitle>
+                        <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Nombre" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Código" />
+                            <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label="Credito" />
+                        </DialogContent>
+                        <DialogActions style={{ justifyContent: "center" }}>
+                            <Button onClick={handleCloseCreateDialog2} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                Cancelar
+                            </Button>
+                            <Button onClick={handleOpenSaveConfirmation} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                Guardar
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                    <Dialog open={isSaveConfirmationOpen} onClose={handleCloseSaveConfirmation}>
+                        <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Guardado</DialogTitle>
+                        <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <p>¿Desea crear esta asignatura?</p>
+                        </DialogContent>
+                        <DialogActions style={{ justifyContent: "center" }}>
+                            <Button onClick={handleCloseSaveConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                Cancelar
+                            </Button>
+                            <Button onClick={handleSaveAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                Confirmar
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+                <Paper elevation={0} style={paperStyle}>
                 </Paper>
-            </div>
+            </Paper>
         </div>
     );
 }
