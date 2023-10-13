@@ -9,7 +9,8 @@ const AsignaturaController = require('../controllers/AsignaturaController.js');
 
 router.get('/Asignaturas', async (req, res) => {
     try {
-
+        const result = await AsignaturaController.getAllAsignaturas(req, res);
+        res.json(result);
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

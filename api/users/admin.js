@@ -43,6 +43,18 @@ router.get('/Admins', async (req, res) => {
 
 })
 
+router.get('/Admins/analytics/get', async (req, res) => {
+    /* #swagger.tags = ['Admins']*/
+    // #swagger.description = 'Endpoint para obtener las estadisticas de los administradores.'
+    try {
+        const result = await AdminController.getAdminsAnalytics(req, res);
+        res.json(result);
+        console.log(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/Admins/upload', upload.single('csv'), async (req, res) => {
     /* #swagger.tags = ['Admins']
          #swagger.description = 'Endpoint para subir un archivo csv con los datos de los administradores.'

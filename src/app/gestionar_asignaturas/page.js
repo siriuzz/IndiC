@@ -119,6 +119,9 @@ const editButtonStyle = {
     backgroundColor: "#EADDFF",
 };
 
+import axios from "axios";
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+
 export default function GestionarAsignatura() {
     const [isSwitchOn, setIsSwitchOn] = useState(true); // Establece el interruptor en estado inicial encendido
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
@@ -126,6 +129,17 @@ export default function GestionarAsignatura() {
     const [isCreateDialogOpen2, setCreateDialogOpen2] = useState(false);
     const [isSaveConfirmationOpen, setSaveConfirmationOpen] = useState(false);
     const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
+    const [asignaturas, setAsignaturas] = useState([]);
+    const [asignaturaSeleccionada, setAsignaturaSeleccionada] = useState({});// Aquí puedes agregar la lógica para guardar la asignatura
+
+    React.useEffect(() => {
+        if (asignaturas.length == 0) {
+            axios.get(`http://${apiURL}/api/Asignaturas`).then((res) => {
+                setAsignaturas(res.data);
+            });
+
+        }
+    });
 
     const handleSwitchToggle = () => {
         if (isSwitchOn) {
@@ -143,6 +157,7 @@ export default function GestionarAsignatura() {
     };
 
     const handleCancelSwitch = () => {
+        console.log(asignaturaSeleccionada);
         setConfirmationDialogOpen(false);
     };
 
@@ -197,42 +212,45 @@ export default function GestionarAsignatura() {
                 <div style={{ display: 'flex', justifyContent: "center" }}>
                     <div style={EachAsignaturaStyle}>
                         <div style={SearchBarStyle}>
-                            <SearchBar style={{marginLeft: '40px'}} placeholder="Buscar asignaturas" />
+                            <SearchBar style={{ marginLeft: '40px' }} placeholder="Buscar asignaturas" />
                         </div>
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar style={{ backgroundColor: '#A6B1E1' }}>
-                                    <BookmarkIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText style={{ fontWeight: "600" }} primary="IDS335 - Diseño de Software" secondary="BERNARDO ANTONIO BATISTA DIAZ" />
-                            <IconButton style={editButtonStyle} variant="contained" onClick={handleOpenCreateDialog}>
-                                <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
-                            </IconButton>
-                            <FormGroup style={{ marginLeft: "10px" }}>
-                                <Stack direction="row" spacing={1} alignItems="center">
-                                    <AntSwitch
-                                        checked={isSwitchOn}
-                                        onChange={handleSwitchToggle}
-                                        inputProps={{ 'aria-label': 'ant design' }}
-                                    />
-                                </Stack>
-                            </FormGroup>
-                            <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
-                                <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
-                                    ¿Está seguro que quiere desactivar esta asignatura?
-                                </DialogContent>
-                                <DialogActions style={{ justifyContent: "center" }}>
-                                    <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                        Cancelar
-                                    </Button>
-                                    <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
-                                        Desactivar
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
-                        </ListItem>
+                        {asignaturas.map((asignatura) => (
+                            <ListItem key={asignatura.id}>
+                                <ListItemAvatar>
+                                    <Avatar style={{ backgroundColor: '#A6B1E1' }}>
+                                        <BookmarkIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText style={{ fontWeight: "600" }} primary={asignatura.nombre} secondary={asignatura.profesor} />
+                                <IconButton style={editButtonStyle} variant="contained" onClick={handleOpenCreateDialog}>
+                                    <EditIcon style={{ height: "20", width: "20", color: "#6750a4" }} />
+                                </IconButton>
+                                <FormGroup style={{ marginLeft: "10px" }}>
+                                    <Stack direction="row" spacing={1} alignItems="center">
+                                        <AntSwitch
+                                            checked={isSwitchOn}
+                                            onChange={handleSwitchToggle}
+                                            onClick={() => setAsignaturaSeleccionada(asignatura)}
+                                            inputProps={{ 'aria-label': 'ant design' }}
+                                        />
+                                    </Stack>
+                                </FormGroup>
+                            </ListItem>
+                        ))}
                     </div>
+                    <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
+                        <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
+                            ¿Está seguro que quiere desactivar esta asignatura?
+                        </DialogContent>
+                        <DialogActions style={{ justifyContent: "center" }}>
+                            <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                Cancelar
+                            </Button>
+                            <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                Desactivar
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
 
                     <Button style={CrearStyle} onClick={handleOpenCreateDialog2}>
                         <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", fontWeight: "500", width: "270px", color: "#3E44CC" }}>

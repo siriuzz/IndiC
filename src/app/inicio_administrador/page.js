@@ -121,9 +121,9 @@ const estudianteTextStyle = {
 };
 
 const estudianteIndiceTextStyle = {
-    marginTop: "17%",
+    marginTop: "15.5%",
     marginLeft: "-23%",
-    fontSize: "24px",
+    fontSize: "32px",
 };
 
 const estudianteIconStyle = {
@@ -207,7 +207,7 @@ const handleCloseEditConfirmation = () => {
     setEditConfirmationOpen(false);
 };
 
-const handleEditAsignatura = () => {
+const handleEditUsuario = () => {
     // Aquí puedes agregar la lógica para editar la asignatura
 
     // Cierra el diálogo de confirmación
@@ -224,29 +224,30 @@ export default function InicioAdministrador() {
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
     const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
+    const [analytics, setAnalytics] = useState({ estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }); // { estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }
     const [estado, setEstado] = React.useState();
+    const [currentUserId, setCurrentUserId] = React.useState();
+    const [count, setCount] = useState(0); //initial value of this 
 
-    const [estudiantes, setEstudiantes] = React.useState([{
-        id: 1,
-        nombre: "Juan",
-        correo: "juan@gmail.com",
-        id_estado: 1
-    },]);
+    const [usuarios, setUsuarios] = useState([]);
 
-    const handleSwitchToggle = () => {
+    const handleSwitchToggle = (id) => {
+        setCurrentUserId(id);
+        // setCount((count) => count + 1);
         if (isSwitchOn) {
             setConfirmationDialogOpen(true); // Mostrar el mensaje de confirmación solo al apagar
         } else {
             // Cambiar el estado del interruptor directamente si está apagado
             setIsSwitchOn(true);
-            setEstudiantes.id_estado = 1;
+            // setUsuarios.id_estado = 1;
         }
     };
 
     const handleConfirmSwitch = () => {
+        usuarios.find((usuario) => usuario.id == currentUserId).id_estado = 0;
         // Apagar el interruptor
         setIsSwitchOn(false);
-        setEstudiantes.id_estado = 0;
+        // setEstudiantes.id_estado = 0;
         setConfirmationDialogOpen(false);
     };
 
@@ -266,8 +267,7 @@ export default function InicioAdministrador() {
         setEditConfirmationOpen(false);
     };
 
-    const handleEditAsignatura = () => {
-        // Aquí puedes agregar la lógica para editar la asignatura
+    const handleEditUsuario = () => {
 
         // Cierra el diálogo de confirmación
         handleCloseEditConfirmation();
@@ -275,6 +275,12 @@ export default function InicioAdministrador() {
     };
 
     useEffect(() => {
+        if (analytics.estudiantesActivos == 0) {
+            axios.get(`http://${apiURL}/api/Admins/analytics/get`).then((response) => {
+                setAnalytics(response.data);
+            });
+        };
+
         // console.log(process.env.NEXT_PUBLIC_API_HOST);
         axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
             console.log(response.data);
@@ -282,10 +288,23 @@ export default function InicioAdministrador() {
             console.log(error);
             localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
             window.location.href = '/login';
-        });;
-        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-            setEstudiantes(response.data);
         });
+        // const usuariosAxios = [];
+        // async function getUsuarios() {
+        //     usuariosAxios.push(estudiantes.data);
+        //     // const docentes = await axios.get(`http://${apiURL}/api/Docentes`);
+        //     // console.log(estudiantes.data, docentes.data)
+        //     // usuarios.push(...docentes.data);
+        //     // setUsuarios(usuarios);
+        // }
+        if (usuarios.length == 0) {
+
+            axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+                setUsuarios(response.data);
+            });
+        }
+
+        // getUsuarios();
     }, []);
 
     return (
@@ -302,7 +321,7 @@ export default function InicioAdministrador() {
                             </div>
                             <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
                             <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
-                            <div style={estudianteIndiceTextStyle}>70K</div>
+                            <div style={estudianteIndiceTextStyle}>{analytics.estudiantesActivos}</div>
                         </div>
                         <div style={docenteContainerStyle}>
                             <div style={docenteInfoStyle}>
@@ -312,10 +331,10 @@ export default function InicioAdministrador() {
                             </div>
                             <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
                             <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
-                            <div style={estudianteIndiceTextStyle}>3K</div>
+                            <div style={estudianteIndiceTextStyle}>{analytics.docentesActivos}</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
-                                <NotificationsIcon style={notificationsIconStyle} />
+                            <NotificationsIcon style={notificationsIconStyle} />
                         </IconButton>
                     </Paper>
                     <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
@@ -325,23 +344,23 @@ export default function InicioAdministrador() {
                                     <SearchBar placeholder="Buscar Usuarios" />
                                 </div>
                                 {
-                                    estudiantes.map((estudiante) => {
+                                    usuarios.map((usuario) => {
                                         return (
-                                            <div style={EachAsignaturaStyle} key={estudiante.id}>
+                                            <div style={EachAsignaturaStyle} key={usuario.id}>
                                                 <ListItem>
                                                     <ListItemAvatar>
                                                         <Avatar style={{ backgroundColor: '#FFFFFF' }}>
                                                             <AccountCircleOutlinedIcon style={ProfileIconStyle} />
                                                         </Avatar>
                                                     </ListItemAvatar>
-                                                    <ListItemText primary={estudiante.nombre} secondary={estudiante.correo} />
+                                                    <ListItemText primary={usuario.nombre} secondary={usuario.correo} />
                                                     <div style={EstadoStyle}>
-                                                        {estudiante.id_estado == 1 ? "Activo" : "Inactivo"}
+                                                        {usuario.id_estado == 1 ? "Activo" : "Inactivo"}
                                                         <FormGroup style={{ marginLeft: "10px" }}>
                                                             <Stack direction="row" spacing={1} alignItems="center">
                                                                 <AntSwitch
-                                                                    checked={isSwitchOn}
-                                                                    onChange={handleSwitchToggle}
+                                                                    checked={usuario.id_estado == 1 ? true : false}
+                                                                    onChange={handleSwitchToggle(usuario.id)}
                                                                     inputProps={{ 'aria-label': 'ant design' }}
                                                                 />
                                                             </Stack>
@@ -352,54 +371,55 @@ export default function InicioAdministrador() {
                                                     </div>
                                                 </ListItem>
 
-                                                <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
-                                                    <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center", fontSize: "24px", }}>Editar Usuario</DialogTitle>
-                                                    <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Correo" />
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Telefono" />
-                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266" }} label="Cedula" />
-                                                    </DialogContent>
-                                                    <DialogActions style={{ justifyContent: "center", marginBottom: "10px" }}>
-                                                        <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                                            Cancelar
-                                                        </Button>
-                                                        <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
-                                                            Guardar
-                                                        </Button>
-                                                        <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
-                                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
-                                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                                <p>¿Desea editar esta asignatura?</p>
-                                                            </DialogContent>
-                                                            <DialogActions style={{ justifyContent: "center" }}>
-                                                                <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                                                    Cancelar
-                                                                </Button>
-                                                                <Button onClick={handleEditAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
-                                                                    Confirmar
-                                                                </Button>
-                                                            </DialogActions>
-                                                        </Dialog>
-                                                    </DialogActions>
-                                                </Dialog>
-                                                <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
-                                                    <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
-                                                        ¿Está seguro que quiere desactivar esta asignatura?
-                                                    </DialogContent>
-                                                    <DialogActions style={{ justifyContent: "center" }}>
-                                                        <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                                            Cancelar
-                                                        </Button>
-                                                        <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
-                                                            Desactivar
-                                                        </Button>
-                                                    </DialogActions>
-                                                </Dialog>
                                             </div>
+
                                         );
                                     })
                                 }
+                                <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
+                                    <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center", fontSize: "24px", }}>Editar Usuario</DialogTitle>
+                                    <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Correo" />
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Telefono" />
+                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266" }} label="Cedula" />
+                                    </DialogContent>
+                                    <DialogActions style={{ justifyContent: "center", marginBottom: "10px" }}>
+                                        <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                            Cancelar
+                                        </Button>
+                                        <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                            Guardar
+                                        </Button>
+                                        <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
+                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
+                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                <p>¿Desea editar este usuario?</p>
+                                            </DialogContent>
+                                            <DialogActions style={{ justifyContent: "center" }}>
+                                                <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                                    Cancelar
+                                                </Button>
+                                                <Button onClick={handleEditUsuario} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                                    Confirmar
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                    </DialogActions>
+                                </Dialog>
+                                <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
+                                    <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
+                                        ¿Está seguro que quiere desactivar este usuario?
+                                    </DialogContent>
+                                    <DialogActions style={{ justifyContent: "center" }}>
+                                        <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                            Cancelar
+                                        </Button>
+                                        <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                            Desactivar
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
                             </List>
                         </Paper>
                     </div>

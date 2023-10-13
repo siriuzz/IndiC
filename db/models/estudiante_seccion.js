@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   Estudiante_Seccion.init({
     id_estudiante: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false },
     id_seccion: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false },
-    calificacion_mt: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 40 },
+    calificacion_mt: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     calificacion_final: { type: DataTypes.INTEGER, allowNull: false },
     periodo_year: { type: DataTypes.INTEGER, allowNull: false },
     year: { type: DataTypes.INTEGER, allowNull: false },
