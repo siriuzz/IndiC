@@ -152,22 +152,22 @@ const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_
 
 export default function InicioAdministrador() {
     const [estudiantes, setEstudiantes] = React.useState([]);
-    // useEffect(() => {
-    //     // console.log(process.env.NEXT_PUBLIC_API_HOST);
-    //     axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
-    //         console.log(response.data);
-    //     }).catch((error) => {
-    //         console.log(error);
-    //         localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
-    //         window.location.href = '/login';
-    //     });;
-    //     axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-    //         setEstudiantes(response.data);
-    //     });
-    // }, []);
+    useEffect(() => {
+        // console.log(process.env.NEXT_PUBLIC_API_HOST);
+        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
+            window.location.href = '/login';
+        });;
+        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+            setEstudiantes(response.data);
+        });
+    }, []);
     return (
         <div style={wallpaperStyle}>
-            <SidebarAdministrador />    
+            <SidebarAdministrador />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <ThemeProvider theme={theme}>
                     <Paper elevation={0} style={{ display: "inline-flex", justifyContent: "space-between", width: "100%" }}>
@@ -192,14 +192,14 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>3K</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
-                        <Badge badgeContent={1} color="secondary">
-                            <NotificationsIcon style={notificationsIconStyle} />
+                            <Badge badgeContent={1} color="secondary">
+                                <NotificationsIcon style={notificationsIconStyle} />
                             </Badge>
                         </IconButton>
                     </Paper>
                     <Paper elevation={4} style={UsuariosStyle}>
                         <List sx={{ width: "190px" }}>
-                            <div style={{marginLeft: "16px", marginTop: "10px"}}>
+                            <div style={{ marginLeft: "16px", marginTop: "10px" }}>
                                 <SearchBar placeholder="Buscar Usuarios" />
                             </div>
                             {

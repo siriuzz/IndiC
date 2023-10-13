@@ -183,12 +183,12 @@ export default function SidebarCloseEstudiante() {
                         </Button>
                     </Link>
 
-                    <Link href="/calculadora">
+                    {/* <Link href="/calculadora">
                         <Button style={buttonStyle2} variant={contained}>
                             <SignalCellularAltIcon style={iconStyle} />
                             <div style={divStyle}>Calculadora de indice</div>
                         </Button>
-                    </Link>
+                    </Link> */}
 
                     <Link href="/seleccionar_asignaturas">
                         <Button style={buttonStyle2} variant={contained}>

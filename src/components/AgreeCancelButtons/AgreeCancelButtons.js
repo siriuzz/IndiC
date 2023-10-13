@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import theme from "@/app/theme";
 import { Kanit } from "next/font/google";
+import Link from "next/link";
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
 
@@ -29,15 +30,17 @@ const CancelarStyle = {
     textTransform: "none",
 };
 
-export default function AgreeCancelButtons() {
+export default function AgreeCancelButtons({ onClick }) {
     return (
         <div style={divContainerStyle}>
-            <Button className={kanit.className} style={GuardarStyle} variant="contained">
+            <Button onClick={onClick} className={kanit.className} style={GuardarStyle} variant="contained">
                 Guardar
             </Button>
-            <Button className={kanit.className} style={CancelarStyle} variant="contained">
-                Cancelar
-            </Button>
+            <Link href="/inicio_estudiante">
+                <Button className={kanit.className} style={CancelarStyle} variant="contained">
+                    Cancelar
+                </Button>
+            </Link>
         </div>
     );
 }
