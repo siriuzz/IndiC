@@ -46,15 +46,11 @@ const notificationsButtonStyle = {
     marginTop: "5px",
     width: "35px",
     height: "35px",
-    display: "flex",
-    marginRight: "24px",
 };
 
 const notificationsIconStyle = {
     height: "35px",
     width: "35px",
-    marginLeft: "2400px",
-    marginTop: "-180px",
 };
 
 const paperStyle = {
@@ -219,16 +215,11 @@ export default function Calificaciones_Estudiante() {
             <SidebarDocente />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <Paper elevation={0} style={paperStyle}>
-                    <paper style={{ display: "flex" }}>
+                    <paper style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
                         <paper style={UserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
                             <paper style={userInfoStyle}>
                                 Nombre: <div style={{ fontSize: "26px", color: "black" }}>Nombre y Apellido</div><paper>ID: <div style={{ fontSize: "26px", color: "black" }}>ID</div></paper>
-                                <IconButton style={notificationsButtonStyle}>
-                                    <Badge badgeContent={1} color="secondary">
-                                        <NotificationsIcon style={notificationsIconStyle} />
-                                    </Badge>
-                                </IconButton>
                                 <Tabs className={kanit.className} defaultValue={0}>
                                     <StyledTabsList>
                                         <StyledTab value={0}>Finales</StyledTab>
@@ -377,6 +368,19 @@ export default function Calificaciones_Estudiante() {
                                     </StyledTabPanel>
                                 </Tabs>
                             </paper>
+                            <div style={{
+                                float: "right", display: "flex",
+                                position: "absolute",
+                                float: "right",
+                                marginLeft: "83.5rem",
+                                marginTop: "-0.5rem",
+                            }}>
+                                <IconButton style={notificationsButtonStyle}>
+                                    <Badge badgeContent={1} color="secondary">
+                                        <NotificationsIcon style={notificationsIconStyle} />
+                                    </Badge>
+                                </IconButton>
+                            </div>
                         </paper>
                     </paper>
                 </Paper>
