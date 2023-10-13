@@ -376,9 +376,7 @@ export default function Calificaciones_Estudiante() {
                                 marginTop: "-0.5rem",
                             }}>
                                 <IconButton style={notificationsButtonStyle}>
-                                    <Badge badgeContent={1} color="secondary">
                                         <NotificationsIcon style={notificationsIconStyle} />
-                                    </Badge>
                                 </IconButton>
                             </div>
                         </paper>
