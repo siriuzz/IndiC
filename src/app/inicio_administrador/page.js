@@ -20,8 +20,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import axios from "axios";
 import Badge from '@mui/material/Badge';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { useState } from "react";
 
 // require('dotenv').config()
 
@@ -40,12 +43,9 @@ const UsuariosStyle = {
     fontFamily: kanit,
     fontStyle: "bold",
     width: "600px",
-    float: "right",
-    justifySelf: "center",
-    marginTop: "2.5%",
+    display: "flex",
+    // marginTop: "2.5%",
     borderRadius: "10px",
-    marginRight: "26rem",
-    marginLeft: "26rem",
     height: "25rem",
     overflowY: "auto",
 };
@@ -128,10 +128,8 @@ const EstadoStyle = {
 
 
 const RightIconStyle = {
-    width: "30px",
-    height: "30px",
-    marginLeft: "-8px",
-    marginTop: "-2px"
+    width: "25px",
+    height: "25px",
 };
 
 const notificationsButtonStyle = {
@@ -148,26 +146,81 @@ const notificationsIconStyle = {
     width: "35px"
 };
 
+const handleOpenCreateDialog = () => {
+    setCreateDialogOpen(true);
+};
+
+const handleCloseCreateDialog = () => {
+    setCreateDialogOpen(false);
+};
+
+const handleCloseEditConfirmation = () => {
+    setEditConfirmationOpen(false);
+};
+
+const handleEditAsignatura = () => {
+    // Aquí puedes agregar la lógica para editar la asignatura
+
+    // Cierra el diálogo de confirmación
+    handleCloseEditConfirmation();
+
+};
+
+
 const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
 export default function InicioAdministrador() {
-    const [estudiantes, setEstudiantes] = React.useState([]);
-    useEffect(() => {
-        // console.log(process.env.NEXT_PUBLIC_API_HOST);
-        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
-            console.log(response.data);
-        }).catch((error) => {
-            console.log(error);
-            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
-            window.location.href = '/login';
-        });;
-        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-            setEstudiantes(response.data);
-        });
-    }, []);
+    const handleOpenCreateDialog = () => {
+        setCreateDialogOpen(true);
+    };
+    
+    const handleCloseCreateDialog = () => {
+        setCreateDialogOpen(false);
+    };
+    
+    const handleCloseEditConfirmation = () => {
+        setEditConfirmationOpen(false);
+    };
+    
+    const handleEditAsignatura = () => {
+        // Aquí puedes agregar la lógica para editar la asignatura
+    
+        // Cierra el diálogo de confirmación
+        handleCloseEditConfirmation();
+    
+    };
+
+    const [isSwitchOn, setIsSwitchOn] = useState(true); // Establece el interruptor en estado inicial encendido
+    const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+    const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
+    const [isCreateDialogOpen2, setCreateDialogOpen2] = useState(false);
+    const [isSaveConfirmationOpen, setSaveConfirmationOpen] = useState(false);
+    const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
+    const [estudiantes, setEstudiantes] = React.useState([{
+        id: 1,
+        nombre: "Juan",
+        correo: "juan@gmail.com",
+        id_estado: 1
+    },]);
+
+
+
+    // useEffect(() => {
+    //     // console.log(process.env.NEXT_PUBLIC_API_HOST);
+    //     axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
+    //         console.log(response.data);
+    //     }).catch((error) => {
+    //         console.log(error);
+    //         localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
+    //         window.location.href = '/login';
+    //     });;
+    //     axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+    //         setEstudiantes(response.data);
+    //     });
+    // }, []);
     return (
         <div style={wallpaperStyle}>
-            <SidebarAdministrador />    
+            <SidebarAdministrador />
             <Paper elevation={3} style={useStyles.paperBig}>
                 <ThemeProvider theme={theme}>
                     <Paper elevation={0} style={{ display: "inline-flex", justifyContent: "space-between", width: "100%" }}>
@@ -192,79 +245,74 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>3K</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
-                        <Badge badgeContent={1} color="secondary">
-                            <NotificationsIcon style={notificationsIconStyle} />
+                            <Badge badgeContent={1} color="secondary">
+                                <NotificationsIcon style={notificationsIconStyle} />
                             </Badge>
                         </IconButton>
                     </Paper>
-                    <Paper elevation={4} style={UsuariosStyle}>
-                        <List sx={{ width: "190px" }}>
-                            <div style={{marginLeft: "16px", marginTop: "10px"}}>
-                                <SearchBar placeholder="Buscar Usuarios" />
-                            </div>
-                            {
-                                estudiantes.map((estudiante) => {
-                                    return (
-                                        <div style={EachAsignaturaStyle} key={estudiante.id}>
-                                            <ListItem>
-                                                <ListItemAvatar>
-                                                    <Avatar style={{ backgroundColor: '#FFFFFF' }}>
-                                                        <AccountCircleOutlinedIcon style={ProfileIconStyle} />
-                                                    </Avatar>
-                                                </ListItemAvatar>
-                                                <ListItemText primary={estudiante.nombre} secondary={estudiante.correo} />
-                                                <div style={EstadoStyle}>{estudiante.id_estado == 1 ? "Activo" : "Inactivo"} <ChevronRightIcon style={RightIconStyle} /></div>
-                                            </ListItem>
-                                        </div>
-                                    );
-                                })
-                            }
-                            {/* <div style={EachAsignaturaStyle}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
-                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="Juan Ubiera" secondary="juanduuuu@gmail.com" />
-                                    <div style={EstadoStyle}>Egresado <ChevronRightIcon style={RightIconStyle} /></div>
-                                </ListItem>
-                            </div>
-                            <div style={EachAsignaturaStyle}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
-                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="Kelvin Garcia" secondary="kelvin.garcia@gmail.com" />
-                                    <div style={EstadoStyle}>Activo <ChevronRightIcon style={RightIconStyle} /></div>
-                                </ListItem>
-                            </div>
-                            <div style={EachAsignaturaStyle}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
-                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="Francia Mejia" secondary="franciamejia@example.com" />
-                                    <div style={EstadoStyle}>Docente <ChevronRightIcon style={RightIconStyle} /></div>
-                                </ListItem>
-                            </div>
-                            <div style={EachAsignaturaStyle}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
-                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="Elian Matos" secondary="ElianMatos@example.com" />
-                                    <div style={EstadoStyle}>Administrador <ChevronRightIcon style={RightIconStyle} /></div>
-                                </ListItem>
-                            </div> */}
-                        </List>
-                    </Paper>
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+                        <Paper elevation={4} style={UsuariosStyle}>
+                            <List >
+                                <div style={{ marginLeft: "16px", marginTop: "10px" }}>
+                                    <SearchBar placeholder="Buscar Usuarios" />
+                                </div>
+                                {
+                                    estudiantes.map((estudiante) => {
+                                        return (
+                                            <div style={EachAsignaturaStyle} key={estudiante.id}>
+                                                <ListItem>
+                                                    <ListItemAvatar>
+                                                        <Avatar style={{ backgroundColor: '#FFFFFF' }}>
+                                                            <AccountCircleOutlinedIcon style={ProfileIconStyle} />
+                                                        </Avatar>
+                                                    </ListItemAvatar>
+                                                    <ListItemText primary={estudiante.nombre} secondary={estudiante.correo} />
+                                                    <div style={EstadoStyle}>
+                                                        {estudiante.id_estado == 1 ? "Activo" : "Inactivo"}
+                                                        <IconButton style={{marginLeft: "10px"}} onClick={handleOpenCreateDialog}>
+                                                            <EditOutlinedIcon style={RightIconStyle} />
+                                                        </IconButton></div>
+                                                </ListItem>
+
+                                                <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
+                                                    <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center", fontSize: "24px",  }}>Editar Usuario</DialogTitle>
+                                                    <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
+                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Correo" />
+                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Telefono" />
+                                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266" }} label="Cedula" />
+                                                        <TextField disabled style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginTop: "20px" }} label={estudiante.id_estado == 1 ? "Activo" : "Inactivo"} />
+                                                    </DialogContent>
+                                                    <DialogActions style={{ justifyContent: "center", marginBottom: "10px" }}>
+                                                        <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                                            Cancelar
+                                                        </Button>
+                                                        <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                                            Guardar
+                                                        </Button>
+                                                        <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
+                                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
+                                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                <p>¿Desea editar esta asignatura?</p>
+                                                            </DialogContent>
+                                                            <DialogActions style={{ justifyContent: "center" }}>
+                                                                <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                                                    Cancelar
+                                                                </Button>
+                                                                <Button onClick={handleEditAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                                                    Confirmar
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Dialog>
+                                                    </DialogActions>
+                                                </Dialog>
+                                            </div>
+                                        );
+                                    })
+                                }
+                            </List>
+                        </Paper>
+                    </div>
                 </ThemeProvider>
             </Paper>
         </div>
