@@ -61,7 +61,77 @@ router.get('/Estudiantes/:id', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-}).patch('/Estudiantes/CambiarPassword/:id', async (req, res) => {
+}).put('/Estudiantes/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para actualizar un estudiante.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiante actualizado correctamente.',
+            schema: { $ref: "#/components/schemas/Estudiante" }
+    } */
+    /* #swagger.parameters[body] = [
+        {
+            in: 'body',
+            description: 'Actualización de la información del estudiante.',
+            required: true,
+            schema: { $ref: "#/components/schemas/Estudiante" }
+        }
+    ] */
+    try {
+        const result = await EstudianteController.updateEstudiante(req, res);
+        // console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+}).delete('/Estudiantes/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para eliminar un estudiante.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiante eliminado correctamente.',
+            schema: { $ref: "#/components/schemas/Estudiante" }
+    } */
+    try {
+        const result = await EstudianteController.deleteEstudiante(req, res);
+        // console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
+
+router.patch('/Estudiantes/desactivar/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para desactivar un estudiante.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiante desactivado correctamente.',
+            schema: { $ref: "#/components/schemas/Estudiante" }
+    } */
+    try {
+        const result = await EstudianteController.desactivarEstudiante(req, res);
+        // console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
+
+router.patch('/Estudiantes/activar/:id', async (req, res) => {
+    // #swagger.description = 'Endpoint para activar un estudiante.'
+    /*	#swagger.responses[200] = {
+            description: 'Estudiante activado correctamente.',
+            schema: { $ref: "#/components/schemas/Estudiante" }
+    } */
+    try {
+        const result = await EstudianteController.activarEstudiante(req, res);
+        // console.log(result);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
+
+router.patch('/Estudiantes/CambiarPassword/:id', async (req, res) => {
     // #swagger.description = 'Endpoint para actualizar la contraseña de un estudiante.'
     /*	#swagger.responses[200] = {
             description: 'Estudiante actualizado correctamente.',

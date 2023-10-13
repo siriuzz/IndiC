@@ -14,7 +14,39 @@ router.get('/Asignaturas', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
-})
+});
+
+router.get('/Asignaturas/:id', async (req, res) => {
+    try {
+        const result = await AsignaturaController.getAsignaturaById(req, res);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}).put('/Asignaturas/:id', async (req, res) => {
+    try {
+        const result = await AsignaturaController.updateAsignatura(req, res);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+router.patch('/Asignaturas/desactivar/:id', async (req, res) => {
+    try {
+        const result = await AsignaturaController.desactivarAsignatura(req, res);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}).patch('/Asignaturas/activar/:id', async (req, res) => {
+    try {
+        const result = await AsignaturaController.activarAsignatura(req, res);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
 
 router.post('/Asignaturas/upload', upload.single('csv'), (req, res) => {
     /* #swagger.tags = ['Asignaturas']
