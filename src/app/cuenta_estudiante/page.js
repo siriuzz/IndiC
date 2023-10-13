@@ -1,8 +1,8 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import SidebarClose from "@/components/Sidebar/sidebarEstudiante/SidebarEstudiante";
-import { Button, IconButton, colors } from "@mui/material";
+import { Button, IconButton, colors, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import EditIcon from "@mui/icons-material/EditOutlined";
 import 'bootstrap/dist/css/bootstrap.css'
@@ -54,6 +54,18 @@ export default function Perfil() {
     const [carrera, setCarrera] = React.useState({});
     const [telefono, setTelefono] = React.useState("###-###-####");
     const [condicionAcademica, setCondicionAcademica] = React.useState("Normal");
+    const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
+
+    const handleCloseChangePasswordDialog = () => {
+      setChangePasswordDialogOpen(false);
+    };
+  
+    const handleSavePasswordChanges = () => {
+      // Aquí puedes agregar la lógica para guardar los cambios de contraseña
+  
+      // Cierra el diálogo de cambio de contraseña
+      handleCloseChangePasswordDialog();
+    };
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -118,12 +130,47 @@ export default function Perfil() {
                                 <div style={{ fontWeight: '600', fontSize: "16px", marginTop: "20px", marginLeft: "-160px" }}>Condición Academica</div>
                                 <div style={{ color: "#979797", fontWeight: '400', fontSize: "15px", marginTop: "0px", marginLeft: "-160px" }}>{condicionAcademica}</div>
                             </div>
-                            <Button variant="contained" style={buttonStyle}>
-                                <LockOpenIcon style={{ height: "20px", width: "18px", marginLeft: "-7px" }} />
-                                <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", marginLeft: "5px" }}>
-                                    Cambiar Contraseña
-                                </div>
-                            </Button>
+                            <Button
+          variant="contained"
+          style={buttonStyle}
+          onClick={() => setChangePasswordDialogOpen(true)}
+        >
+          <LockOpenIcon style={{ height: "20px", width: "18px", marginLeft: "-7px" }} />
+          <div className={kanit.className} style={{ fontSize: "16px", textTransform: "none", marginLeft: "5px" }}>
+            Cambiar Contraseña
+          </div>
+        </Button>
+        <Dialog open={isChangePasswordDialogOpen} onClose={handleCloseChangePasswordDialog}>
+          <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Cambiar Contraseña</DialogTitle>
+          <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <TextField
+              style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+              label="Digite la contraseña actual"
+            />
+            <TextField
+              style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+              label="Digite la contraseña nueva"
+            />
+            <TextField
+              style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+              label="Confirme la contraseña nueva"
+            />
+          </DialogContent>
+          <DialogActions style={{ justifyContent: "center" }}>
+            <Button
+              onClick={handleCloseChangePasswordDialog}
+              style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleSavePasswordChanges}
+              style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
+            >
+              Guardar Cambios
+            </Button>
+          </DialogActions>
+        </Dialog>
                             <Image
                                 src={"/assets/cuenta_estudiante.svg"}
                                 style={{ height: "400px", width: "400px", marginLeft: "600px", marginTop: "-280px" }}

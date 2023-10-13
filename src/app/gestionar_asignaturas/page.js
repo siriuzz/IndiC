@@ -5,7 +5,7 @@ import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import 'bootstrap/dist/css/bootstrap.css';
 import Image from "next/image";
 import { Kanit } from "next/font/google";
-import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/sidebarAdministrador";
+import SidebarAdministrador from "@/components/Sidebar/sidebarAdministrador/SidebarAdministrador";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import ListItemText from '@mui/material/ListItemText';
 import EditIcon from "@mui/icons-material/EditOutlined";
