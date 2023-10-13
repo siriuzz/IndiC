@@ -121,9 +121,9 @@ const estudianteTextStyle = {
 };
 
 const estudianteIndiceTextStyle = {
-    marginTop: "17%",
+    marginTop: "15.5%",
     marginLeft: "-23%",
-    fontSize: "24px",
+    fontSize: "32px",
 };
 
 const estudianteIconStyle = {
@@ -207,7 +207,7 @@ const handleCloseEditConfirmation = () => {
     setEditConfirmationOpen(false);
 };
 
-const handleEditAsignatura = () => {
+const handleEditUsuario = () => {
     // Aquí puedes agregar la lógica para editar la asignatura
 
     // Cierra el diálogo de confirmación
@@ -224,14 +224,10 @@ export default function InicioAdministrador() {
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
     const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
+    const [analytics, setAnalytics] = useState({ estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }); // { estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }
     const [estado, setEstado] = React.useState();
 
-    const [estudiantes, setEstudiantes] = React.useState([{
-        id: 1,
-        nombre: "Juan",
-        correo: "juan@gmail.com",
-        id_estado: 1
-    },]);
+    const [usuarios, setUsuarios] = useState([]);
 
     const handleSwitchToggle = () => {
         if (isSwitchOn) {
@@ -239,14 +235,14 @@ export default function InicioAdministrador() {
         } else {
             // Cambiar el estado del interruptor directamente si está apagado
             setIsSwitchOn(true);
-            setEstudiantes.id_estado = 1;
+            // setUsuarios.id_estado = 1;
         }
     };
 
     const handleConfirmSwitch = () => {
         // Apagar el interruptor
         setIsSwitchOn(false);
-        setEstudiantes.id_estado = 0;
+        // setEstudiantes.id_estado = 0;
         setConfirmationDialogOpen(false);
     };
 
@@ -266,8 +262,7 @@ export default function InicioAdministrador() {
         setEditConfirmationOpen(false);
     };
 
-    const handleEditAsignatura = () => {
-        // Aquí puedes agregar la lógica para editar la asignatura
+    const handleEditUsuario = () => {
 
         // Cierra el diálogo de confirmación
         handleCloseEditConfirmation();
@@ -275,6 +270,10 @@ export default function InicioAdministrador() {
     };
 
     useEffect(() => {
+        axios.get(`http://${apiURL}/api/Admins/analytics/get`).then((response) => {
+            setAnalytics(response.data);
+        });
+
         // console.log(process.env.NEXT_PUBLIC_API_HOST);
         axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
             console.log(response.data);
@@ -282,10 +281,20 @@ export default function InicioAdministrador() {
             console.log(error);
             localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
             window.location.href = '/login';
-        });;
-        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-            setEstudiantes(response.data);
         });
+        // const usuariosAxios = [];
+        // async function getUsuarios() {
+        //     usuariosAxios.push(estudiantes.data);
+        //     // const docentes = await axios.get(`http://${apiURL}/api/Docentes`);
+        //     // console.log(estudiantes.data, docentes.data)
+        //     // usuarios.push(...docentes.data);
+        //     // setUsuarios(usuarios);
+        // }
+        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+            setUsuarios(response.data);
+        });
+
+        // getUsuarios();
     }, []);
 
     return (
@@ -302,7 +311,7 @@ export default function InicioAdministrador() {
                             </div>
                             <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
                             <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
-                            <div style={estudianteIndiceTextStyle}>70K</div>
+                            <div style={estudianteIndiceTextStyle}>{analytics.estudiantesActivos}</div>
                         </div>
                         <div style={docenteContainerStyle}>
                             <div style={docenteInfoStyle}>
@@ -312,7 +321,7 @@ export default function InicioAdministrador() {
                             </div>
                             <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
                             <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
-                            <div style={estudianteIndiceTextStyle}>3K</div>
+                            <div style={estudianteIndiceTextStyle}>{analytics.docentesActivos}</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
                             <Badge badgeContent={1} color="secondary">
@@ -327,22 +336,22 @@ export default function InicioAdministrador() {
                                     <SearchBar placeholder="Buscar Usuarios" />
                                 </div>
                                 {
-                                    estudiantes.map((estudiante) => {
+                                    usuarios.map((usuario) => {
                                         return (
-                                            <div style={EachAsignaturaStyle} key={estudiante.id}>
+                                            <div style={EachAsignaturaStyle} key={usuario.id}>
                                                 <ListItem>
                                                     <ListItemAvatar>
                                                         <Avatar style={{ backgroundColor: '#FFFFFF' }}>
                                                             <AccountCircleOutlinedIcon style={ProfileIconStyle} />
                                                         </Avatar>
                                                     </ListItemAvatar>
-                                                    <ListItemText primary={estudiante.nombre} secondary={estudiante.correo} />
+                                                    <ListItemText primary={usuario.nombre} secondary={usuario.correo} />
                                                     <div style={EstadoStyle}>
-                                                        {estudiante.id_estado == 1 ? "Activo" : "Inactivo"}
+                                                        {usuario.id_estado == 1 ? "Activo" : "Inactivo"}
                                                         <FormGroup style={{ marginLeft: "10px" }}>
                                                             <Stack direction="row" spacing={1} alignItems="center">
                                                                 <AntSwitch
-                                                                    checked={isSwitchOn}
+                                                                    checked={usuario.id_estado == 1 ? true : false}
                                                                     onChange={handleSwitchToggle}
                                                                     inputProps={{ 'aria-label': 'ant design' }}
                                                                 />
@@ -378,7 +387,7 @@ export default function InicioAdministrador() {
                                                                 <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
                                                                     Cancelar
                                                                 </Button>
-                                                                <Button onClick={handleEditAsignatura} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                                                <Button onClick={handleEditUsuario(usuario.id)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
                                                                     Confirmar
                                                                 </Button>
                                                             </DialogActions>
