@@ -203,21 +203,20 @@ export default function InicioAdministrador() {
         id_estado: 1
     },]);
 
-
-
-    // useEffect(() => {
-    //     // console.log(process.env.NEXT_PUBLIC_API_HOST);
-    //     axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
-    //         console.log(response.data);
-    //     }).catch((error) => {
-    //         console.log(error);
-    //         localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
-    //         window.location.href = '/login';
-    //     });;
-    //     axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-    //         setEstudiantes(response.data);
-    //     });
-    // }, []);
+    useEffect(() => {
+        // console.log(process.env.NEXT_PUBLIC_API_HOST);
+        axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+            localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
+            window.location.href = '/login';
+        });;
+        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+            setEstudiantes(response.data);
+        });
+    }, []);
+    
     return (
         <div style={wallpaperStyle}>
             <SidebarAdministrador />
