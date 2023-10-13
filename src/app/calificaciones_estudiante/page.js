@@ -209,7 +209,7 @@ export default function Calificaciones_Estudiante() {
         const user = JSON.parse(localStorage.getItem("user"));
         setUser(user);
 
-        axios.get(`http://${apiURL}/api/Estudiante_Seccion/${user.id}?periodo=${user.periodos_cursados}`).then((res) => {
+        axios.get(`http://${apiURL}/api/Estudiante_Seccion/${user.id}?periodo=13`).then((res) => {
             const asignaturas = res.data;
             setAsignaturas(asignaturas);
 
@@ -228,7 +228,7 @@ export default function Calificaciones_Estudiante() {
                         </paper>
                     </paper>
                     <IconButton style={notificationsButtonStyle}>
-                            <NotificationsIcon style={notificationsIconStyle} />
+                        <NotificationsIcon style={notificationsIconStyle} />
                     </IconButton>
 
                 </paper>

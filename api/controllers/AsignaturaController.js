@@ -3,6 +3,7 @@ const { Asignatura, Secciones } = require('../../db/models'); // Importa los mod
 const getAllAsignaturas = async (req, res) => {
     try {
         const allAsignaturas = await Asignatura.findAll();
+        console.log('hola');
         return allAsignaturas;
     }
     catch (error) {

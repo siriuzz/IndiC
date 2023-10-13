@@ -175,6 +175,12 @@ export default function SidebarAdministrador() {
                             <div style={divStyle}>Inicio</div>
                         </Button>
                     </Link>
+                    <Link href="/gestionar_asignaturas">
+                        <Button style={buttonStyle2} variant={contained}>
+                            <EditOutlined style={iconStyle} />
+                            <div style={divStyle}>Cuenta</div>
+                        </Button>
+                    </Link>
 
                     <Link href="/cuenta_administrador">
                         <Button style={buttonStyle2} variant={contained}>

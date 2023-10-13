@@ -275,9 +275,11 @@ export default function InicioAdministrador() {
     };
 
     useEffect(() => {
-        axios.get(`http://${apiURL}/api/Admins/analytics/get`).then((response) => {
-            setAnalytics(response.data);
-        });
+        if (analytics.estudiantesActivos == 0) {
+            axios.get(`http://${apiURL}/api/Admins/analytics/get`).then((response) => {
+                setAnalytics(response.data);
+            });
+        };
 
         // console.log(process.env.NEXT_PUBLIC_API_HOST);
         axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem("jwtToken") }).then((response) => {
@@ -295,9 +297,12 @@ export default function InicioAdministrador() {
         //     // usuarios.push(...docentes.data);
         //     // setUsuarios(usuarios);
         // }
-        axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
-            setUsuarios(response.data);
-        });
+        if (usuarios.length == 0) {
+
+            axios.get(`http://${apiURL}/api/Estudiantes`).then((response) => {
+                setUsuarios(response.data);
+            });
+        }
 
         // getUsuarios();
     }, []);
@@ -329,7 +334,7 @@ export default function InicioAdministrador() {
                             <div style={estudianteIndiceTextStyle}>{analytics.docentesActivos}</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
-                                <NotificationsIcon style={notificationsIconStyle} />
+                            <NotificationsIcon style={notificationsIconStyle} />
                         </IconButton>
                     </Paper>
                     <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
@@ -371,9 +376,6 @@ export default function InicioAdministrador() {
                                         );
                                     })
                                 }
-                                <div className="App">
-                                    <p> value of count: {count} </p>
-                                </div>
                                 <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
                                     <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center", fontSize: "24px", }}>Editar Usuario</DialogTitle>
                                     <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
