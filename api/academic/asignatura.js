@@ -15,6 +15,16 @@ router.get('/Asignaturas', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 
+}).post('/Asignaturas', async (req, res) => {
+    try {
+        if (!req.body.nombre) return res.status(400).json({ error: 'El nombre de la asignatura es requerido.' });
+        if (!req.body.codigo) return res.status(400).json({ error: 'El código de la asignatura es requerido.' });
+        if (!req.body.creditos) return res.status(400).json({ error: 'Los créditos de la asignatura son requeridos.' });
+        const result = await AsignaturaController.createAsignatura(req, res);
+        res.status(201).json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
 });
 
 router.get('/Asignaturas/:id', async (req, res) => {

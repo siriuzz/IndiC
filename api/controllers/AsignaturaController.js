@@ -89,11 +89,22 @@ const activarAsignatura = async (req, res) => {
     }
 }
 
+const createAsignatura = async (req, res) => {
+    try {
+        const asignatura = await Asignatura.create(req.body);
+        return asignatura;
+    } catch (error) {
+        console.log("Error al crear la asignatura");
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 module.exports = {
     getAllAsignaturas,
     createAsignaturaFromCsv,
     updateAsignatura,
     desactivarAsignatura,
     getAsignaturaById,
-    activarAsignatura
+    activarAsignatura,
+    createAsignatura
 }

@@ -29,6 +29,7 @@ import FormGroup from '@mui/material/FormGroup';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import Container from '@mui/material/Container';
 
 // require('dotenv').config()
 
@@ -195,84 +196,106 @@ const notificationsIconStyle = {
     width: "35px"
 };
 
-const handleOpenCreateDialog = () => {
-    setCreateDialogOpen(true);
-};
+// const handleOpenCreateDialog = () => {
+//     setCreateDialogOpen(true);
+// };
 
-const handleCloseCreateDialog = () => {
-    setCreateDialogOpen(false);
-};
+// const handleCloseCreateDialog = () => {
+//     setCreateDialogOpen(false);
+// };
 
-const handleCloseEditConfirmation = () => {
-    setEditConfirmationOpen(false);
-};
+// const handleCloseEditConfirmation = () => {
+//     setEditConfirmationOpen(false);
+// };
 
-const handleEditUsuario = () => {
-    // Aquí puedes agregar la lógica para editar la asignatura
+// const handleEditUsuario = () => {
+//     // Aquí puedes agregar la lógica para editar la asignatura
 
-    // Cierra el diálogo de confirmación
-    handleCloseEditConfirmation();
+//     // Cierra el diálogo de confirmación
+//     handleCloseEditConfirmation();
 
-};
+// };
+
+// const handleConfirmSwitch = () => {
+//     usuarios.find((usuario) => usuario.id == currentUserId).id_estado = 0;
+//     // Apagar el interruptor
+//     setIsSwitchOn(false);
+//     // setEstudiantes.id_estado = 0;
+//     setConfirmationDialogOpen(false);
+// };
+
+// const handleCancelSwitch = () => {
+//     setConfirmationDialogOpen(false);
+// };
+
+// const handleOpenCreateDialog = (id) => {
+//     setCurrentUserId(id);
+//     setCreateDialogOpen(true);
+// };
+
+
+
+// const handleCloseCreateDialog = () => {
+//     setCreateDialogOpen(false);
+// };
+
+// const handleCloseEditConfirmation = () => {
+//     setEditConfirmationOpen(false);
+// };
+
+// const handleEditUsuario = () => {
+
+//     // Cierra el diálogo de confirmación
+//     handleCloseEditConfirmation();
+
+// };
 
 
 const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
 
+// const handleSwitchToggle = (id) => {
+//     setCurrentUserId(id);
+//     // setCount((count) => count + 1);
+//     if (isSwitchOn) {
+//         setConfirmationDialogOpen(true); // Mostrar el mensaje de confirmación solo al apagar
+//     } else {
+//         // Cambiar el estado del interruptor directamente si está apagado
+//         setIsSwitchOn(true);
+//         // setUsuarios.id_estado = 1;
+//     }
+// };
+
 export default function InicioAdministrador() {
 
-    const [isSwitchOn, setIsSwitchOn] = useState(true);
-    const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
-    const [isCreateDialogOpen, setCreateDialogOpen] = useState(false);
-    const [isEditConfirmationOpen, setEditConfirmationOpen] = useState(false);
-    const [analytics, setAnalytics] = useState({ estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }); // { estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 }
-    const [estado, setEstado] = React.useState();
-    const [currentUserId, setCurrentUserId] = React.useState();
-    const [count, setCount] = useState(0); //initial value of this 
-
+    const [switchConfirmationDialogView, setSwitchConfirmationDialogView] = useState(false);
+    const [editModalView, setEditModalView] = useState(false);
+    const [analytics, setAnalytics] = useState({ estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 });
+    const [updateData, setUpdateData] = useState({});
+    const [currentUser, setCurrentUser] = useState({});
     const [usuarios, setUsuarios] = useState([]);
 
-    const handleSwitchToggle = (id) => {
-        setCurrentUserId(id);
-        // setCount((count) => count + 1);
-        if (isSwitchOn) {
-            setConfirmationDialogOpen(true); // Mostrar el mensaje de confirmación solo al apagar
-        } else {
-            // Cambiar el estado del interruptor directamente si está apagado
-            setIsSwitchOn(true);
-            // setUsuarios.id_estado = 1;
-        }
+    function handleSwitchConfirmationView(value) {
+        setSwitchConfirmationDialogView(value);
     };
 
-    const handleConfirmSwitch = () => {
-        usuarios.find((usuario) => usuario.id == currentUserId).id_estado = 0;
-        // Apagar el interruptor
-        setIsSwitchOn(false);
-        // setEstudiantes.id_estado = 0;
-        setConfirmationDialogOpen(false);
+    function handleEditModalView(value, usuario) {
+        if (usuario) setCurrentUser(usuario);
+        setEditModalView(value);
     };
 
-    const handleCancelSwitch = () => {
-        setConfirmationDialogOpen(false);
-    };
+    function saveChanges() {
+        handleEditModalView(false);
+        axios.put(`http://${apiURL}/api/Estudiantes/${currentUser.id}`, currentUser).then((response) => {
+            console.log(response.data);
+        });
+    }
 
-    const handleOpenCreateDialog = () => {
-        setCreateDialogOpen(true);
-    };
-
-    const handleCloseCreateDialog = () => {
-        setCreateDialogOpen(false);
-    };
-
-    const handleCloseEditConfirmation = () => {
-        setEditConfirmationOpen(false);
-    };
-
-    const handleEditUsuario = () => {
-
-        // Cierra el diálogo de confirmación
-        handleCloseEditConfirmation();
-
-    };
+    function deactivateUser() {
+        // currentUser.id_estado = 2;
+        if (currentUser.id_estado == 1) currentUser.id_estado = 2;
+        else currentUser.id_estado = 1;
+        handleSwitchConfirmationView(false);
+    }
 
     useEffect(() => {
         if (analytics.estudiantesActivos == 0) {
@@ -320,7 +343,7 @@ export default function InicioAdministrador() {
                                 <div style={estudianteTextStyle}>Inscritos</div>
                             </div>
                             <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
-                            <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
+                            <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={(analytics.estudiantesActivos / analytics.estudiantes) * 100} />
                             <div style={estudianteIndiceTextStyle}>{analytics.estudiantesActivos}</div>
                         </div>
                         <div style={docenteContainerStyle}>
@@ -330,7 +353,7 @@ export default function InicioAdministrador() {
                                 <div style={estudianteTextStyle}>Trabajando</div>
                             </div>
                             <CircularProgress style={{ color: "#ebdfe6", marginLeft: "80px", marginTop: "5%" }} size={120} variant="determinate" value={100} />
-                            <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={78} />
+                            <CircularProgress style={{ marginLeft: "-120px", display: "flex", marginTop: "5%" }} size={120} variant="determinate" value={(analytics.docentesActivos / analytics.docentes) * 100} />
                             <div style={estudianteIndiceTextStyle}>{analytics.docentesActivos}</div>
                         </div>
                         <IconButton style={notificationsButtonStyle}>
@@ -354,9 +377,11 @@ export default function InicioAdministrador() {
                                                         </Avatar>
                                                     </ListItemAvatar>
                                                     <ListItemText primary={usuario.nombre} secondary={usuario.correo} />
-                                                    <div style={EstadoStyle}>
-                                                        {usuario.id_estado == 1 ? "Activo" : "Inactivo"}
-                                                        <FormGroup style={{ marginLeft: "10px" }}>
+                                                    {usuario.id_estado == 1 ? "Activo" : "Inactivo"}
+                                                    {/* <Switch style={{ marginLeft: "10px" }} checked={usuario.id_estado == 1 ? true : false} onChange={handleSwitchToggle(usuario.id)} /> */}
+
+
+                                                    {/* <FormGroup style={{ marginLeft: "10px" }}>
                                                             <Stack direction="row" spacing={1} alignItems="center">
                                                                 <AntSwitch
                                                                     checked={usuario.id_estado == 1 ? true : false}
@@ -364,11 +389,11 @@ export default function InicioAdministrador() {
                                                                     inputProps={{ 'aria-label': 'ant design' }}
                                                                 />
                                                             </Stack>
-                                                        </FormGroup>
-                                                        <IconButton style={{ marginLeft: "10px" }} onClick={handleOpenCreateDialog}>
-                                                            <EditOutlinedIcon style={RightIconStyle} />
-                                                        </IconButton>
-                                                    </div>
+                                                        </FormGroup> */}
+
+                                                    <IconButton style={{ marginLeft: "10px" }} onClick={() => handleEditModalView(true, usuario)}>
+                                                        <EditOutlinedIcon style={RightIconStyle} />
+                                                    </IconButton>
                                                 </ListItem>
 
                                             </div>
@@ -376,47 +401,35 @@ export default function InicioAdministrador() {
                                         );
                                     })
                                 }
-                                <Dialog open={isCreateDialogOpen} onClose={handleCloseCreateDialog}>
+                                <Dialog open={editModalView} onClose={() => { }}>
                                     <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center", fontSize: "24px", }}>Editar Usuario</DialogTitle>
                                     <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
-                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Correo" />
-                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Telefono" />
-                                        <TextField style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266" }} label="Cedula" />
+                                        <p>Activar/Desactivar</p><Switch checked={currentUser.id_estado == 1 ? true : false} onChange={() => handleSwitchConfirmationView(true)} />
+                                        <TextField value={currentUser.nombre} onChange={() => setCurrentUser({ ...currentUser, nombre: event.target.value })} style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
+                                        <TextField value={currentUser.correo} onChange={() => { setCurrentUser({ ...currentUser, correo: event.target.value }) }} style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Correo" />
+                                        <TextField value={currentUser.telefono} onChange={() => { setCurrentUser({ ...currentUser, telefono: event.target.value }) }} style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Telefono" />
+                                        <TextField value={currentUser.cedula} onChange={() => { setCurrentUser({ ...currentUser, cedula: event.target.value }) }} style={{ width: "210px", height: "56px", borderRadius: "90px", borderColor: "#7E57C266" }} label="Cedula" />
                                     </DialogContent>
                                     <DialogActions style={{ justifyContent: "center", marginBottom: "10px" }}>
-                                        <Button onClick={handleCloseCreateDialog} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                        <Button onClick={() => handleEditModalView(false)} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
                                             Cancelar
                                         </Button>
-                                        <Button onClick={() => setEditConfirmationOpen(true)} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
+                                        <Button onClick={() => saveChanges()} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
                                             Guardar
                                         </Button>
-                                        <Dialog open={isEditConfirmationOpen} onClose={handleCloseEditConfirmation}>
-                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Confirmación de Edición</DialogTitle>
-                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                <p>¿Desea editar este usuario?</p>
-                                            </DialogContent>
-                                            <DialogActions style={{ justifyContent: "center" }}>
-                                                <Button onClick={handleCloseEditConfirmation} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
-                                                    Cancelar
-                                                </Button>
-                                                <Button onClick={handleEditUsuario} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}>
-                                                    Confirmar
-                                                </Button>
-                                            </DialogActions>
-                                        </Dialog>
+
                                     </DialogActions>
                                 </Dialog>
-                                <Dialog open={isConfirmationDialogOpen} onClose={handleCancelSwitch}>
+                                <Dialog open={switchConfirmationDialogView} onClose={() => { }}>
                                     <DialogContent style={{ borderRadius: "200px", height: "100px", justifyContent: "center" }}>
-                                        ¿Está seguro que quiere desactivar este usuario?
+                                        ¿Está seguro que quiere cambiar el estado de este usuario?
                                     </DialogContent>
                                     <DialogActions style={{ justifyContent: "center" }}>
-                                        <Button onClick={handleCancelSwitch} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
+                                        <Button onClick={() => setSwitchConfirmationDialogView(!switchConfirmationDialogView)} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
                                             Cancelar
                                         </Button>
-                                        <Button onClick={handleConfirmSwitch} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
-                                            Desactivar
+                                        <Button onClick={() => deactivateUser()} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                                            Cambiar
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
