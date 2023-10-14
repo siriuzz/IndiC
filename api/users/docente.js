@@ -94,6 +94,22 @@ router.patch('/Docentes/activar/:id', async (req, res) => {
 
 });
 
+router.get('/Docentes/:id/Secciones', async (req, res) => {
+    // #swagger.description = 'Endpoint para crear una sección para un Docente.'
+    /*	#swagger.responses[200] = {
+            description: 'Sección creada correctamente.',
+            schema: { $ref: "#/components/schemas/Seccion" }
+    } */
+    try {
+        const result = await DocenteController.getSeccionesDocenteById(req, res);
+        console.log(result);
+        res.status(201).json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
+
 
 router.post('/Docentes/upload', upload.single('csv'), async (req, res) => {
     try {

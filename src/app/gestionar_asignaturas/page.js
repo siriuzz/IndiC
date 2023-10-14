@@ -132,7 +132,8 @@ export default function GestionarAsignatura() {
     const [createModalView, setCreateModalView] = useState(false);
     const [analytics, setAnalytics] = useState({ estudiantesActivos: 0, estudiantes: 0, docentes: 0, docentesActivos: 0 });
     const [updateData, setUpdateData] = useState({});
-    const [nuevaAsignatura, setNuevaAsignatura] = useState({ nombre: "", codigo: "", creditos: "" });
+    const [nuevaAsignatura, setNuevaAsignatura] = useState({ nombre: "", codigo: "", creditos: "", secciones: [] });
+    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
 
 
 
@@ -141,12 +142,15 @@ export default function GestionarAsignatura() {
             axios.get(`http://${apiURL}/api/Asignaturas`).then((res) => {
                 setAsignaturas(res.data);
             });
-
         }
     });
 
     function handleEditModalView(asignatura) {
         setAsignaturaSeleccionada(asignatura);
+        axios.get(`http://${apiURL}/api/Asignaturas/${asignatura.id}/Secciones`).then((res) => {
+            setAsignaturaSeleccionada({ ...asignatura, secciones: res.data });
+            asignaturaSeleccionada.secciones ? asignaturaSeleccionada.secciones.length > 0 ? setIsSwitchOn(true) : setIsSwitchOn(false) : setIsSwitchOn(false)
+        });
         setEditModalView(true)
     }
 
@@ -164,6 +168,31 @@ export default function GestionarAsignatura() {
         axios.post(`http://${apiURL}/api/Asignaturas`, nuevaAsignatura).then((res) => {
             console.log(res);
             setCreateModalView(false);
+            window.location.reload();
+        });
+    }
+
+    function handleSwitchConfirmationView(value) {
+        setSwitchConfirmationDialogView(value);
+    }
+
+    function desactivarAsignatura() {
+        console.log("Desactivar Asignatura");
+        console.log(asignaturaSeleccionada)
+
+        axios.patch(`http://${apiURL}/api/Asignaturas/desactivar/${asignaturaSeleccionada.id}`).then((res) => {
+            console.log(res);
+            setSwitchConfirmationDialogView(false);
+            window.location.reload();
+        });
+    }
+
+    function activarAsignatura() {
+        console.log("Activar Asignatura");
+        axios.patch(`http://${apiURL}/api/Asignaturas/activar/${asignaturaSeleccionada.id}`).then((res) => {
+            console.log(res);
+
+            setSwitchConfirmationDialogView(false);
             window.location.reload();
         });
     }
@@ -273,7 +302,7 @@ export default function GestionarAsignatura() {
                             <Button onClick={() => setSwitchConfirmationDialogView(false)} style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}>
                                 Cancelar
                             </Button>
-                            <Button onClick={() => { }} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
+                            <Button onClick={() => isSwitchOn ? desactivarAsignatura() : activarAsignatura()} style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }} >
                                 Desactivar
                             </Button>
                         </DialogActions>
@@ -288,6 +317,7 @@ export default function GestionarAsignatura() {
                     <Dialog open={editModalView} onClose={() => { }}>
                         <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Editar Asignatura</DialogTitle>
                         <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "10px" }}>
+                            <p>Activar/Desactivar</p><Switch checked={isSwitchOn} onChange={() => handleSwitchConfirmationView(true)} />
                             <TextField onChange={() => setAsignaturaSeleccionada({ ...asignaturaSeleccionada, nombre: event.target.value })} defaultValue={asignaturaSeleccionada.nombre} style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Nombre" />
                             <TextField onChange={() => setAsignaturaSeleccionada({ ...asignaturaSeleccionada, codigo: event.target.value })} defaultValue={asignaturaSeleccionada.codigo} style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Código" />
                             <TextField onChange={() => setAsignaturaSeleccionada({ ...asignaturaSeleccionada, creditos: event.target.value })} defaultValue={asignaturaSeleccionada.creditos} style={{ width: "210px", height: "56px", borderColor: "#7E57C266", marginBottom: "20px" }} label="Creditos" />

@@ -47,8 +47,9 @@ const getDocenteByCorreo = async (req, res) => {
     }
 }
 
-const getSeccionesDocenteById = async (id) => {
+const getSeccionesDocenteById = async (req, res) => {
     try {
+        const { id } = req.params;
         console.log("Obteniendo secciones por id de docente");
         const secciones = await Secciones.findAll({
             where: {

@@ -29,6 +29,8 @@ import Badge from '@mui/material/Badge';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextField, DialogContent, DialogActions } from '@mui/material';
+import axios from "axios";
+import Container from '@mui/material/Container';
 
 
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "700"] })
@@ -154,6 +156,8 @@ const EditButton = styled(Button)(({ theme }) => ({
     alignSelf: "center",
 }));
 
+const apiURL = process.env.NEXT_PUBLIC_API_HOST + ":" + process.env.NEXT_PUBLIC_API_PORT;
+
 export default function Calificaciones_Estudiante() {
     const [expanded, setExpanded] = React.useState(false);
 
@@ -167,7 +171,20 @@ export default function Calificaciones_Estudiante() {
     const [obtainedGrade, setObtainedGrade] = useState(''); // Estado para la calificación obtenida
     const [secondBaseGrade, setSecondBaseGrade] = useState(''); // Estado para la segunda calificación base
     const [secondObtainedGrade, setSecondObtainedGrade] = useState(''); // Estado para la segunda calificación obtenida
+    const [docente, setDocente] = useState({});
+    const [seccionesDocente, setSeccionesDocente] = useState([]);
 
+
+    React.useEffect(() => {
+        setDocente(JSON.parse(localStorage.getItem("user")));
+        function getSecciones() {
+            axios.get(`http://${apiURL}/api/Docentes/${docente.id}/Secciones`).then((res) => {
+                setSeccionesDocente(res.data);
+                console.log(res.data);
+            });
+        }
+        getSecciones();
+    }, []);
 
     const handleCloseGradeDialog = () => {
         setGradeDialogOpen(false);
@@ -219,18 +236,86 @@ export default function Calificaciones_Estudiante() {
                         <paper style={UserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={100} width={100} />
                             <paper style={userInfoStyle}>
-                                Nombre: <div style={{ fontSize: "26px", color: "black" }}>Nombre y Apellido</div><paper>ID: <div style={{ fontSize: "26px", color: "black" }}>ID</div></paper>
+                                Nombre: <div style={{ fontSize: "26px", color: "black" }}>{docente.nombre}</div><paper>ID: <div style={{ fontSize: "26px", color: "black" }}>{docente.id}</div></paper>
                                 <Tabs className={kanit.className} defaultValue={0}>
                                     <StyledTabsList>
                                         <StyledTab value={0}>Finales</StyledTab>
                                         <StyledTab value={1}>Medio Termino</StyledTab>
                                     </StyledTabsList>
                                     <StyledTabPanel style={{ height: "20" }} value={0}>
-                                        <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        {seccionesDocente.length > 0 && seccionesDocente.map((seccion) => (
+                                            <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+
+                                                <AccordionSummary
+                                                    expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
+                                                    aria-controls="panel1bh-content"
+                                                    id="panel1bh-header">
+
+                                                    <ListItemText style={AsignaturasStyle} primary={<span style={{ fontWeight: "bold", font: "kanit" }}>{seccion.Asignatura.nombre}</span>}
+                                                    />
+                                                </AccordionSummary>
+                                                <AccordionDetails>
+                                                    <Container style={EachStudentStyle}>
+
+                                                        <ListItem>
+                                                            <ListItemAvatar>
+                                                                <Avatar style={{ color: "black", background: "transparent" }}>
+                                                                    <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
+                                                                </Avatar>
+                                                            </ListItemAvatar>
+                                                            <ListItemText primary={<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>}
+                                                                secondary={
+                                                                    <paper>
+                                                                        <span>juandanielu@est.example.edu</span>
+                                                                    </paper>
+
+                                                                } />
+                                                            <EditButton variant="contained" onClick={() => setGradeDialogOpen(true)}>
+                                                                <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
+                                                            </EditButton>
+                                                            <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
+                                                                <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Final</DialogTitle>
+                                                                <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                    <TextField
+                                                                        style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                        label="Calificación Base Final"
+                                                                        value={baseGrade}
+                                                                        onChange={(e) => setBaseGrade(e.target.value)}
+                                                                    />
+                                                                    <TextField
+                                                                        style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                        label="Calificación Obtenida Final"
+                                                                        value={obtainedGrade}
+                                                                        onChange={(e) => setObtainedGrade(e.target.value)}
+                                                                    />
+                                                                </DialogContent>
+                                                                <DialogActions style={{ justifyContent: "center" }}>
+                                                                    <Button
+                                                                        onClick={handleCloseGradeDialog}
+                                                                        style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
+                                                                    >
+                                                                        Cancelar
+                                                                    </Button>
+                                                                    <Button
+                                                                        onClick={handleSaveGrades}
+                                                                        style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
+                                                                    >
+                                                                        Guardar
+                                                                    </Button>
+                                                                </DialogActions>
+                                                            </Dialog>
+                                                        </ListItem>
+                                                    </Container>
+                                                </AccordionDetails>
+                                            </Accordion>
+                                        ))}
+                                        {/* <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
                                                 id="panel1bh-header">
+
                                                 <ListItemText style={AsignaturasStyle} primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Aseguramiento de la Calidad</span>
                                                     secondary={
                                                         <paper>
@@ -242,6 +327,7 @@ export default function Calificaciones_Estudiante() {
                                             </AccordionSummary>
                                             <AccordionDetails>
                                                 <paper style={EachStudentStyle}>
+
                                                     <ListItem>
                                                         <ListItemAvatar>
                                                             <Avatar style={{ color: "black", background: "transparent" }}>
@@ -292,10 +378,76 @@ export default function Calificaciones_Estudiante() {
                                                     </ListItem>
                                                 </paper>
                                             </AccordionDetails>
-                                        </Accordion>
+                                        </Accordion> */}
                                     </StyledTabPanel>
                                     <StyledTabPanel value={1}>
-                                        <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        {seccionesDocente.map((seccion) => (
+                                            <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+
+                                                <AccordionSummary
+                                                    expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
+                                                    aria-controls="panel1bh-content"
+                                                    id="panel1bh-header">
+
+                                                    <ListItemText style={AsignaturasStyle} primary={<span style={{ fontWeight: "bold", font: "kanit" }}>{seccion.Asignatura.nombre}</span>}
+                                                    />
+                                                </AccordionSummary>
+                                                <AccordionDetails>
+                                                    <paper style={EachStudentStyle}>
+
+                                                        <ListItem>
+                                                            <ListItemAvatar>
+                                                                <Avatar style={{ color: "black", background: "transparent" }}>
+                                                                    <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
+                                                                </Avatar>
+                                                            </ListItemAvatar>
+                                                            <ListItemText primary={<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>}
+                                                                secondary={
+                                                                    <paper>
+                                                                        <span>juandanielu@est.example.edu</span>
+                                                                    </paper>
+
+                                                                } />
+                                                            <EditButton variant="contained" onClick={() => setGradeDialogOpen(true)}>
+                                                                <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
+                                                            </EditButton>
+                                                            <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
+                                                                <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Final</DialogTitle>
+                                                                <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                    <TextField
+                                                                        style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                        label="Calificación Base Final"
+                                                                        value={baseGrade}
+                                                                        onChange={(e) => setBaseGrade(e.target.value)}
+                                                                    />
+                                                                    <TextField
+                                                                        style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                                        label="Calificación Obtenida Final"
+                                                                        value={obtainedGrade}
+                                                                        onChange={(e) => setObtainedGrade(e.target.value)}
+                                                                    />
+                                                                </DialogContent>
+                                                                <DialogActions style={{ justifyContent: "center" }}>
+                                                                    <Button
+                                                                        onClick={handleCloseGradeDialog}
+                                                                        style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
+                                                                    >
+                                                                        Cancelar
+                                                                    </Button>
+                                                                    <Button
+                                                                        onClick={handleSaveGrades}
+                                                                        style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
+                                                                    >
+                                                                        Guardar
+                                                                    </Button>
+                                                                </DialogActions>
+                                                            </Dialog>
+                                                        </ListItem>
+                                                    </paper>
+                                                </AccordionDetails>
+                                            </Accordion>
+                                        ))}
+                                        {/* <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
                                                 aria-controls="panel1bh-content"
@@ -328,7 +480,7 @@ export default function Calificaciones_Estudiante() {
                                                             <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                         </EditButton>
                                                         <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
-                                                            {/* ... Ventana emergente similar para el primer botón de "Editar" */}
+                                                            {/* ... Ventana emergente similar para el primer botón de "Editar" */}{/*</StyledTabPanel>
                                                         </Dialog>
                                                         <Dialog open={isSecondGradeDialogOpen} onClose={handleCloseSecondGradeDialog}>
                                                             <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Medio Término</DialogTitle>
@@ -364,7 +516,7 @@ export default function Calificaciones_Estudiante() {
                                                     </ListItem>
                                                 </paper>
                                             </AccordionDetails>
-                                        </Accordion>
+                                        </Accordion> */}
                                     </StyledTabPanel>
                                 </Tabs>
                             </paper>
@@ -376,7 +528,7 @@ export default function Calificaciones_Estudiante() {
                                 marginTop: "-0.5rem",
                             }}>
                                 <IconButton style={notificationsButtonStyle}>
-                                        <NotificationsIcon style={notificationsIconStyle} />
+                                    <NotificationsIcon style={notificationsIconStyle} />
                                 </IconButton>
                             </div>
                         </paper>

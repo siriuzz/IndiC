@@ -127,9 +127,10 @@ export default function Inicio_docente() {
 
     useEffect(() => {
         setValue(dayjs());
+        console.log(JSON.parse(localStorage.getItem("user")));
         setProfesor(JSON.parse(localStorage.getItem("user")));
         axios.post(`http://${apiURL}/api/token/validate`, { token: localStorage.getItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`) }).then((response) => {
-            // console.log("this is the data");
+            console.log("this is the data", response.data);
         }).catch((error) => {
             console.log(error);
             localStorage.removeItem(`${process.env.NEXT_PUBLIC_JWT_NAME}`);
@@ -174,8 +175,8 @@ export default function Inicio_docente() {
                         <div style={containerUserStyle}>
                             <Image src="https://github.com/JuanDanielU/DisBG/blob/main/Empty-profile-picture.png?raw=true" alt="Profile picture" height={150} width={150} />
                             <div style={userInfoStyle}>
-                                Nombre: <div style={{fontSize: "26px", color: "black"}}>{" " + profesor.nombre}</div>
-                                ID: <div style={{fontSize: "26px", color: "black"}}>{" " + profesor.id}</div><div>Estado: <div style={{fontSize: "26px", color: "black"}}>{" " + profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div></div>
+                                Nombre: <div style={{ fontSize: "26px", color: "black" }}>{" " + profesor.nombre}</div>
+                                ID: <div style={{ fontSize: "26px", color: "black" }}>{" " + profesor.id}</div><div>Estado: <div style={{ fontSize: "26px", color: "black" }}>{" " + profesor.id_estado == 1 ? "Activo" : "Inactivo"}</div></div>
                             </div>
                         </div>
                         <Paper elevation={2} style={CalendarStyle}>

@@ -43,6 +43,16 @@ router.get('/Asignaturas/:id', async (req, res) => {
     }
 });
 
+router.get('/Asignaturas/:id/Secciones', async (req, res) => {
+    try {
+        const result = await AsignaturaController.getSeccionesByAsignaturaId(req, res);
+        res.json(result);
+    }
+    catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 router.patch('/Asignaturas/desactivar/:id', async (req, res) => {
     try {
         const result = await AsignaturaController.desactivarAsignatura(req, res);

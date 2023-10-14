@@ -72,8 +72,8 @@ router.post('/auth/login', async (req, res) => {
                     }
                     const key = process.env.JWT_KEY;
                     const token = jwt.sign(payload, key);
-
-                    const seccionesDocente = await DocenteController.getSeccionesDocenteById(docente.id);
+                    const req = { params: { id: docente.id } }
+                    const seccionesDocente = await DocenteController.getSeccionesDocenteById(req, res);
 
                     return res.status(200).json({
                         "token": token, "user": {
