@@ -118,6 +118,7 @@ const calcularIndicePorPeriodo = async (req, res) => {
 
 const createEstudianteSeccion = async (req, res) => {
     try {
+        console.log(req.body)
         const estudianteSeccion = await Estudiante_Seccion.create(req.body);
         return estudianteSeccion;
     } catch (error) {

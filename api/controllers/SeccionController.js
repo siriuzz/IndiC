@@ -10,6 +10,24 @@ const getAllSecciones = async (req, res) => {
     }
 }
 
+const getEstudiantes = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const seccion = await Secciones.findOne({
+            where: { id: id }
+        });
+        if (seccion) {
+            const estudiantes = await Estudiante_Seccion.findAll({
+                where: { id_seccion: id }
+            });
+            return estudiantes;
+        }
+        return 'Seccion with the specified ID does not exists';
+    } catch (error) {
+        return error.message;
+    }
+}
+
 const getSeccionById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -99,5 +117,6 @@ module.exports = {
     createSeccionesFromCsv,
     getSeccionById,
     getSeleccion,
-    updateSeccion
+    updateSeccion,
+    getEstudiantes
 }

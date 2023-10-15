@@ -26,6 +26,15 @@ router.put('/Secciones/:id', async (req, res) => {
     }
 });
 
+router.get('/Secciones/:id/Estudiantes', async (req, res) => {
+    try {
+        const result = await SeccionController.getEstudiantes(req, res);
+        res.json(result);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/Secciones/upload', upload.single('csv'), async (req, res) => {
     /* #swagger.tags = ['Secciones']
         #swagger.description = 'Endpoint para crear secciones desde un archivo csv.'

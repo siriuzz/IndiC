@@ -173,17 +173,21 @@ export default function Calificaciones_Estudiante() {
     const [secondObtainedGrade, setSecondObtainedGrade] = useState(''); // Estado para la segunda calificación obtenida
     const [docente, setDocente] = useState({});
     const [seccionesDocente, setSeccionesDocente] = useState([]);
+    const estudiantesSeccion = [];
 
 
     React.useEffect(() => {
-        setDocente(JSON.parse(localStorage.getItem("user")));
-        function getSecciones() {
-            axios.get(`http://${apiURL}/api/Docentes/${docente.id}/Secciones`).then((res) => {
-                setSeccionesDocente(res.data);
-                console.log(res.data);
+        const user = JSON.parse(localStorage.getItem("user"));
+        setDocente(user);
+        user.secciones.map((seccion) => {
+            console.log(seccion.id)
+            axios.get(`http://${apiURL}/api/Secciones/${seccion.id}/Estudiantes`).then((res) => {
+                // console.log(res.data)
+                return estudiantesSeccion.push(res.data);
+            }).finally(() => {
+                console.log(estudiantesSeccion);
             });
-        }
-        getSecciones();
+        });
     }, []);
 
     const handleCloseGradeDialog = () => {
@@ -243,8 +247,8 @@ export default function Calificaciones_Estudiante() {
                                         <StyledTab value={1}>Medio Termino</StyledTab>
                                     </StyledTabsList>
                                     <StyledTabPanel style={{ height: "20" }} value={0}>
-                                        {seccionesDocente.length > 0 && seccionesDocente.map((seccion) => (
-                                            <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        {docente.secciones ? docente.secciones.map((seccion) => (
+                                            <Accordion key={seccion.id} style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
 
                                                 <AccordionSummary
                                                     expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
@@ -256,17 +260,16 @@ export default function Calificaciones_Estudiante() {
                                                 </AccordionSummary>
                                                 <AccordionDetails>
                                                     <Container style={EachStudentStyle}>
-
                                                         <ListItem>
                                                             <ListItemAvatar>
                                                                 <Avatar style={{ color: "black", background: "transparent" }}>
                                                                     <AccountCircleOutlinedIcon style={{ width: "38px", height: "38px" }} />
                                                                 </Avatar>
                                                             </ListItemAvatar>
-                                                            <ListItemText primary={<span style={{ fontWeight: "bold", font: "kanit" }}>Juan Daniel Ubiera</span>}
+                                                            <ListItemText primary=<span style={{ fontWeight: "bold", font: "kanit" }}>Dominic Baker</span>
                                                                 secondary={
                                                                     <paper>
-                                                                        <span>juandanielu@est.example.edu</span>
+                                                                        <span>dbaker@gmail.com</span>
                                                                     </paper>
 
                                                                 } />
@@ -307,8 +310,41 @@ export default function Calificaciones_Estudiante() {
                                                         </ListItem>
                                                     </Container>
                                                 </AccordionDetails>
+
+
                                             </Accordion>
-                                        ))}
+                                        )) : null}
+                                        <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
+                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Final</DialogTitle>
+                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                <TextField
+                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                    label="Calificación Base Final"
+                                                    value={baseGrade}
+                                                    onChange={(e) => setBaseGrade(e.target.value)}
+                                                />
+                                                <TextField
+                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                    label="Calificación Obtenida Final"
+                                                    value={obtainedGrade}
+                                                    onChange={(e) => setObtainedGrade(e.target.value)}
+                                                />
+                                            </DialogContent>
+                                            <DialogActions style={{ justifyContent: "center" }}>
+                                                <Button
+                                                    onClick={handleCloseGradeDialog}
+                                                    style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
+                                                >
+                                                    Cancelar
+                                                </Button>
+                                                <Button
+                                                    onClick={handleSaveGrades}
+                                                    style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
+                                                >
+                                                    Guardar
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
                                         {/* <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
 
                                             <AccordionSummary
@@ -381,8 +417,8 @@ export default function Calificaciones_Estudiante() {
                                         </Accordion> */}
                                     </StyledTabPanel>
                                     <StyledTabPanel value={1}>
-                                        {seccionesDocente.map((seccion) => (
-                                            <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                        {docente.secciones ? docente.secciones.map((seccion) => (
+                                            <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} key={seccion.id} onChange={handleChange('panel1')}>
 
                                                 <AccordionSummary
                                                     expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
@@ -411,42 +447,44 @@ export default function Calificaciones_Estudiante() {
                                                             <EditButton variant="contained" onClick={() => setGradeDialogOpen(true)}>
                                                                 <EditIcon style={{ height: "28", width: "28", color: Theme.palette.primary.main }} />
                                                             </EditButton>
-                                                            <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
-                                                                <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Final</DialogTitle>
-                                                                <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                                    <TextField
-                                                                        style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
-                                                                        label="Calificación Base Final"
-                                                                        value={baseGrade}
-                                                                        onChange={(e) => setBaseGrade(e.target.value)}
-                                                                    />
-                                                                    <TextField
-                                                                        style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
-                                                                        label="Calificación Obtenida Final"
-                                                                        value={obtainedGrade}
-                                                                        onChange={(e) => setObtainedGrade(e.target.value)}
-                                                                    />
-                                                                </DialogContent>
-                                                                <DialogActions style={{ justifyContent: "center" }}>
-                                                                    <Button
-                                                                        onClick={handleCloseGradeDialog}
-                                                                        style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
-                                                                    >
-                                                                        Cancelar
-                                                                    </Button>
-                                                                    <Button
-                                                                        onClick={handleSaveGrades}
-                                                                        style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
-                                                                    >
-                                                                        Guardar
-                                                                    </Button>
-                                                                </DialogActions>
-                                                            </Dialog>
+
                                                         </ListItem>
                                                     </paper>
                                                 </AccordionDetails>
                                             </Accordion>
-                                        ))}
+                                        )) : null}
+
+                                        <Dialog open={isGradeDialogOpen} onClose={handleCloseGradeDialog}>
+                                            <DialogTitle style={{ fontSize: "16px", color: "#7E57C6", width: "300px", textAlign: "center" }}>Calificar Final</DialogTitle>
+                                            <DialogContent style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                <TextField
+                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                    label="Calificación Base Final"
+                                                    value={baseGrade}
+                                                    onChange={(e) => setBaseGrade(e.target.value)}
+                                                />
+                                                <TextField
+                                                    style={{ width: "300px", height: "56px", borderRadius: "20px", borderColor: "#7E57C266", marginTop: "20px" }}
+                                                    label="Calificación Obtenida Final"
+                                                    value={obtainedGrade}
+                                                    onChange={(e) => setObtainedGrade(e.target.value)}
+                                                />
+                                            </DialogContent>
+                                            <DialogActions style={{ justifyContent: "center" }}>
+                                                <Button
+                                                    onClick={handleCloseGradeDialog}
+                                                    style={{ background: "#ffffff", color: "#6750A4", border: "1px solid #6750A4", borderRadius: "20px", width: "125px" }}
+                                                >
+                                                    Cancelar
+                                                </Button>
+                                                <Button
+                                                    onClick={handleSaveGrades}
+                                                    style={{ background: "#6750A4", color: "#ffffff", borderRadius: "20px", width: "125px" }}
+                                                >
+                                                    Guardar
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
                                         {/* <Accordion style={{ border: '2px solid', borderColor: Theme.palette.primary.main, borderRadius: "20px" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon style={{ color: Theme.palette.primary.main, height: "35px", width: "35px" }} />}
