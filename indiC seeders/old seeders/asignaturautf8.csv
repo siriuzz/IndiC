@@ -1,0 +1,201 @@
+﻿nombre,codigo,creditos
+Matemáticas I,MED253,4
+Matemáticas II,MED243,1
+Física General,ESE240,5
+Química Orgánica,DGR277,3
+Biología Celular,ADE272,4
+Historia del Arte,EPR215,4
+Introducción a la Psicología,CCO283,4
+Economía Microeconómica,PSI271,1
+Economía Macroeconómica,CIV219,1
+Literatura Comparada,CAM286,2
+Derecho Constitucional,MKT283,3
+Introducción a la Programación,CON261,1
+Marketing Digital,CCO288,5
+Teoría de la Música,EPR221,1
+Anatomía Humana,CMP246,4
+Geografía Mundial,CON229,3
+Ética y Responsabilidad Social,FIS277,1
+Introducción a la Sociología,MKT275,5
+Lingüística Aplicada,QUI254,4
+Gestión de Proyectos,QUI246,3
+Estadísticas Avanzadas,BIO200,1
+Microbiología,ENF245,5
+Psicopatología,IEL300,1
+Finanzas Corporativas,TSO255,2
+Historia Mundial Contemporánea,ESE300,3
+Economía del Desarrollo,TEA292,1
+Escritura Creativa,PER240,5
+Derecho Internacional,CCO267,1
+Bases de Datos,DER254,4
+Publicidad y Relaciones Públicas,CPI206,3
+Arte Contemporáneo,TSO258,3
+Psicología del Desarrollo,CON288,2
+Marketing Estratégico,BIO245,4
+Oratoria y Debate,DGR257,1
+Biología Molecular,CIV233,5
+Geología,CAM215,2
+Ética Empresarial,DER236,4
+Antropología Cultural,GEO284,1
+Traducción e Interpretación,DAN265,1
+Dirección de Recursos Humanos,ENF209,1
+Ecología,ECO206,1
+Sociología de la Familia,MUS215,1
+Historia del Cine,CIV297,5
+Psicología Clínica,CPI300,4
+Estadística Aplicada,MKT208,5
+Bioquímica,ECO296,2
+Derecho Laboral,TSO254,4
+Marketing en Redes Sociales,EPR239,2
+Filosofía Política,MKT290,5
+Programación Avanzada,IEL281,2
+Neurociencia,CCO229,1
+Geopolítica,MED277,2
+Psicología Organizacional,TEA250,1
+Comercio Internacional,GEO283,1
+Pintura al Óleo,QUI289,2
+Genética,CCO286,1
+Geografía Económica,ESE279,2
+Criminología,DER237,4
+Teoría Literaria,DAN254,2
+Dirección de Marketing,IEL204,2
+Fotografía,DGR275,4
+Anatomía Comparada,PSI290,1
+Historia de la Música,BIO284,5
+Economía Ambiental,IEL214,4
+Derechos Humanos,MAT217,5
+Sistemas de Información,ARQ290,5
+Relaciones Internacionales,CMP209,4
+Comunicación Corporativa,MUS275,3
+Arquitectura Moderna,EPR278,2
+Neuropsicología,FIS219,2
+Comportamiento del Consumidor,MAT225,1
+Filosofía de la Ciencia,TSO283,3
+Seguridad Informática,ENF284,2
+Geografía Política,IEL284,4
+Psicología de la Salud,ECO290,2
+Marketing de Contenidos,PSI246,2
+Escultura,MED290,1
+Microeconomía Avanzada,ADE254,4
+Epidemiología,ADE203,2
+Sociología de Género,ARQ254,4
+Cine Documental,HIS290,4
+Terapia Familiar,DGR275,5
+Investigación de Mercados,TSO299,2
+Literatura Latinoamericana,MKT225,1
+Derecho Penal,ENF264,1
+Programación Web,PER275,3
+Arquitectura Sostenible,HIS247,5
+Psicología Experimental,PER221,3
+Econometría,TEA282,5
+Historia del Teatro,BIO299,3
+Marketing de Influencers,TEA209,3
+Dibujo Técnico,DER236,5
+Biología Evolutiva,DAN200,1
+Geografía Cultural,SOC288,5
+Psicología Social,CCO253,4
+Economía del Comportamiento,DGR242,4
+Filosofía Existencialista,CCO300,2
+Seguridad de Redes,TSO284,4
+Geografía Urbana,GEO277,5
+Crítica Literaria,ENF278,1
+Derecho Mercantil,DAN288,3
+Animación Digital,DGR288,5
+Ecología Marina,ECO250,1
+Sociología de la Educación,MAT284,2
+Historia del Diseño Gráfico,MKT279,3
+Terapia Ocupacional,PSI281,1
+Marketing Internacional,ADE217,5
+Grabado Artístico,MUS300,3
+Biología Evolutiva Avanzada,EPR279,5
+Geografía Regional,CPI290,2
+Sociología Urbana,DER290,4
+Historia de la Moda,CAM254,4
+Terapia de Rehabilitación,ENF209,4
+Marketing de Producto,MKT204,5
+Arte Digital,CPI283,5
+Biología de la Ecología Tropical,CON204,4
+Psicología del Consumidor,FIS245,4
+Economía del Desarrollo Sostenible,CIV202,3
+Filosofía de la Ciencia Política,MED289,4
+Inteligencia Artificial,MED240,1
+Geografía Física,DER253,3
+Sociología Rural,PSI300,4
+Historia de la Arquitectura,GEO296,5
+Terapia de Grupo,CMP241,5
+Publicidad Interactiva,CIV214,5
+Escultura en Madera Tallada,MUS299,3
+Biología de la Ecología de Desiertos,BIO286,2
+Geografía de la Geografía Humana Urbana,SOC239,1
+Psicología del Comportamiento Organizacional,ESE300,2
+Economía de la Política de Energía Eólica,SOC204,4
+Filosofía de la Filosofía del Arte Contemporáneo,ADE226,2
+Programación en Perl,CMP219,4
+Sociología de la Política de Big Data,TSO200,2
+Historia del Arte del Renacimiento Inglés,DAN297,5
+Terapia de Terapia de Terapia de Terapia de Arte para Niños Autistas,ESE281,2
+Marketing de Contenido en Video Marketing,FIS296,1
+Cerámica de Alta Temperatura,ENF267,2
+Biología de la Ecología de Desiertos,MAT246,3
+Geografía de la Geografía Humana Urbana,ESE282,2
+Psicología del Comportamiento Organizacional,DGR227,3
+Economía de la Política de Energía Eólica,PER297,2
+Filosofía de la Filosofía del Arte Contemporáneo,BIO281,3
+Programación en Perl,SOC221,4
+Sociología de la Política de Big Data,IEL289,5
+Historia del Arte del Renacimiento Inglés,SOC299,2
+Terapia de Terapia de Terapia de Terapia de Arte para Niños Autistas,CCO200,5
+Marketing de Contenido en Video Marketing,EPR273,3
+Cerámica de Alta Temperatura,ECO284,1
+Biología de la Ecología de Ecosistemas Fluviales,TEA272,3
+Geografía de la Geografía Económica Internacional,DAN209,1
+Psicología de la Psicología de la Salud Mental,TEA219,5
+Economía de la Política de Transporte Sostenible,MKT262,3
+Filosofía de la Filosofía del Feminismo Posmoderno,CIV205,3
+Diseño de Videojuegos,ECO282,5
+Sociología de la Política de Ciberseguridad,ADE227,3
+Historia del Arte del Renacimiento Escocés,BIO296,2
+Terapia de Terapia de Terapia de Terapia de Juego Adolescente,EPR273,2
+Marketing de Contenido en Moda y Belleza,GEO296,2
+Escultura en Pap,BIO267,2
+Estructura de Datos y Algoritmos I,HIS273,5
+el Maché,ECO276,1
+Biología de la Ecología de Ecosistemas Marinos,PER220,4
+Geografía de la Geografía de la Planificación del Desarrollo,PER214,4
+Psicología de la Psicología de la Psicología de la Personalidad,CON267,4
+Economía de la Política de Energía Nuclear,ADE246,3
+Filosofía de la Filosofía de la Ciencia de Datos,DAN262,5
+Programación en Scala,CMP217,1
+Sociología de la Política de Privacidad en Línea,CCO245,4
+Historia del Arte del Renacimiento Portugués,ECO284,2
+Terapia de Terapia de Terapia de Terapia de Arte Adolescente,DAN223,1
+Marketing de Contenido en Nutrición y Fitness,ECO249,3
+Fotografía de Naturaleza Salvaje,HIS274,3
+Biología de la Ecología de Ecosistemas de Montaña,MAT267,1
+Geografía de la Geografía Cultural Urbana,MKT241,5
+Psicología de la Psicología de la Psicología Escolar,TSO284,4
+Economía de la Política de Energía Hidroeléctrica,ESE260,5
+Filosofía de la Filosofía de la Ética Empresarial,MED272,5
+Diseño de Aplicaciones Móviles para Juegos,MUS283,3
+Sociología de la Política de Medios Sociales,ARQ208,1
+Historia del Arte del Barroco Español,ARQ219,2
+Terapia de Terapia de Terapia de Terapia de Terapia de Arte Infantil,ENF209,4
+Marketing de Contenido en Viajes de Aventura y Aire Libre,PER236,4
+Pintura al Grafito,CAM278,4
+Biología de la Ecología de Ecosistemas de Bosques Tropicales,ECO286,4
+Geografía de la Ecología Urbana,HIS300,2
+Psicología de la Psicología Evolutiva,MAT289,2
+Economía de la Política de Energía Solar,SOC208,5
+Filosofía de la Filosofía de la Ética Empresarial,ENF279,4
+Diseño de Aplicaciones Móviles para Entretenimiento,SOC201,3
+Sociología de la Política de Educación,DGR287,5
+Historia del Arte del Renacimiento Italiano,TEA279,5
+Terapia de Terapia de Terapia de Terapia de Terapia de Arte en Adolescentes,BIO245,3
+Marketing de Contenido en Estilo de Vida Saludable,EPR225,5
+Escultura en Metal Fundido,CPI272,1
+Biología de la Ecología de Ecosistemas de Sabanas,GEO257,1
+Geografía de la Geografía de la Población Rural,ENF214,1
+Psicología de la Psicología de la Psicología de la Creatividad Infantil,DER277,2
+Economía de la Política de Desarrollo Sostenible,CPI300,3
+Filosofía de la Filosofía del Arte Abstracto,MAT205,4
+Contabilidad I,TSO256,5
